@@ -353,10 +353,12 @@
 					<div class="row">
 						<div class="col-md-12 text-center">
 							<p>
-								<small class="block">&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></small><br> 
-								<small class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a>, <a href="http://pexels.com/" target="_blank">Pexels</a></small>
+								<small class="block">
+									&copy;Copyright &copy;
+									<script>document.write(new Date().getFullYear());</script> 
+									All rights reserved | This website is made by <a href="https://newgamingnews.com" target="_blank">NewGamingNews</a>
+								</small>
+								<br> 
 							</p>
 						</div>
 					</div>
