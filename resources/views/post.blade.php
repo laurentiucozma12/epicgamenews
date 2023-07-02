@@ -1,4 +1,4 @@
-@extends('main_layouts.master')
+@extends('layout')
 
 @section('title', 'New Gaming News | Home')
 
