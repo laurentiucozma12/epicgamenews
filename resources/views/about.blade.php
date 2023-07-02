@@ -9,8 +9,8 @@
         <div class="row">
             <div class="col-md-7">
                 <div class="about-desc">
-                    <div class="about-img-1 animate-box" style="background-image: url(images/about-img-2.jpg);"></div>
-                    <div class="about-img-2 animate-box" style="background-image: url(images/about-img-1.jpg);"></div>
+                    <div class="about-img-1 animate-box" style="background-image: url(blog_template/images/about-img-2.jpg);"></div>
+                    <div class="about-img-2 animate-box" style="background-image: url(blog_template/images/about-img-1.jpg);"></div>
                 </div>
             </div>
             <div class="col-md-5">
