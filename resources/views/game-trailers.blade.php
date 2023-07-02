@@ -4,6 +4,8 @@
 
 @section('content')
 
-This is game-trailes page!
+<div class="content-container">
+    This is game-trailes page!
+</div>
 
 @endsection

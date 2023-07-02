@@ -138,6 +138,7 @@ h1, h2, h3, h4, h5, h6, figure {
         padding: 28px 1em;
         background: #fff; } }
   .colorlib-nav #colorlib-logo {
+    width: 240px;
     font-size: 24px;
     margin: 0;
     padding: 0;
@@ -431,6 +432,7 @@ h1, h2, h3, h4, h5, h6, figure {
 .colorlib-light-grey {
   background: #f2f3f7; }
 
+.content-container,
 .colorlib-event,
 .colorlib-trainers,
 .colorlib-classes,

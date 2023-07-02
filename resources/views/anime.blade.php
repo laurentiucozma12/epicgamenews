@@ -4,6 +4,8 @@
 
 @section('content')
 
-This is anime page!
+<div class="content-container">
+    This is anime page!
+</div>
 
 @endsection

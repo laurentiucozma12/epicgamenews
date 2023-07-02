@@ -4,6 +4,8 @@
 
 @section('content')
 
-This is playstation games page!
+<div class="content-container">
+    This is playstation games page!
+</div>
 
 @endsection

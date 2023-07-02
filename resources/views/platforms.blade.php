@@ -4,6 +4,8 @@
 
 @section('content')
 
-This is platformers page!
+<div class="content-container">
+    This is platformers page!
+</div>
 
 @endsection

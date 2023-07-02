@@ -64,7 +64,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-2">
-							<div id="colorlib-logo"><a href="index.html">Blog</a></div>
+							<div id="colorlib-logo"><a href="{{ route('home') }}">New Gaming News</a></div>
 						</div>
 						<div class="col-md-10 text-right menu-1">
 							<ul>
@@ -219,7 +219,7 @@
 								<small class="block">
 									&copy;Copyright &copy;
 									<script>document.write(new Date().getFullYear());</script> 
-									All rights reserved | This website is made by <a href="https://newgamingnews.com" target="_blank">NewGamingNews</a>
+									All rights reserved | This website is made by <a href="{{ route('home') }}">New Gaming News</a>
 								</small>
 								<br> 
 							</p>
