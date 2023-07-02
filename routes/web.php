@@ -32,6 +32,10 @@ Route::get('/post', function () {
 
 
 // -S-Platforms-button-
+Route::get('platforms', function () {
+    return view('/platforms');
+})->name('platforms');
+
 Route::get('/tags/mobile', function () {
     return view('/tags/mobile');
 })->name('mobile');
@@ -58,6 +62,9 @@ Route::get('/tags/xbox', function () {
 Route::get('/game-trailers', function () {
     return view('game-trailers');
 })->name('game-trailers');
+Route::get('/anime', function () {
+    return view('anime');
+})->name('anime');
 // -E-More-button-
 
 

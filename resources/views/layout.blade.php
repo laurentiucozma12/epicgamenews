@@ -68,17 +68,26 @@
 						</div>
 						<div class="col-md-10 text-right menu-1">
 							<ul>
-								<li><a href="index.html">Home</a></li>
+								<li><a href="{{ route('home') }}">Home</a></li>
 								<li class="has-dropdown">
-									<a href="courses.html">Categories</a>
+									<a href="{{ route('platforms') }}">Platforms</a>
 									<ul class="dropdown">
-										<li><a href="#">Programming</a></li>
-										<li><a href="#">Games</a></li>
-										<li><a href="#">Soft Skills</a></li>
+										<li><a href="{{ route('pc') }}">PC Games</a></li>
+										<li><a href="{{ route('playstation') }}">Playstation</a></li>
+										<li><a href="{{ route('xbox') }}">Xbox</a></li>
+										<li><a href="{{ route('nintendo') }}">Nintendo</a></li>
+										<li><a href="{{ route('mobile') }}">Mobile</a></li>
 									</ul>
 								</li>
-								<li><a href="about.html">About</a></li>
-								<li><a href="contact.html">Contact</a></li>
+								<li><a href="{{ route('about') }}">About</a></li>
+								<li><a href="{{ route('contact') }}">Contact</a></li>
+								<li class="has-dropdown">
+									<a href="">More</a>
+									<ul class="dropdown">
+										<li><a href="{{ route('game-trailers') }}">Game Trailers</a></li>
+										<li><a href="{{ route('anime') }}">Anime</a></li>
+									</ul>
+								</li>
 								<li class="btn-cta"><a href="#"><span>Sign in</span></a></li>
 							</ul>
 						</div>
