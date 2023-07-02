@@ -1,1 +1,0 @@
-This is anime page!
