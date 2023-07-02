@@ -18,10 +18,6 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/post', function () {
-    return view('post');
-})->name('post');
-
 Route::get('/about', function () {
     return view('about');
 })->name('about');
@@ -29,6 +25,35 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
+
+Route::get('/game-trailers', function () {
+    return view('game-trailers');
+})->name('game-trailers');
+
+Route::get('/post', function () {
+    return view('post');
+})->name('post');
+
+// Tags pages
+Route::get('/tags/mobile', function () {
+    return view('/tags/mobile');
+})->name('mobile');
+
+Route::get('/tags/nintendo', function () {
+    return view('/tags/nintendo');
+})->name('nintendo');
+
+Route::get('/tags/pc', function () {
+    return view('/tags/pc');
+})->name('pc');
+
+Route::get('/tags/playstation', function () {
+    return view('/tags/playstation');
+})->name('playstation');
+
+Route::get('/tags/xbox', function () {
+    return view('/tags/xbox');
+})->name('xbox');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
