@@ -88,7 +88,14 @@
 										<li><a href="{{ route('anime') }}">Anime</a></li>
 									</ul>
 								</li>
-								<li class="btn-cta"><a href="#"><span>Sign in</span></a></li>
+
+								{{-- @guest --}}
+								<li class="btn-cta"><a href="{{ route('login') }}"><span>Login</span></a></li>
+								{{-- @endguest --}}
+
+								{{-- @auth
+								<li class="btn-cta"><a href="#"><span>Username</span></a></li>
+								@endauth --}}
 							</ul>
 						</div>
 					</div>
