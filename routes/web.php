@@ -30,7 +30,7 @@ Route::get('/post', function () {
     return view('post');
 })->name('post');
 
-
+ 
 // -S-Platforms-button-
 Route::get('platforms', function () {
     return view('/platforms');
