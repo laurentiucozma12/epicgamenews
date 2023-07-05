@@ -69,6 +69,7 @@
 						<div class="col-md-10 text-right menu-1">
 							<ul>
 								<li><a href="{{ route('home') }}">Home</a></li>
+								<li><a href="{{ route('categories') }}">Categories</a></li>
 								<li class="has-dropdown">
 									<a href="{{ route('platforms') }}">Platforms</a>
 									<ul class="dropdown">
@@ -82,7 +83,7 @@
 								<li><a href="{{ route('about') }}">About</a></li>
 								<li><a href="{{ route('contact') }}">Contact</a></li>
 								<li class="has-dropdown">
-									<a href="">More</a>
+									<a href="{{ route('more') }}">More</a>
 									<ul class="dropdown">
 										<li><a href="{{ route('game-trailers') }}">Game Trailers</a></li>
 										<li><a href="{{ route('anime') }}">Anime</a></li>
