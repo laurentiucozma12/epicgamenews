@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Models\Comment;
+use App\Models\Post;
+
+Route::get('/user', function () {
+    $comment = Comment::find(1);
+    dd($comment->user);
+});
+
+
+
 Route::get('/', function () {
     return view('home');
 })->name('home');
