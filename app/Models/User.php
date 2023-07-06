@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Model\Role;
 use App\Model\Post;
 use App\Model\Comment;
+use App\Models\Image;
 
 class User extends Authenticatable
 {
@@ -60,5 +61,10 @@ class User extends Authenticatable
     public function comment() 
     {     
         return $this->hasMany(Comment::class);
+    }
+    
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 }
