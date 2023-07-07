@@ -15,7 +15,7 @@ class Post extends Model
 {
     use HasFactory;   
     
-    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'user_id', 'category_id'];
+    protected $fillable = ['title' , 'slug', 'excerpt', 'body', 'user_id', 'category_id'];
 
     public function author()
     {
@@ -26,13 +26,14 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
-
+    
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
     }
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 
