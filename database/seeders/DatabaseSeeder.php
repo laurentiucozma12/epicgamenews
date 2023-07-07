@@ -5,6 +5,9 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+use Illuminate\Support\Facades\Schema;
+
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -12,11 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        // Disable foreign key constraints for users and enable it again.
+        Schema::disableForeignKeyConstraints();
+        \App\Models\User::truncate();
+        \App\Models\Role::truncate();
+        Schema::enableForeignKeyConstraints();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Create Roles and Users
+        \App\Models\Role::factory(1)->create();
+        \App\Models\User::factory(10)->create();
     }
 }
