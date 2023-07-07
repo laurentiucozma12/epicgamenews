@@ -14,37 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */ 
 
-use App\Models\Post;
-use App\Models\Category;
-use App\Models\User;
-use App\Models\Image;
-
-Route::get('/createuserimage', function () {
-
-    $user = User::find(1);
-
-    $user->image()->create(['name' => 'random file for user', 'extension' => 'jpg', 'path' => '/image/random_file.jpg']);
-
-});
-
-// Route::get('/createpost', function () {
-
-//     $post = Post::create([
-//         'title' => 'This is a post title', 
-//         'excerpt' => 'This is a post excerpt',
-//         'slug' => 'this-is-a-post-slug',
-//         'body' => 'This is a post body',
-//         'user_id' => 1,
-//         // 'category_id' => Category::create(['name' => 'Programming', 'slug' => 'programming']),
-//         'category_id' => Category::find(1)->id,
-//     ]);
-
-//     $post->image()->create(['name' => 'random file', 'extension' => 'jpg', 'path' => '/image/random_file.jpg']);
-
-// });
-
-
-
 Route::get('/', function () {
     return view('home');
 })->name('home');
