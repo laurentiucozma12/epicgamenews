@@ -23,12 +23,18 @@ class DatabaseSeeder extends Seeder
         \App\Models\Post::truncate();
         \App\Models\Tag::truncate();
         \App\Models\Comment::truncate();
+        \App\Models\Image::truncate();
 
         Schema::enableForeignKeyConstraints();
 
         // Create Roles and Users
         \App\Models\Role::factory(1)->create();
-        \App\Models\User::factory(10)->create();
+        $users = \App\Models\User::factory(10)->create();
+
+        foreach ($users as $user)
+        {
+            $user->image()->save( \App\Models\Image::factory()->make() );
+        }
 
         \App\Models\Category::factory(10)->create();
 
@@ -47,6 +53,7 @@ class DatabaseSeeder extends Seeder
             $tags_ids[] = \App\Models\Tag::all()->random()->id;
 
             $post->tags()->sync( $tags_ids );
+            $post->image()->save( \App\Models\Image::factory()->make() );
         }
     }
 }
