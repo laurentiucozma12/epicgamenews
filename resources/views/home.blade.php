@@ -9,7 +9,7 @@
 		<div class="row">
 			<div class="col-md-8 posts-col">
 
-				@foreach ($posts as $post)
+				@forelse ($posts as $post)
 					<div class="block-21 d-flex animate-box post">
 					<a 
 					href="#" 
@@ -27,8 +27,10 @@
 							</div>
 						</div>
 					</div>
-					</div>					
-				@endforeach
+					</div>		
+				@empty
+					<p>There are no posts yet.</p>
+				@endforelse
 
 				{{ $posts->links() }}
 
