@@ -16,7 +16,7 @@ class HomeController extends Controller
         $recent_posts = Post::latest()->take(5)->get();
 
         $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
-        $tags = Tag::all();
+        $tags = Tag::latest()->take(50)->get();
 
         
         return view('home', [
