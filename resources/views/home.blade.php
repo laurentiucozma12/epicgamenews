@@ -75,12 +75,11 @@
 						<h3 class="sidbar-heading">Tags</h3>
 						<div class="block-26">
 						<ul>
-							<li><a href="#">code</a></li>
-							<li><a href="#">design</a></li>
-							<li><a href="#">typography</a></li>
-							<li><a href="#">development</a></li>
-							<li><a href="#">creative</a></li>
-							<li><a href="#">codehack</a></li>
+
+							@foreach ($tags as $tag)
+								<li><a href="#"> {{ $tag->name }} </a></li>								
+							@endforeach
+							
 						</ul>
 					</div>
 					</div>
