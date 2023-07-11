@@ -39,9 +39,11 @@
 						<h3 class="sidebar-heading">Categories</h3>
 						<div class="block-24">
 						<ul>
-							
-							<li><a href="#">Education <span>10</span></a></li>
-							
+
+						@foreach ($categories as $category)
+							<li><a href="#"> {{ $category->name }} <span>{{ $category->posts_count }}</span></a></li>							
+						@endforeach
+
 						</ul>
 					</div>
 					</div>
