@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,10 +18,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-Route::get('/categories', function () {
-    return view('categories');
-})->name('categories');
+Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
 
 Route::get('/about', function () {
     return view('about');
