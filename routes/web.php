@@ -16,14 +16,12 @@ use Illuminate\Support\Facades\Route;
 */ 
 
 use App\Http\Controllers\HomeController;
-use App\Models\Post;
+use App\Http\Controllers\PostsController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
 
-Route::get('/posts/{post:slug}', function (Post $post) {    
-    return view('post', ['post' => $post]);
-})->name('posts.show');
+Route::get('/posts/{post:slug}', [PostsController::class, 'show'])->name('posts.show');
 
 Route::get('/about', function () {
     return view('about');
