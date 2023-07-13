@@ -21,11 +21,9 @@ use App\Models\Post;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
 
-Route::get('/posts/{post}', function ($post) {
-    $post = Post::where('slug', $post)->first();
-    
-    return view('post');
-})->name('post');
+Route::get('/posts/{post:slug}', function (Post $post) {    
+    return view('post', ['post' => $post]);
+})->name('posts.show');
 
 Route::get('/about', function () {
     return view('about');
@@ -45,24 +43,31 @@ Route::get('platforms', function () {
     return view('/platforms');
 })->name('platforms');
 
-Route::get('/tags/mobile', function () {
-    return view('/tags/mobile');
+// Route::get('platforms/{platform}', function ($platform) {
+//// !!! I should have in DB a platform table with a platform id !!!
+//// !!! Also what if a game is playable on more platforms? for example on pc and playstation.. it should be included in more platforms !!!
+//     $platform = Post::where('platform', $platform)->first();
+//     return view('/platform');
+// })->name('platforms');
+
+Route::get('/platforms/mobile', function () {
+    return view('/platforms/mobile');
 })->name('mobile');
 
-Route::get('/tags/nintendo', function () {
-    return view('/tags/nintendo');
+Route::get('/platforms/nintendo', function () {
+    return view('/platforms/nintendo');
 })->name('nintendo');
 
-Route::get('/tags/pc', function () {
-    return view('/tags/pc');
+Route::get('/platforms/pc', function () {
+    return view('/platforms/pc');
 })->name('pc');
 
-Route::get('/tags/playstation', function () {
-    return view('/tags/playstation');
+Route::get('/platforms/playstation', function () {
+    return view('/platforms/playstation');
 })->name('playstation');
 
-Route::get('/tags/xbox', function () {
-    return view('/tags/xbox');
+Route::get('/platforms/xbox', function () {
+    return view('/platforms/xbox');
 })->name('xbox');
 // -E-Platforms-button-
 
