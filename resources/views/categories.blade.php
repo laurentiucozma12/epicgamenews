@@ -13,7 +13,6 @@
             <li><a href=""> {{ $tag->name }} </a></li>
         @endforeach
     </ul>
-
 </div>
 
 @endsection

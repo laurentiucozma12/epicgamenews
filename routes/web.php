@@ -16,9 +16,16 @@ use Illuminate\Support\Facades\Route;
 */ 
 
 use App\Http\Controllers\HomeController;
+use App\Models\Post;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
+
+Route::get('/posts/{post}', function ($post) {
+    $post = Post::where('slug', $post)->first();
+    
+    return view('post');
+})->name('post');
 
 Route::get('/about', function () {
     return view('about');
@@ -31,10 +38,6 @@ Route::get('/more', function () {
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
-
-Route::get('/post', function () {
-    return view('post');
-})->name('post');
 
 
 // -S-Platforms-button-
