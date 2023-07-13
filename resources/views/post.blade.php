@@ -101,7 +101,7 @@
                                     <!-- <label for="subject">Subject</label> -->
                                     <input type="text" id="subject" class="form-control" placeholder="Your subject of this message">
                                 </div>
-                            </div>
+                            </div> 
 
                             <div class="row form-group">
                                 <div class="col-md-12">
