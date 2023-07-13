@@ -17,13 +17,15 @@
 					style="background-image: url({{ asset( 'storage/' . $post->image->path. '' ) }});"></a>
 
 					<div class="text">
-						<h3 class="heading"><a href="#"> {{ $post->title }} </a></h3>
+						<h3 class="heading"><a href="{{ route('posts.show', $post) }}"> {{ $post->title }} </a></h3>
 						<p class="excerpt"> {{ $post->excerpt }} </p>
 						<div class="meta">
 							<div><a class='date' href="#"><span class="icon-calendar"></span> {{ $post->created_at->diffForHumans() }} </a></div>
 							<div><a href="#"><span class="icon-user2"></span> {{ $post->author->name }} </a></div>
 							<div class="comments-count">
-								<a href="#"><span class="icon-chat"></span> {{ $post->comments_count }} </a>
+								<a href="{{ route('posts.show', $post) }}#post-comments">
+									<span class="icon-chat"></span> {{ $post->comments_count }} 
+								</a>
 							</div>
 						</div>
 					</div>
@@ -45,7 +47,7 @@
 					<x-blog.side-recent-posts :recent_posts="$recent_posts"/>
 
 					<x-blog.side-tags :tags="$tags"/>
-					
+
 				</div>
 			</div>
 		</div>
