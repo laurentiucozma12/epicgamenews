@@ -38,7 +38,9 @@
                             <div id="comment_{{ $comment->id }}" class="review">
                                 <div 
                                 class="user-img" 
-                                style="background-image: url({{ $comment->user->image ? asset('storage/' . $comment->user->image->path. '') : 'https://images.assetsdelivery.com/compings_v2/salamatik/salamatik1801/salamatik180100019.jpg'  }});"></div>
+                                style="background-image: url({{ $comment->user->image ? asset('storage/' . $comment->user->image->path) : asset('blog_template/images/user-profile-picture-blank.jpg') }});">
+                                </div>
+
                                 <div class="desc">
                                     <h4>
                                         <span class="text-left">{{ $comment->user->name }}</span>
@@ -57,6 +59,9 @@
         
                 <div class="row animate-box">
                     <div class="col-md-12">
+
+                        <x-blog.message :status="'success'"/>
+
                         <h2 class="colorlib-heading-2">Say something</h2>
 
                         @auth
@@ -67,7 +72,7 @@
                             <div class="row form-group">
                                 <div class="col-md-12">
                                     <!-- <label for="message">Message</label> -->
-                                    <textarea name="the_comment" id="the_comment" cols="30" rows="10" class="form-control" placeholder="Say something about us"></textarea>
+                                    <textarea name="the_comment" id="the_comment" cols="30" rows="10" class="form-control" placeholder="Say something this post"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">

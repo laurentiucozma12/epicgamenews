@@ -25,14 +25,15 @@ class PostsController extends Controller
         ]);
     }
 
-    public function addComment(Post $post) {
+    public function addComment(Post $post)
+    {
         $attributes = request()->validate([
-            'the_comment' => 'required|min:10|max:500'
+            'the_comment' => 'required|min:10|max:300'
         ]);
 
         $attributes['user_id'] = auth()->id();
-        $post->comments()->create($attributes);
+        $comment = $post->comments()->create($attributes);
 
-        return back();
+        return redirect('/posts/' . $post->slug . '#comment_' . $comment->id)->with('success', 'Comment has been added');
     }
 }
