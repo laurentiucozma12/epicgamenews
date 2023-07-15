@@ -2,7 +2,7 @@
 
 @if(session()->has($status))
 
-    <div class="alert alert-{{ $status == 'sucess' ? 'info' : 'danger' }}">
+    <div class="alert alert-{{ $status == 'success' ? 'info' : 'danger' }}">
         {{ session($status) }}
     </div>
 
