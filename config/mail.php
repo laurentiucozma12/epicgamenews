@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => env('MAIL_MAILER', 'mailgun'),
 
     /*
     |--------------------------------------------------------------------------
@@ -99,9 +99,11 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => 'contact@newgamingnews.com',
+        'name' => 'Contact New Gaming News',
     ],
+
+    'reply_to' => ['address' => 'contact@newgamingnews.com', 'name' => 'Contact New Gaming News'],
 
     /*
     |--------------------------------------------------------------------------
