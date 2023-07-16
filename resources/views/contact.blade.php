@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <form onsubmit="return false;" autocomplete="off" method="POST">
+                    <form method="POST" action="{{ route('contact.store') }}" autocomplete="off" >
                         @csrf
                         <div class="row form-group">
                             <div class="col-md-6">
