@@ -9,44 +9,39 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-use Illuminate\Mail\Mailables\Address;
-
-class Test extends Mailable
+class ContactMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $username;
+    public $firstname;
+    public $lastname;
+    public $email;
+    public $subject;
+    public $message;
 
-    public function __construct($username)
+    public function __construct($firstname, $lastname, $email, $subject, $message)
     {
-        $this->username = $username;
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+        $this->email = $email;
+        $this->subject = $subject;
+        $this->message = $message;
     }
     
-
-
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('laurentiucozma12@gmail.com', 'New Gaming News'),
-            subject: 'Feedback',
+            subject: 'Contact Mail',
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
     public function content(): Content
     {
         return new Content(
-            view: 'emails.test',
+            markdown: 'emails.contact',
         );
     }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
     public function attachments(): array
     {
         return [];

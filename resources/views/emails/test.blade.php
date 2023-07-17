@@ -1,1 +1,0 @@
-We got your feedback {{ $username }}. Thank you very much for your time!
