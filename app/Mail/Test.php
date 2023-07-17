@@ -27,7 +27,7 @@ class Test extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('laurentiucozma12@gmail.com', 'Contact New Gaming News'),
+            from: new Address('laurentiucozma12@gmail.com', 'New Gaming News'),
             subject: 'Feedback',
         );
     }
