@@ -281,13 +281,9 @@
 	<!-- Main -->
 	<script src="{{ asset('blog_template/js/main.js') }}"></script>
 
-    @yield('custom_js')
+	<script src="{{ asset('js/functions.js') }}"></script>
 
-	<script>
-		setTimeout(() => {
-			$(".global-message").fadeOut();
-		}, 5000);
-	</script>
+    @yield('custom_js')
 
 	</body>
 </html>

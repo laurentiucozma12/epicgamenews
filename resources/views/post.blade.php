@@ -104,5 +104,14 @@
         </div>
     </div>	
 </div>
+@endsection
 
+@section('customjs')
+
+<script>
+    setTimeout(() => {
+        $(".global-message").fadeOut();
+    }, 5000);
+</script>
+    
 @endsection

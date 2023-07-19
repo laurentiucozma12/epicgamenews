@@ -119,6 +119,22 @@
                 contentType: false,
                 success: function(data) {
                     console.log(data);
+                    if (data.success) 
+                    {
+                        $(".global-message").addClass("alert , alert-info");                        
+                        $(".global-message").fadeIn("d-none");
+                        $(".global-message").text(data.message);
+
+                        clearData($($this).parents("form"), ['first_name', 'last_name', 'email', 'subject', 'message']);
+
+                        setTimeout(() => {
+                            $(".global-message").fadeOut();                        
+                        }, 5000);
+                    }
+                    else
+                    {
+                        
+                    }
                 }
             });
         });
