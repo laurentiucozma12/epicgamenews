@@ -47,7 +47,6 @@ class DatabaseSeeder extends Seeder
         foreach($posts as $post) 
         {
             $tags_ids = [];
-
             $tags_ids[] = \App\Models\Tag::all()->random()->id;
             $tags_ids[] = \App\Models\Tag::all()->random()->id;
             $tags_ids[] = \App\Models\Tag::all()->random()->id;

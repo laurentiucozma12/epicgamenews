@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'New Gaming News')
+@section('title', $tag->name . ' Tag | New Gaming News')
 
 @section('content')
 
@@ -31,7 +31,7 @@
 						</div>
 					</div>		
 				@empty
-					<p class="lead">There are no posts yet.</p>
+					<p>There are no posts related to this tag</p>
 				@endforelse
 
 				{{ $posts->links() }}

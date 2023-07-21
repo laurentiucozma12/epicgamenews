@@ -13,3 +13,7 @@
 .global-message.error {
     background-color: #d81d1d;
 }
+/* Categories page style */
+.categories-col .block-21 .text {
+    width: 100%;
+}
