@@ -118,7 +118,7 @@
                 processData: false,
                 contentType: false,
                 success: function(data) {
-                    console.log(data);
+                    
                     if (data.success) 
                     {
                         $(".global-message").addClass("alert , alert-info");                        
@@ -133,11 +133,16 @@
                     }
                     else
                     {
-                        
+                        for (const error in data.errors)
+                        {
+                            $('small' + error).text(data.errors[error]);
+                        }
                     }
                 }
             });
+
         });
 
     </script>
+    
 @endsection
