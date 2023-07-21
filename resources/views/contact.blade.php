@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <form onsubmit="return false;" autocomplete="off" method="POST" >
+                    <form onsubmit="return false;" autocomplete="off" method="POST">
                         @csrf
                         <div class="row form-group">
                             <div class="col-md-6">
@@ -71,36 +71,37 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Send Message" class="btn btn-primary send-message-btn send-message-btn">
+                            <input type="submit" value="Send Message" class="btn btn-primary send-message-btn">
                         </div>
                     </form>
 
                     <x-blog.message :status="'success'" />
                     
                 </div>
-
                 <div class="col-md-6">
                     <div id="map" class="colorlib-map"></div>
                 </div>
             </div>
         </div>
     </div>
-		
+    
 @endsection
 
+
 @section('custom_js')
+
     <script>
 
-        $(document).on("click", ".send-message-btn", (evt) => {
+        $(document).on("click", '.send-message-btn', (evt) => {
             evt.preventDefault();
             let $this = evt.target;
-
-            let csrf_token = $($this).parents("form").find("input[name='_token']").val(); 
-            let firstname = $($this).parents("form").find("input[name='first_name']").val(); 
-            let lastname = $($this).parents("form").find("input[name='last_name']").val(); 
-            let email = $($this).parents("form").find("input[name='email']").val(); 
-            let subject = $($this).parents("form").find("input[name='subject']").val(); 
-            let message = $($this).parents("form").find("input[name='message']").val(); 
+            
+            let csrf_token = $($this).parents("form").find("input[name='_token']").val();
+            let first_name = $($this).parents("form").find("input[name='first_name']").val();
+            let last_name = $($this).parents("form").find("input[name='last_name']").val();
+            let email = $($this).parents("form").find("input[name='email']").val();
+            let subject = $($this).parents("form").find("input[name='subject']").val();
+            let message = $($this).parents("form").find("textarea[name='message']").val();
 
             let formData = new FormData();
             formData.append('_token', csrf_token);
@@ -121,8 +122,8 @@
                     
                     if (data.success) 
                     {
-                        $(".global-message").addClass("alert , alert-info");                        
-                        $(".global-message").fadeIn("d-none");
+                        $(".global-message").addClass('alert , alert-info');                        
+                        $(".global-message").fadeIn();
                         $(".global-message").text(data.message);
 
                         clearData($($this).parents("form"), ['first_name', 'last_name', 'email', 'subject', 'message']);
@@ -135,7 +136,7 @@
                     {
                         for (const error in data.errors)
                         {
-                            $('small' + error).text(data.errors[error]);
+                            $("small." + error).text(data.errors[error]);
                         }
                     }
                 }
@@ -144,5 +145,5 @@
         });
 
     </script>
-    
+
 @endsection
