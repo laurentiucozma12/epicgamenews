@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'New Gaming News | Anime')
+@section('title', 'Anime | New Gaming News')
 
 @section('content')
 

@@ -80,24 +80,29 @@
 									</ul>
 								</li>
 								<li class="has-dropdown">
-									<a href="{{ route('platforms') }}">Platforms</a>
+									<a href="{{ route('platforms.index') }}">Platforms</a>
 									<ul class="dropdown">
-										<li><a href="{{ route('pc') }}">PC Games</a></li>
-										<li><a href="{{ route('playstation') }}">Playstation</a></li>
-										<li><a href="{{ route('xbox') }}">Xbox</a></li>
-										<li><a href="{{ route('nintendo') }}">Nintendo</a></li>
-										<li><a href="{{ route('mobile') }}">Mobile</a></li>
+										{{-- @foreach ($platforms as $platform)
+											
+											// Not ready yet
+											<li><a href="{{ route('platform.show', $platform) }}">{{ $platform->name }}</a></li>
+
+										@endforeach --}}
 									</ul>
 								</li>
 								<li><a href="{{ route('about') }}">About</a></li>
 								<li><a href="{{ route('contact.create') }}">Contact</a></li>
-								<li class="has-dropdown">
-									<a href="{{ route('more') }}">More</a>
+								{{-- <li class="has-dropdown">
+									<a href="{{ route('more.index') }}">More</a>
 									<ul class="dropdown">
-										<li><a href="{{ route('game-trailers') }}">Game Trailers</a></li>
-										<li><a href="{{ route('anime') }}">Anime</a></li>
+										@foreach ($collection as $item)
+											
+											// Not ready yet
+											<li><a href="{{ route('item.show', $item) }}">{{ $item->name }}</a></li>
+
+										@endforeach
 									</ul>
-								</li>
+								</li> --}}
 
 								@guest
 								<li class="btn-cta"><a href="{{ route('login') }}"><span>Login</span></a></li>
