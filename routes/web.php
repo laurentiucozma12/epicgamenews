@@ -20,6 +20,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\PlatformController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 

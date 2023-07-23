@@ -1,1 +1,0 @@
-folderu asta main_layouts poate o sa il sterg... depinde ce face asta in curs sa mai vad pe parcurs
