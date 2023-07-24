@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Platform;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -27,6 +28,7 @@ class PostFactory extends Factory
             'body' => $this->faker->paragraph(), 
             'user_id' => User::factory(), 
             'category_id' => Category::all()->random()->id,
+            'platform_id' => Platform::all()->random()->id,
         ];
     }
 }

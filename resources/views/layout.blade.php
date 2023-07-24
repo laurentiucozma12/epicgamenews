@@ -82,12 +82,9 @@
 								<li class="has-dropdown">
 									<a href="{{ route('platforms.index') }}">Platforms</a>
 									<ul class="dropdown">
-										{{-- @foreach ($platforms as $platform)
-											
-											// Not ready yet
-											<li><a href="{{ route('platform.show', $platform) }}">{{ $platform->name }}</a></li>
-
-										@endforeach --}}
+										@foreach ($navbar_platforms as $platform)											
+											<li><a href="{{ route('platforms.show', $platform) }}">{{ $platform->name }}</a></li>
+										@endforeach
 									</ul>
 								</li>
 								<li><a href="{{ route('about') }}">About</a></li>

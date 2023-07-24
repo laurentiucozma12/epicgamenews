@@ -7,6 +7,7 @@ use Illuminate\Pagination\Paginator;
 
 use Illuminate\Support\Facades\View;
 use App\Models\Category;
+use App\Models\Platform;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,7 +27,9 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         $categories = Category::withCount('posts')->orderBy('posts_count', 'DESC')->take(10)->get();
+        $platforms = Platform::withCount('posts')->orderBy('posts_count', 'DESC')->take(5)->get();
 
         View::share('navbar_categories', $categories);
+        View::share('navbar_platforms', $platforms);
     }
 }

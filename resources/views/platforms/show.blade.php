@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', ' | New Gaming News')
+@section('title', $platform->name . ' | New Gaming News')
 
 @section('content')
 
