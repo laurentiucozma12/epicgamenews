@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 | 
 */ 
 
+
+use App\Http\Controllers\AdminControllers\DashboardController;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\AboutController;
@@ -21,6 +24,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\PlatformController;
+
+// Front User Routes
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -48,3 +53,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+// Admin Dashboard Routes
+
+Route::get('admin', [DashboardController::class, 'index'])->name('admin.index');
