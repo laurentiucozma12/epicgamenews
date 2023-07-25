@@ -8,9 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-use App\Model\Role;
-use App\Model\Post;
-use App\Model\Comment;
+use App\Models\Role;
+use App\Models\Post;
+use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Category;
 
