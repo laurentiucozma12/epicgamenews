@@ -1,7 +1,7 @@
 @props(['recent_posts'])
 
 <div class="side">
-    <h3 class="sidebar-heading">Recent Blog</h3>
+    <h3 class="sidebar-heading">Recent News</h3>
 
     @foreach($recent_posts as $recent_post)
         <div class="f-blog">
