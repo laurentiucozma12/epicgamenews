@@ -11,13 +11,13 @@
             style="background-image: url({{ asset( 'storage/' . $recent_post->image->path. '' ) }});">
             </a>
             <div class="desc">
-                <p class="admin"><span> {{ $recent_post->created_at->diffForHumans() }} </span></p>
                 <h2>
                     <a href="blog.html"> 
-                        {{ \Str::limit($recent_post->title, 20) }}									
+                        {{ \Str::limit($recent_post->title, 10) }}									
                     </a>
                 </h2>
-                <p> {{ $recent_post->excerpt }} </p>
+                <p> {{ \Str::limit($recent_post->excerpt, 20) }} </p>
+                <p class="admin"><span> {{ $recent_post->created_at->diffForHumans() }} </span></p>
             </div>
         </div>
     @endforeach
