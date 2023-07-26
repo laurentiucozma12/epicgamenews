@@ -10,12 +10,14 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Comment;
 use App\Models\Image;
+use App\Models\Platform;
+use App\Models\More;
 
 class Post extends Model
 {
     use HasFactory;   
     
-    protected $fillable = ['title' , 'slug', 'excerpt', 'body', 'user_id', 'category_id', 'platform_id'];
+    protected $fillable = ['title' , 'slug', 'excerpt', 'body', 'user_id', 'category_id', 'platform_id', 'more_id'];
 
     public function author()
     {
@@ -25,6 +27,16 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function platform()
+    {
+        return $this->belongsTo(Platform::class);
+    }
+
+    public function more()
+    {
+        return $this->belongsTo(More::class);
     }
     
     public function tags()
