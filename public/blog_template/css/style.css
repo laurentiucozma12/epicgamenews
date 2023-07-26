@@ -171,6 +171,7 @@ h1, h2, h3, h4, h5, h6, figure {
     text-transform: uppercase;
     font-weight: 700; }
     .colorlib-nav #colorlib-logo a {
+      z-index: 1;
       position: relative;
       color: var(--white); }
       @media screen and (max-width: 768px) {
