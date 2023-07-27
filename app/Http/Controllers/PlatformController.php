@@ -10,12 +10,7 @@ use App\Models\Category;
 use App\Models\Platform;
 
 class PlatformController extends Controller
-{
-    public function __construct()
-    {
-        $this->loadNavbarData();
-    }
-    
+{    
     public function index()
     {
         return view('platforms.index', [

@@ -11,12 +11,7 @@ use App\Models\Platform;
 use App\Models\More;
 
 class PostsController extends Controller
-{
-    public function __construct()
-    {
-        $this->loadNavbarData();
-    }
-    
+{ 
     public function show(Post $post) {
 
         $recent_posts = Post::latest()->take(5)->get();

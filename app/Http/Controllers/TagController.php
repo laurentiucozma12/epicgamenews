@@ -11,12 +11,7 @@ use App\Models\More;
 use App\Models\Tag;
 
 class TagController extends Controller
-{
-    public function __construct()
-    {
-        $this->loadNavbarData();
-    }
-    
+{  
     public function index()
     {
         // view all tags in the blog

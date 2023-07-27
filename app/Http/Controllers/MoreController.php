@@ -11,11 +11,6 @@ use App\Models\More;
 
 class MoreController extends Controller
 {
-    public function __construct()
-    {
-        $this->loadNavbarData();
-    }
-
     public function index()
     {
         return view('mores.index', [

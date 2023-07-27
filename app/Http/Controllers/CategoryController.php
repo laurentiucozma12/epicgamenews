@@ -9,12 +9,7 @@ use App\Models\Tag;
 use App\Models\Category;
 
 class CategoryController extends Controller
-{
-    public function __construct()
-    {
-        $this->loadNavbarData();
-    }
-    
+{    
     public function index()
     {
         return view('categories.index', [

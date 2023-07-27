@@ -12,11 +12,6 @@ use App\Models\More;
 
 class HomeController extends Controller
 {
-    public function __construct()
-    {
-        $this->loadNavbarData();
-    }
-    
     public function index()
     {
         $posts = Post::withCount('comments')->paginate(10);
