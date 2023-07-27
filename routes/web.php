@@ -30,6 +30,7 @@ use App\Http\Controllers\TagController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+
 Route::get('/posts/{post:slug}', [PostsController::class, 'show'])->name('posts.show');
 Route::post('/posts/{post:slug}', [PostsController::class, 'addComment'])->name('posts.add_comment');
 
@@ -39,13 +40,14 @@ Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->
 Route::get('/platforms', [PlatformController::class, 'index'])->name('platforms.index');
 Route::get('/platforms/{platform:slug}', [PlatformController::class, 'show'])->name('platforms.show');
 
+Route::get('/more', [MoreController::class, 'index'])->name('mores.index');
+Route::get('/more/{more:slug}', [MoreController::class, 'show'])->name('mores.show');
+
+
 Route::get('/about', AboutController::class)->name('about');
 
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-
-Route::get('/more', [MoreController::class, 'index'])->name('mores.index');
-Route::get('/more/{more:slug}', [MoreController::class, 'show'])->name('mores.show');
 
 Route::get('/tag/{tag:name}', [TagController::class, 'show'])->name('tags.show');
 
