@@ -27,6 +27,9 @@ return new class extends Migration
             $table->unsignedBigInteger('platform_id');
             $table->foreign('platform_id')->references('id')->on('platforms');
 
+            $table->unsignedBigInteger('more_id');
+            $table->foreign('more_id')->references('id')->on('mores');
+
             $table->timestamps();
         });
     }

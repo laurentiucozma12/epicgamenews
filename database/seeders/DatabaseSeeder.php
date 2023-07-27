@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::truncate();
         \App\Models\Role::truncate();
         \App\Models\Category::truncate();
+        \App\Models\Platform::truncate();
+        \App\Models\More::truncate();
         \App\Models\Post::truncate();
         \App\Models\Tag::truncate();
         \App\Models\Comment::truncate();
@@ -41,6 +43,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\Category::factory(10)->create();
 
         \App\Models\Platform::factory(10)->create();
+
+        \App\Models\More::factory(10)->create();
 
         $posts = \App\Models\Post::factory(50)->create();
 

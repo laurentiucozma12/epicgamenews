@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class AboutController extends Controller
 {
+    public function __construct()
+    {
+        $this->loadNavbarData();
+    }
     /**
      * Handle the incoming request.
      */

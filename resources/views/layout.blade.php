@@ -89,17 +89,14 @@
 								</li>
 								<li><a href="{{ route('about') }}">About</a></li>
 								<li><a href="{{ route('contact.create') }}">Contact</a></li>
-								{{-- <li class="has-dropdown">
-									<a href="{{ route('more.index') }}">More</a>
+								<li class="has-dropdown">
+									<a href="{{ route('mores.index') }}">More</a>
 									<ul class="dropdown">
-										@foreach ($collection as $item)
-											
-											// Not ready yet
-											<li><a href="{{ route('item.show', $item) }}">{{ $item->name }}</a></li>
-
+										@foreach ($navbar_mores as $more)											
+											<li><a href="{{ route('mores.show', $more) }}">{{ $more->name }}</a></li>
 										@endforeach
 									</ul>
-								</li> --}}
+								</li>
 
 								@guest
 								<li class="btn-cta"><a href="{{ route('login') }}"><span>Login</span></a></li>

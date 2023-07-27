@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Validator;
 
 class ContactController extends Controller
 {
+    public function __construct()
+    {
+        $this->loadNavbarData();
+    }
+    
     public function create()
     {
         return view('contact');

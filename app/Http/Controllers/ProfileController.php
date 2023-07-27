@@ -11,6 +11,10 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->loadNavbarData();
+    }
     /**
      * Display the user's profile form.
      */

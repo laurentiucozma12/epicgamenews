@@ -5,39 +5,36 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Post;
-use App\Models\Category;
-use App\Models\Platform;
-use App\Models\More;
 use App\Models\Tag;
+use App\Models\Category;
+use App\Models\More;
 
-class TagController extends Controller
+class MoreController extends Controller
 {
     public function __construct()
     {
         $this->loadNavbarData();
     }
-    
+
     public function index()
     {
-        // view all tags in the blog
+        return view('mores.index', [
+            'mores' => More::withCount('posts')->paginate(100)
+        ]);
     }
 
-    public function show(Tag $tag)
-    {        
+    public function show(More $more)
+    {
         $recent_posts = Post::latest()->take(5)->get();
         $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
-        $platforms = Platform::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
-        $mores = More::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
         $tags = Tag::latest()->take(50)->get();
 
-        return view('tags.show', [
-            'tag' => $tag,
-            'posts' => $tag->posts()->paginate(10),
+        return view('mores.show', [
+            'more' => $more,
+            'posts' => $more->posts()->paginate(5),
             'recent_posts' => $recent_posts,
             'categories' => $categories,
-            'platforms' => $platforms,
-            'mores' => $mores,
             'tags' => $tags,
-        ]);
+        ]);    
     }
 }
