@@ -14,7 +14,7 @@
 						<a 
 						href="{{ route('posts.show', $post) }}" 
 						class="blog-img"
-						style="background-image: url({{ asset( 'storage/' . $post->image->path. '' ) }});"></a>
+						style="background-image: url({{ asset('storage/' . $post->image->path. '') }});"></a>
 
 						<div class="text">
 							<h3 class="heading"><a href="{{ route('posts.show', $post) }}"> {{ $post->title }} </a></h3>

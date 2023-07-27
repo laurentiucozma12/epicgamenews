@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', $more->name . ' Category | New Gaming News')
+@section('title', $more->name . ' More | New Gaming News')
 
 @section('content')
 
@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 posts-col">
-
+				
 				@forelse ($posts as $post)
 					<div class="block-21 d-flex animate-box post">
 						<a 

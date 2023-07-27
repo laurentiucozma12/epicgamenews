@@ -10,12 +10,10 @@
 			<div class="col-md-12 categories-col">
 
                 <div class="row">
-
                     @forelse ($mores as $more)
                         <div class='col-md-3'>
                             <div class="block-21 d-flex animate-box post">
                                 <div class="text">
-
                                     <h3 class="heading"><a href="{{ route('mores.show', $more) }}"> {{ $more->name }} </a></h3>
                                     <div class="meta">
                                         <div><a class='date' href="#"><span class="icon-calendar"></span> {{ $more->created_at->diffForHumans() }} </a></div>
@@ -26,7 +24,6 @@
                                             </a>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

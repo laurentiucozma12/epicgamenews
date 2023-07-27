@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\Category;
 use App\Models\Platform;
 use App\Models\More;
-use App\Models\Tag;
 
 class HomeController extends Controller
 {

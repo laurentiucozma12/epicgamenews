@@ -45,7 +45,7 @@ Route::get('/contact', [ContactController::class, 'create'])->name('contact.crea
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/more', [MoreController::class, 'index'])->name('mores.index');
-Route::get('/more/{platform:slug}', [MoreController::class, 'show'])->name('mores.show');
+Route::get('/more/{more:slug}', [MoreController::class, 'show'])->name('mores.show');
 
 Route::get('/tag/{tag:name}', [TagController::class, 'show'])->name('tags.show');
 

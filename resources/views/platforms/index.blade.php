@@ -10,7 +10,6 @@
 			<div class="col-md-12 categories-col">
 
                 <div class="row">
-
                     @forelse ($platforms as $platform)
                         <div class='col-md-3'>
                             <div class="block-21 d-flex animate-box post">
