@@ -9,7 +9,6 @@ use Illuminate\Routing\Controller as BaseController;
 use App\Models\Category;
 use App\Models\Platform;
 use App\Models\More;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 
 class Controller extends BaseController

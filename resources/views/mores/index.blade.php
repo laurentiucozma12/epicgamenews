@@ -7,7 +7,7 @@
 <div class="colorlib-blog">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12 mores-col">
+			<div class="col-md-12 categories-col">
 
                 <div class="row">
 
