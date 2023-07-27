@@ -19,7 +19,7 @@ class PlatformController extends Controller
     public function index()
     {
         return view('platforms.index', [
-            'platforms' => Platform::withCount('posts')->paginate(10)
+            'platforms' => Platform::withCount('posts')->paginate(12)
         ]);
     }
 

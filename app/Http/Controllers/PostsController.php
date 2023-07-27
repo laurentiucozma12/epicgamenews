@@ -20,9 +20,9 @@ class PostsController extends Controller
 
         $recent_posts = Post::latest()->take(5)->get();
 
-        $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
-        $platforms = Platform::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
-        $mores = More::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
+        $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(12)->get();
+        $platforms = Platform::withCount('posts')->orderBy('posts_count', 'desc')->take(12)->get();
+        $mores = More::withCount('posts')->orderBy('posts_count', 'desc')->take(12)->get();
 
         $tags = Tag::latest()->take(50)->get();
 

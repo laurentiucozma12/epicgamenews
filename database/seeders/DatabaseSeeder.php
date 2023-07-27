@@ -40,11 +40,11 @@ class DatabaseSeeder extends Seeder
             $user->image()->save( \App\Models\Image::factory()->make() );
         }
 
-        \App\Models\Category::factory(10)->create();
+        \App\Models\Category::factory(24)->create();
 
-        \App\Models\Platform::factory(10)->create();
+        \App\Models\Platform::factory(24)->create();
 
-        \App\Models\More::factory(10)->create();
+        \App\Models\More::factory(24)->create();
 
         $posts = \App\Models\Post::factory(50)->create();
 

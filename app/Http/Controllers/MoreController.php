@@ -19,7 +19,7 @@ class MoreController extends Controller
     public function index()
     {
         return view('mores.index', [
-            'mores' => More::withCount('posts')->paginate(100)
+            'mores' => More::withCount('posts')->paginate(12)
         ]);
     }
 
