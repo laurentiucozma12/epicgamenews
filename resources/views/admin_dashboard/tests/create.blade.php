@@ -15,6 +15,7 @@
 <!--start page wrapper -->
 <div class="page-wrapper">
     <div class="page-content">
+
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
             <div class="breadcrumb-title pe-3">Posts</div>
@@ -32,10 +33,10 @@
         
         <div class="card">
             <div class="card-body p-4">
-                <h5 class="card-title">Add New Post</h5>
+                <h5 class="card-title">Testing Add New Post</h5>
                 <hr/>
 
-                <form action="{{ route('admin.posts.store') }}" method="POST">
+                <form action="{{ route('admin.tests.store') }}" method="POST">
                     @csrf
                     <div class="form-body mt-4">
                         <div class="row">
@@ -43,45 +44,8 @@
                                 <div class="border border-3 p-4 rounded">
 
                                     <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Post Title</label>
-                                        <input type="email" class="form-control" id="inputProductTitle" placeholder="Enter post title">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Post Slug</label>
-                                        <input type="email" class="form-control" id="inputProductTitle" placeholder="Enter post slug">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="inputProductDescription" class="form-label">Post Excerpt</label>
-                                        <textarea class="form-control" id="inputProductDescription" rows="3"></textarea>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Post Category</label>                                        
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="rounded">
-                                                    <div class="mb-3">
-                                                        <select class="single-select">
-                                                            @foreach ($categories as $key => $category)
-                                                                <option value="{{ $key }}">{{ $category }}</option>                                                                
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>                                            
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="inputProductDescription" class="form-label">Post Thumbnail</label>
-                                        <input id="image-uploadify" type="file" accept="image/*" multiple>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="inputProductDescription" class="form-label">Post Content</label>
-                                        <textarea id="post_content" class="form-control" id="inputProductDescription" rows="3"></textarea>
+                                        <label for="inputProductDescription" class="form-label">TESTING Post Content</label>
+                                        <textarea id="test" class="form-control" id="inputProductDescription" rows="3"></textarea>
                                     </div>
 
                                 </div>
@@ -89,8 +53,10 @@
                         </div><!--end row-->
                     </div>                        
                 </form><!--end form-->
+
             </div>
         </div>
+
     </div>
 </div>
 <!--end page wrapper -->
@@ -118,10 +84,11 @@
     });
 
 // Tiny MCE
+
 tinymce.init({
-    selector: 'textarea#post_content',
+    selector: 'textarea#test',
     plugins: 'image code',
-    height: '500',
+    height: 500,
     toolbar: 'undo redo | link image | code',
     /* enable title field in the Image dialog*/
     image_title: true,
