@@ -1,14 +1,22 @@
 @extends("admin_dashboard.layouts.app")
 
 @section("style")
-<link href="{{ asset('admin_dashboard_assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('admin_dashboard_assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }} " rel="stylesheet" />
+
 <link href="{{ asset('admin_dashboard_assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('admin_dashboard_assets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
 
-<style>.imageuploadify { margin: 0; max-width: 100%; }</style>
+<link href="{{ asset('admin_dashboard_assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
 
+<style>
+    .imageuploadify {
+        margin: 0;
+        max-width: 100%;
+    }
+</style>
+
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.0/tinymce.min.js" integrity="nhtc4hkvw9rxs4ivm25pg3brruxcsjsaknsuggv71arm406g" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 <script src="https://cdn.tiny.cloud/1/nhtc4hkvw9rxs4ivm25pg3brruxcsjsaknsuggv71arm406g/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-
 @endsection
     
 @section("wrapper")
@@ -98,11 +106,14 @@
 
 @section("script")
 <script src="{{ asset('admin_dashboard_assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
+
 <script src="{{ asset('admin_dashboard_assets/plugins/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('admin_dashboard_assets/plugins/input-tags/js/tagsinput.js') }}"></script>
+
 <script>
     $(document).ready(function () {
         $('#image-uploadify').imageuploadify();
-    })
+    });
 
     $('.single-select').select2({
         theme: 'bootstrap4',
@@ -117,53 +128,55 @@
         allowClear: Boolean($(this).data('allow-clear')),
     });
 
-// Tiny MCE
-tinymce.init({
-    selector: 'textarea#post_content',
-    plugins: 'image code',
-    height: '500',
-    toolbar: 'undo redo | link image | code',
-    /* enable title field in the Image dialog*/
-    image_title: true,
-    /* enable automatic uploads of images represented by blob or data URIs*/
-    automatic_uploads: true,
-    /*
-    URL of our upload handler (for more details check: https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_url)
-    images_upload_url: 'postAcceptor.php',
-    here we add custom filepicker only to Image dialog
-    */
-    file_picker_types: 'image',
-    /* and here's our custom image picker*/
-    file_picker_callback: (cb, value, meta) => {
-        const input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'image/*');
 
-        input.addEventListener('change', (e) => {
-            const file = e.target.files[0];
+    // Tiny MCE
+    images_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {  
+        const formData = new FormData();
+        let _token = $("input[name='token']").val();
 
-            const reader = new FileReader();
-            reader.addEventListener('load', () => {
-            /*
-                Note: Now we need to register the blob in TinyMCEs image blob
-                registry. In the next release this part hopefully won't be
-                necessary, as we are looking to handle it internally.
-            */
-            const id = 'blobid' + (new Date()).getTime();
-            const blobCache =  tinymce.activeEditor.editorUpload.blobCache;
-            const base64 = reader.result.split(',')[1];
-            const blobInfo = blobCache.create(id, file, base64);
-            blobCache.add(blobInfo);
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', "{{ route('admin.upload_tinymce_image') }}");
 
-            /* call the callback and populate the Title field with the file name */
-            cb(blobInfo.blobUri(), { title: file.name });
-            });
-            reader.readAsDataURL(file);
-        });
+        xhr.onload = () => {
+            if (xhr.status === 403) {
+                reject({ message: 'HTTP Error: ' + xhr.status, remove: true });
+                return;
+            }
 
-        input.click();
-    },
-    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
-});
+            if (xhr.status < 200 || xhr.status >= 300) {
+                reject('HTTP Error: ' + xhr.status);
+                return;
+            }
+
+            const json = JSON.parse(xhr.responseText);
+
+            if (!json || typeof json.location != 'string') {
+                reject('Invalid JSON: ' + xhr.responseText);
+                return;
+            }
+
+            resolve(json.location);
+        };
+
+        formData.append('_token', '{{ csrf_token() }}');
+        formData.append('file', blobInfo.blob(), blobInfo.filename());
+        xhr.send(formData);
+    });
+
+    tinymce.init({
+        selector: 'textarea#post_content',
+        plugins: 'advlist autolink lists link image media charmap print preview hr anchor pagebreak',
+        toolbar_mode: 'floating',
+        height: '500',
+
+        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image code | rtl ltr',
+        toolbar_mode: 'floating',
+
+        image_title: true,
+        automatic_uploads: true,
+
+        images_upload_handler: images_upload_handler,
+    });
+
 </script>
 @endsection
