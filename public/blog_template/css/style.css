@@ -1313,7 +1313,16 @@ input[type="text"] {
   padding: 5em 0;
   position: relative;
   overflow: hidden;
-  z-index: 0; }
+  z-index: 0; 
+  height: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  @media screen and (max-width: 1200px) {    
+    #colorlib-subscribe {
+      height: 700px;
+    }
+  }
   #colorlib-subscribe:after {
     position: absolute;
     top: 0;
@@ -1345,7 +1354,7 @@ input[type="text"] {
   width: 100%;
   padding: 0; }
   .qbstp-header-subscribe .col-three-forth {
-    width: 70%; }
+    width: 100%; }
   .qbstp-header-subscribe .col-one-third {
     width: 30%; }
   .qbstp-header-subscribe .col-three-forth, .qbstp-header-subscribe .col-one-third {
@@ -1354,7 +1363,7 @@ input[type="text"] {
     float: left; }
     @media screen and (max-width: 768px) {
       .qbstp-header-subscribe .col-three-forth, .qbstp-header-subscribe .col-one-third {
-        width: 50%; } }
+        width: 100%; } }
   .qbstp-header-subscribe .form-control {
     background: transparent; }
   .qbstp-header-subscribe .form-group {
@@ -1377,7 +1386,6 @@ input[type="text"] {
       color: var(--light-gray-2); }
   .qbstp-header-subscribe #email {
     font-size: 14px;
-    width: 100%;
     border: none;
     border-bottom: 1px solid var(--dark-1);
     color: var(--dark-1) !important; }

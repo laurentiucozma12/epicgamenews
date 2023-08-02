@@ -5,15 +5,35 @@
     min-width: 500px;
     border-radius: 50px;
     color: #fff;
-    z-index: 2;
-}
+    z-index: 2; }
 .global-message.info {
-    background-color: #4586ff;
-}
+    background-color: #4586ff; }
 .global-message.error {
-    background-color: #d81d1d;
-}
+    background-color: #d81d1d; }
+/* Subscribe Container */
+#colorlib-subscribe {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+#colorlib-subscribe .first-container .container {
+    background-color: #969696a9;
+    border-radius: 15px;
+    padding: 3rem 0;
+    margin: 0;
+    width: 500px; }
+    @media screen and (max-width: 500px) {
+        #colorlib-subscribe .first-container .container {            
+            border-radius: 0;
+        } }
+#colorlib-subscribe .first-container .container .form-group {
+    margin-bottom: 0; }
+#colorlib-subscribe .first-container .container .form-group .btn {
+    margin: 0; }
+#subscribe-input {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%; }
 /* Categories page style */
 .categories-col .block-21 .text {
-    width: 100%;
-}
+    width: 100%; }
