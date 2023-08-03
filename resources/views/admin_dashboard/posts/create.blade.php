@@ -43,8 +43,9 @@
                 <h5 class="card-title">Add New Post</h5>
                 <hr/>
 
-                <form action="{{ route('admin.posts.store') }}" method="POST">
+                <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+
                     <div class="form-body mt-4">
                         <div class="row">
                             <div class="col-lg-12">
@@ -52,17 +53,29 @@
 
                                     <div class="mb-3">
                                         <label for="inputProductTitle" class="form-label">Post Title</label>
-                                        <input type="email" class="form-control" id="inputProductTitle" placeholder="Enter post title">
+                                        <input type="text" value='{{ old("title") }}' name="title" required class="form-control" id="inputProductTitle">
+
+                                        @error('title')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="inputProductTitle" class="form-label">Post Slug</label>
-                                        <input type="email" class="form-control" id="inputProductTitle" placeholder="Enter post slug">
+                                        <input type="text" value='{{ old("slug") }}' name="slug" required class="form-control" id="inputProductTitle">
+
+                                        @error('slug')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="inputProductDescription" class="form-label">Post Excerpt</label>
-                                        <textarea class="form-control" id="inputProductDescription" rows="3"></textarea>
+                                        <textarea required class="form-control" name='excerpt' id="inputProductDescription" rows="3">{{ old("excerpt") }}</textarea>
+                                    
+                                        @error('excerpt')
+                                            <p class='text-danger'>{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3">
@@ -71,11 +84,15 @@
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
-                                                        <select class="single-select">
+                                                        <select name="category_id" required class="single-select">
                                                             @foreach ($categories as $key => $category)
                                                                 <option value="{{ $key }}">{{ $category }}</option>                                                                
                                                             @endforeach
                                                         </select>
+
+                                                        @error('category_id')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -83,14 +100,29 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="inputProductDescription" class="form-label">Post Thumbnail</label>
-                                        <input id="image-uploadify" type="file" accept="image/*" multiple>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <label for="inputProductDescription" class="form-label">Post Thumbnail</label>
+                                                <input id='thumbnail' required name='thumbnail' id="file" type="file">
+
+                                                @error('thumbnail')
+                                                    <p class='text-danger'>{{ $message }}</p>
+                                                @enderror
+
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="inputProductDescription" class="form-label">Post Content</label>
-                                        <textarea id="post_content" class="form-control" id="inputProductDescription" rows="3"></textarea>
+                                        <textarea name="body" id="post_content" class="form-control" id="inputProductDescription" rows="3">{{ old("body") }}</textarea>   
+                                    
+                                        @error('body')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
+                                    
+                                    <button class='btn btn-primary' type='submit'>Add Post</button>
 
                                 </div>
                             </div>                            
@@ -111,9 +143,8 @@
 <script src="{{ asset('admin_dashboard_assets/plugins/input-tags/js/tagsinput.js') }}"></script>
 
 <script>
-    $(document).ready(function () {
-        $('#image-uploadify').imageuploadify();
-    });
+$(document).ready(function () {
+    // $('#image-uploadify').imageuploadify();
 
     $('.single-select').select2({
         theme: 'bootstrap4',
@@ -177,6 +208,7 @@
 
         images_upload_handler: images_upload_handler,
     });
+});
 
 </script>
 @endsection
