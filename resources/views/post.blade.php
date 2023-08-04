@@ -66,7 +66,7 @@
 
                         @auth
 
-                        <form method="POST" action="{{ route('posts.add_comment', $post) }}">
+                        <form method="POST" action="{{ route('add_comment', $post) }}">
                             @csrf
                             
                             <div class="row form-group">

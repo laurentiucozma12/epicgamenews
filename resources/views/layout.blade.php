@@ -90,10 +90,10 @@
 								<li><a href="{{ route('about') }}">About</a></li>
 								<li><a href="{{ route('contact.create') }}">Contact</a></li>
 								<li class="has-dropdown">
-									<a href="{{ route('mores.index') }}">More</a>
+									<a href="{{ route('others.index') }}">Others</a>
 									<ul class="dropdown">
-										@foreach ($navbar_mores as $more)											
-											<li><a href="{{ route('mores.show', $more) }}">{{ $more->name }}</a></li>
+										@foreach ($navbar_others as $other)											
+											<li><a href="{{ route('others.show', $other) }}">{{ $other->name }}</a></li>
 										@endforeach
 									</ul>
 								</li>

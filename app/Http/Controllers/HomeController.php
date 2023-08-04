@@ -8,7 +8,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use App\Models\Category;
 use App\Models\Platform;
-use App\Models\More;
+use App\Models\Other;
 
 class HomeController extends Controller
 {
@@ -20,7 +20,7 @@ class HomeController extends Controller
 
         $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
         $platforms = Platform::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
-        $mores = More::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
+        $others = Other::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
 
         $tags = Tag::latest()->take(50)->get();
 
@@ -30,7 +30,7 @@ class HomeController extends Controller
             'recent_posts' => $recent_posts,
             'categories' => $categories,
             'platforms' => $platforms,
-            'mores' => $mores,
+            'others' => $others,
             'tags' => $tags,
         ]);
     }

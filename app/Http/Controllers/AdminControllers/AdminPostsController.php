@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Category;
 use App\Models\Platform;
-use App\Models\More;
+use App\Models\Other;
 use App\Models\Post;
 
 class AdminPostsController extends Controller
@@ -18,7 +18,7 @@ class AdminPostsController extends Controller
         'excerpt' => 'required|max:300',
         'category_id' => 'required|numeric',
         'platform_id' => 'required|numeric',
-        'more_id' => 'required|numeric',
+        'other_id' => 'required|numeric',
         'thumbnail' => 'required|file|mimes:jpg,png,webp,svg,jpeg',
         'body' => 'required',
     ];
@@ -33,7 +33,7 @@ class AdminPostsController extends Controller
         return view('admin_dashboard.posts.create', [
             'categories' => Category::pluck('name', 'id'),
             'platforms' => Platform::pluck('name', 'id'),
-            'mores' => More::pluck('name', 'id'),
+            'others' => Other::pluck('name', 'id'),
         ]);
     }
 
@@ -41,8 +41,23 @@ class AdminPostsController extends Controller
     {
         $validated = $request->validate($this->rules);
         $validated['user_id'] = auth()->id();
+        $post = Post::create($validated);
 
-        Post::create($validated);
+        if ($request->has('thumbnail'))
+        {
+            $thumbnail = $request->file('thumbnail');
+            $filename = $thumbnail->getClientOriginalName();
+            $file_extension = $thumbnail->getClientOriginalExtension();
+            $path = $thumbnail->store('images', 'public');
+
+            $post->image()->create([
+                'name' => $filename,
+                'extension' => $file_extension,
+                'path' => $path 
+            ]);
+        }
+
+        return redirect()->route('admin.posts.create')->with('success', 'Post has been created');
     }
 
     public function show(string $id)

@@ -24,44 +24,8 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\MoreController;
+use App\Http\Controllers\OtherController;
 use App\Http\Controllers\TagController;
-
-
-// Front User Routes
-
-Route::get('/', [HomeController::class, 'index'])->name('home');
-
-
-Route::get('/posts/{post:slug}', [PostsController::class, 'show'])->name('posts.show');
-Route::post('/posts/{post:slug}', [PostsController::class, 'addComment'])->name('posts.add_comment');
-
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
-
-Route::get('/platforms', [PlatformController::class, 'index'])->name('platforms.index');
-Route::get('/platforms/{platform:slug}', [PlatformController::class, 'show'])->name('platforms.show');
-
-Route::get('/more', [MoreController::class, 'index'])->name('mores.index');
-Route::get('/more/{more:slug}', [MoreController::class, 'show'])->name('mores.show');
-
-
-Route::get('/about', AboutController::class)->name('about');
-
-Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-
-Route::get('/tag/{tag:name}', [TagController::class, 'show'])->name('tags.show');
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';
-
 
 // Admin Dashboard Routes
 
@@ -73,3 +37,34 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isadmin'])->group(f
     Route::post('upload_tinymce_image', [TinyMCEController::class, 'upload_tinymce_image'])->name('upload_tinymce_image');
     
 });
+
+// Front User Routes
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
+
+Route::get('/platforms', [PlatformController::class, 'index'])->name('platforms.index');
+Route::get('/platforms/{platform:slug}', [PlatformController::class, 'show'])->name('platforms.show');
+
+Route::get('/other', [OtherController::class, 'index'])->name('others.index');
+Route::get('/other/{other:slug}', [OtherController::class, 'show'])->name('others.show');
+
+Route::get('/about', AboutController::class)->name('about');
+
+Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+Route::get('/tag/{tag:name}', [TagController::class, 'show'])->name('tags.show');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
+
+Route::get('/{post:slug}', [PostsController::class, 'show'])->name('show');
+Route::post('/{post:slug}', [PostsController::class, 'addComment'])->name('add_comment');

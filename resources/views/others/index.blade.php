@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'More | New Gaming News')
+@section('title', 'Other | New Gaming News')
 
 @section('content')
 
@@ -10,17 +10,17 @@
 			<div class="col-md-12 categories-col">
 
                 <div class="row">
-                    @forelse ($mores as $more)
+                    @forelse ($others as $other)
                         <div class='col-md-3'>
                             <div class="block-21 d-flex animate-box post">
                                 <div class="text">
-                                    <h3 class="heading"><a href="{{ route('mores.show', $more) }}"> {{ $more->name }} </a></h3>
+                                    <h3 class="heading"><a href="{{ route('others.show', $other) }}"> {{ $other->name }} </a></h3>
                                     <div class="meta">
-                                        <div><a class='date' href="#"><span class="icon-calendar"></span> {{ $more->created_at->diffForHumans() }} </a></div>
-                                        <div><a href="#"><span class="icon-user2"></span> {{ $more->user->name }} </a></div>
+                                        <div><a class='date' href="#"><span class="icon-calendar"></span> {{ $other->created_at->diffForHumans() }} </a></div>
+                                        <div><a href="#"><span class="icon-user2"></span> {{ $other->user->name }} </a></div>
                                         <div class="posts-count">
-                                            <a href="{{ route('mores.show', $more) }}">
-                                                <span class="icon-tag"></span> {{ $more->posts_count }}
+                                            <a href="{{ route('others.show', $other) }}">
+                                                <span class="icon-tag"></span> {{ $other->posts_count }}
                                             </a>
                                         </div>
                                     </div>
@@ -28,12 +28,12 @@
                             </div>
                         </div>
                     @empty
-                        <p class="lead">There is no more to show.</p>
+                        <p class="lead">There is no other to show.</p>
                     @endforelse
                     
                 </div>
 
-                {{ $mores->links() }}
+                {{ $others->links() }}
 
 			</div>
 		</div>

@@ -8,7 +8,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use App\Models\Category;
 use App\Models\Platform;
-use App\Models\More;
+use App\Models\Other;
 
 class PostsController extends Controller
 { 
@@ -18,7 +18,7 @@ class PostsController extends Controller
 
         $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(12)->get();
         $platforms = Platform::withCount('posts')->orderBy('posts_count', 'desc')->take(12)->get();
-        $mores = More::withCount('posts')->orderBy('posts_count', 'desc')->take(12)->get();
+        $others = Other::withCount('posts')->orderBy('posts_count', 'desc')->take(12)->get();
 
         $tags = Tag::latest()->take(50)->get();
 
@@ -27,7 +27,7 @@ class PostsController extends Controller
             'recent_posts' => $recent_posts,
             'categories' => $categories,
             'platforms' => $platforms,
-            'mores' => $mores,
+            'others' => $others,
             'tags' => $tags,
         ]);
     }
@@ -41,6 +41,6 @@ class PostsController extends Controller
         $attributes['user_id'] = auth()->id();
         $comment = $post->comments()->create($attributes);
 
-        return redirect('/posts/' . $post->slug . '#comment_' . $comment->id)->with('success', 'Comment has been added');
+        return redirect($post->slug . '#comment_' . $comment->id)->with('success', 'Comment has been added');
     }
 }

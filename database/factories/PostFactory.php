@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Platform;
-use App\Models\More;
+use App\Models\Other;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -29,7 +29,7 @@ class PostFactory extends Factory
             'user_id' => User::factory(), 
             'category_id' => Category::all()->random()->id,
             'platform_id' => Platform::all()->random()->id,
-            'more_id' => More::all()->random()->id,
+            'other_id' => Other::all()->random()->id,
         ];
     }
 }

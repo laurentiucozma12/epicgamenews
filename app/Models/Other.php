@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Post;
 use App\Models\User;
 
-class More extends Model
+class Other extends Model
 {
     use HasFactory;
 

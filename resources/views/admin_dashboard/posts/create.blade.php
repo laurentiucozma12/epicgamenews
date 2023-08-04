@@ -208,6 +208,10 @@ $(document).ready(function () {
 
         images_upload_handler: images_upload_handler,
     });
+
+    setTimeout(() => {
+        $('general-message').fadeOut();
+    }, 5000);
 });
 
 </script>

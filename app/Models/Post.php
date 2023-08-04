@@ -11,13 +11,13 @@ use App\Models\Tag;
 use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Platform;
-use App\Models\More;
+use App\Models\Other;
 
 class Post extends Model
 {
     use HasFactory;   
     
-    protected $fillable = ['title' , 'slug', 'excerpt', 'body', 'user_id', 'category_id', 'platform_id', 'more_id'];
+    protected $fillable = ['title' , 'slug', 'excerpt', 'body', 'user_id', 'category_id', 'platform_id', 'other_id'];
 
     public function author()
     {
@@ -34,9 +34,9 @@ class Post extends Model
         return $this->belongsTo(Platform::class);
     }
 
-    public function more()
+    public function other()
     {
-        return $this->belongsTo(More::class);
+        return $this->belongsTo(Other::class);
     }
     
     public function tags()
