@@ -1331,9 +1331,11 @@ input[type="text"] {
   #colorlib-subscribe .colorlib-heading {
     margin-bottom: 20px; }
     #colorlib-subscribe .colorlib-heading h2 {
+      font-weight: 800;
       color: var(--dark-1); }
     #colorlib-subscribe .colorlib-heading p {
       font-size: 18px;
+      font-weight: 800;
       color: var(--dark-1); }
 
 .qbstp-header-subscribe {

@@ -10,6 +10,8 @@
     --green-1: #5cb85c;
     --green-2: #4cae4c;
     --light-gray-1: #5e5e5e;
+    --transparent-gray-1: #e9d05599;
+    --light-gray-1: #5e5e5e;
     --light-gray-2: #c5c5c5;
     --light-blue-1: #0EF1FF;
     --light-blue-2: #c2fcff;
@@ -41,7 +43,7 @@
     justify-content: center;
     align-items: center; }
 #colorlib-subscribe .first-container .container {
-    background-color: #969696a9;
+    background-color: var(--transparent-gray-1);
     border-radius: 15px;
     padding: 3rem 0;
     margin: 0;

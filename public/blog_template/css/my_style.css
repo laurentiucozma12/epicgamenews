@@ -1,3 +1,28 @@
+:root {
+    --bg-filter: #c8c8c814;
+    --black: #000000;
+    --blue-1: #5f97ff;
+    --blue-2: #5bc0de;
+    --blue-3: #46b8da;
+    --dark-1: #161616;
+    --dark-gray: #202020;
+    --gray-1: #313131;
+    --green-1: #5cb85c;
+    --green-2: #4cae4c;
+    --light-gray-1: #5e5e5e;
+    --light-gray-2: #c5c5c5;
+    --light-blue-1: #0EF1FF;
+    --light-blue-2: #c2fcff;
+    --light-green: #32AC1E;
+    --light-green-hover: #3ac924;
+    --red-1: red;
+    --red-2: #d9534f;
+    --red-3: #d43f3a ;
+    --orange-1: #F7AF1D;
+    --orange-2: #f0ad4e;
+    --orange-3: #eea236;
+    --white: #ffffff;
+}
 .global-message {
     position: fixed;
     bottom: 10px;
@@ -16,7 +41,7 @@
     justify-content: center;
     align-items: center; }
 #colorlib-subscribe .first-container .container {
-    background-color: #969696a9;
+    background-color: var(--dark-gray) !important;
     border-radius: 15px;
     padding: 3rem 0;
     margin: 0;
