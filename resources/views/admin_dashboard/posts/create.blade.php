@@ -250,7 +250,7 @@ $(document).ready(function () {
     });
 
     setTimeout(() => {
-        $('general-message').fadeOut();
+        $('.general-message').fadeOut();
     }, 5000);
 });
 
