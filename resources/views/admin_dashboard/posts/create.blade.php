@@ -98,6 +98,46 @@
                                             </div>
                                         </div>                                            
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="inputProductTitle" class="form-label">Post Platform</label>                                        
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="rounded">
+                                                    <div class="mb-3">
+                                                        <select name="platform_id" required class="single-select">
+                                                            @foreach ($platforms as $key => $platform)
+                                                                <option value="{{ $key }}">{{ $platform }}</option>                                                                
+                                                            @endforeach
+                                                        </select>
+
+                                                        @error('platform_id')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                            
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="inputProductTitle" class="form-label">Post Other</label>                                        
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="rounded">
+                                                    <div class="mb-3">
+                                                        <select name="other_id" required class="single-select">
+                                                            @foreach ($others as $key => $other)
+                                                                <option value="{{ $key }}">{{ $other }}</option>                                                                
+                                                            @endforeach
+                                                        </select>
+
+                                                        @error('other_id')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                            
+                                    </div>
 
                                     <div class="mb-3">
                                         <div class="card">
