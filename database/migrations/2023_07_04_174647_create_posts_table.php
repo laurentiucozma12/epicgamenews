@@ -30,6 +30,9 @@ return new class extends Migration
             $table->unsignedBigInteger('other_id');
             $table->foreign('other_id')->references('id')->on('others');
 
+            $table->integer('views')->default(0);
+            $table->string('status')->default('published');
+
             $table->timestamps();
         });
     }

@@ -8,7 +8,7 @@
             <a 
             href="{{ route('show', $recent_post) }}" 
             class="blog-img" 
-            style="background-image: url({{ asset( 'storage/' . $recent_post->image->path. '' ) }});">
+            style="background-image: url({{ asset($recent_post->image ? 'storage/' . $recent_post->image->path : 'storage/placeholders/thumbnail_placeholder.jpg') }});">
             </a>
             <div class="desc">
                 <h2>

@@ -10,10 +10,6 @@ use App\Models\Platform;
 use App\Models\Other;
 use App\Models\Post;
 
-////  Delete after testing
-    use Illuminate\Support\Facades\Log;
-////
-
 class AdminPostsController extends Controller
 {
     private $rules = [
@@ -23,13 +19,15 @@ class AdminPostsController extends Controller
         'category_id' => 'required|numeric',
         'platform_id' => 'required|numeric',
         'other_id' => 'required|numeric',
-        'thumbnail' => 'required|file|mimes:jpg,png,webp,svg,jpeg',
+        'thumbnail' => 'required|file|mimes:jpg,png,webp,svg,jpeg|dimensions:max_width=300,max_height=227',
         'body' => 'required',
     ];
 
     public function index()
     {
-        return view('admin_dashboard.posts.index');
+        return view('admin_dashboard.posts.index', [
+            'posts' => Post::with(['category', 'platform', 'other'])->get(),
+        ]);
     }
 
     public function create()
@@ -69,18 +67,43 @@ class AdminPostsController extends Controller
         //
     }
 
-    public function edit(string $id)
+    public function edit(Post $post)
     {
-        //
+        return view('admin_dashboard.posts.edit', [
+            'post' => $post,
+            'categories' => Category::pluck('name', 'id'),
+            'platforms' => Platform::pluck('name', 'id'),
+            'others' => Other::pluck('name', 'id'),
+        ]);
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $this->rules['thumbnail'] = 'nullable|file|mimes:jpg,png,webp,svg,jpeg|dimensions:max_width=300,max_height=227';
+        $validated = $request->validate($this->rules);
+
+        $post->update($validated);
+
+        if ($request->has('thumbnail'))
+        {
+            $thumbnail = $request->file('thumbnail');
+            $filename = $thumbnail->getClientOriginalName();
+            $file_extension = $thumbnail->getClientOriginalExtension();
+            $path = $thumbnail->store('images', 'public');
+
+            $post->image()->update([
+                'name' => $filename,
+                'extension' => $file_extension,
+                'path' => $path
+            ]);
+        }
+
+        return redirect()->route('admin.posts.edit', $post)->with('success', 'Post has been updated');    
     }
 
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('admin.posts.index')->with('success', 'Post has been deleted');
     }
 }
