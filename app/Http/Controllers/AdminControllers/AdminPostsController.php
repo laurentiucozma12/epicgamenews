@@ -43,43 +43,9 @@ class AdminPostsController extends Controller
 
     public function store(Request $request)
     {
-
-        if(!$request->has('title')) {
-            Log::debug('title field is not present in the request data.');
-        }
-        if (!$request->has('slug')) {
-            Log::debug('slug field is not present in the request data.');        
-        }
-        if (!$request->has('excerpt')) {
-            Log::debug('excerpt field is not present in the request data.');        
-        }
-        if (!$request->has('category_id')) {
-            Log::debug('category_id field is not present in the request data.');        
-        }
-        if (!$request->has('platform_id')) {
-            Log::debug('platform_id field is not present in the request data.');        
-        }
-        if (!$request->has('other_id')) {
-            Log::debug('Other_id field is not present in the request data.');        
-        }
-        if (!$request->has('thumbnail')) {
-            Log::debug('thumbnail field is not present in the request data.');        
-        }
-        if (!$request->has('body')) {
-            Log::debug('body field is not present in the request data.');        
-        }
-        Log::debug('Reached this point 1');
-
         $validated = $request->validate($this->rules);
-
-        Log::debug('Reached this point 2');
-
         $validated['user_id'] = auth()->id();     
-
-        $post = Post::create($validated);  
-
-        Log::debug('Reached this point 3');
-        Log::debug('Validated data:', $validated);
+        $post = Post::create($validated); 
 
         if($request->has('thumbnail'))
         {
