@@ -1,21 +1,12 @@
 @extends("admin_dashboard.layouts.app")
 
 @section("style")
-<link href="{{ asset('admin_dashboard_assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }} " rel="stylesheet" />
 
 <link href="{{ asset('admin_dashboard_assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('admin_dashboard_assets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
 
 <link href="{{ asset('admin_dashboard_assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
 
-<style>
-    .imageuploadify {
-        margin: 0;
-        max-width: 100%;
-    }
-</style>
-
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.0/tinymce.min.js" integrity="nhtc4hkvw9rxs4ivm25pg3brruxcsjsaknsuggv71arm406g" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 <script src="https://cdn.tiny.cloud/1/nhtc4hkvw9rxs4ivm25pg3brruxcsjsaknsuggv71arm406g/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 @endsection
     
@@ -177,14 +168,12 @@
 @endsection
 
 @section("script")
-<script src="{{ asset('admin_dashboard_assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
 
 <script src="{{ asset('admin_dashboard_assets/plugins/select2/js/select2.min.js') }}"></script>
 <script src="{{ asset('admin_dashboard_assets/plugins/input-tags/js/tagsinput.js') }}"></script>
 
 <script>
 $(document).ready(function () {
-    // $('#image-uploadify').imageuploadify();
 
     $('.single-select').select2({
         theme: 'bootstrap4',
@@ -252,6 +241,7 @@ $(document).ready(function () {
     setTimeout(() => {
         $('.general-message').fadeOut();
     }, 5000);
+
 });
 
 </script>
