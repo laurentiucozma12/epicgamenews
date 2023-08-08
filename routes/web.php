@@ -18,6 +18,8 @@ use App\Http\Controllers\AdminControllers\DashboardController;
 use App\Http\Controllers\AdminControllers\AdminPostsController;
 use App\Http\Controllers\AdminControllers\TinyMCEController;
 use App\Http\Controllers\AdminControllers\AdminCategoriesController;
+use App\Http\Controllers\AdminControllers\AdminPlatformsController;
+use App\Http\Controllers\AdminControllers\AdminOthersController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
@@ -38,6 +40,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isadmin'])->group(f
     Route::post('upload_tinymce_image', [TinyMCEController::class, 'upload_tinymce_image'])->name('upload_tinymce_image');
     
     Route::resource('categories', AdminCategoriesController::class);
+    Route::resource('platforms', AdminPlatformsController::class);
+    Route::resource('others', AdminOthersController::class);
     
 });
 
