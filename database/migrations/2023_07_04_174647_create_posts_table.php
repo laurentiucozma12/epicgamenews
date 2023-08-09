@@ -18,17 +18,10 @@ return new class extends Migration
             $table->string('excerpt');
             $table->text('body');
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
-
-            $table->unsignedBigInteger('platform_id');
-            $table->foreign('platform_id')->references('id')->on('platforms');
-
-            $table->unsignedBigInteger('other_id');
-            $table->foreign('other_id')->references('id')->on('others');
+            $table->foreignId('user_id');
+            $table->foreignId('category_id');
+            $table->foreignId('platform_id');
+            $table->foreignId('other_id');
 
             $table->integer('views')->default(0);
             $table->string('status')->default('published');

@@ -34,13 +34,19 @@ class DatabaseSeeder extends Seeder
         \App\Models\Role::factory(1)->create(['name' => 'admin']);
         
         $users = \App\Models\User::factory(10)->create();
+        $users = \App\Models\User::factory(1)->create([
+            'name' => 'Lau',
+            'email' => 'laurentiucozma12@gmail.com',
+            'role_id' => 2
+        ]);
 
         foreach ($users as $user)
         {
             $user->image()->save( \App\Models\Image::factory()->make() );
         }
 
-        \App\Models\Category::factory(24)->create();
+        \App\Models\Category::factory(10)->create();
+        \App\Models\Category::factory(1)->create(['name' => 'Uncategorized']);
 
         \App\Models\Platform::factory(24)->create();
 
