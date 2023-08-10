@@ -132,6 +132,11 @@
                                     </div>
 
                                     <div class="mb-3">
+                                        <label class="form-label">Post Tags</label>
+                                        <input type="text" class="form-control" value="{{ $tags }}" name="tags" data-role="tagsinput">
+                                    </div>
+
+                                    <div class="mb-3">
                                         <div class="row">
 
                                             <div class="com-md-8">
@@ -157,7 +162,7 @@
                                     <div class="mb-3">
                                         <label for="inputProductDescription" class="form-label">Post Content</label>
                                         <textarea name="body" id="post_content" class="form-control" id="inputProductDescription" rows="3">
-                                            {{ old("body", str_replace('../../../', '/', $post->body)) }}</textarea>   
+                                            {{ old("body", str_replace('../../', '../../../', $post->body)) }}</textarea>   
                                     
                                         @error('body')
                                             <p class="text-danger">{{ $message }}</p>
@@ -165,19 +170,25 @@
                                     </div>
                                     
                                     <button class='btn btn-primary' type='submit'>Update Post</button>
-
-                                    <form action="{{ route('admin.posts.destroy', $post) }}">
-                                        @csrf
-
-                                        @method('DELETE')
-                                        <button type='submit' class='btn btn-danger'>Delete Post</button>
-                                    </form>
+                                    
+                                    <a 
+                                    class='btn btn-danger'
+                                    onclick="event.preventDefault();document.getElementById('delete_post_{{ $post->id }}').submit()"
+                                    href="#">
+                                        Delete Post
+                                    </a>
 
                                 </div>
                             </div>                            
                         </div><!--end row-->
                     </div>                        
                 </form><!--end form-->
+                
+                <form id="delete_post_{{ $post->id }}" method="POST" action="{{ route('admin.posts.destroy', $post) }}">
+                    @csrf
+                    @method('DELETE')
+                </form>
+
             </div>
         </div>
     </div>

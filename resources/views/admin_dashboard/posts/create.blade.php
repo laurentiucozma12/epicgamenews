@@ -62,7 +62,7 @@
 
                                     <div class="mb-3">
                                         <label for="inputProductDescription" class="form-label">Post Excerpt</label>
-                                        <textarea required class="form-control" name='excerpt' id="inputProductDescription" rows="3">{{ old("excerpt") }}</textarea>
+                                        <textarea class="form-control" required name='excerpt' id="inputProductDescription" rows="3">{{ old("excerpt") }}</textarea>
                                     
                                         @error('excerpt')
                                             <p class='text-danger'>{{ $message }}</p>
@@ -131,6 +131,11 @@
                                     </div>
 
                                     <div class="mb-3">
+                                        <label class="form-label">Post Tags</label>
+                                        <input type="text" class="form-control" name="tags" data-role="tagsinput">
+                                    </div>
+
+                                    <div class="mb-3">
                                         <div class="card">
                                             <div class="card-body">
                                                 <label for="inputProductDescription" class="form-label">Post Thumbnail</label>
@@ -146,7 +151,7 @@
 
                                     <div class="mb-3">
                                         <label for="inputProductDescription" class="form-label">Post Content</label>
-                                        <textarea name="body" id="post_content" class="form-control" id="inputProductDescription" rows="3">{{ old("body") }}</textarea>   
+                                        <textarea id="post_content" name="body" class="form-control" id="inputProductDescription" rows="3">{{ old("body") }}</textarea>   
                                     
                                         @error('body')
                                             <p class="text-danger">{{ $message }}</p>

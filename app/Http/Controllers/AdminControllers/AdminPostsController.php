@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Platform;
 use App\Models\Other;
 use App\Models\Post;
+use App\Models\Tag;
 
 class AdminPostsController extends Controller
 {
@@ -19,7 +20,7 @@ class AdminPostsController extends Controller
         'category_id' => 'required|numeric',
         'platform_id' => 'required|numeric',
         'other_id' => 'required|numeric',
-        'thumbnail' => 'required|file|mimes:jpg,png,webp,svg,jpeg|dimensions:max_width=300,max_height=227',
+        'thumbnail' => 'required|file|mimes:jpg,png,webp,svg,jpeg',
         'body' => 'required',
     ];
 
@@ -42,8 +43,8 @@ class AdminPostsController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate($this->rules);
-        $validated['user_id'] = auth()->id();     
-        $post = Post::create($validated); 
+        $validated['user_id'] = auth()->id();
+        $post = Post::create($validated);
 
         if($request->has('thumbnail'))
         {
@@ -59,7 +60,17 @@ class AdminPostsController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.posts.create')->with('success', 'Post has been created');
+        $tags = explode(',', $request->input('tags'));
+        $tags_ids = [];
+        foreach($tags as $tag){
+            $tag_ob = Tag::create(['name' => trim($tag)]);
+            $tags_ids[] = $tag_ob->id;
+        }
+        
+        if(count($tags_ids) > 0)
+            $post->tags()->sync( $tags_ids );
+
+        return redirect()->route('admin.posts.create')->with('success', 'Post has been created.');    
     }
 
     public function show(string $id)
@@ -69,8 +80,18 @@ class AdminPostsController extends Controller
 
     public function edit(Post $post)
     {
+        $tags = '';
+        foreach ($post->tags as $key => $tag)
+        {
+                $tags .= $tag->name;
+                if ($key !== count($post->tags) - 1) 
+                    $tags .= ', ';
+
+        }
+
         return view('admin_dashboard.posts.edit', [
             'post' => $post,
+            'tags' => $tags,
             'categories' => Category::pluck('name', 'id'),
             'platforms' => Platform::pluck('name', 'id'),
             'others' => Other::pluck('name', 'id'),
@@ -84,8 +105,7 @@ class AdminPostsController extends Controller
 
         $post->update($validated);
 
-        if ($request->has('thumbnail'))
-        {
+        if ($request->has('thumbnail')) {
             $thumbnail = $request->file('thumbnail');
             $filename = $thumbnail->getClientOriginalName();
             $file_extension = $thumbnail->getClientOriginalExtension();
@@ -97,6 +117,16 @@ class AdminPostsController extends Controller
                 'path' => $path
             ]);
         }
+        
+        $tags = explode(',', $request->input('tags'));
+        $tags_ids = [];
+        foreach($tags as $tag){
+            $tag_ob = Tag::create(['name' => trim($tag)]);
+            $tags_ids[] = $tag_ob->id;
+        }
+        
+        if(count($tags_ids) > 0)
+            $post->tags()->sync( $tags_ids );
 
         return redirect()->route('admin.posts.edit', $post)->with('success', 'Post has been updated');    
     }
