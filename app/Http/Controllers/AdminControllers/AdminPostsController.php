@@ -133,6 +133,8 @@ class AdminPostsController extends Controller
 
     public function destroy(Post $post)
     {
+        $post->tags()->delete();
+        $post->delete();
         $post->delete();
         return redirect()->route('admin.posts.index')->with('success', 'Post has been deleted');
     }
