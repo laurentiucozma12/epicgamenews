@@ -14,6 +14,7 @@ class AdminCategoriesController extends Controller
         'name' => 'required|min:3|max:30',
         'slug' => 'required|unique:categories,slug'
     ];
+    
     public function index()
     {
         return view('admin_dashboard.categories.index', [
