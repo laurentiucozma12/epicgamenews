@@ -40,9 +40,9 @@
                                 <div 
                                 class="user-img" 
                                 style="background-image: url({{ $comment->user->image ? asset('storage/' . $comment->user->image->path. '') : 'https://images.assetsdelivery.com/compings_v2/salamatik/salamatik1801/salamatik180100019.jpg'  }});"></div>
-                                </div>
+                            </div>
 
-                                <div class="desc">
+                            <div class="desc">
                                     <h4>
                                         <span class="text-left">{{ $comment->user->name }}</span>
                                         <span class="text-right">{{ $comment->created_at->diffForHumans() }}</span>
@@ -51,7 +51,6 @@
                                     <p class="star">
                                         <span class="text-left"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
                                     </p>
-                                </div>
                             </div>
                         @endforeach
 
