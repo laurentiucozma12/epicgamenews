@@ -22,6 +22,7 @@ use App\Http\Controllers\AdminControllers\AdminPlatformsController;
 use App\Http\Controllers\AdminControllers\AdminOthersController;
 use App\Http\Controllers\AdminControllers\AdminTagsController;
 use App\Http\Controllers\AdminControllers\AdminCommentsController;
+use App\Http\Controllers\AdminControllers\AdminRolesController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
@@ -45,9 +46,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isadmin'])->group(f
     Route::resource('platforms', AdminPlatformsController::class);
     Route::resource('others', AdminOthersController::class);
 
-    Route::resource('tags', AdminTagsController::class);
+    Route::resource('tags', AdminTagsController::class)->only(['index', 'show', 'destroy']);
+    Route::resource('comments', AdminCommentsController::class)->except('show');
 
-    Route::resource('comments', AdminCommentsController::class);
+    Route::resource('roles', AdminRolesController::class)->except('show');
     
 });
 
