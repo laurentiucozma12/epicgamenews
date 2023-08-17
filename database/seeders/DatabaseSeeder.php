@@ -33,13 +33,16 @@ class DatabaseSeeder extends Seeder
         // Create Roles and Users
         \App\Models\Role::factory(1)->create();
         \App\Models\Role::factory(1)->create(['name' => 'admin']);
+        $permissions_id = [];
 
         $blog_routes = Route::getRoutes();
         foreach ($blog_routes as $route) {
             if (strpos($route->getName(), 'admin') !== false) {
-                \App\Models\Permission::create(['name' => $route->getName()]);
+                $permission = \App\Models\Permission::create(['name' => $route->getName()]);
+                $permissions_ids[] = $permission->id;
             }            
         }
+        \App\Models\Role::where('name', 'admin')->first()->permissions()->sync( $permissions_ids );
         
         $users = \App\Models\User::factory(10)->create();
         $users = \App\Models\User::factory(1)->create([
