@@ -13,6 +13,6 @@ class IsAdmin
         if (auth()->user()->role->name === 'admin')
             return $next($request);
         
-        abort(403, 'Unauthorised');
+        abort(403, 'Unauthorized');
     }
 }

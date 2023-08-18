@@ -88,7 +88,7 @@
         <hr>
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-comment-dots'></i></div>
+                <div class="parent-icon"><i class='bx bx-key'></i></div>
                 <div class="menu-title">Roles</div>
             </a>
 
