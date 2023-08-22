@@ -23,6 +23,7 @@ use App\Http\Controllers\AdminControllers\AdminOthersController;
 use App\Http\Controllers\AdminControllers\AdminTagsController;
 use App\Http\Controllers\AdminControllers\AdminCommentsController;
 use App\Http\Controllers\AdminControllers\AdminRolesController;
+use App\Http\Controllers\AdminControllers\AdminUsersController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
@@ -50,6 +51,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isadmin', 'check_pe
     Route::resource('comments', AdminCommentsController::class)->except('show');
 
     Route::resource('roles', AdminRolesController::class)->except('show');
+
+    Route::resource('users', AdminUsersController::class)->except('show');
     
 });
 
