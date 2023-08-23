@@ -36,7 +36,7 @@ use App\Http\Controllers\TagController;
 
 // Admin Dashboard Routes
 
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'isadmin', 'check_permissions'])->group(function(){
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions'])->group(function(){
 
     Route::get('/', [DashboardController::class, 'index'])->name('index');
 

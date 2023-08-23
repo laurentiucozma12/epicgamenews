@@ -15,9 +15,9 @@ use App\Models\Other;
 
 class Post extends Model
 {
-    use HasFactory;   
-    
-    protected $fillable = ['title' , 'slug', 'excerpt', 'body', 'user_id', 'category_id', 'platform_id', 'other_id'];
+    use HasFactory;
+
+    protected $fillable = ['title' , 'slug', 'excerpt', 'body', 'user_id', 'category_id', 'platform_id', 'other_id', 'approved'];
 
     public function author()
     {
@@ -28,7 +28,7 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
-
+    
     public function platform()
     {
         return $this->belongsTo(Platform::class);
@@ -38,7 +38,7 @@ class Post extends Model
     {
         return $this->belongsTo(Other::class);
     }
-    
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
@@ -52,5 +52,11 @@ class Post extends Model
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    // Scope function
+    public function scopeApproved($query)
+    {
+        return $query->where('approved', 1);
     }
 }

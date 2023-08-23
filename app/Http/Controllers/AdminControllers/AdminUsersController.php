@@ -108,7 +108,7 @@ class AdminUsersController extends Controller
     public function destroy(User $user)
     {
         if($user->id === auth()->id())
-            return redirect()->back()->with('error', 'You can not delete your self.');
+            return redirect()->back()->with('error', 'You can not delete yourself.');
 
         User::whereHas('role', function($query){
             $query->where('name', 'admin');
