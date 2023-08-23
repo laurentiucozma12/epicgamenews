@@ -52,7 +52,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isadmin', 'check_pe
 
     Route::resource('roles', AdminRolesController::class)->except('show');
 
-    Route::resource('users', AdminUsersController::class)->except('show');
+    Route::resource('users', AdminUsersController::class);
     
 });
 
