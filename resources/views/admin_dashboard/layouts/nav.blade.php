@@ -110,6 +110,12 @@
                 <li> <a href="{{ route('admin.users.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New User</a></li>
             </ul>
         </li>
+        <li>
+            <a href="{{ route('admin.contacts') }}" target="_blank">
+                <div class="parent-icon"><i class='bx bx-mail-send'></i></div>
+                <div class="menu-title">Contacts</div>
+            </a>
+        </li>
 
     </ul>
     <!--end navigation-->
