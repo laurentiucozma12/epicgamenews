@@ -116,6 +116,12 @@
                 <div class="menu-title">Contacts</div>
             </a>
         </li>
+        <li>
+            <a href="{{ route('admin.about.edit') }}" target="_blank">
+                <div class="parent-icon"><i class='bx bx-bulb'></i></div>
+                <div class="menu-title">About</div>
+            </a>
+        </li>
 
     </ul>
     <!--end navigation-->
