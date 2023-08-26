@@ -14,6 +14,6 @@ class AdminAboutController extends Controller
 
     public function update()
     {
-        //
+        dd( request()->all() );
     }
 }

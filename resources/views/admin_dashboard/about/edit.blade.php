@@ -1,6 +1,10 @@
 
 @extends("admin_dashboard.layouts.app")
-    
+
+@section("style")
+    <script src="https://cdn.tiny.cloud/1/nhtc4hkvw9rxs4ivm25pg3brruxcsjsaknsuggv71arm406g/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+@endsection
+
 @section("wrapper")
 <!--start page wrapper -->
 <div class="page-wrapper">
@@ -34,19 +38,19 @@
                                 <div class="border border-3 p-4 rounded">
 
                                     <div class="mb-3">
-                                        <label for="input_name" class="form-label">Name</label>
-                                        <input name='name' type='text' class="form-control" id="input_name">
+                                        <label for="first_text" class="form-label">"Who are we" text</label>
+                                        <textarea name='first_text' class="form-control" id="first_text"></textarea>
                                     
-                                        @error('name')
+                                        @error('first_text')
                                             <p class='text-danger'>{{ $message }}</p>
                                         @enderror
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="input_email" class="form-label">Email</label>
-                                        <input name='email' type='email' class="form-control" id="input_email">
+                                        <label for="second_text" class="form-label">Second text</label>
+                                        <textarea name='second_text' class="form-control" id="second_text"></textarea>
                                     
-                                        @error('email')
+                                        @error('second_text')
                                             <p class='text-danger'>{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -86,9 +90,35 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="our_mission" class="form-label">Our Mission</label>
+                                        <textarea id="our_mission" name="our_mission" class="form-control" id="our_mission" rows="3"></textarea>   
+                                    
+                                        @error('our_mission')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="our_vision" class="form-label">Our Vision</label>
+                                        <textarea id="our_vision" name="our_vision" class="form-control" id="our_vision" rows="3"></textarea>   
+                                    
+                                        @error('our_vision')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="services" class="form-label">Services</label>
+                                        <textarea id="services" name="body" class="form-control" id="services" rows="3"></textarea>   
+                                    
+                                        @error('services')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
 
                                     
-
                                     <button class='btn btn-primary' type='submit'>Update</button>
                                     
                                 </div>
@@ -110,12 +140,29 @@
 @section("script")
 
 <script>
-    $(document).ready(function () {
+$(document).ready(function () {
 
-        setTimeout(() => {
-            $(".general-message").fadeOut();
-        }, 5000);
+    // Tiny MCE
+    let initTinyMCE = (id) => {
+        tinymce.init({
+            selector: 'textarea#' + id,
+            plugins: 'advlist autolink lists link charmap print preview hr anchor pagebreak',
+            toolbar_mode: 'floating',
+            height: '300',
 
-    });
+            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link code | rtl ltr',
+            toolbar_mode: 'floating',
+        });       
+    }
+    
+    initTinyMCE('our_mission');
+    initTinyMCE('our_vision');
+    initTinyMCE('services');
+
+    setTimeout(() => {
+        $(".general-message").fadeOut();
+    }, 5000);
+
+});
 </script>
 @endsection
