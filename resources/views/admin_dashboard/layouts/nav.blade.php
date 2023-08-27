@@ -12,7 +12,7 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li>
-            <a href="{{ url('index') }}" target="_blank">
+            <a href="{{ url('index') }}">
             <div class="parent-icon"><i class='bx bx-home-circle'></i></div>
                 <div class="menu-title">Dashboard</div>
             </a>
@@ -110,16 +110,28 @@
                 <li> <a href="{{ route('admin.users.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New User</a></li>
             </ul>
         </li>
+
+        <hr>        
         <li>
-            <a href="{{ route('admin.contacts') }}" target="_blank">
+            <a href="{{ route('admin.contacts') }}">
                 <div class="parent-icon"><i class='bx bx-mail-send'></i></div>
                 <div class="menu-title">Contacts</div>
             </a>
         </li>
+
+        <hr>
         <li>
-            <a href="{{ route('admin.about.edit') }}" target="_blank">
-                <div class="parent-icon"><i class='bx bx-bulb'></i></div>
-                <div class="menu-title">About</div>
+            <a href="{{ route('admin.setting.edit') }}">
+                <div class="parent-icon"><i class='bx bx-info-square'></i></div>
+                <div class="menu-title">Setting</div>
+            </a>
+        </li>
+
+        <hr>
+        <li>
+            <a href="{{ route('home') }}" target="_blank">
+                <div class="parent-icon"><i class='bx bx-pointer'></i></div>
+                <div class="menu-title">Visit Site</div>
             </a>
         </li>
 
