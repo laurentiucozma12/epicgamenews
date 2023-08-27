@@ -29,7 +29,7 @@
                 <h5 class="card-title">Edit About Page</h5>
                 <hr/>
 
-                <form action="{{ route('admin.about.update') }}" method='post' enctype='multipart/form-data'>
+                <form action="{{ route('admin.setting.update') }}" method='post' enctype='multipart/form-data'>
                     @csrf
 
                     <div class="form-body mt-4">
@@ -38,86 +38,83 @@
                                 <div class="border border-3 p-4 rounded">
 
                                     <div class="mb-3">
-                                        <label for="first_text" class="form-label">"Who are we" text</label>
-                                        <textarea name='first_text' class="form-control" id="first_text"></textarea>
+                                        <label for="about_first_text" class="form-label">"Who are we" text</label>
+                                        <textarea name='about_first_text' class="form-control" id="about_first_text">{{ old("about_first_text", $setting->about_first_text) }}</textarea>
                                     
-                                        @error('first_text')
+                                        @error('about_first_text')
                                             <p class='text-danger'>{{ $message }}</p>
                                         @enderror
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="second_text" class="form-label">Second text</label>
-                                        <textarea name='second_text' class="form-control" id="second_text"></textarea>
+                                        <label for="about_second_text" class="form-label">Second text</label>
+                                        <textarea name='about_second_text' class="form-control" id="about_second_text">{{ old("about_second_text", $setting->about_second_text) }}</textarea>
                                     
-                                        @error('second_text')
+                                        @error('about_second_text')
                                             <p class='text-danger'>{{ $message }}</p>
                                         @enderror
                                     </div>
 
                                     <div class='row'>
-                                        <div class='col-md-8'>
+                                        <div class='col-md-6'>
                                             <div class="mb-3">
                                                 <label for="input_image1" class="form-label">First Image</label>
-                                                <input name='first_image' type='file' class="form-control" id="input_image1">
+                                                <input name='about_first_image' type='file' class="form-control" id="input_image1">
                                             
-                                                @error('first_image')
+                                                @error('about_first_image')
                                                     <p class='text-danger'>{{ $message }}</p>
                                                 @enderror
                                             </div>
-                                        </div>
-                                        <div class='col-md-4'>
+                                        
+                                            <hr>
                                             <div class='user-image'>
-
+                                                <img class='img-fluid img-thumbnail' src="{{ asset('storage/' . $setting->about_first_image) }}">
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class='row'>
-                                        <div class='col-md-8'>
+                                        <div class='col-md-6'>
                                             <div class="mb-3">
                                                 <label for="input_image2" class="form-label">Second Image</label>
-                                                <input name='second_image' type='file' class="form-control" id="input_image2">
+                                                <input name='about_second_image' type='file' class="form-control" id="input_image2">
                                             
-                                                @error('second_image')
+                                                @error('about_second_image')
                                                     <p class='text-danger'>{{ $message }}</p>
                                                 @enderror
                                             </div>
-                                        </div>
-                                        <div class='col-md-4'>
-                                            <div class='user-image'>
 
+                                            <hr>
+                                            <div class='user-image'>
+                                                <img class='img-fluid img-thumbnail' src="{{ asset('storage/' . $setting->about_second_image) }}">
                                             </div>
                                         </div>
                                     </div>
                                     
                                     <div class="mb-3">
-                                        <label for="our_mission" class="form-label">Our Mission</label>
-                                        <textarea id="our_mission" name="our_mission" class="form-control" id="our_mission" rows="3"></textarea>   
+                                        <label for="about_our_mission" class="form-label">Our Mission</label>
+                                        <textarea id="about_our_mission" name="about_our_mission" class="form-control" rows="3">{{ old("about_our_mission", $setting->about_our_mission) }}</textarea>   
                                     
-                                        @error('our_mission')
+                                        @error('about_our_mission')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
                                     
                                     <div class="mb-3">
-                                        <label for="our_vision" class="form-label">Our Vision</label>
-                                        <textarea id="our_vision" name="our_vision" class="form-control" id="our_vision" rows="3"></textarea>   
+                                        <label for="about_our_vision" class="form-label">Our Vision</label>
+                                        <textarea id="about_our_vision" name="about_our_vision" class="form-control" rows="3">{{ old("about_our_vision", $setting->about_our_vision) }}</textarea>   
                                     
-                                        @error('our_vision')
+                                        @error('about_our_vision')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
                                     
                                     <div class="mb-3">
-                                        <label for="services" class="form-label">Services</label>
-                                        <textarea id="services" name="body" class="form-control" id="services" rows="3"></textarea>   
+                                        <label for="about_services" class="form-label">Services</label>
+                                        <textarea id="about_services" name="about_services" class="form-control" rows="3">{{ old("about_services", $setting->about_services) }}</textarea>   
                                     
-                                        @error('services')
+                                        @error('about_services')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
-
                                     
                                     <button class='btn btn-primary' type='submit'>Update</button>
                                     
@@ -155,9 +152,9 @@ $(document).ready(function () {
         });       
     }
     
-    initTinyMCE('our_mission');
-    initTinyMCE('our_vision');
-    initTinyMCE('services');
+    initTinyMCE('about_our_mission');
+    initTinyMCE('about_our_vision');
+    initTinyMCE('about_services');
 
     setTimeout(() => {
         $(".general-message").fadeOut();

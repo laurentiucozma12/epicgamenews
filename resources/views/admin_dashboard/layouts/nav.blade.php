@@ -121,7 +121,7 @@
 
         <hr>
         <li>
-            <a href="{{ route('admin.setting.edit') }}">
+            <a href="{{ route('admin.setting.edit') }}"> 
                 <div class="parent-icon"><i class='bx bx-info-square'></i></div>
                 <div class="menu-title">Setting</div>
             </a>
