@@ -165,7 +165,7 @@
 		</div>
 		
 		<footer id="colorlib-footer">
-			<div class="container">
+			{{-- <div class="container">
 				<div class="row row-pb-md">
 					<div class="col-md-3 colorlib-widget">
 						<h4>Contact Info</h4>
@@ -237,7 +237,8 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> --}}
+			
 			<div class="copy">
 				<div class="container">
 					<div class="row">
