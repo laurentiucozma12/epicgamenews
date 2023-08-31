@@ -27,7 +27,7 @@ class AdminPostsController extends Controller
     public function index()
     {
         return view('admin_dashboard.posts.index', [
-            'posts' => Post::with(['category', 'platform', 'other'])->get(),
+            'posts' => Post::latest()->with(['category', 'platform', 'other'])->get(),
         ]);
     }
 

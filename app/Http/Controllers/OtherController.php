@@ -14,7 +14,7 @@ class OtherController extends Controller
     public function index()
     {
         return view('others.index', [
-            'others' => Other::withCount('posts')->paginate(12)
+            'others' => Other::latest()->withCount('posts')->paginate(12)
         ]);
     }
 
@@ -26,7 +26,7 @@ class OtherController extends Controller
 
         return view('others.show', [
             'other' => $other,
-            'posts' => $other->posts()->paginate(5),
+            'posts' => $other->posts()->latest()->paginate(10),
             'recent_posts' => $recent_posts,
             'categories' => $categories,
             'tags' => $tags,

@@ -14,7 +14,7 @@ class PlatformController extends Controller
     public function index()
     {
         return view('platforms.index', [
-            'platforms' => Platform::withCount('posts')->paginate(12)
+            'platforms' => Platform::latest()->withCount('posts')->paginate(12)
         ]);
     }
 
@@ -26,7 +26,7 @@ class PlatformController extends Controller
 
         return view('platforms.show', [
             'platform' => $platform,
-            'posts' => $platform->posts()->paginate(5),
+            'posts' => $platform->posts()->latest()->paginate(10),
             'recent_posts' => $recent_posts,
             'categories' => $categories,
             'tags' => $tags,
