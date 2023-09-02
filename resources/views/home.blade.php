@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 posts-col">
-
+ 
 				@forelse ($posts as $post)
 					<div class="block-21 d-flex animate-box post">
 						<a 
