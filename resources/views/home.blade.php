@@ -14,8 +14,8 @@
 						<a 
 						href="{{ route('show', $post) }}" 
 						class="blog-img"
-						style="background-image: url({{ asset( $post->image->path. '' ) }});"></a>
-
+						style="background-image: url({{ asset( '/' .$post->image->path. '' ) }});"></a>
+						<h1>TEST TEST TEST TEST</h1>
 						<div class="text">
 							<h3 class="heading"><a href="{{ route('show', $post) }}"> {{ $post->title }} </a></h3>
 							<p class="excerpt"> {{ $post->excerpt }} </p>
