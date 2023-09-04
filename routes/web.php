@@ -44,6 +44,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
 
     Route::get('/foo', function () {
         Artisan::call('storage:link');
+        // test
     });
 
     Route::get('/', [DashboardController::class, 'index'])->name('index');
