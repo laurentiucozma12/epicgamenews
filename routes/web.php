@@ -26,6 +26,8 @@ use App\Http\Controllers\AdminControllers\AdminRolesController;
 use App\Http\Controllers\AdminControllers\AdminUsersController;
 use App\Http\Controllers\AdminControllers\AdminContactsController;
 use App\Http\Controllers\AdminControllers\AdminSettingController;
+use Illuminate\Support\Facades\Artisan;
+
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
@@ -39,6 +41,10 @@ use App\Http\Controllers\TagController;
 // Admin Dashboard Routes
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions'])->group(function(){
+
+    Route::get('/foo', function () {
+        Artisan::call('storage:link');
+    });
 
     Route::get('/', [DashboardController::class, 'index'])->name('index');
 
