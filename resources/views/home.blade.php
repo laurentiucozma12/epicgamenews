@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 posts-col">
-				<h1>TEST TEST TEST TEST</h1>
+				<h2>TEST TEST TEST TEST</h2>
  
 				@forelse ($posts as $post)
 					<div class="block-21 d-flex animate-box post">
@@ -16,7 +16,6 @@
 						href="{{ route('show', $post) }}" 
 						class="blog-img"
 						style="background-image: url({{ asset( '/' .$post->image->path. '' ) }});"></a>
-						<h1>TEST TEST TEST TEST</h1>
 						<div class="text">
 							<h3 class="heading"><a href="{{ route('show', $post) }}"> {{ $post->title }} </a></h3>
 							<p class="excerpt"> {{ $post->excerpt }} </p>
