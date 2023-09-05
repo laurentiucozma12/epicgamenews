@@ -26,8 +26,8 @@ use App\Http\Controllers\AdminControllers\AdminRolesController;
 use App\Http\Controllers\AdminControllers\AdminUsersController;
 use App\Http\Controllers\AdminControllers\AdminContactsController;
 use App\Http\Controllers\AdminControllers\AdminSettingController;
-use Illuminate\Support\Facades\Artisan;
 
+use App\Http\Controllers\StorageLinkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\AboutController;
@@ -64,18 +64,17 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
 });
 
 // Front User Routes
-
 // Route::get('/storage-link', function() {
 //     $targetFolder = storage_path('app/public');
-//     $linkFolder = $_SERVER['DOCUMENT_ROOT'] / '/storage';
+//     $linkFolder = $_SERVER['DOCUMENT_ROOT'] . '/storage';
 //     symlink($targetFolder, $linkFolder);
 // });
 
 Route::get('/storage-link', function () {
     // Define the mapping of branch names to their respective storage paths
     $branchPaths = [
-        'development' => storage_path('app/public'), // Adjust as needed
-        'pre-production' => storage_path('app/public'), // Adjust as needed
+        'development' => storage_path('app/public'),
+        'pre-production',
         'production' => storage_path('app/public'),
     ];
 
@@ -83,19 +82,26 @@ Route::get('/storage-link', function () {
     $currentBranch = trim(shell_exec('git rev-parse --abbrev-ref HEAD'));
 
     // Check if the current branch exists in the mapping, default to 'production' if not found
-    $targetFolder = $branchPaths[$currentBranch] ?? $branchPaths['production'];
+    $targetBranch = $branchPaths[$currentBranch] ?? $branchPaths['production'];
 
     // Define the target link folder (public storage)
-    if ($targetFolder === 'development') {
+    if ($targetBranch === 'development') {
         $linkFolder = public_path('storage');    
-    } else if ($targetFolder === 'pre-production') {
-        $linkFolder = public_path('repositories/preprod-epicgamenews/storage');
-    } else if ($targetFolder === 'production') {        
+    } else if ($targetBranch === 'pre-production') {
+        dd($_SERVER['DOCUMENT_ROOT']);
+        $linkFolder = public_path('repositories/preprod-epicgamenews/storage/app/public');
+
+        $targetFolder = $_SERVER['DOCUMENT_ROOT'] . '/storage/app/public';
+        $linkFolder = $_SERVER['DOCUMENT_ROOT'] . '/public/storage';
+        symlink($targetFolder, $linkFolder);
+
+
+    } else if ($targetBranch === 'production') {        
         $linkFolder = public_path(''); // I have to find the correct path
     }
 
     // Create the symbolic link
-    symlink($targetFolder, $linkFolder);
+    // symlink($targetFolder, $linkFolder);
 
     return "Storage link created for branch: $currentBranch";
     // return redirect()->route('home');
