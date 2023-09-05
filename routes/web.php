@@ -101,7 +101,6 @@ Route::get('/storage-link', function () {
     return redirect()->route('home');
 });
 
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
