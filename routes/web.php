@@ -107,7 +107,7 @@ Route::get('/storage-link', function () {
 
     // dd($_SERVER['DOCUMENT_ROOT']);
     // return "Storage link created for branch: $currentBranch";
-    // return redirect()->route('home');
+    return redirect()->route('home');
 });
 
 
