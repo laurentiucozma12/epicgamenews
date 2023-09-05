@@ -8,7 +8,6 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 posts-col">
-				<h2>TEST TEST TEST TEST</h2>
  
 				@forelse ($posts as $post)
 					<div class="block-21 d-flex animate-box post">

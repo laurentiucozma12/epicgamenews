@@ -43,7 +43,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
 
     Route::get('/foo', function () {
         Artisan::call('storage:link');
-        // TEST NOU 5 septembrie 5:56 PM
     });
 
     Route::get('/', [DashboardController::class, 'index'])->name('index');
