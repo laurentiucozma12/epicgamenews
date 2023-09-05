@@ -65,11 +65,36 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
 
 // Front User Routes
 
-Route::get('/storage-link', function() {
-    $targetFolder = storage_path('app/public');
-    $linkFolder = $_SERVER['DOCUMENT_ROOT'] / '/storage';
+// Route::get('/storage-link', function() {
+//     $targetFolder = storage_path('app/public');
+//     $linkFolder = $_SERVER['DOCUMENT_ROOT'] / '/storage';
+//     symlink($targetFolder, $linkFolder);
+// });
+
+Route::get('/storage-link', function () {
+    // Define the mapping of branch names to their respective storage paths
+    $branchPaths = [
+        'development' => storage_path('app/public'), // Adjust as needed
+        'pre-production' => storage_path('app/pre-public'), // Adjust as needed
+        'production' => storage_path('app/public'),
+    ];
+
+    // Get the current branch name (assuming you have Git installed)
+    $currentBranch = trim(shell_exec('git rev-parse --abbrev-ref HEAD'));
+
+    // Check if the current branch exists in the mapping, default to 'production' if not found
+    $targetFolder = $branchPaths[$currentBranch] ?? $branchPaths['production'];
+
+    // Define the target link folder (public storage)
+    $linkFolder = public_path('storage');
+
+    // Create the symbolic link
     symlink($targetFolder, $linkFolder);
+
+    return "Storage link created for branch: $currentBranch";
+    // return redirect()->route('home');
 });
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
