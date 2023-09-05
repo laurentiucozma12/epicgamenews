@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Categories | New Gaming News')
+@section('title', 'Categories | Epic Game News')
 
 @section('content')
 
