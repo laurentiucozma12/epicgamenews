@@ -86,23 +86,26 @@ Route::get('/storage-link', function () {
 
     // Define the target link folder (public storage)
     if ($targetBranch === 'development') {
+
         $linkFolder = public_path('storage');    
+        // Create the symbolic link
+        // symlink($targetFolder, $linkFolder);
+
     } else if ($targetBranch === 'pre-production') {
-        $linkFolder = public_path('repositories/preprod-epicgamenews/storage/app/public');
 
-        $targetFolder = $_SERVER['DOCUMENT_ROOT'] . '/storage/app/public';
-        $linkFolder = $_SERVER['DOCUMENT_ROOT'] . '/public/storage';
+        //  testing => dd($_SERVER['DOCUMENT_ROOT']); => "/home/epicjszd/repositories/preprod-epicgamenews" // routes/web.php:105
+        $targetFolder = $_SERVER['DOCUMENT_ROOT'] . '/epicjszd/repositories/preprod-epicgamenews/storage/app/public';
+        $linkFolder = $_SERVER['DOCUMENT_ROOT'] . '/epicjszd/repositories/preprod-epicgamenews/public/storage';
+
+        // Create the symbolic link
         symlink($targetFolder, $linkFolder);
-
 
     } else if ($targetBranch === 'production') {        
         $linkFolder = public_path(''); // I have to find the correct path
     }
 
-    // Create the symbolic link
-    // symlink($targetFolder, $linkFolder);
 
-    dd($_SERVER['DOCUMENT_ROOT']);
+    // dd($_SERVER['DOCUMENT_ROOT']);
     // return "Storage link created for branch: $currentBranch";
     // return redirect()->route('home');
 });
