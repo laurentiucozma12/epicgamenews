@@ -88,7 +88,6 @@ Route::get('/storage-link', function () {
     if ($targetBranch === 'development') {
         $linkFolder = public_path('storage');    
     } else if ($targetBranch === 'pre-production') {
-        dd($_SERVER['DOCUMENT_ROOT']);
         $linkFolder = public_path('repositories/preprod-epicgamenews/storage/app/public');
 
         $targetFolder = $_SERVER['DOCUMENT_ROOT'] . '/storage/app/public';
@@ -103,7 +102,8 @@ Route::get('/storage-link', function () {
     // Create the symbolic link
     // symlink($targetFolder, $linkFolder);
 
-    return "Storage link created for branch: $currentBranch";
+    dd($_SERVER['DOCUMENT_ROOT']);
+    // return "Storage link created for branch: $currentBranch";
     // return redirect()->route('home');
 });
 
