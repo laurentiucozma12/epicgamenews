@@ -75,7 +75,7 @@ Route::get('/storage-link', function () {
     // Define the mapping of branch names to their respective storage paths
     $branchPaths = [
         'development' => storage_path('app/public'), // Adjust as needed
-        'pre-production' => storage_path('app/pre-public'), // Adjust as needed
+        'pre-production' => storage_path('app/public'), // Adjust as needed
         'production' => storage_path('app/public'),
     ];
 
