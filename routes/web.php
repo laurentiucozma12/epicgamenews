@@ -28,7 +28,6 @@ use App\Http\Controllers\AdminControllers\AdminContactsController;
 use App\Http\Controllers\AdminControllers\AdminSettingController;
 use Illuminate\Support\Facades\Artisan;
 
- 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\AboutController;
@@ -44,7 +43,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
 
     Route::get('/foo', function () {
         Artisan::call('storage:link');
-        // test de pe develop
+        // TEST NOU 5 septembrie 5:56 PM
     });
 
     Route::get('/', [DashboardController::class, 'index'])->name('index');
