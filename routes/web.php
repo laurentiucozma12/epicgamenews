@@ -64,16 +64,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
 });
 
 // Front User Routes
-// Route::get('/storage-link', function() {
-//     $targetFolder = storage_path('app/public');
-//     $linkFolder = $_SERVER['DOCUMENT_ROOT'] . '/storage';
-//     symlink($targetFolder, $linkFolder);
-// });
-
 Route::get('/storage-link', function () {
     // Define the mapping of branch names to their respective storage paths
     $branchPaths = [
-        'development' => storage_path('app/public'),
+        'development',
         'pre-production',
         'production' => storage_path('app/public'),
     ];
@@ -82,30 +76,27 @@ Route::get('/storage-link', function () {
     $currentBranch = trim(shell_exec('git rev-parse --abbrev-ref HEAD'));
 
     // Check if the current branch exists in the mapping, default to 'production' if not found
-    $targetBranch = $branchPaths[$currentBranch] ?? $branchPaths['production'];
+    $targetFolder = $branchPaths[$currentBranch] ?? $branchPaths['production'];
 
     // Define the target link folder (public storage)
-    if ($targetBranch === 'development') {
-
+    if ($currentBranch === 'development')
+    {
         $linkFolder = public_path('storage');    
-        // Create the symbolic link
-        // symlink($targetFolder, $linkFolder);
-
-    } else if ($targetBranch === 'pre-production') {
-
-        //  testing => dd($_SERVER['DOCUMENT_ROOT']); => "/home/epicjszd/repositories/preprod-epicgamenews" // routes/web.php:105
-        $targetFolder = $_SERVER['DOCUMENT_ROOT'] . '/epicjszd/repositories/preprod-epicgamenews/storage/app/public';
-        $linkFolder = $_SERVER['DOCUMENT_ROOT'] . '/epicjszd/repositories/preprod-epicgamenews/public/storage';
-
-        // Create the symbolic link
         symlink($targetFolder, $linkFolder);
-
-    } else if ($targetBranch === 'production') {        
+    } 
+    else if ($currentBranch === 'pre-production') 
+    {
+        $linkFolder = public_path(''); // I have to find the correct path
+    } 
+    else if ($currentBranch === 'production') 
+    {        
         $linkFolder = public_path(''); // I have to find the correct path
     }
 
+    // dd($targetFolder); // "C:\xampp\htdocs\epicgamenews\storage\app/public" // routes\web.php:96
+    // dd(public_path('storage')); // "C:\xampp\htdocs\epicgamenews\public\storage" // routes\web.php:96
+    // dd($targetFolder, public_path('storage'));
 
-    // dd($_SERVER['DOCUMENT_ROOT']);
     // return "Storage link created for branch: $currentBranch";
     return redirect()->route('home');
 });
