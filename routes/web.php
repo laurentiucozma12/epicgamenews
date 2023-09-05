@@ -86,7 +86,13 @@ Route::get('/storage-link', function () {
     $targetFolder = $branchPaths[$currentBranch] ?? $branchPaths['production'];
 
     // Define the target link folder (public storage)
-    $linkFolder = public_path('storage');
+    if ($targetFolder === 'development') {
+        $linkFolder = public_path('storage');    
+    } else if ($targetFolder === 'pre-production') {
+        $linkFolder = public_path('repositories/preprod-epicgamenews/storage');
+    } else if ($targetFolder === 'production') {        
+        $linkFolder = public_path(''); // I have to find the correct path
+    }
 
     // Create the symbolic link
     symlink($targetFolder, $linkFolder);
