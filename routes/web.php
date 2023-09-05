@@ -81,15 +81,15 @@ Route::get('/storage-link', function () {
     // Define the target link folder (public storage)
     if ($currentBranch === 'development')
     {
-        // dd($targetFolder); // "C:\xampp\htdocs\epicgamenews\storage\app/public" // routes\web.php:96
-        // dd(public_path('storage')); // "C:\xampp\htdocs\epicgamenews\public\storage" // routes\web.php:96
+        // dd($targetFolder); // "C:\xampp\htdocs\epicgamenews\storage\app/public"
+        // dd(public_path('storage')); // "C:\xampp\htdocs\epicgamenews\public\storage"
         $linkFolder = public_path('storage');    
         symlink($targetFolder, $linkFolder);        
     } 
     else if ($currentBranch === 'pre-production') 
     {
-        // dd($targetFolder); // "/home/epicjszd/repositories/preprod-epicgamenews/storage/app/public" // routes/web.php:103
-        // dd(public_path('storage')); // "/home/epicjszd/repositories/preprod-epicgamenews/public/storage" // routes/web.php:103
+        // dd($targetFolder); // "/home/epicjszd/repositories/preprod-epicgamenews/storage/app/public"
+        // dd(public_path('storage')); // "/home/epicjszd/repositories/preprod-epicgamenews/public/storage"
         $linkFolder = public_path('storage'); 
         symlink($targetFolder, $linkFolder);
     } 
@@ -100,7 +100,7 @@ Route::get('/storage-link', function () {
         $linkFolder = public_path(''); // I have to find the correct path
     }
 
-    dd($targetFolder, public_path('storage'));
+    // dd($targetFolder, public_path('storage'));
     return redirect()->route('home');
 });
 
