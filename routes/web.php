@@ -41,10 +41,6 @@ use App\Http\Controllers\TagController;
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions'])->group(function(){
 
-    Route::get('/foo', function () {
-        Artisan::call('storage:link');
-    });
-
     Route::get('/', [DashboardController::class, 'index'])->name('index');
 
     Route::resource('posts', AdminPostsController::class);
@@ -68,6 +64,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
 });
 
 // Front User Routes
+
+Route::get('/storage-link', function() {
+    $targetFolder = storage_path('app/public');
+    $linkFolder = $_SERVER['DOCUMENT_ROOT'] / '/storage';
+    symlink($targetFolder, $linkFolder);
+});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
