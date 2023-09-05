@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', $tag->name . ' Tag | New Gaming News')
+@section('title', $tag->name . ' Tag | Epic Game News')
 
 @section('content')
 

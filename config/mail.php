@@ -99,11 +99,11 @@ return [
     */
 
     'from' => [
-        'address' => 'contact@newgamingnews.com',
-        'name' => 'Contact New Gaming News',
+        'address' => 'contact@epicgamenews.com',
+        'name' => 'Contact Epic Game News',
     ],
 
-    'reply_to' => ['address' => 'contact@newgamingnews.com', 'name' => 'Contact New Gaming News'],
+    'reply_to' => ['address' => 'contact@epicgamenews.com', 'name' => 'Contact Epic Game News'],
 
     /*
     |--------------------------------------------------------------------------

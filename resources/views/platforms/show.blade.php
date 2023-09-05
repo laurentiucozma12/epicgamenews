@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', $platform->name . ' Category | New Gaming News')
+@section('title', $platform->name . ' Category | Epic Game News')
 
 @section('content')
 
