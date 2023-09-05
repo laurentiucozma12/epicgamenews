@@ -142,7 +142,7 @@
                                             <div class="com-md-8">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <label for="inputProductDescription" class="form-label">Post Thumbnail</label>
+                                                        <label for="inputProductDescription" class="form-label">Post Thumbnail (Max 1800 x 900)</label>
                                                         <input id='thumbnail' name='thumbnail' id="file" type="file">
 
                                                         @error('thumbnail')
