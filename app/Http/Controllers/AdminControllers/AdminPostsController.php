@@ -5,8 +5,6 @@ namespace App\Http\Controllers\AdminControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use Spatie\ImageOptimizer\OptimizerChainFactory;
-
 use App\Models\Category;
 use App\Models\Platform;
 use App\Models\Other;
@@ -54,19 +52,10 @@ class AdminPostsController extends Controller
             $file_extension = $thumbnail->getClientOriginalExtension();
             $path = $thumbnail->store('images', 'public');
     
-            // Optimize and convert to WebP
-            $optimizerChain = OptimizerChainFactory::create();
-            $optimizerChain->optimize($path);
-    
-            // Create WebP version
-            $webPPath = str_replace($file_extension, 'webp', $path);
-            $optimizerChain->executeCommand("cwebp -q 80 $path -o $webPPath");
-    
             $post->image()->create([
                 'name' => $filename,
                 'extension' => $file_extension,
                 'path' => $path,
-                'webp_path' => $webPPath, // Store the WebP path in your database
             ]);
         }
 
@@ -121,19 +110,10 @@ class AdminPostsController extends Controller
             $file_extension = $thumbnail->getClientOriginalExtension();
             $path = $thumbnail->store('images', 'public');
     
-            // Optimize and convert to WebP
-            $optimizerChain = OptimizerChainFactory::create();
-            $optimizerChain->optimize($path);
-    
-            // Create WebP version
-            $webPPath = str_replace($file_extension, 'webp', $path);
-            $optimizerChain->executeCommand("cwebp -q 80 $path -o $webPPath");
-    
             $post->image()->update([
                 'name' => $filename,
                 'extension' => $file_extension,
                 'path' => $path,
-                'webp_path' => $webPPath, // Update the WebP path in your database
             ]);
         }
         

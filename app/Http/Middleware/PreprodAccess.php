@@ -10,7 +10,8 @@ class PreprodAccess
 {
     public function handle(Request $request, Closure $next): Response
     {    
-        if (env('APP_ENV') === 'preprod') 
+        $currentBranch = trim(shell_exec('git rev-parse --abbrev-ref HEAD'));
+        if ($currentBranch === 'pre-production') 
         {
             $clientIP = $request->ip();   
             if ($clientIP !== '83.103.225.235')
