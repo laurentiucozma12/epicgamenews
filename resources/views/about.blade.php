@@ -16,8 +16,8 @@
             <div class="col-md-5">
                 <div class="row">
                     <div class="col-md-12 colorlib-heading animate-box">
-                        <h1 class="heading-big">Who are we</h1>
-                        <h2>Who are we</h2>
+                        <h1 class="heading-big">Who are we?</h1>
+                        <h2>Who are we?</h2>
                     </div>
                 </div>
                 <div class="row">
@@ -28,7 +28,7 @@
                         <div class="counter-entry">
                             <div class="desc">
                                 <span class="colorlib-counter js-counter" data-from="0" data-to="1539" data-speed="5000" data-refresh-interval="50"></span>
-                                <span class="colorlib-counter-label">Courses</span>
+                                <span class="colorlib-counter-label">Gaming News</span>
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                         <div class="counter-entry">
                             <div class="desc">
                                 <span class="colorlib-counter js-counter" data-from="0" data-to="3653" data-speed="5000" data-refresh-interval="50"></span>
-                                <span class="colorlib-counter-label">Students</span>
+                                <span class="colorlib-counter-label">Gamers on our website</span>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                         <div class="counter-entry">
                             <div class="desc">
                                 <span class="colorlib-counter js-counter" data-from="0" data-to="2300" data-speed="5000" data-refresh-interval="50"></span>
-                                <span class="colorlib-counter-label">Teachers online</span>
+                                <span class="colorlib-counter-label">Games</span>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                         <div class="counter-entry">
                             <div class="desc">
                                 <span class="colorlib-counter js-counter" data-from="0" data-to="200" data-speed="5000" data-refresh-interval="50"></span>
-                                <span class="colorlib-counter-label">Countries</span>
+                                <span class="colorlib-counter-label">Game Categories</span>
                             </div>
                         </div>
                     </div>

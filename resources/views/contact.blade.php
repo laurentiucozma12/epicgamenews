@@ -8,7 +8,7 @@
 
     <div class="colorlib-contact">
         <div class="container">
-            <div class="row row-pb-md">
+            {{-- <div class="row row-pb-md">
                 <div class="col-md-12 animate-box">
                     <h2>Contact Information</h2>
                     <div class="row">
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="row">
                 <div class="col-md-12">
                     <h2>Message Us</h2>
