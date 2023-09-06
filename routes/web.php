@@ -97,10 +97,11 @@ Route::get('/storage-link', function () {
     {        
         // dd($targetFolder); // 
         // dd(public_path('storage')); //
-        $linkFolder = public_path(''); // I have to find the correct path
+        // $linkFolder = public_path('storage'); 
+        // symlink($targetFolder, $linkFolder);
     }
 
-    // dd($targetFolder, public_path('storage'));
+    dd($targetFolder, public_path('storage'));
     return redirect()->route('home');
 });
 
