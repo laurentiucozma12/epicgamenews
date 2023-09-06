@@ -24,8 +24,8 @@ class AdminSettingController extends Controller
             'about_our_mission' => 'required',
             'about_our_vision' => 'required',
             'about_services' => 'required',
-            'about_first_image' => 'nullable|image',
-            'about_second_image' => 'nullable|image',
+            'about_first_image' => 'required|image|dimensions:max_width=540,max_height=340',
+            'about_second_image' => 'required|image|dimensions:max_width=540,max_height=340',
         ]);
 
         if (request()->has('about_first_image')) {

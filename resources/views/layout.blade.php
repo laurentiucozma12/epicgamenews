@@ -104,7 +104,7 @@
 
 								@auth
 								<li class="has-dropdown">
-									<a href="#">{{ auth()->user()->name }}<span class="caret"></span></a>
+									<a href="">{{ auth()->user()->name }}<span class="caret"></span></a>
 									<ul class="dropdown">
 										<li>
 											<a 
@@ -115,7 +115,11 @@
 											<form id="nav-logout-form" action="{{ route('logout') }}" method="POST">
 												@csrf
 											</form>
-
+										</li>
+										<li>
+											@if ( auth()->user()->role_id === 2 )
+												<a href="{{ route('admin.index') }}">Admin Dasboard</a>
+											@endif
 										</li>
 									</ul>
 								</li>

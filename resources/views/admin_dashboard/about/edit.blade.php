@@ -58,7 +58,7 @@
                                     <div class='row'>
                                         <div class='col-md-6'>
                                             <div class="mb-3">
-                                                <label for="input_image1" class="form-label">First Image</label>
+                                                <label for="input_image1" class="form-label">First Image (Max 540 x 340)</label>
                                                 <input name='about_first_image' type='file' class="form-control" id="input_image1">
                                             
                                                 @error('about_first_image')
@@ -74,7 +74,7 @@
 
                                         <div class='col-md-6'>
                                             <div class="mb-3">
-                                                <label for="input_image2" class="form-label">Second Image</label>
+                                                <label for="input_image2" class="form-label">Second Image (Max 540 x 340)</label>
                                                 <input name='about_second_image' type='file' class="form-control" id="input_image2">
                                             
                                                 @error('about_second_image')

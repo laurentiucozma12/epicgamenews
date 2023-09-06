@@ -20,7 +20,7 @@ class AdminPostsController extends Controller
         'category_id' => 'required|numeric',
         'platform_id' => 'required|numeric',
         'other_id' => 'required|numeric',
-        'thumbnail' => 'required|file|dimensions:max_width=1800,max_height=900',
+        'thumbnail' => 'required|image|dimensions:max_width=1800,max_height=900',
         'body' => 'required',
     ];
 
@@ -99,7 +99,7 @@ class AdminPostsController extends Controller
 
     public function update(Request $request, Post $post)
     {
-        $this->rules['thumbnail'] = 'nullable|file|dimensions:max_width=1800,max_height=900';
+        $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1800,max_height=900';
         $validated = $request->validate($this->rules);
 
         $post->update($validated);

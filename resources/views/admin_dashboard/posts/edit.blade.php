@@ -152,8 +152,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="com-md-4 text-center">
-                                                <img style="width: 100%" src="/storage/{{ $post->image ? $post->image->path : 'placeholders/thumbnail_placeholder.jpg' }}" class="img-responsive" alt="Post Thumbnail">
+                                            <div class="com-md-4">
+                                                <img style="width: 540px" src="/storage/{{ $post->image ? $post->image->path : 'placeholders/thumbnail_placeholder.jpg' }}" class="img-responsive" alt="Post Thumbnail">
                                             </div>
 
                                         </div>
