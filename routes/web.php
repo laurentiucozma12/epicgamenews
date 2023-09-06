@@ -95,13 +95,12 @@ Route::get('/storage-link', function () {
     } 
     else if ($currentBranch === 'production') 
     {        
-        // dd($targetFolder); // 
-        // dd(public_path('storage')); //
-        // $linkFolder = public_path('storage'); 
-        // symlink($targetFolder, $linkFolder);
+        // dd($targetFolder); // "/home/epicjszd/public_html/storage/app/public"
+        // dd(public_path('storage')); // "/home/epicjszd/public_html/public/storage"
+        $linkFolder = public_path('storage'); 
+        symlink($targetFolder, $linkFolder);
     }
 
-    dd($targetFolder, public_path('storage'));
     return redirect()->route('home');
 });
 
