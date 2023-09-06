@@ -143,7 +143,7 @@
 					<div >
 						<div class="text-center colorlib-heading animate-box">
 							<h2>Subscribe Newsletter</h2>
-							<p>Subscribe our newsletter and get the latest update</p>
+							<p>Subscribe to our newsletter and get the latest update</p>
 						</div>
 						<div class="animate-box">
 							<form id="subscribe-input" class="form-inline">
