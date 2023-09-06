@@ -5,6 +5,8 @@ namespace App\Http\Controllers\AdminControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Spatie\ImageOptimizer\OptimizerChainFactory;
+
 use App\Models\Category;
 use App\Models\Platform;
 use App\Models\Other;
@@ -20,7 +22,7 @@ class AdminPostsController extends Controller
         'category_id' => 'required|numeric',
         'platform_id' => 'required|numeric',
         'other_id' => 'required|numeric',
-        'thumbnail' => 'required|file|mimes:jpg,png,webp,svg,jpeg|dimensions:max_width=1800,max_height=900',
+        'thumbnail' => 'required|file|dimensions:max_width=1800,max_height=900',
         'body' => 'required',
     ];
 
@@ -46,17 +48,25 @@ class AdminPostsController extends Controller
         $validated['user_id'] = auth()->id();
         $post = Post::create($validated);
 
-        if($request->has('thumbnail'))
-        {
+        if ($request->has('thumbnail')) {
             $thumbnail = $request->file('thumbnail');
             $filename = $thumbnail->getClientOriginalName();
             $file_extension = $thumbnail->getClientOriginalExtension();
             $path = $thumbnail->store('images', 'public');
-
+    
+            // Optimize and convert to WebP
+            $optimizerChain = OptimizerChainFactory::create();
+            $optimizerChain->optimize($path);
+    
+            // Create WebP version
+            $webPPath = str_replace($file_extension, 'webp', $path);
+            $optimizerChain->executeCommand("cwebp -q 80 $path -o $webPPath");
+    
             $post->image()->create([
                 'name' => $filename,
                 'extension' => $file_extension,
-                'path' => $path
+                'path' => $path,
+                'webp_path' => $webPPath, // Store the WebP path in your database
             ]);
         }
 
@@ -100,7 +110,7 @@ class AdminPostsController extends Controller
 
     public function update(Request $request, Post $post)
     {
-        $this->rules['thumbnail'] = 'nullable|file|mimes:jpg,png,webp,svg,jpeg,avif|dimensions:max_width=1800,max_height=900';
+        $this->rules['thumbnail'] = 'nullable|file|dimensions:max_width=1800,max_height=900';
         $validated = $request->validate($this->rules);
 
         $post->update($validated);
@@ -110,11 +120,20 @@ class AdminPostsController extends Controller
             $filename = $thumbnail->getClientOriginalName();
             $file_extension = $thumbnail->getClientOriginalExtension();
             $path = $thumbnail->store('images', 'public');
-
+    
+            // Optimize and convert to WebP
+            $optimizerChain = OptimizerChainFactory::create();
+            $optimizerChain->optimize($path);
+    
+            // Create WebP version
+            $webPPath = str_replace($file_extension, 'webp', $path);
+            $optimizerChain->executeCommand("cwebp -q 80 $path -o $webPPath");
+    
             $post->image()->update([
                 'name' => $filename,
                 'extension' => $file_extension,
-                'path' => $path
+                'path' => $path,
+                'webp_path' => $webPPath, // Update the WebP path in your database
             ]);
         }
         
