@@ -118,7 +118,7 @@
 										</li>
 										<li>
 											@if ( auth()->user()->role_id === 2 )
-												<a href="{{ route('admin.index') }}">Admin Dasboard</a>
+												<a href="{{ route('admin.index') }}" target="_blank">Admin Dasboard</a>
 											@endif
 										</li>
 									</ul>
