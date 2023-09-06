@@ -66,7 +66,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h3>Static title second text</h3>
+                <h3>Story</h3>
                 <p>{{ $setting->about_second_text }}</p>
             </div>
             <div class="col-md-6">
