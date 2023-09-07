@@ -22,6 +22,9 @@
  
 	<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900" rel="stylesheet">
 	
+	<!-- Epic Game News Icon Logo -->
+	<link rel="icon" href="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}" type="image/x-icon"/>
+
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="{{ asset('blog_template/css/animate.css') }}">
 	<!-- Icomoon Icon Fonts-->
@@ -66,7 +69,13 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-2">
-							<div id="colorlib-logo"><a href="{{ route('home') }}">Epic Game News</a></div>
+							<div id="colorlib-logo">
+								{{-- de pus in css --}}
+								<a href="{{ route('home') }}" style="display: flex; align-items: center;">
+									<img style="width: 25px; height: 25px;" src="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}" class="logo-icon" alt="logo icon"> 
+									<span style="margin-left: 5px; margin-top: 2.5px">Epic Game News</span>
+								</a>
+							</div>
 						</div>
 						<div class="col-md-10 text-right menu-1">
 							<ul>

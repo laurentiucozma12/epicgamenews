@@ -17,13 +17,21 @@
 <div class="colorlib-classes">
     <div class="container">
         <div class="row">
+
+            <div class="col-md-12 animate-box">
+                <div class="classes class-single">
+                    <div class="classes-img" style="background-image: url({{ asset($post->image ? 'storage/' . $post->image->path : 'storage/placeholders/thumbnail_placeholder.svg' . '')  }});">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
             
             <div class="col-md-8">
                 <div class="row row-pb-lg">
                     <div class="col-md-12 animate-box">
                         <div class="classes class-single">
-                            <div class="classes-img" style="background-image: url({{ asset($post->image ? 'storage/' . $post->image->path : 'storage/placeholders/thumbnail_placeholder.svg' . '')  }});">
-                            </div>
                             <div class="desc desc2">
                                 {!! $post->body !!}
                             </div>
@@ -37,7 +45,7 @@
 
                         @foreach($post->comments as $comment)
                             <div id="comment_{{ $comment->id }}" class="review">
-                                <div 
+                                <div
                                 class="user-img" 
                                 style="background-image: url({{ $comment->user->image ? asset('storage/' . $comment->user->image->path. '') : 'https://images.assetsdelivery.com/compings_v2/salamatik/salamatik1801/salamatik180100019.jpg'  }});"></div>
                             </div>

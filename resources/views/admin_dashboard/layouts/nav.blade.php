@@ -2,7 +2,7 @@
 <div class="sidebar-wrapper" data-simplebar="true">
     <div class="sidebar-header">
         <div>
-            <img src="{{ asset('admin_dashboard_assets/images/logo-icon.png') }}" class="logo-icon" alt="logo icon">
+            <img src="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}" class="logo-icon" alt="logo icon">
         </div>
         <div>
             <a href="{{ route('home') }}" target="_blank"><h4 class="logo-text">Epic Game News</h4></a>

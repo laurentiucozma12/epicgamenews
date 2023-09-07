@@ -13,7 +13,7 @@
                     @forelse ($platforms as $platform)
                         <div class='col-md-3'>
                             <div class="block-21 d-flex animate-box post">
-                                <div class="text">
+                                <div class="text category-container">
                                     <h3 class="heading"><a href="{{ route('platforms.show', $platform) }}"> {{ $platform->name }} </a></h3>
                                     <div class="meta">
                                         <div><a class='date' href="#"><span class="icon-calendar"></span> {{ $platform->created_at->diffForHumans() }} </a></div>
