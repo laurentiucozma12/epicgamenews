@@ -12,20 +12,32 @@ class CategoryController extends Controller
 {    
     public function index()
     {
+        $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->paginate(16);
+
         return view('categories.index', [
-            'categories' => Category::withCount('posts')->paginate(12)
+            'categories' => $categories
         ]);
     }
 
     public function show(Category $category)
     {
-        $recent_posts = Post::latest()->take(5)->get();
-        $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
+        if ($category->name === 'uncategorized') {
+            abort(404);
+        }
+
+        $posts = $category->posts()->latest()->paginate(10);
+
+        $recent_posts = Post::latest()
+            ->whereHas('category', function ($query) {
+                $query->where('name', '!=', 'uncategorized');
+            })->take(5)->get();
+            
+        $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(10)->get();
         $tags = Tag::latest()->take(50)->get();
 
         return view('categories.show', [
             'category' => $category,
-            'posts' => $category->posts()->latest()->paginate(10),
+            'posts' => $posts,
             'recent_posts' => $recent_posts,
             'categories' => $categories,
             'tags' => $tags,

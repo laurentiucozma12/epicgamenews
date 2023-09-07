@@ -12,13 +12,22 @@ use App\Models\Other;
 
 class PostsController extends Controller
 { 
-    public function show(Post $post) {
+    public function show(Post $post)
+    {
+        $recent_posts = Post::latest()
+            ->whereDoesntHave('category', function ($query) {
+                $query->where('name', 'uncategorized');
+            })
+            ->whereDoesntHave('platform', function ($query) {
+                $query->where('name', 'uncategorized');
+            })
+            ->whereDoesntHave('other', function ($query) {
+                $query->where('name', 'uncategorized');
+            })
+            ->take(5)
+            ->get();
 
-        $recent_posts = Post::latest()->take(5)->get();
-
-        $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(12)->get();
-        $platforms = Platform::withCount('posts')->orderBy('posts_count', 'desc')->take(12)->get();
-        $others = Other::withCount('posts')->orderBy('posts_count', 'desc')->take(12)->get();
+        $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(12)->get();
 
         $tags = Tag::latest()->take(50)->get();
 
@@ -26,8 +35,6 @@ class PostsController extends Controller
             'post' => $post,
             'recent_posts' => $recent_posts,
             'categories' => $categories,
-            'platforms' => $platforms,
-            'others' => $others,
             'tags' => $tags,
         ]);
     }

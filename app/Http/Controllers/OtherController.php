@@ -12,21 +12,33 @@ use App\Models\Other;
 class OtherController extends Controller
 {
     public function index()
-    {
+    {        
+        $others = Other::withCount('posts')->where('name', '!=', 'uncategorized')->paginate(16);
+
         return view('others.index', [
-            'others' => Other::latest()->withCount('posts')->paginate(12)
+            'others' => $others
         ]);
     }
 
     public function show(Other $other)
     {
-        $recent_posts = Post::latest()->take(5)->get();
-        $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
+        if ($other->name === 'uncategorized') {
+            abort(404);
+        }
+
+        $posts = $other->posts()->latest()->paginate(10);
+        
+        $recent_posts = Post::latest()
+            ->whereHas('other', function ($query) {
+                $query->where('name', '!=', 'uncategorized');
+            })->take(5)->get();
+
+        $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(10)->get();
         $tags = Tag::latest()->take(50)->get();
 
         return view('others.show', [
             'other' => $other,
-            'posts' => $other->posts()->latest()->paginate(10),
+            'posts' => $posts,
             'recent_posts' => $recent_posts,
             'categories' => $categories,
             'tags' => $tags,

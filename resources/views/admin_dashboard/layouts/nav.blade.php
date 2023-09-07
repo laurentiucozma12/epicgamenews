@@ -1,11 +1,11 @@
 <!--sidebar wrapper -->
 <div class="sidebar-wrapper" data-simplebar="true">
-    <div class="sidebar-header">
+    <div class="sidebar-header admin-sidebar-header">
         <div>
-            <img src="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}" class="logo-icon" alt="logo icon">
-        </div>
-        <div>
-            <a href="{{ route('home') }}" target="_blank"><h4 class="logo-text">Epic Game News</h4></a>
+            <a class="admin-logo-container" href="{{ route('home') }}" target="_blank">
+                <img class="logo-new-game-news" src="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}">                
+                <h4 class="title-route">EGN</h4>
+            </a>
         </div>
         <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i></div>
     </div>

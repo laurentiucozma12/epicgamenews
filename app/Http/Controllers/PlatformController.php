@@ -13,20 +13,32 @@ class PlatformController extends Controller
 {    
     public function index()
     {
+        $platforms = Platform::withCount('posts')->where('name', '!=', 'uncategorized')->paginate(16);
+
         return view('platforms.index', [
-            'platforms' => Platform::latest()->withCount('posts')->paginate(12)
+            'platforms' => $platforms
         ]);
     }
 
     public function show(Platform $platform)
     {
-        $recent_posts = Post::latest()->take(5)->get();
-        $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
+        if ($platform->name === 'uncategorized') {
+            abort(404);
+        }
+        
+        $posts = $platform->posts()->latest()->paginate(10);
+
+        $recent_posts = Post::latest()
+            ->whereHas('platform', function ($query) {
+                $query->where('name', '!=', 'uncategorized');
+            })->take(5)->get();
+            
+        $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(10)->get();
         $tags = Tag::latest()->take(50)->get();
 
         return view('platforms.show', [
             'platform' => $platform,
-            'posts' => $platform->posts()->latest()->paginate(10),
+            'posts' => $platform,
             'recent_posts' => $recent_posts,
             'categories' => $categories,
             'tags' => $tags,

@@ -14,17 +14,24 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $posts = Post::latest()->withCount('comments')->paginate(10);
+        $posts = Post::latest()
+            ->whereHas('category', function ($query) {
+                $query->where('name', '!=', 'uncategorized');
+            })
+            ->withCount('comments')
+            ->paginate(10);
 
-        $recent_posts = Post::latest()->take(5)->get();
+        $recent_posts = Post::latest()
+            ->whereHas('category', function ($query) {
+                $query->where('name', '!=', 'uncategorized');
+            })->take(5)->get();
 
-        $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
-        $platforms = Platform::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
-        $others = Other::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
+        $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(10)->get();
+        $platforms = Platform::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(10)->get();
+        $others = Other::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(10)->get();
 
         $tags = Tag::latest()->take(50)->get();
 
-        
         return view('home', [
             'posts' => $posts,
             'recent_posts' => $recent_posts,

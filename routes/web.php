@@ -106,12 +106,21 @@ Route::get('/storage-link', function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/categories/uncategorized', function () {
+    abort(404);
+});
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
 
+Route::get('/platforms/uncategorized', function () {
+    abort(404);
+});
 Route::get('/platforms', [PlatformController::class, 'index'])->name('platforms.index');
 Route::get('/platforms/{platform:slug}', [PlatformController::class, 'show'])->name('platforms.show');
 
+Route::get('/other/uncategorized', function () {
+    abort(404);
+});
 Route::get('/other', [OtherController::class, 'index'])->name('others.index');
 Route::get('/other/{other:slug}', [OtherController::class, 'show'])->name('others.show');
 

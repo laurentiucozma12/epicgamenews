@@ -37,6 +37,18 @@
     background-color: #4586ff; }
 .global-message.error {
     background-color: #d81d1d; }
+/* Layout */
+#colorlib-logo .logo-route,
+.admin-sidebar-header .admin-logo-container {
+    display: flex; 
+    align-items: center; }
+#colorlib-logo .logo-route .logo-new-game-news,
+.admin-sidebar-header .logo-new-game-news {
+    width: 25px;
+    height: 25px; }
+#colorlib-logo .logo-route .title-route,
+.admin-sidebar-header .title-route {
+    margin: 2.5px 0 0 5px; }
 /* Subscribe Container */
 #colorlib-subscribe {
     display: flex;
@@ -80,7 +92,6 @@
         .category-container {
         width: 100%; } }
 /* Pagination Buttons*/
-
 .pagination > .active > a, 
 .pagination > .active > a:hover, 
 .pagination > .active > a:focus, 

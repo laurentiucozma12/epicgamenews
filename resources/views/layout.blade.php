@@ -69,15 +69,18 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-2">
+
 							<div id="colorlib-logo">
 								{{-- de pus in css --}}
-								<a href="{{ route('home') }}" style="display: flex; align-items: center;">
-									<img style="width: 25px; height: 25px;" src="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}" class="logo-icon" alt="logo icon"> 
-									<span style="margin-left: 5px; margin-top: 2.5px">Epic Game News</span>
+								<a href="{{ route('home') }}" class="logo-route">
+									<img class="logo-new-game-news" src="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}"> 
+									<span class="title-route">Epic Game News</span>
 								</a>
 							</div>
+
 						</div>
 						<div class="col-md-10 text-right menu-1">
+
 							<ul>
 								<li><a href="{{ route('home') }}">Home</a></li>
 								<li class="has-dropdown">
@@ -108,32 +111,33 @@
 								</li>
 
 								@guest
-								<li class="btn-cta"><a href="{{ route('login') }}"><span>Login</span></a></li>
+									<li class="btn-cta"><a href="{{ route('login') }}"><span>Login</span></a></li>
 								@endguest
 
 								@auth
-								<li class="has-dropdown">
-									<a href="">{{ auth()->user()->name }}<span class="caret"></span></a>
-									<ul class="dropdown">
-										<li>
-											<a 
-											onclick="event.preventDefault();
-											document.getElementById('nav-logout-form').submit()"
-											href="">Logout</a>
+									<li class="has-dropdown">
+										<a href="">{{ auth()->user()->name }}<span class="caret"></span></a>
+										<ul class="dropdown">
+											<li>
+												<a 
+												onclick="event.preventDefault();
+												document.getElementById('nav-logout-form').submit()"
+												href="">Logout</a>
 
-											<form id="nav-logout-form" action="{{ route('logout') }}" method="POST">
-												@csrf
-											</form>
-										</li>
-										<li>
-											@if ( auth()->user()->role_id === 2 )
-												<a href="{{ route('admin.index') }}" target="_blank">Admin Dasboard</a>
-											@endif
-										</li>
-									</ul>
-								</li>
-								@endauth
+												<form id="nav-logout-form" action="{{ route('logout') }}" method="POST">
+													@csrf
+												</form>
+											</li>
+											<li>
+												@if ( auth()->user()->role->name === "admin" )
+													<a href="{{ route('admin.index') }}" target="_blank">Admin Dasboard</a>
+												@endif
+											</li>
+										</ul>
+									</li>
+								@endauth								
 							</ul>
+
 						</div>
 					</div>
 				</div>

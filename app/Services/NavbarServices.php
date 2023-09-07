@@ -22,9 +22,21 @@ class NavbarServices
             $platforms = Platform::withCount('posts')->orderBy('posts_count', 'DESC')->take(5)->get();
             $others = Other::withCount('posts')->orderBy('posts_count', 'DESC')->take(5)->get();
     
-            View::share('navbar_categories', $categories);
-            View::share('navbar_platforms', $platforms);
-            View::share('navbar_others', $others);
+            $filteredCategories = $categories->reject(function ($categorie) {
+                return $categorie->name === 'uncategorized';
+            });
+            
+            $filteredPlatforms = $platforms->reject(function ($platform) {
+                return $platform->name === 'uncategorized';
+            });
+            
+            $filteredOthers = $others->reject(function ($other) {
+                return $other->name === 'uncategorized';
+            });
+
+            View::share('navbar_categories', $filteredCategories);
+            View::share('navbar_platforms', $filteredPlatforms);
+            View::share('navbar_others', $filteredOthers);
         }
     
         return $next($request);

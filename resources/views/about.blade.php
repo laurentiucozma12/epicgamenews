@@ -24,7 +24,7 @@
                     <div class="col-md-12 animate-box">
                         <p>{{ $setting->about_first_text }}</p>
                     </div>
-                    <div class="col-md-6 col-xs-6 animate-box">
+                    {{-- <div class="col-md-6 col-xs-6 animate-box">
                         <div class="counter-entry">
                             <div class="desc">
                                 <span class="colorlib-counter js-counter" data-from="0" data-to="1539" data-speed="5000" data-refresh-interval="50"></span>
@@ -55,7 +55,7 @@
                                 <span class="colorlib-counter-label">Game Categories</span>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

@@ -5,8 +5,8 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--favicon-->
-	<link rel="icon" href="{{ asset('admin_dashboard_assets/images/favicon-32x32.png') }}" type="image/png" />
+	<!-- Epic Game News Icon Logo -->
+	<link href="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}" rel="icon" type="image/x-icon"/>
 	<!--plugins-->
 	@yield("style")
 	<link href="{{ asset('admin_dashboard_assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
@@ -22,11 +22,15 @@
 	<link href=" {{ asset('admin_dashboard_assets/css/icons.css') }}" rel="stylesheet">
 
     <!-- Theme Style CSS -->
-    <link rel="stylesheet" href="{{ asset('admin_dashboard_assets/css/dark-theme.css') }}" />
-    <link rel="stylesheet" href="{{ asset('admin_dashboard_assets/css/semi-dark.css') }}" />
-    <link rel="stylesheet" href="{{ asset('admin_dashboard_assets/css/header-colors.css') }}" />
-    <link rel="stylesheet" href="{{ asset('admin_dashboard_assets/css/my_style.css') }}" />
-    <title>Rocker - Bootstrap 5 Admin Dashboard Template</title>
+    <link href="{{ asset('admin_dashboard_assets/css/dark-theme.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin_dashboard_assets/css/semi-dark.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin_dashboard_assets/css/header-colors.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin_dashboard_assets/css/my_style.css') }}" rel="stylesheet" />
+
+    {{-- My Style --}}    
+    <link href="{{ asset('css/mystyle.css') }}" rel="stylesheet" />
+    
+    <title>Admin Dashboard - New Game News </title>
 </head>
 
 <body>
@@ -56,7 +60,7 @@
 		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
 		<!--End Back To Top Button-->
 		<footer class="page-footer">
-			<p class="mb-0">Copyright © 2021. All right reserved.</p>
+			<p class="mb-0">Copyright © 2023. All right reserved.</p>
 		</footer>
 	</div>
 	<!--end wrapper-->

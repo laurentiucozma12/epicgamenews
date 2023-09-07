@@ -58,9 +58,9 @@
                                     </td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->excerpt }}</td>
-                                    <td>{{ $post->category->name }}</td>
-                                    <td>{{ $post->platform->name }}</td>
-                                    <td>{{ $post->other->name }}</td>
+                                    <td>{{ optional($post->category)->name }}</td>
+                                    <td>{{ optional($post->platform)->name }}</td>
+                                    <td>{{ optional($post->other)->name }}</td>                                    
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
                                     <td>
                                         <div class="badge rounded-pill @if($post->status === 'published') {{ 'text-info bg-light-info' }} @elseif ($post->status === 'draft') {{ 'text-warning bg-light-warning' }} @else {{ 'text-danger bg-light-danger' }} @endif p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>{{ $post->status }}</div>
