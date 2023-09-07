@@ -39,15 +39,19 @@
                 <div class="col-md-6">
                     <form onsubmit="return false;" autocomplete="off" method="POST">
                         @csrf
+
                         <div class="row form-group">
-                            <div class="col-md-6">
+                            <div class="col-md-12 ">
                                 <x-blog.form.input value='{{ old("first_name") }}' placeholder='Your Firstname' name="first_name" />
                                 <small class='error text-danger first_name'></small>
                             </div>
-                            <div class="col-md-6">
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-12 ">
                                 <x-blog.form.input value='{{ old("last_name") }}' placeholder='Your Lastname' name="last_name" />
                                 <small class='error text-danger last_name'></small>
-                            </div>
+                            </div>                            
                         </div>
 
                         <div class="row form-group">
