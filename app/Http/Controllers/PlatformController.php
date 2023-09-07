@@ -38,7 +38,7 @@ class PlatformController extends Controller
 
         return view('platforms.show', [
             'platform' => $platform,
-            'posts' => $platform,
+            'posts' => $posts,
             'recent_posts' => $recent_posts,
             'categories' => $categories,
             'tags' => $tags,

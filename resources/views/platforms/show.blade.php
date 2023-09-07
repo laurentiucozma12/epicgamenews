@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', $platform->name . ' Category | Epic Game News')
+@section('title', $platform->name . ' Platform | Epic Game News')
 
 @section('content')
 
@@ -11,9 +11,7 @@
 
 				@forelse ($posts as $post)
 					<div class="block-21 d-flex animate-box post">
-						<a 
-						href="{{ route('show', $post) }}" 
-						class="blog-img"
+						<a href="{{ route('show', $post) }}" class="blog-img"
 						style="background-image: url({{ asset('storage/' . $post->image->path. '') }});"></a>
 
 						<div class="text">
