@@ -23,7 +23,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900" rel="stylesheet">
 	
 	<!-- Epic Game News Icon Logo -->
-	<link rel="icon" href="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}" type="image/x-icon"/>
+	<link rel="icon" href="{{ asset('storage/logo/logo-epic-game-news-25x25.png') }}" type="image/x-icon"/>
 
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="{{ asset('blog_template/css/animate.css') }}">
@@ -73,7 +73,7 @@
 							<div id="colorlib-logo">
 								{{-- de pus in css --}}
 								<a href="{{ route('home') }}" class="logo-route">
-									<img class="logo-new-game-news" src="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}"> 
+									<img class="logo-new-game-news" src="{{ asset('storage/logo/logo-epic-game-news-25x25.png') }}"> 
 									<span class="title-route">Epic Game News</span>
 								</a>
 							</div>

@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Epic Game News Icon Logo -->
-	<link href="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}" rel="icon" type="image/x-icon"/>
+	<link href="{{ asset('storage/logo/logo-epic-game-news-25x25.png') }}" rel="icon" type="image/x-icon"/>
 	<!--plugins-->
 	@yield("style")
 	<link href="{{ asset('admin_dashboard_assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
