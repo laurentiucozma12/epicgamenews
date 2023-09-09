@@ -18,7 +18,7 @@
                 </h4>                    
             </div>  
             <div class="desc">
-                <p> {{ \Str::limit($recent_post->excerpt, 70) }} </p>
+                <p> {{ \Str::limit($recent_post->excerpt, 66) }} </p>
                 <p class="admin"><span> {{ $recent_post->created_at->diffForHumans() }} </span></p>
             </div>
         </div>

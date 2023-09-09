@@ -17,11 +17,24 @@
 <div class="colorlib-classes">
     <div class="container">
         <div class="row">
-
-            <div class="col-md-12 animate-box">
-                <div class="classes class-single">
-                    <div class="classes-img" style="background-image: url({{ asset($post->image ? 'storage/' . $post->image->path : 'storage/placeholders/thumbnail_placeholder.svg' . '')  }});">
-                    </div>
+            <div class="col-md-12">
+                <h1>{{ $post->title }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p>{{ $post->excerpt }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span> By{{ $post->author->name }} Published {{ $post->created_at->diffForHumans() }} </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="animate-box thumbnail-container">
+                    <img width="1800" height="900" style="display:block;height:auto;max-width:100%;background-image: url({{ asset($post->image ? 'storage/' . $post->image->path : 'storage/placeholders/thumbnail_placeholder.svg' . '')  }});" />
                 </div>
             </div>
 

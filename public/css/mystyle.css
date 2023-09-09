@@ -63,9 +63,8 @@
 .recent-news-big-title {
     margin: 0 0 10px 0 !important; }
 .recent-news-container {
-    margin: 0 0 20px 0 !important;
-    padding-left: 0px !important;
-    height: 130px !important; }
+    margin: 0 0 25px 0 !important;
+    padding-left: 0px !important; }
 .recent-news-container .img-and-title-container-recent-news .recent-news-img {
     position: static !important;
     margin: 0 10px 0 0;
@@ -171,4 +170,9 @@
 
 /* Others Page */
 
+/* Post Page */
+.thumbnail-container img {
+    margin: 2rem 0; }
+.classes .desc2 {
+    padding-top: 0;}
 /****** END OF PAGES ******/

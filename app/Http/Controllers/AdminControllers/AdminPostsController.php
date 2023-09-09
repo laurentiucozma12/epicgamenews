@@ -14,9 +14,9 @@ use App\Models\Tag;
 class AdminPostsController extends Controller
 {
     private $rules = [
-        'title' => 'required|max:200',
-        'slug' => 'required|max:200',
-        'excerpt' => 'required|max:1000',
+        'title' => 'required|max:90',
+        'slug' => 'required|max:100',
+        'excerpt' => 'required|max:150',
         'category_id' => 'required|numeric',
         'platform_id' => 'required|numeric',
         'other_id' => 'required|numeric',
