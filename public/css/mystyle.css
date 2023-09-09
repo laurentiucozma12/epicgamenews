@@ -1,3 +1,4 @@
+/****** MY COLORS ******/
 :root {
     --bg-filter: #c8c8c814;
     --black: #000000;
@@ -25,6 +26,10 @@
     --orange-3: #eea236;
     --white: #ffffff;
 }
+/****** END OF MY COLORS ******/
+
+
+/****** MESSAGE COLORS ******/
 .global-message {
     position: fixed;
     bottom: 10px;
@@ -37,6 +42,10 @@
     background-color: #4586ff; }
 .global-message.error {
     background-color: #d81d1d; }
+/****** END OF MESSAGE COLORS ******/
+
+
+/****** LAYOUTS (all the things that apear on every page) ******/
 /* Layout */
 #colorlib-logo .logo-route,
 .admin-sidebar-header .admin-logo-container {
@@ -49,6 +58,54 @@
 #colorlib-logo .logo-route .title-route,
 .admin-sidebar-header .title-route {
     margin: 2.5px 0 0 5px; }
+
+/* Recent News */
+.recent-news-big-title {
+    margin: 0 0 10px 0 !important; }
+.recent-news-container {
+    margin: 0 0 20px 0 !important;
+    padding-left: 0px !important;
+    height: 130px !important; }
+.recent-news-container .img-and-title-container-recent-news .recent-news-img {
+    position: static !important;
+    margin: 0 10px 0 0;
+    width: 80px !important; 
+    height: 50px !important; }
+.recent-news-container .img-and-title-container-recent-news h4 {
+    height: 50px !important;
+    margin: 0 0 10px 0 !important; }
+.recent-news-container .desc p {
+    margin: 0 !important; }
+
+/* Pagination Buttons*/
+.pagination > .active > a, 
+.pagination > .active > a:hover, 
+.pagination > .active > a:focus, 
+.pagination > .active > span, 
+.pagination > .active > span:hover, 
+.pagination > .active > span:focus {
+    color: var(--black);
+    background-color: var(--white);
+    border: 1px solid var(--white);
+    cursor: pointer;
+}
+.pagination > li > a,
+.pagination > li > span,
+.pagination > .disabled > span {
+    color: var(--white);
+    background-color: var(--dark-1);
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover {
+    color: var(--white);
+    background-color: var(--gray-1);
+    cursor: pointer;
+}
+.pagination > .disabled > span:hover {
+    color: var(--white);
+    background-color: var(--gray-1);
+}
+
 /* Subscribe Container */
 #colorlib-subscribe {
     display: flex;
@@ -82,7 +139,21 @@
             justify-content: center; }
         #subscribe-input #email {
             margin-bottom: 20px; } }
-/* Categories page style */
+/****** END OF LAYOUTS (all the things that apear on every page) ******/
+
+
+/****** PAGES ******/
+/* Home Page */
+    @media (min-width: 1400px) {
+    .container {
+        width: 1400px; } }
+.articles-container {
+    height: 225px; }
+.articles-container .heading,
+.articles-container .excerpt {
+    margin: 0 0 10px 0; }
+
+/* Categories Page */
 .categories-col .block-21 .text {
     width: 100%; }
 .category-container {
@@ -91,32 +162,13 @@
     @media screen and (max-width: 500px) {
         .category-container {
         width: 100%; } }
-/* Pagination Buttons*/
-.pagination > .active > a, 
-.pagination > .active > a:hover, 
-.pagination > .active > a:focus, 
-.pagination > .active > span, 
-.pagination > .active > span:hover, 
-.pagination > .active > span:focus {
-    color: var(--black);
-    background-color: var(--white);
-    border: 1px solid var(--white);
-    cursor: pointer;
-}
-.pagination > li > a,
-.pagination > li > span,
-.pagination > .disabled > span {
-    color: var(--white);
-    background-color: var(--dark-1);
-}
-.pagination > li > a:hover,
-.pagination > li > span:hover {
-    color: var(--white);
-    background-color: var(--gray-1);
-    cursor: pointer;
-}
-.pagination > .disabled > span:hover {
-    color: var(--white);
-    background-color: var(--gray-1);
-}
+
+/* Platforms Page */
+
+/* About Page */
+
 /* Contact Page */
+
+/* Others Page */
+
+/****** END OF PAGES ******/

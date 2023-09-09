@@ -7,7 +7,7 @@
 <div class="colorlib-blog">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-8 posts-col">
+			<div class="col-md-9 posts-col">
 
 				@forelse ($posts as $post)
 					<div class="block-21 d-flex animate-box post blog-container">
@@ -15,9 +15,9 @@
 						href="{{ route('show', $post) }}" 
 						class="blog-img"
 						style="background-image: url({{ asset( 'storage/' .$post->image->path. '' ) }});"></a>
-						<div class="text">
+						<div class="text articles-container">
 							<h3 class="heading"><a href="{{ route('show', $post) }}"> {{ $post->title }} </a></h3>
-							<p class="excerpt"> {{ $post->excerpt }} </p>
+							<p class="excerpt"> {{ \Str::limit($post->excerpt, 150) }} </p>
 							<div class="meta">
 								<div><a class='date' href="#"><span class="icon-calendar"></span> {{ $post->created_at->diffForHumans() }} </a></div>
 								<div><a href="#"><span class="icon-user2"></span> {{ $post->author->name }} </a></div>
@@ -38,7 +38,7 @@
 			</div>
 
 			<!-- SIDEBAR: start -->
-			<div class="col-md-4 animate-box">
+			<div class="col-md-3 animate-box">
 				<div class="sidebar">
 				
 					<x-blog.side-categories :categories="$categories"/>
