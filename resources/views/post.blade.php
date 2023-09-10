@@ -28,7 +28,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <span> By{{ $post->author->name }} Published {{ $post->created_at->diffForHumans() }} </span>
+                <span> By {{ $post->author->name }} Published {{ $post->created_at->diffForHumans() }} </span>
             </div>
         </div>
         <div class="row">
