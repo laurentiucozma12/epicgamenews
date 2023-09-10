@@ -57,6 +57,6 @@ class Post extends Model
     // Scope function
     public function scopeApproved($query)
     {
-        return $query->where('approved', 1);
+        return $query->where('approved', 1); 
     }
 }

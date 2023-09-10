@@ -101,6 +101,7 @@ class AdminPostsController extends Controller
     {
         $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1800,max_height=900';
         $validated = $request->validate($this->rules);
+        $validated['approved'] = $request->input('approved') !== null;
 
         $post->update($validated);
 
@@ -136,7 +137,6 @@ class AdminPostsController extends Controller
     public function destroy(Post $post)
     {
         $post->tags()->delete();
-        $post->delete();
         $post->delete();
         return redirect()->route('admin.posts.index')->with('success', 'Post has been deleted');
     }

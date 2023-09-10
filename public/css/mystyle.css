@@ -44,7 +44,7 @@
     background-color: #d81d1d; }
 /****** END OF MESSAGE COLORS ******/
 
-
+/************ USER SIDE ************/
 /****** LAYOUTS (all the things that apear on every page) ******/
 /* Layout */
 #colorlib-logo .logo-route,
@@ -190,3 +190,21 @@
 .comment-container .desc h4 {
     margin: 0;}
 /****** END OF PAGES ******/
+/************ END OF USER SIDE ************/
+
+/************ ADMIN SIDE ************/
+.admin-approve-container {
+    margin: 1.5rem 0; }
+.admin-approve-container .form-check-input {
+    width: 100px; 
+    height: 30px;
+    margin: 0 1.5rem 0 0; }
+.admin-approve-container .form-check-label {
+    font-size: 15pt; }
+.update-delete-btn-container {
+    display: flex;
+    justify-content: space-around; }
+.form-check-input:checked {
+    background-color: #15ca20 !important;    
+    border-color: #0faa1a !important; }
+/************ END OF ADMIN SIDE ************/

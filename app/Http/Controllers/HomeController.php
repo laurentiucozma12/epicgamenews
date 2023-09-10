@@ -18,6 +18,7 @@ class HomeController extends Controller
             ->whereHas('category', function ($query) {
                 $query->where('name', '!=', 'uncategorized');
             })
+            ->approved()
             ->withCount('comments')
             ->paginate(10);
 

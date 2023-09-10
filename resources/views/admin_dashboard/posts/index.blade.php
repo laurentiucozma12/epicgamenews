@@ -63,7 +63,22 @@
                                     <td>{{ optional($post->other)->name }}</td>                                    
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
                                     <td>
-                                        <div class="badge rounded-pill @if($post->status === 'published') {{ 'text-info bg-light-info' }} @elseif ($post->status === 'draft') {{ 'text-warning bg-light-warning' }} @else {{ 'text-danger bg-light-danger' }} @endif p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>{{ $post->status }}</div>
+                                        {{-- <div class="badge rounded-pill p-2 text-uppercase px-3
+                                            @if($post->approved !== 0) 
+                                                {{ 'text-info bg-light-info' }}
+
+                                            @else {{ 'text-danger bg-light-danger' }}
+                                            
+                                            @endif
+                                        ">
+                                         <i class='bx bxs-circle align-middle me-1'></i>{{ $post->status }}
+                                        </div> --}}
+
+                                        @if($post->approved !== 0)
+                                            <div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Approved</div>
+                                        @else
+                                            <div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Not Approved</div>
+                                        @endif
                                     </td>
                                     <td>{{ $post->views }}</td>
                                     <td>

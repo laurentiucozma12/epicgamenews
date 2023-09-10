@@ -168,15 +168,24 @@
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
+
+                                    <div class="form-check form-switch admin-approve-container">
+                                        <input name='approved' {{ $post->approved ? 'checked' : '' }} class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                        <label class="form-check-label {{ $post->approved ? 'text-success' : 'text-danger' }}" for="flexSwitchCheckChecked">
+                                            <b>{{ $post->approved ? 'Approved' : 'Not approved' }}</b>
+                                        </label>
+                                    </div>
                                     
-                                    <button class='btn btn-primary' type='submit'>Update Post</button>
-                                    
-                                    <a 
-                                    class='btn btn-danger'
-                                    onclick="event.preventDefault();document.getElementById('delete_post_{{ $post->id }}').submit()"
-                                    href="#">
-                                        Delete Post
-                                    </a>
+                                    <div class="update-delete-btn-container">
+                                        <button class='btn btn-primary' type='submit'>Update Post</button>
+                                        
+                                        <a 
+                                        class='btn btn-danger'
+                                        onclick="event.preventDefault();document.getElementById('delete_post_{{ $post->id }}').submit()"
+                                        href="#">
+                                            Delete Post
+                                        </a>
+                                    </div>
 
                                 </div>
                             </div>                            
