@@ -864,11 +864,6 @@ h1, h2, h3, h4, h5, h6, figure {
   font-size: 18px;
   line-height: 1.8; }
 
-.review {
-  width: 100%;
-  float: left;
-  margin-bottom: 30px;
-  border-bottom: 1px solid var(--white); }
   .review .user-img {
     width: 80px;
     height: 80px;
@@ -876,7 +871,8 @@ h1, h2, h3, h4, h5, h6, figure {
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     border-radius: 50%;
-    float: left; }
+    float: left;
+    margin-right: 25px; }
   .review .desc {
     width: calc(100% - 100px);
     float: right; }

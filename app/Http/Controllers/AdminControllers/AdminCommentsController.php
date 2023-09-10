@@ -12,7 +12,7 @@ class AdminCommentsController extends Controller
 {
     private $rules = [
         'post_id' => 'required|numeric',
-        'the_comment' => 'required|min:3|max:1000'
+        'the_comment' => 'required|min:10|max:1000'
     ];
 
     public function index()

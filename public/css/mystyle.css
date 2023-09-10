@@ -175,4 +175,9 @@
     margin: 2rem 0; }
 .classes .desc2 {
     padding-top: 0;}
+.comment-container {
+    display: flex;
+    margin-bottom: 2rem; }
+.comment-container .desc h4 {
+    margin: 0;}
 /****** END OF PAGES ******/
