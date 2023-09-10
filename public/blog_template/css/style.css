@@ -1110,7 +1110,7 @@ h1, h2, h3, h4, h5, h6, figure {
   padding-left: 30px; }
   .sidebar .side {
     display: block;
-    margin-bottom: 3em; }
+    margin-bottom: 2em; }
     .sidebar .side .sidebar-heading {
       font-size: 20px;
       margin-bottom: 30px; }
@@ -1122,7 +1122,7 @@ h1, h2, h3, h4, h5, h6, figure {
       margin-bottom: 10px; }
       .sidebar .block-24 ul li a {
         display: block;
-        padding: 2px 16px;
+        padding: 2px 8px;
         border-left: 4px solid transparent;
         position: relative;
         color: var(--white); }

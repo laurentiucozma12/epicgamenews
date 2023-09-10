@@ -1,7 +1,7 @@
 @props(['tags'])
 
 <div class="side">
-    <h3 class="sidbar-heading">Tags</h3>
+    <h3 class="sidbar-heading tags-big-title">Tags</h3>
     <div class="block-26">
         <ul>
             @foreach ($tags as $tag)

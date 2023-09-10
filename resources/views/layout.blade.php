@@ -85,32 +85,11 @@
 
 						<ul>
 							<li><a href="{{ route('home') }}">Home</a></li>
-							<li class="has-dropdown">
-								<a href="{{ route('categories.index') }}">Categories</a>
-								<ul class="dropdown">
-									@foreach ($navbar_categories as $category)
-										<li><a href="{{ route('categories.show', $category) }}">{{ $category->name }}</a></li>
-									@endforeach
-								</ul>
-							</li>
-							<li class="has-dropdown">
-								<a href="{{ route('platforms.index') }}">Platforms</a>
-								<ul class="dropdown">
-									@foreach ($navbar_platforms as $platform)											
-										<li><a href="{{ route('platforms.show', $platform) }}">{{ $platform->name }}</a></li>
-									@endforeach
-								</ul>
-							</li>
+							<li><a href="{{ route('categories.index') }}">Categories</a></li>
+							<li><a href="{{ route('platforms.index') }}">Platforms</a></li>
 							<li><a href="{{ route('about') }}">About</a></li>
 							<li><a href="{{ route('contact.create') }}">Contact</a></li>
-							<li class="has-dropdown">
-								<a href="{{ route('others.index') }}">Others</a>
-								<ul class="dropdown">
-									@foreach ($navbar_others as $other)											
-										<li><a href="{{ route('others.show', $other) }}">{{ $other->name }}</a></li>
-									@endforeach
-								</ul>
-							</li>
+							<li><a href="{{ route('others.index') }}">Others</a></li>
 
 							@guest
 								<li class="btn-cta"><a href="{{ route('login') }}"><span>Login</span></a></li>

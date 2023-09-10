@@ -59,52 +59,6 @@
 .admin-sidebar-header .title-route {
     margin: 2.5px 0 0 5px; }
 
-/* Recent News */
-.recent-news-big-title {
-    margin: 0 0 10px 0 !important; }
-.recent-news-container {
-    margin: 0 0 25px 0 !important;
-    padding-left: 0px !important; }
-.recent-news-container .img-and-title-container-recent-news .recent-news-img {
-    position: static !important;
-    margin: 0 10px 0 0;
-    width: 80px !important; 
-    height: 50px !important; }
-.recent-news-container .img-and-title-container-recent-news h4 {
-    height: 50px !important;
-    margin: 0 0 10px 0 !important; }
-.recent-news-container .desc p {
-    margin: 0 !important; }
-
-/* Pagination Buttons*/
-.pagination > .active > a, 
-.pagination > .active > a:hover, 
-.pagination > .active > a:focus, 
-.pagination > .active > span, 
-.pagination > .active > span:hover, 
-.pagination > .active > span:focus {
-    color: var(--black);
-    background-color: var(--white);
-    border: 1px solid var(--white);
-    cursor: pointer;
-}
-.pagination > li > a,
-.pagination > li > span,
-.pagination > .disabled > span {
-    color: var(--white);
-    background-color: var(--dark-1);
-}
-.pagination > li > a:hover,
-.pagination > li > span:hover {
-    color: var(--white);
-    background-color: var(--gray-1);
-    cursor: pointer;
-}
-.pagination > .disabled > span:hover {
-    color: var(--white);
-    background-color: var(--gray-1);
-}
-
 /* Subscribe Container */
 #colorlib-subscribe {
     display: flex;
@@ -140,6 +94,61 @@
             margin-bottom: 20px; } }
 /****** END OF LAYOUTS (all the things that apear on every page) ******/
 
+/****** START OF COMPONENTS ******/ 
+/* Recent News: side-categories.blade.php */
+.categories-big-title {
+    margin: 0 0 10px 0 !important; }
+
+/* Recent News: side-recent-posts.blade.php */
+.recent-news-big-title {
+    margin: 0 0 10px 0 !important; }
+.recent-news-container {
+    margin: 0 0 25px 0 !important;
+    padding-left: 0px !important; }
+.recent-news-container .img-and-title-container-recent-news .recent-news-img {
+    position: static !important;
+    margin: 0 10px 0 0;
+    width: 80px !important; 
+    height: 50px !important; }
+.recent-news-container .img-and-title-container-recent-news h4 {
+    height: 50px !important;
+    margin: 0 0 10px 0 !important; }
+.recent-news-container .desc p {
+    margin: 0 !important; }
+
+/* Recent News: side-tags.blade.php */
+.tags-big-title {
+    margin: 0 0 10px 0 !important; }    
+
+/* Pagination Buttons*/
+.pagination > .active > a, 
+.pagination > .active > a:hover, 
+.pagination > .active > a:focus, 
+.pagination > .active > span, 
+.pagination > .active > span:hover, 
+.pagination > .active > span:focus {
+    color: var(--black);
+    background-color: var(--white);
+    border: 1px solid var(--white);
+    cursor: pointer;
+}
+.pagination > li > a,
+.pagination > li > span,
+.pagination > .disabled > span {
+    color: var(--white);
+    background-color: var(--dark-1);
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover {
+    color: var(--white);
+    background-color: var(--gray-1);
+    cursor: pointer;
+}
+.pagination > .disabled > span:hover {
+    color: var(--white);
+    background-color: var(--gray-1);
+}
+/****** END OF COMPONENTS******/ 
 
 /****** PAGES ******/
 /* Home Page */
