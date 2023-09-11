@@ -99,8 +99,6 @@ class AdminPostsController extends Controller
 
     public function update(Request $request, Post $post)
     {    
-        dd($request->all());
-
         $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1800,max_height=900';
         $validated = $request->validate($this->rules);
         $validated['approved'] = $request->has('approved');
