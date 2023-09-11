@@ -101,13 +101,18 @@ class AdminPostsController extends Controller
     {    
         $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1800,max_height=900';
         $validated = $request->validate($this->rules);
+
         $validated['approved'] = $request->has('approved');
-    
+
+        $category = $post->category;
+        $platform = $post->platform;
+        $other = $post->other;
+
         $post->update($validated);
 
-        $post->category()->associate($validated['category_id']);
-        $post->platform()->associate($validated['platform_id']);
-        $post->other()->associate($validated['other_id']);
+        $post->category()->associate($category);
+        $post->platform()->associate($platform);
+        $post->other()->associate($other);
 
         if ($request->has('thumbnail')) {
             $thumbnail = $request->file('thumbnail');
