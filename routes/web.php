@@ -37,6 +37,26 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OtherController;
 use App\Http\Controllers\TagController;
 
+
+
+
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/migrate', function () {
+    try {
+        Artisan::call('migrate');
+        $output = Artisan::output();
+        return response()->json(['message' => 'Migrations completed successfully', 'output' => $output]);
+    } catch (\Exception $e) {
+        return response()->json(['message' => 'Migrations failed', 'error' => $e->getMessage()], 500);
+    }
+});
+
+
+
+
+
+
 // Admin Dashboard Routes
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions'])->group(function(){
@@ -69,6 +89,7 @@ Route::get('/storage-link', function () {
     $branchPaths = [
         'development',
         'pre-production',
+        ////// I forgot about this, gotta test if I can delete it storage_path('app/public') //////
         'production' => storage_path('app/public'),
     ];
 
@@ -78,10 +99,11 @@ Route::get('/storage-link', function () {
     // Check if the current branch exists in the mapping, default to 'production' if not found
     $targetFolder = $branchPaths[$currentBranch] ?? $branchPaths['production'];
 
+    ////// gotta test if I can make it shorter like if ($currentBranch === 'development' || $currentBranch === 'pre-production' || $currentBranch === 'production') {...} //////
     // Define the target link folder (public storage)
     if ($currentBranch === 'development')
     {
-        // dd($targetFolder); // "C:\xampp\htdocs\epicgamenews\storage\app/public"
+        // dd($targetFolder); // "C:\xampp\htdocs\epicgamenews\storage\app\public"
         // dd(public_path('storage')); // "C:\xampp\htdocs\epicgamenews\public\storage"
         $linkFolder = public_path('storage');    
         symlink($targetFolder, $linkFolder);        
