@@ -37,26 +37,6 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OtherController;
 use App\Http\Controllers\TagController;
 
-
-
-
-use Illuminate\Support\Facades\Artisan;
-
-Route::get('/migrate', function () {
-    try {
-        Artisan::call('migrate');
-        $output = Artisan::output();
-        return response()->json(['message' => 'Migrations completed successfully', 'output' => $output]);
-    } catch (\Exception $e) {
-        return response()->json(['message' => 'Migrations failed', 'error' => $e->getMessage()], 500);
-    }
-});
-
-
-
-
-
-
 // Admin Dashboard Routes
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions'])->group(function(){
