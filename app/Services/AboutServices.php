@@ -7,17 +7,17 @@ use Illuminate\Support\Facades\View;
 
 use Illuminate\Support\Facades\Schema;
 
-use App\Models\Setting;
+use App\Models\About;
 
-class SettingServices
+class AboutServices
 {
     public function handle($request, Closure $next)
     {
         
-        if ( Schema::hasTable('settings') )
+        if ( Schema::hasTable('abouts') )
         {
-            $setting = Setting::find(1);
-            View::share('setting', $setting);
+            $about = About::find(1);
+            View::share('about', $about);
         }
 
         return $next($request);

@@ -29,7 +29,7 @@
                 <h5 class="card-title">Edit About Page</h5>
                 <hr/>
 
-                <form action="{{ route('admin.setting.update') }}" method='post' enctype='multipart/form-data'>
+                <form action="{{ route('admin.about.update') }}" method='post' enctype='multipart/form-data'>
                     @csrf
 
                     <div class="form-body mt-4">
@@ -39,7 +39,7 @@
 
                                     <div class="mb-3">
                                         <label for="about_first_text" class="form-label">"Who are we" text</label>
-                                        <textarea name='about_first_text' class="form-control" id="about_first_text">{{ old("about_first_text", $setting->about_first_text) }}</textarea>
+                                        <textarea name='about_first_text' class="form-control" id="about_first_text">{{ old("about_first_text", $about->about_first_text) }}</textarea>
                                     
                                         @error('about_first_text')
                                             <p class='text-danger'>{{ $message }}</p>
@@ -48,7 +48,7 @@
 
                                     <div class="mb-3">
                                         <label for="about_second_text" class="form-label">Second text</label>
-                                        <textarea name='about_second_text' class="form-control" id="about_second_text">{{ old("about_second_text", $setting->about_second_text) }}</textarea>
+                                        <textarea name='about_second_text' class="form-control" id="about_second_text">{{ old("about_second_text", $about->about_second_text) }}</textarea>
                                     
                                         @error('about_second_text')
                                             <p class='text-danger'>{{ $message }}</p>
@@ -68,7 +68,7 @@
                                         
                                             <hr>
                                             <div class='user-image'>
-                                                <img class='img-fluid img-thumbnail' src="{{ asset('storage/' . $setting->about_first_image) }}">
+                                                <img class='img-fluid img-thumbnail' src="{{ asset('storage/' . $about->about_first_image) }}">
                                             </div>
                                         </div>
 
@@ -84,14 +84,14 @@
 
                                             <hr>
                                             <div class='user-image'>
-                                                <img class='img-fluid img-thumbnail' src="{{ asset('storage/' . $setting->about_second_image) }}">
+                                                <img class='img-fluid img-thumbnail' src="{{ asset('storage/' . $about->about_second_image) }}">
                                             </div>
                                         </div>
                                     </div>
                                     
                                     <div class="mb-3">
                                         <label for="about_our_mission" class="form-label">Our Mission</label>
-                                        <textarea id="about_our_mission" name="about_our_mission" class="form-control" rows="3">{{ old("about_our_mission", $setting->about_our_mission) }}</textarea>   
+                                        <textarea id="about_our_mission" name="about_our_mission" class="form-control" rows="3">{{ old("about_our_mission", $about->about_our_mission) }}</textarea>   
                                     
                                         @error('about_our_mission')
                                             <p class="text-danger">{{ $message }}</p>
@@ -100,7 +100,7 @@
                                     
                                     <div class="mb-3">
                                         <label for="about_our_vision" class="form-label">Our Vision</label>
-                                        <textarea id="about_our_vision" name="about_our_vision" class="form-control" rows="3">{{ old("about_our_vision", $setting->about_our_vision) }}</textarea>   
+                                        <textarea id="about_our_vision" name="about_our_vision" class="form-control" rows="3">{{ old("about_our_vision", $about->about_our_vision) }}</textarea>   
                                     
                                         @error('about_our_vision')
                                             <p class="text-danger">{{ $message }}</p>
@@ -109,7 +109,7 @@
                                     
                                     <div class="mb-3">
                                         <label for="about_services" class="form-label">Services</label>
-                                        <textarea id="about_services" name="about_services" class="form-control" rows="3">{{ old("about_services", $setting->about_services) }}</textarea>   
+                                        <textarea id="about_services" name="about_services" class="form-control" rows="3">{{ old("about_services", $about->about_services) }}</textarea>   
                                     
                                         @error('about_services')
                                             <p class="text-danger">{{ $message }}</p>

@@ -5,14 +5,14 @@ namespace App\Http\Controllers\AdminControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\Setting;
+use App\Models\About;
 
-class AdminSettingController extends Controller
+class AdminAboutController extends Controller
 {
     public function edit()
     {
         return view('admin_dashboard.about.edit', [
-            'setting' => Setting::find(1),
+            'about' => About::find(1),
         ]);
     }
 
@@ -24,23 +24,23 @@ class AdminSettingController extends Controller
             'about_our_mission' => 'required',
             'about_our_vision' => 'required',
             'about_services' => 'required',
-            'about_first_image' => 'required|image|dimensions:max_width=540,max_height=340',
-            'about_second_image' => 'required|image|dimensions:max_width=540,max_height=340',
+            'about_first_image' => 'nullable|image|dimensions:max_width=540,max_height=340',
+            'about_second_image' => 'nullable|image|dimensions:max_width=540,max_height=340',
         ]);
 
         if (request()->has('about_first_image')) {
             $about_first_image = request()->file('about_first_image');
-            $path = $about_first_image->store('setting', 'public');
+            $path = $about_first_image->store('about', 'public');
             $validated['about_first_image'] = $path;
         }
 
         if (request()->has('about_second_image')) {
             $about_second_image = request()->file('about_second_image');
-            $path = $about_second_image->store('setting', 'public');
+            $path = $about_second_image->store('about', 'public');
             $validated['about_second_image'] = $path;
         }
 
-        Setting::find(1)->update($validated);
-        return redirect()->route('admin.setting.edit')->with('success', 'Setting has been updated');
+        About::find(1)->update($validated);
+        return redirect()->route('admin.about.edit')->with('success', 'about has been updated');
     }
 }

@@ -12,7 +12,8 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">All Categories</li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.categories.index') }}">All Categories</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.categories.create') }}">Add New Category</a></li>    
                     </ol>
                 </nav>
             </div>

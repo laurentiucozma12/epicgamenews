@@ -12,7 +12,7 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">All Posts</li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.posts.index') }}">All Posts</a></li>
                     </ol>
                 </nav>
             </div>
@@ -63,17 +63,6 @@
                                     <td>{{ optional($post->other)->name }}</td>                                    
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
                                     <td>
-                                        {{-- <div class="badge rounded-pill p-2 text-uppercase px-3
-                                            @if($post->approved !== 0) 
-                                                {{ 'text-info bg-light-info' }}
-
-                                            @else {{ 'text-danger bg-light-danger' }}
-                                            
-                                            @endif
-                                        ">
-                                         <i class='bx bxs-circle align-middle me-1'></i>{{ $post->status }}
-                                        </div> --}}
-
                                         @if($post->approved !== 0)
                                             <div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Approved</div>
                                         @else
