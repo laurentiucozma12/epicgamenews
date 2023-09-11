@@ -101,6 +101,7 @@ class AdminPostsController extends Controller
     {
         $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1800,max_height=900';
         $validated = $request->validate($this->rules);
+        $validated['approved'] = $request->input('approved') !== null;
 
         $post->update($validated);
 
@@ -129,9 +130,6 @@ class AdminPostsController extends Controller
         
         if(count($tags_ids) > 0)
             $post->tags()->sync( $tags_ids );
-
-        $validated['approved'] = $request->input('approved') !== null;
-        $post->update($validated);
 
         return redirect()->route('admin.posts.edit', $post)->with('success', 'Post has been updated');    
     }
