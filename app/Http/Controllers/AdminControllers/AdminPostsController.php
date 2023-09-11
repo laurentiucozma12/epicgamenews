@@ -98,21 +98,11 @@ class AdminPostsController extends Controller
     }
 
     public function update(Request $request, Post $post)
-    {    
+    {
         $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1800,max_height=900';
         $validated = $request->validate($this->rules);
 
-        $validated['approved'] = $request->has('approved');
-
-        $category = $post->category;
-        $platform = $post->platform;
-        $other = $post->other;
-
         $post->update($validated);
-
-        $post->category()->associate($category);
-        $post->platform()->associate($platform);
-        $post->other()->associate($other);
 
         if ($request->has('thumbnail')) {
             $thumbnail = $request->file('thumbnail');
@@ -139,6 +129,9 @@ class AdminPostsController extends Controller
         
         if(count($tags_ids) > 0)
             $post->tags()->sync( $tags_ids );
+
+        $validated['approved'] = $request->input('approved') !== null;
+        $post->update($validated);
 
         return redirect()->route('admin.posts.edit', $post)->with('success', 'Post has been updated');    
     }
