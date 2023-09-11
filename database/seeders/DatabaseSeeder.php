@@ -57,12 +57,14 @@ class DatabaseSeeder extends Seeder
             $user->image()->save( \App\Models\Image::factory()->make() );
         }
 
+        \App\Models\Category::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
         \App\Models\Category::factory(10)->create();
-        \App\Models\Category::factory(1)->create(['name' => 'Uncategorized']);
 
-        \App\Models\Platform::factory(24)->create();
+        \App\Models\Platform::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
+        \App\Models\Platform::factory(10)->create();
 
-        \App\Models\Other::factory(24)->create();
+        \App\Models\Other::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
+        \App\Models\Other::factory(10)->create();
 
         $posts = \App\Models\Post::factory(50)->create();
 
