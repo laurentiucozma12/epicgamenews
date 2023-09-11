@@ -101,8 +101,8 @@ class AdminPostsController extends Controller
     {
         $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1800,max_height=900';
         $validated = $request->validate($this->rules);
-        $validated['approved'] = $request->has('approved');
-    
+        $validated['approved'] = $request->input('approved') !== null;
+
         $post->update($validated);
 
         if ($request->has('thumbnail')) {
