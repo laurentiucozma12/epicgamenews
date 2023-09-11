@@ -107,6 +107,10 @@ class AdminPostsController extends Controller
     
         $post->update($validated);
 
+        $post->category()->associate($validated['category_id']);
+        $post->platform()->associate($validated['platform_id']);
+        $post->other()->associate($validated['other_id']);
+
         if ($request->has('thumbnail')) {
             $thumbnail = $request->file('thumbnail');
             $filename = $thumbnail->getClientOriginalName();
