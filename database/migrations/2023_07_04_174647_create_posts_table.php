@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreignId('other_id');
 
             $table->integer('views')->default(0);
-            $table->boolean('approved')->default(true);
+            $table->boolean('approved')->default(false);
 
             $table->timestamps();
         });
