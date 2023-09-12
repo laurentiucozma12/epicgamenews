@@ -34,14 +34,12 @@ class PlatformController extends Controller
             })->take(5)->get();
             
         $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(10)->get();
-        $tags = Tag::latest()->take(50)->get();
 
         return view('platforms.show', [
             'platform' => $platform,
             'posts' => $posts,
             'recent_posts' => $recent_posts,
             'categories' => $categories,
-            'tags' => $tags,
         ]);
     }
 }

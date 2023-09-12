@@ -15,21 +15,23 @@ class PostsController extends Controller
     public function show(Post $post)
     {
         $recent_posts = Post::latest()
-            ->whereDoesntHave('category', function ($query) {
-                $query->where('name', 'uncategorized');
-            })
-            ->whereDoesntHave('platform', function ($query) {
-                $query->where('name', 'uncategorized');
-            })
-            ->whereDoesntHave('other', function ($query) {
-                $query->where('name', 'uncategorized');
+            ->where(function ($query) {
+                $query->whereHas('category', function ($categoryQuery) {
+                    $categoryQuery->where('name', '!=', 'uncategorized');
+                })
+                ->orWhereHas('platform', function ($platformQuery) {
+                    $platformQuery->where('name', '!=', 'uncategorized');
+                })
+                ->orWhereHas('other', function ($otherQuery) {
+                    $otherQuery->where('name', '!=', 'uncategorized');
+                });
             })
             ->take(5)
             ->get();
 
         $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(12)->get();
 
-        $tags = Tag::latest()->take(50)->get();
+        $tags = $post->tags;
 
         return view('post', [
             'post' => $post,

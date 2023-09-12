@@ -23,7 +23,6 @@ class TagController extends Controller
         $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
         $platforms = Platform::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
         $others = Other::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
-        $tags = Tag::latest()->take(50)->get();
 
         return view('tags.show', [
             'tag' => $tag,
@@ -32,7 +31,6 @@ class TagController extends Controller
             'categories' => $categories,
             'platforms' => $platforms,
             'others' => $others,
-            'tags' => $tags,
         ]);
     }
 }
