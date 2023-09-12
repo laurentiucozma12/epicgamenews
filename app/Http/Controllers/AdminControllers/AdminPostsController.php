@@ -40,83 +40,83 @@ class AdminPostsController extends Controller
         ]);
     }
 
-    public function store(Request $request)
-    {
-        $validated = $request->validate($this->rules);
-        $validated['user_id'] = auth()->id();
-        $post = Post::create($validated);
-
-        if ($request->has('thumbnail')) {
-            $thumbnail = $request->file('thumbnail');
-            $filename = $thumbnail->getClientOriginalName();
-            $file_extension = $thumbnail->getClientOriginalExtension();
-            $path = $thumbnail->store('images', 'public');
-    
-            $post->image()->create([
-                'name' => $filename,
-                'extension' => $file_extension,
-                'path' => $path,
-            ]);
-        }
-
-        $tags = explode(',', $request->input('tags'));
-        $tags_ids = [];
-        foreach($tags as $tag){
-            $tag_ob = Tag::create(['name' => trim($tag)]);
-            $tags_ids[] = $tag_ob->id;
-        }
-        
-        if(count($tags_ids) > 0)
-            $post->tags()->sync( $tags_ids );
-
-        return redirect()->route('admin.posts.create')->with('success', 'Post has been created.');    
-    }
-
     // public function store(Request $request)
     // {
     //     $validated = $request->validate($this->rules);
     //     $validated['user_id'] = auth()->id();
+    //     $post = Post::create($validated);
 
-    //     dd($request->input('category'), $request->input('platform'), $request->input('other'));
-    //     // Check if at least one of the related records is not 'uncategorized'
-    //     if (
-    //         // 1 is 'uncategorized'
-    //         $request->input('category') === 1 &&
-    //         $request->input('platform') === 1 &&
-    //         $request->input('other') === 1
-    //     ) {
-    //         // I dont get redirected
-    //         return redirect()->route('admin.posts.create')->with('error', 'Post has NOT been created.');
-    //     } else {
-    //         $post = Post::create($validated);
+    //     if ($request->has('thumbnail')) {
+    //         $thumbnail = $request->file('thumbnail');
+    //         $filename = $thumbnail->getClientOriginalName();
+    //         $file_extension = $thumbnail->getClientOriginalExtension();
+    //         $path = $thumbnail->store('images', 'public');
+    
+    //         $post->image()->create([
+    //             'name' => $filename,
+    //             'extension' => $file_extension,
+    //             'path' => $path,
+    //         ]);
+    //     }
 
-    //         if ($request->has('thumbnail')) {
-    //             $thumbnail = $request->file('thumbnail');
-    //             $filename = $thumbnail->getClientOriginalName();
-    //             $file_extension = $thumbnail->getClientOriginalExtension();
-    //             $path = $thumbnail->store('images', 'public');
+    //     $tags = explode(',', $request->input('tags'));
+    //     $tags_ids = [];
+    //     foreach($tags as $tag){
+    //         $tag_ob = Tag::create(['name' => trim($tag)]);
+    //         $tags_ids[] = $tag_ob->id;
+    //     }
+        
+    //     if(count($tags_ids) > 0)
+    //         $post->tags()->sync( $tags_ids );
 
-    //             $post->image()->create([
-    //                 'name' => $filename,
-    //                 'extension' => $file_extension,
-    //                 'path' => $path,
-    //             ]);
-    //         }
-
-    //         $tags = explode(',', $request->input('tags'));
-    //         $tags_ids = [];
-    //         foreach ($tags as $tag) {
-    //             $tag_ob = Tag::create(['name' => trim($tag)]);
-    //             $tags_ids[] = $tag_ob->id;
-    //         }
-
-    //         if (count($tags_ids) > 0) {
-    //             $post->tags()->sync($tags_ids);
-    //         }
-
-    //         return redirect()->route('admin.posts.create')->with('success', 'Post has been created.');
-    //     } 
+    //     return redirect()->route('admin.posts.create')->with('success', 'Post has been created.');    
     // }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate($this->rules);
+        $validated['user_id'] = auth()->id();
+
+        dd($request->input('category'), $request->input('platform'), $request->input('other'));
+        // Check if at least one of the related records is not 'uncategorized'
+        if (
+            // 1 is 'uncategorized'
+            $request->input('category') === 1 &&
+            $request->input('platform') === 1 &&
+            $request->input('other') === 1
+        ) {
+            // I dont get redirected
+            return redirect()->route('admin.posts.create')->with('error', 'Post has NOT been created.');
+        } else {
+            $post = Post::create($validated);
+
+            if ($request->has('thumbnail')) {
+                $thumbnail = $request->file('thumbnail');
+                $filename = $thumbnail->getClientOriginalName();
+                $file_extension = $thumbnail->getClientOriginalExtension();
+                $path = $thumbnail->store('images', 'public');
+
+                $post->image()->create([
+                    'name' => $filename,
+                    'extension' => $file_extension,
+                    'path' => $path,
+                ]);
+            }
+
+            $tags = explode(',', $request->input('tags'));
+            $tags_ids = [];
+            foreach ($tags as $tag) {
+                $tag_ob = Tag::create(['name' => trim($tag)]);
+                $tags_ids[] = $tag_ob->id;
+            }
+
+            if (count($tags_ids) > 0) {
+                $post->tags()->sync($tags_ids);
+            }
+
+            return redirect()->route('admin.posts.create')->with('success', 'Post has been created.');
+        } 
+    }
 
     public function show(string $id)
     {
@@ -128,10 +128,9 @@ class AdminPostsController extends Controller
         $tags = '';
         foreach ($post->tags as $key => $tag)
         {
-                $tags .= $tag->name;
-                if ($key !== count($post->tags) - 1) 
-                    $tags .= ', ';
-
+            $tags .= $tag->name;
+            if ($key !== count($post->tags) - 1) 
+                $tags .= ', ';
         }
 
         return view('admin_dashboard.posts.edit', [
