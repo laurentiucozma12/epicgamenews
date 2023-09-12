@@ -43,6 +43,7 @@ class AdminPostsController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate($this->rules);
+        // user_id is the user who creates the post
         $validated['user_id'] = auth()->id();
 
         // Check if at least one of the related records is not 'uncategorized'
@@ -111,37 +112,45 @@ class AdminPostsController extends Controller
     {
         $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1800,max_height=900';
         $validated = $request->validate($this->rules);
-        $validated['approved'] = $request->input('approved') !== null;
 
-        $post->update($validated);
+        // Check if at least one of the related records is not 'uncategorized'
+        if (
+            ($request->category_id + $request->platform_id + $request->other_id) === 3
+        ) {
+            return redirect()->back()->withInput()->withErrors(['all_fields' => 'At least one field from Category/Platform/Other must be different than "uncategorized."']);
+        } else {            
+            $validated['approved'] = $request->input('approved') !== null;
 
-        if ($request->has('thumbnail')) {
-            $thumbnail = $request->file('thumbnail');
-            $filename = $thumbnail->getClientOriginalName();
-            $file_extension = $thumbnail->getClientOriginalExtension();
-            $path = $thumbnail->store('images', 'public');
-    
-            $post->image()->update([
-                'name' => $filename,
-                'extension' => $file_extension,
-                'path' => $path,
-            ]);
-        }
+            $post->update($validated);
+
+            if ($request->has('thumbnail')) {
+                $thumbnail = $request->file('thumbnail');
+                $filename = $thumbnail->getClientOriginalName();
+                $file_extension = $thumbnail->getClientOriginalExtension();
+                $path = $thumbnail->store('images', 'public');
         
-        $tags = explode(',', $request->input('tags'));
-        $tags_ids = [];
-        foreach($tags as $tag){
-            $tag_exist = $post->tags()->where('name', trim($tag))->count();
-            if($tag_exist == 0) {
-                $tag_ob = Tag::create(['name' => $tag]);
-                $tags_ids[] = $tag_ob->id;
+                $post->image()->update([
+                    'name' => $filename,
+                    'extension' => $file_extension,
+                    'path' => $path,
+                ]);
             }
-        }
-        
-        if(count($tags_ids) > 0)
-            $post->tags()->sync( $tags_ids );
+            
+            $tags = explode(',', $request->input('tags'));
+            $tags_ids = [];
+            foreach($tags as $tag){
+                $tag_exist = $post->tags()->where('name', trim($tag))->count();
+                if($tag_exist == 0) {
+                    $tag_ob = Tag::create(['name' => $tag]);
+                    $tags_ids[] = $tag_ob->id;
+                }
+            }
+            
+            if(count($tags_ids) > 0)
+                $post->tags()->sync( $tags_ids );
 
-        return redirect()->route('admin.posts.edit', $post)->with('success', 'Post has been updated');    
+            return redirect()->route('admin.posts.edit', $post)->with('success', 'Post has been updated');    
+        }
     }
 
     public function destroy(Post $post)

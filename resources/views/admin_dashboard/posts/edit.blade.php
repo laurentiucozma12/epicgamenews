@@ -86,6 +86,10 @@
                                                         @error('category_id')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
+
+                                                        @if($errors->has('all_fields'))          
+                                                            <p class="text-danger">{{ $errors->first('all_fields') }}</p>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -106,6 +110,10 @@
                                                         @error('platform_id')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
+                                                        
+                                                        @if($errors->has('all_fields'))          
+                                                            <p class="text-danger">{{ $errors->first('all_fields') }}</p>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -126,6 +134,10 @@
                                                         @error('other_id')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
+                                                        
+                                                        @if($errors->has('all_fields'))          
+                                                            <p class="text-danger">{{ $errors->first('all_fields') }}</p>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
