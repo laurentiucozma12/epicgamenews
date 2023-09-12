@@ -33,10 +33,10 @@ class OtherController extends Controller
             ->whereDoesntHave('category', function ($query) {
                 $query->where('name', 'uncategorized');
             })
-            ->whereDoesntHave('platform', function ($query) {
+            ->orWhereDoesntHave('platform', function ($query) {
                 $query->where('name', 'uncategorized');
             })
-            ->whereDoesntHave('other', function ($query) {
+            ->orWhereDoesntHave('other', function ($query) {
                 $query->where('name', 'uncategorized');
             })
             ->take(5)
