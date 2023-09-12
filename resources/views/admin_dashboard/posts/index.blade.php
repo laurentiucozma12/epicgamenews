@@ -57,7 +57,7 @@
                                         </div>
                                     </td>
                                     <td>{{ $post->title }}</td>
-                                    <td>{{ $post->excerpt }}</td>
+                                    <td>{{ $post->excerpt }}</td> 
                                     <td>{{ optional($post->category)->name }}</td>
                                     <td>{{ optional($post->platform)->name }}</td>
                                     <td>{{ optional($post->other)->name }}</td>                                    
