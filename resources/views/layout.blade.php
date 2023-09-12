@@ -30,24 +30,19 @@
 <!-- Icomoon Icon Fonts-->
 <link rel="stylesheet" href="{{ asset('blog_template/css/icomoon.css') }}">
 <!-- Bootstrap  -->
-<link rel="stylesheet" href="{{ asset('blog_template/css/bootstrap.css') }}">
-
+<link rel="stylesheet" href="{{ asset('blog_template/css/bootstrap.css') }}">    
 <!-- Magnific Popup -->
 <link rel="stylesheet" href="{{ asset('blog_template/css/magnific-popup.css') }}">
-
 <!-- Flexslider  -->
 <link rel="stylesheet" href="{{ asset('blog_template/css/flexslider.css') }}">
-
 <!-- Owl Carousel -->
 <link rel="stylesheet" href="{{ asset('blog_template/css/owl.carousel.min.css') }}">
 <link rel="stylesheet" href="{{ asset('blog_template/css/owl.theme.default.min.css') }}">
-
 <!-- Flaticons  -->
 <link rel="stylesheet" href="{{ asset('blog_template/fonts/flaticon/font/flaticon.css') }}">
-
 <!-- Theme style  -->
 <link rel="stylesheet" href="{{ asset('blog_template/css/style.css') }}">
-
+{{-- Epic Game News - My Style --}}
 <link rel="stylesheet" href="{{ asset('css/mystyle.css') }}">
 
 <!-- Modernizr JS -->
@@ -56,7 +51,7 @@
 <!--[if lt IE 9]>
 <script src="js/respond.min.js"></script>
 <![endif]-->
-	
+
 @yield('custom_css')
 
 </head>
@@ -270,7 +265,7 @@
 </div>
 
 {{-- SCRIPTS --}}
-<!-- jQuery -->
+ <!-- jQuery -->
 <script src="{{ asset('blog_template/js/jquery.min.js') }}"></script>
 <!-- jQuery Easing -->
 <script src="{{ asset('blog_template/js/jquery.easing.1.3.js') }}"></script>
