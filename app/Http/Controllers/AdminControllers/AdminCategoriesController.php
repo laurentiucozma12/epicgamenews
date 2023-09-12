@@ -61,9 +61,9 @@ class AdminCategoriesController extends Controller
 
     public function destroy(Category $category)
     {
-        $default_category_id = Category::where('name', 'Uncategorized')->first()->id;
+        $default_category_id = Category::where('name', 'uncategorized')->first()->id;
 
-        if ($category->name === 'Uncategorized')
+        if ($category->name === 'uncategorized')
             abort('404');
 
         $category->posts()->update(['category_id' => $default_category_id]);
