@@ -19,7 +19,19 @@ class TagController extends Controller
 
     public function show(Tag $tag)
     {        
-        $recent_posts = Post::latest()->take(5)->get();
+        // SIDE_RECENT_POSTS Hide all posts that have all 3 (category/platform/other) set on uncategorized
+        $recent_posts = Post::latest()
+            ->whereDoesntHave('category', function ($query) {
+                $query->where('name', 'uncategorized');
+            })
+            ->whereDoesntHave('platform', function ($query) {
+                $query->where('name', 'uncategorized');
+            })
+            ->whereDoesntHave('other', function ($query) {
+                $query->where('name', 'uncategorized');
+            })
+            ->take(5)
+            ->get();
         $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
         $platforms = Platform::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
         $others = Other::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
