@@ -13,25 +13,34 @@ use App\Models\Other;
 class PostsController extends Controller
 { 
     public function show(Post $post)
-    {
+    {       
+        if (
+            ($post->category && $post->category->name === 'uncategorized') &&
+            ($post->platform && $post->platform->name === 'uncategorized') &&
+            ($post->other && $post->other->name === 'uncategorized')
+        ) {
+            // The post is uncategorized in all three categories, so deny access.
+            // You can return a response with an error message or a 404 page.
+            abort(404);
+        }
+
+        // SIDE_RECENT_POSTS Hide all posts that have all 3 (category/platform/other) set on uncategorized
         $recent_posts = Post::latest()
-            ->where(function ($query) {
-                $query->whereHas('category', function ($categoryQuery) {
-                    $categoryQuery->where('name', '!=', 'uncategorized');
-                })
-                ->orWhereHas('platform', function ($platformQuery) {
-                    $platformQuery->where('name', '!=', 'uncategorized');
-                })
-                ->orWhereHas('other', function ($otherQuery) {
-                    $otherQuery->where('name', '!=', 'uncategorized');
-                });
+            ->whereDoesntHave('category', function ($query) {
+                $query->where('name', 'uncategorized');
+            })
+            ->whereDoesntHave('platform', function ($query) {
+                $query->where('name', 'uncategorized');
+            })
+            ->whereDoesntHave('other', function ($query) {
+                $query->where('name', 'uncategorized');
             })
             ->take(5)
             ->get();
 
         $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(12)->get();
 
-        $tags = $post->tags;
+        $tags = Tag::latest()->take(50)->get();
 
         return view('post', [
             'post' => $post,

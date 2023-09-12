@@ -14,18 +14,16 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // Show only approved posts that have at least 1 of category/platform/other != uncategorized
+        // POSTS Hide posts that have all 3 (category/platform/other) set on uncategorized
         $posts = Post::latest()
-        ->where(function ($query) {
-            $query->whereHas('category', function ($categoryQuery) {
-                $categoryQuery->where('name', '!=', 'uncategorized');
-            })
-            ->orWhereHas('platform', function ($platformQuery) {
-                $platformQuery->where('name', '!=', 'uncategorized');
-            })
-            ->orWhereHas('other', function ($otherQuery) {
-                $otherQuery->where('name', '!=', 'uncategorized');
-            });
+        ->whereDoesntHave('category', function ($categoryQuery) {
+            $categoryQuery->where('name', 'uncategorized');
+        })
+        ->orWhereDoesntHave('platform', function ($platformQuery) {
+            $platformQuery->where('name', 'uncategorized');
+        })
+        ->orWhereDoesntHave('other', function ($otherQuery) {
+            $otherQuery->where('name', 'uncategorized');
         })
         ->approved()
         ->withCount('comments')
@@ -35,11 +33,14 @@ class HomeController extends Controller
         $platforms = Platform::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(10)->get();
         $others = Other::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(10)->get();
 
+        $tags = Tag::latest()->take(50)->get();
+
         return view('home', [
             'posts' => $posts,
             'categories' => $categories,
             'platforms' => $platforms,
             'others' => $others,
+            'tags' => $tags,
         ]);
     }
 }
