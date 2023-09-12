@@ -40,7 +40,7 @@ class PostsController extends Controller
 
         $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(12)->get();
 
-        $tags = Tag::latest()->take(50)->get();
+        $tags = $post->tags;
 
         return view('post', [
             'post' => $post,
