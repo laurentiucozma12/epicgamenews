@@ -33,14 +33,11 @@ class HomeController extends Controller
         $platforms = Platform::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(10)->get();
         $others = Other::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(10)->get();
 
-        $tags = Tag::latest()->take(50)->get();
-
         return view('home', [
             'posts' => $posts,
             'categories' => $categories,
             'platforms' => $platforms,
             'others' => $others,
-            'tags' => $tags,
         ]);
     }
 }
