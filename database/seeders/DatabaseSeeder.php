@@ -66,7 +66,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Other::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
         \App\Models\Other::factory(10)->create();
 
-        $posts = \App\Models\Post::factory(50)->create();
+        $posts = \App\Models\Post::factory(200)->create();
 
         \App\Models\Comment::factory(100)->create();
 

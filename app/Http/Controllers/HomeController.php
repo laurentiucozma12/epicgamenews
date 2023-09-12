@@ -14,13 +14,22 @@ class HomeController extends Controller
 {
     public function index()
     {
+        // Get only approved posts that have at least one of the $query != 'uncategorized
         $posts = Post::latest()
-            ->whereHas('category', function ($query) {
-                $query->where('name', '!=', 'uncategorized');
-            })
-            ->approved()
-            ->withCount('comments')
-            ->paginate(10);
+        // ->where(function ($query) {
+        //     $query->whereHas('category', function ($categoryQuery) {
+        //         $categoryQuery->where('name', '!=', 'uncategorized');
+        //     })
+        //     ->orWhereHas('platform', function ($platformQuery) {
+        //         $platformQuery->where('name', '!=', 'uncategorized');
+        //     })
+        //     ->orWhereHas('other', function ($otherQuery) {
+        //         $otherQuery->where('name', '!=', 'uncategorized');
+        //     });
+        // })
+        ->approved()
+        ->withCount('comments')
+        ->paginate(10);
 
         $recent_posts = Post::latest()
             ->whereHas('category', function ($query) {
