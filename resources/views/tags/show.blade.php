@@ -34,7 +34,7 @@
 					<p>There are no posts related to this tag</p>
 				@endforelse
 
-				{{ $posts->links() }}
+				{{ $posts->onEachSide(1)->links('pagination::bootstrap-4') }}
 
 			</div>
 
@@ -45,8 +45,6 @@
 					<x-blog.side-categories :categories="$categories"/>
 
 					<x-blog.side-recent-posts :recent_posts="$recent_posts"/>
-
-					<x-blog.side-tags :tags="$tags"/>
 
 				</div>
 			</div>
