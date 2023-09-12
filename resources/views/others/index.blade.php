@@ -35,7 +35,7 @@
                     
                 </div>
 
-                {{ $others->links() }}
+				{{ $others->onEachSide(1)->links('pagination::bootstrap-4') }}
 
 			</div>
 		</div>

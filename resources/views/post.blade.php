@@ -34,7 +34,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="animate-box thumbnail-container">
-                    <img width="1800" height="900" style="display:block;height:auto;max-width:100%;background-image: url({{ asset($post->image ? 'storage/' . $post->image->path : 'storage/placeholders/thumbnail_placeholder.svg' . '')  }});" />
+                    <img style="display: block; height: auto; max-width: 100%; background-image: url('{{ asset($post->image ? 'storage/' . $post->image->path : 'storage/placeholders/thumbnail_placeholder.svg') }}'); background-repeat: no-repeat; background-size: cover; width: 1800px; height: 900px;" />
                 </div>
             </div>
 
@@ -116,8 +116,6 @@
             <!-- SIDEBAR: start -->
             <div class="col-md-4 animate-box">
                 <div class="sidebar">                    
-				
-					<x-blog.side-categories :categories="$categories"/>
 
 					<x-blog.side-recent-posts :recent_posts="$recent_posts"/>
 

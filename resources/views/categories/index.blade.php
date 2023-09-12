@@ -36,7 +36,7 @@
                     
                 </div>
 
-                {{ $categories->links() }}
+				{{ $categories->onEachSide(1)->links('pagination::bootstrap-4') }}
 
 			</div>
 		</div>
