@@ -46,7 +46,6 @@ class AdminPostsController extends Controller
         // user_id is the user who creates the post
         $validated['user_id'] = auth()->id();
 
-        dd($validated, $request->category_id, $request->platform_id, $request->other_id);
         // Check if at least one of the related records is not 'uncategorized'
         if (
             ($request->category_id + $request->platform_id + $request->other_id) === 3
