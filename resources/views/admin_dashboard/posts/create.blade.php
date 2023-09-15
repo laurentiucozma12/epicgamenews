@@ -151,7 +151,7 @@
 
                                     <div class="mb-3">
                                         <label class="form-label">Post Tags</label>
-                                        <input type="text" class="form-control" name="tags" data-role="tagsinput">
+                                        <input type="text" value="{{ old("tags") }}" class="form-control" name="tags" data-role="tagsinput">
 
                                         @error('tags')
                                             <p class="text-danger">{{ $message }}</p>
