@@ -46,72 +46,67 @@ class AdminPostsController extends Controller
         $validated = $request->validate($this->rules);
         
         $validated['user_id'] = auth()->id();
-        // dd($request->category_id, $request->platform_id, $request->other_id);
-        // I get the id for category and other, but for platform I get null, so I have to rethink this one
-        // if (($request->category_id + $request->platform_id + $request->other_id) === 3) {
-        //     return redirect()->back()->withInput()->withErrors(['all_fields' => 'At least one field from Category/Platform/Other must be different than "uncategorized."']);
-        // } else {
-            $post = Post::create($validated);
+        $post = Post::create($validated);
 
-            if ($request->has('thumbnail')) {
-                $thumbnail = $request->file('thumbnail');
-                $filename = $thumbnail->getClientOriginalName();
-                $file_extension = $thumbnail->getClientOriginalExtension();
-                $path = $thumbnail->store('images', 'public');
+        if ($request->has('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
+            $filename = $thumbnail->getClientOriginalName();
+            $file_extension = $thumbnail->getClientOriginalExtension();
+            $path = $thumbnail->store('images', 'public');
+    
+            $post->image()->create([
+                'name' => $filename,
+                'extension' => $file_extension,
+                'path' => $path,
+            ]);
+        }
+
+        $selectedPlatforms = $request->input('platforms', []);
+        $platformIds = [];
+        // Map platform names to their corresponding IDs
+        foreach ($selectedPlatforms as $selectedPlatform) {
+            switch ($selectedPlatform) {
+                case 'uncategorized':
+                    $platformIds[] = 1;
+                    break;
+                case 'pc':
+                    $platformIds[] = 2;
+                    break;
+                case 'playstation':
+                    $platformIds[] = 3;
+                    break;
+                case 'xbox':
+                    $platformIds[] = 4;
+                    break;
+                case 'mobile':
+                    $platformIds[] = 5;
+                    break;
+                case 'nintendo':
+                    $platformIds[] = 6;
+                    break;
+            }
+        }
+
+        // Attach platform IDs to the post
+        $post->platforms()->attach($platformIds);
+
+        $tags = explode(',', $request->input('tags'));
+        $tags_ids = [];
+        foreach ($tags as $tag) {
+            $tag = strtolower(trim($tag)); // Convert to lowercase
+            $existingTag = Tag::firstOrNew(['name' => $tag]);
+
+            if (!$existingTag->exists) {
+                $existingTag->save();
+            }
+
+            $tags_ids[] = $existingTag->id;
+        }
+
+        $post->tags()->sync($tags_ids);
+
         
-                $post->image()->create([
-                    'name' => $filename,
-                    'extension' => $file_extension,
-                    'path' => $path,
-                ]);
-            }
-
-            $selectedPlatforms = $request->input('platforms', []);
-            $platformIds = [];
-            // Map platform names to their corresponding IDs
-            foreach ($selectedPlatforms as $selectedPlatform) {
-                switch ($selectedPlatform) {
-                    case 'uncategorized':
-                        $platformIds[] = 1;
-                        break;
-                    case 'pc':
-                        $platformIds[] = 2;
-                        break;
-                    case 'playstation':
-                        $platformIds[] = 3;
-                        break;
-                    case 'xbox':
-                        $platformIds[] = 4;
-                        break;
-                    case 'mobile':
-                        $platformIds[] = 5;
-                        break;
-                    case 'nintendo':
-                        $platformIds[] = 6;
-                        break;
-                }
-            }
-
-            // Attach platform IDs to the post
-            $post->platforms()->attach($platformIds);
-
-            
-            $tags = explode(',', $request->input('tags'));
-            $tags_ids = [];
-            foreach ($tags as $tag) {
-                $existingTag = Tag::firstOrNew(['name' => trim($tag)]);
-
-                if (!$existingTag->exists) {
-                    $existingTag->save();
-                }
-            
-                $tags_ids[] = $existingTag->id;
-            }
-            
-            $post->tags()->sync($tags_ids);
-            
-            return redirect()->route('admin.posts.create')->with('success', 'Post has been created.');
-        // } // end from // if (($request->category_id + $request->platform_id + $request->other_id) === 3)
+        return redirect()->route('admin.posts.create')->with('success', 'Post has been created.');
     }
 
 
