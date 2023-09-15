@@ -77,8 +77,8 @@
                                                 <div class="rounded">
                                                     <div class="mb-3">
                                                         <select name="category_id" required class="single-select">
-                                                            @foreach ($categories as $key => $category)
-                                                                <option value="{{ $key }}">{{ $category }}</option>                                                                
+                                                            @foreach ($categories as $category)
+                                                                <option value="{{ $category->id }}">{{ $category->name }}</option>                                                                
                                                             @endforeach
                                                         </select>
 
@@ -101,11 +101,31 @@
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
-                                                        <select name="platform_id" required class="single-select">
-                                                            @foreach ($platforms as $key => $platform)
-                                                                <option value="{{ $key }}">{{ $platform }}</option>                                                                
-                                                            @endforeach
-                                                        </select>
+                                                        
+                                                        <select id="platforms" name="platforms[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms">
+                                                            <option value="uncategorized" selected>uncategorized</option>
+                                                            <option value="pc">PC Games</option>
+                                                            <option value="playstation">PlayStation</option>
+                                                            <option value="xbox">Xbox</option>
+                                                            <option value="mobile">Mobile</option>
+                                                            <option value="nintendo">Nintendo</option>
+                                                        </select>                                                        
+
+                                                        {{-- START - Delete after testing is done --}}
+                                                            {{-- @if ($errors->any()) --}}
+                                                                {{-- {{ dd(
+                                                                    in_array($platform->id, $platforms->pluck('id')->toArray()), // true
+                                                                    old('platforms', []), // ex: array2: [ 0 => 4, 1 => 6]
+                                                                ) }} --}}
+                                                                {{-- <div class="alert alert-danger">
+                                                                    <ul>
+                                                                        @foreach ($errors->all() as $error)
+                                                                            <li>{{ $error }}</li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </div>
+                                                            @endif                                                         --}}
+                                                        {{-- END - Delete after testing is done --}}
 
                                                         @error('platform_id')
                                                             <p class="text-danger">{{ $message }}</p>
@@ -127,8 +147,8 @@
                                                 <div class="rounded">
                                                     <div class="mb-3">
                                                         <select name="other_id" required class="single-select">
-                                                            @foreach ($others as $key => $other)
-                                                                <option value="{{ $key }}">{{ $other }}</option>                                                                
+                                                            @foreach ($others as $other)
+                                                                <option value="{{ $other->id }}">{{ $other->name }}</option>                                                                
                                                             @endforeach
                                                         </select>
 
@@ -208,7 +228,6 @@ $(document).ready(function () {
         allowClear: Boolean($(this).data('allow-clear')),
     });
 
-
     // Tiny MCE
     images_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {  
         const formData = new FormData();
@@ -242,7 +261,7 @@ $(document).ready(function () {
         formData.append('file', blobInfo.blob(), blobInfo.filename());
         xhr.send(formData);
     });
-
+    
     tinymce.init({
         selector: 'textarea#post_content',
         plugins: 'advlist autolink lists link image media charmap print preview hr anchor pagebreak',

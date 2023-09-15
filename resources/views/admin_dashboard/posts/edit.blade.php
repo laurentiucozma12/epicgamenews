@@ -101,11 +101,25 @@
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
-                                                        <select name="platform_id" required class="single-select">
+                                                        {{-- <select name="platform_id" required class="single-select">
                                                             @foreach ($platforms as $key => $platform)
                                                                 <option {{ $post->platform_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $platform }}</option>                                                                
                                                             @endforeach
-                                                        </select>
+                                                        </select> --}}
+                                                        <select name="platform_id" required class="multiple-select" data-placeholder="Choose anything" multiple="multiple">
+                                                            @php
+                                                                $uncategorizedPlatform = \App\Models\Platform::where('name', 'uncategorized')->first();
+                                                                $selectedPlatforms = $post->platforms->pluck('id')->toArray();
+                                                            @endphp
+                                                            @if (in_array($uncategorizedPlatform->id, $selectedPlatforms))
+                                                                <option value="{{ $uncategorizedPlatform->id }}" selected>{{ $uncategorizedPlatform->name }}</option>
+                                                            @endif
+                                                            @foreach ($platforms as $key => $platform)
+                                                                @if ($key !== $uncategorizedPlatform->id)
+                                                                    <option value="{{ $key }}" {{ in_array($key, $selectedPlatforms) ? 'selected' : '' }}>{{ $platform }}</option>
+                                                                @endif
+                                                            @endforeach
+                                                        </select>                                                                                                                                    
 
                                                         @error('platform_id')
                                                             <p class="text-danger">{{ $message }}</p>
@@ -239,6 +253,28 @@ $(document).ready(function () {
         allowClear: Boolean($(this).data('allow-clear')),
     });
 
+    // Listen for changes in the select input
+    let uncategorizedSelected = true;
+
+    // Listen for changes in the select input
+    $('#platforms').change(function () {
+        const selectedOptions = $(this).val();
+
+        if (!selectedOptions || selectedOptions.length === 0) {
+            // No options selected, re-add "Uncategorized"
+            if (!uncategorizedSelected) {
+                const uncategorizedOption = '<option value="{{ $uncategorizedPlatform->id }}" selected>{{ $uncategorizedPlatform->name }}</option>';
+                $('#platforms').append(uncategorizedOption);
+                uncategorizedSelected = true;
+            }
+        } else {
+            // Check if "Uncategorized" is selected and remove it if necessary
+            if (uncategorizedSelected) {
+                $('#platforms option[value="{{ $uncategorizedPlatform->id }}"]').remove();
+                uncategorizedSelected = false;
+            }
+        }
+    });
 
     // Tiny MCE
     images_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {  

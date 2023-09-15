@@ -32,7 +32,7 @@ class CategoryController extends Controller
             ->whereDoesntHave('category', function ($query) {
                 $query->where('name', 'uncategorized');
             })
-            ->orWhereDoesntHave('platform', function ($query) {
+            ->orWhereDoesntHave('platforms', function ($query) {
                 $query->where('name', 'uncategorized');
             })
             ->orWhereDoesntHave('other', function ($query) {

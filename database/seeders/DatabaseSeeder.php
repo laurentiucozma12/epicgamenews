@@ -45,12 +45,12 @@ class DatabaseSeeder extends Seeder
         
         \App\Models\Role::where('name', 'admin')->first()->permissions()->sync( $permissions_ids );
         
-        $users = \App\Models\User::factory(10)->create();
         $users = \App\Models\User::factory(1)->create([
             'name' => 'Lau',
             'email' => 'laurentiucozma12@gmail.com',
             'role_id' => 2
         ]);
+        $users = \App\Models\User::factory(10)->create();
 
         foreach ($users as $user)
         {
@@ -60,8 +60,12 @@ class DatabaseSeeder extends Seeder
         \App\Models\Category::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
         \App\Models\Category::factory(10)->create();
 
-        \App\Models\Platform::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
-        \App\Models\Platform::factory(10)->create();
+        \App\Models\Platform::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized', 'user_id' => 1]);
+        \App\Models\Platform::factory(1)->create(['name' => 'pc', 'slug' => 'pc-games', 'user_id' => 1]);
+        \App\Models\Platform::factory(1)->create(['name' => 'playstation', 'slug' => 'playstation', 'user_id' => 1]);
+        \App\Models\Platform::factory(1)->create(['name' => 'xbox', 'slug' => 'xbox', 'user_id' => 1]);
+        \App\Models\Platform::factory(1)->create(['name' => 'mobile', 'slug' => 'mobile-games', 'user_id' => 1]);
+        \App\Models\Platform::factory(1)->create(['name' => 'nintendo', 'slug' => 'nintendo', 'user_id' => 1]);
 
         \App\Models\Other::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
         \App\Models\Other::factory(10)->create();
@@ -74,12 +78,18 @@ class DatabaseSeeder extends Seeder
 
         foreach($posts as $post) 
         {
-            $tags_ids = [];
-            $tags_ids[] = \App\Models\Tag::all()->random()->id;
-            $tags_ids[] = \App\Models\Tag::all()->random()->id;
-            $tags_ids[] = \App\Models\Tag::all()->random()->id;
+            $platforms_ids = [];
+            $platforms_ids[] = \App\Models\Platform::all()->random()->id;
+            $platforms_ids[] = \App\Models\Platform::all()->random()->id;
+            $platforms_ids[] = \App\Models\Platform::all()->random()->id;
+            $post->platforms()->sync( $platforms_ids );
 
+            $platforms_ids = [];
+            $tags_ids[] = \App\Models\Tag::all()->random()->id;
+            $tags_ids[] = \App\Models\Tag::all()->random()->id;
+            $tags_ids[] = \App\Models\Tag::all()->random()->id;
             $post->tags()->sync( $tags_ids );
+
             $post->image()->save( \App\Models\Image::factory()->make() );
         }
 

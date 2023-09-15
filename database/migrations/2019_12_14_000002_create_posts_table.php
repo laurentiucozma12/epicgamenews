@@ -20,7 +20,6 @@ return new class extends Migration
 
             $table->foreignId('user_id');
             $table->foreignId('category_id');
-            $table->foreignId('platform_id');
             $table->foreignId('other_id');
 
             $table->integer('views')->default(0);

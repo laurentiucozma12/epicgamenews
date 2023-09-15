@@ -31,14 +31,14 @@
                     <table class="table mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>Post#</th>
+                                <th>Posts</th>
+                                <th>Status</th>
                                 <th>Post Title</th>
                                 <th>Post Excerpt</th>
                                 <th>Category</th>
-                                <th>Platform</th>
+                                <th>Platforms</th>
                                 <th>Other</th>
                                 <th>Created at</th>
-                                <th>Status</th>
                                 <th>Views</th>
                                 <th>Actions</th>
                             </tr>
@@ -52,19 +52,30 @@
                                                 <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
                                             </div>
                                             <div class="ms-2">
-                                                <h6 class="mb-0 font-14">#P-{{ $post->id }}</h6>
+                                                <h6 class="mb-0 font-14">P-{{ $post->id }}</h6>
                                             </div>
                                         </div>
+                                    </td>
+                                    <td>
+                                        @if($post->approved)
+                                            <div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Approved</div>
+                                        @else
+                                            <div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Not Approved</div>
+                                        @endif
                                     </td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->excerpt }}</td>
                                     <td>{{ $post->category->name }}</td>
-                                    <td>{{ $post->platform->name }}</td>
+                                    <td>
+                                        @foreach($post->platforms as $platform)
+                                            {{ $platform->name }}
+                                            @if (!$loop->last)
+                                                , 
+                                            @endif
+                                        @endforeach    
+                                    </td>
                                     <td>{{ $post->other->name }}</td>
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
-                                    <td>
-                                        <div class="badge rounded-pill @if($post->status === 'published') {{ 'text-info bg-light-info' }} @elseif ($post->status === 'draft') {{ 'text-warning bg-light-warning' }} @else {{ 'text-danger bg-light-danger' }} @endif p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>{{ $post->status }}</div>
-                                    </td>
                                     <td>{{ $post->views }}</td>
                                     <td>
                                         <div class="d-flex order-actions">

@@ -66,7 +66,14 @@
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->excerpt }}</td> 
                                     <td>{{ optional($post->category)->name }}</td>
-                                    <td>{{ optional($post->platform)->name }}</td>
+                                    <td>
+                                        @foreach($post->platforms as $platform)
+                                            {{ $platform->name }}
+                                            @if (!$loop->last)
+                                                , 
+                                            @endif
+                                        @endforeach
+                                    </td>                                    
                                     <td>{{ optional($post->other)->name }}</td>                                    
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
                                     <td>{{ $post->views }}</td>

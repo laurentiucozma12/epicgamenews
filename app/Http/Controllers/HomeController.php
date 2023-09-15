@@ -19,7 +19,7 @@ class HomeController extends Controller
         ->whereDoesntHave('category', function ($categoryQuery) {
             $categoryQuery->where('name', 'uncategorized');
         })
-        ->orWhereDoesntHave('platform', function ($platformQuery) {
+        ->orWhereDoesntHave('platforms', function ($platformQuery) {
             $platformQuery->where('name', 'uncategorized');
         })
         ->orWhereDoesntHave('other', function ($otherQuery) {

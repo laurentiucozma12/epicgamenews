@@ -17,7 +17,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title' , 'slug', 'excerpt', 'body', 'user_id', 'category_id', 'platform_id', 'other_id', 'approved'];
+    protected $fillable = ['title' , 'slug', 'excerpt', 'body', 'user_id', 'category_id', 'other_id', 'approved'];
 
     public function author()
     {
@@ -29,9 +29,9 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
     
-    public function platform()
+    public function platforms()
     {
-        return $this->belongsTo(Platform::class);
+        return $this->belongsToMany(Platform::class, 'post_platform');
     }
 
     public function other()

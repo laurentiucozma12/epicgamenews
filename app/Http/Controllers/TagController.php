@@ -24,7 +24,7 @@ class TagController extends Controller
             ->whereDoesntHave('category', function ($query) {
                 $query->where('name', 'uncategorized');
             })
-            ->whereDoesntHave('platform', function ($query) {
+            ->whereDoesntHave('platforms', function ($query) {
                 $query->where('name', 'uncategorized');
             })
             ->whereDoesntHave('other', function ($query) {

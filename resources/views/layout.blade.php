@@ -286,7 +286,7 @@
 <script src="{{ asset('blog_template/js/jquery.countTo.js') }}"></script>
 <!-- Main -->
 <script src="{{ asset('blog_template/js/main.js') }}"></script>
-
+<!-- My Scripts -->
 <script src="{{ asset('js/functions.js') }}"></script>
 
 @yield('custom_js')

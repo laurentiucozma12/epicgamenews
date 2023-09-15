@@ -11,6 +11,11 @@ use App\Models\Other;
 
 class OtherController extends Controller
 {
+    private $rules = [
+        'name' => 'required|min:3|max:30',
+        'slug' => 'required|unique:categories,slug'
+    ];
+
     public function index()
     {        
         $others = Other::withCount('posts')->where('name', '!=', 'uncategorized')->paginate(16);
@@ -33,7 +38,7 @@ class OtherController extends Controller
             ->whereDoesntHave('category', function ($query) {
                 $query->where('name', 'uncategorized');
             })
-            ->orWhereDoesntHave('platform', function ($query) {
+            ->orWhereDoesntHave('platforms', function ($query) {
                 $query->where('name', 'uncategorized');
             })
             ->orWhereDoesntHave('other', function ($query) {
