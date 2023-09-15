@@ -109,23 +109,7 @@
                                                             <option value="xbox">Xbox</option>
                                                             <option value="mobile">Mobile</option>
                                                             <option value="nintendo">Nintendo</option>
-                                                        </select>                                                        
-
-                                                        {{-- START - Delete after testing is done --}}
-                                                            {{-- @if ($errors->any()) --}}
-                                                                {{-- {{ dd(
-                                                                    in_array($platform->id, $platforms->pluck('id')->toArray()), // true
-                                                                    old('platforms', []), // ex: array2: [ 0 => 4, 1 => 6]
-                                                                ) }} --}}
-                                                                {{-- <div class="alert alert-danger">
-                                                                    <ul>
-                                                                        @foreach ($errors->all() as $error)
-                                                                            <li>{{ $error }}</li>
-                                                                        @endforeach
-                                                                    </ul>
-                                                                </div>
-                                                            @endif                                                         --}}
-                                                        {{-- END - Delete after testing is done --}}
+                                                        </select>
 
                                                         @error('platform_id')
                                                             <p class="text-danger">{{ $message }}</p>
@@ -168,6 +152,10 @@
                                     <div class="mb-3">
                                         <label class="form-label">Post Tags</label>
                                         <input type="text" class="form-control" name="tags" data-role="tagsinput">
+
+                                        @error('tags')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3">

@@ -104,7 +104,6 @@ class AdminPostsController extends Controller
         }
 
         $post->tags()->sync($tags_ids);
-
         
         return redirect()->route('admin.posts.create')->with('success', 'Post has been created.');
     }
@@ -125,12 +124,19 @@ class AdminPostsController extends Controller
                 $tags .= ', ';
         }
 
+        // Pass all the platforms
+        $platforms = Platform::pluck('name', 'id');
+
+        // Pass the selected platforms
+        $selectedPlatformIds = $post->platforms->pluck('id')->toArray();
+        
         return view('admin_dashboard.posts.edit', [
             'post' => $post,
             'tags' => $tags,
             'categories' => Category::pluck('name', 'id'),
-            'platforms' => Platform::pluck('name', 'id'),
             'others' => Other::pluck('name', 'id'),
+            'platforms' => $platforms,
+            'selectedPlatformIds' => $selectedPlatformIds,
         ]);
     }
 
@@ -143,42 +149,40 @@ class AdminPostsController extends Controller
         $post->update($validated);
 
         if ($request->has('thumbnail')) {
-            // Your thumbnail handling code here
+            $thumbnail = $request->file('thumbnail');
+            $filename = $thumbnail->getClientOriginalName();
+            $file_extension = $thumbnail->getClientOriginalExtension();
+            $path = $thumbnail->store('images', 'public');
+
+            $post->image()->update([
+                'name' => $filename,
+                'extension' => $file_extension,
+                'path' => $path,
+            ]);
         }
 
-        $platformNames = explode(',', $request->input('platforms'));
-        $platformIds = [];
+        // Get the selected platform names from the request
+        $platformIds = $request->input('platforms', []);
 
-        foreach ($platformNames as $platformName) {
-            // Find the existing platform by name
-            $existingPlatform = Platform::where('name', trim($platformName))->first();
-
-            if ($existingPlatform) {
-                // If the platform exists, use its ID
-                $platformIds[] = $existingPlatform->id;
-            }
-        }
-
-        if (count($platformIds) > 0) {
-            $post->platforms()->sync($platformIds);
-        }
+        // Sync the new platforms
+        $post->platforms()->sync($platformIds);
 
         $tags = explode(',', $request->input('tags'));
         $tags_ids = [];
+        foreach ($tags as $tag) {
+            $tag = strtolower(trim($tag)); // Convert to lowercase
+            $existingTag = Tag::firstOrNew(['name' => $tag]);
 
-        foreach($tags as $tag){
-            $tag_exist = $post->tags()->where('name', trim($tag))->count();
-            if($tag_exist == 0) {
-                $tag_ob = Tag::create(['name' => $tag]);
-                $tags_ids[] = $tag_ob->id;
+            if (!$existingTag->exists) {
+                $existingTag->save();
             }
-        }      
 
-        if (count($tags_ids) > 0) {
-            $post->tags()->sync($tags_ids);
+            $tags_ids[] = $existingTag->id;
         }
 
-        return redirect()->route('admin.posts.edit', $post)->with('success', 'Post has been updated');
+        $post->tags()->sync($tags_ids);
+
+        return redirect()->route('admin.posts.edit', $post)->with('success', 'Post has been updated with success');
     }
 
     public function destroy(Post $post)

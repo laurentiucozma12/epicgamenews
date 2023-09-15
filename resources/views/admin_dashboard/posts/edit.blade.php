@@ -96,43 +96,29 @@
                                         </div>                                            
                                     </div>
                                     <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Post Platform</label>                                        
+                                        <label for="inputProductTitle" class="form-label">Post Platform</label>
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
-                                                        {{-- <select name="platform_id" required class="single-select">
+                                                        <select id="platforms" name="platforms[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms">
                                                             @foreach ($platforms as $key => $platform)
-                                                                <option {{ $post->platform_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $platform }}</option>                                                                
+                                                                <option value="{{ $key }}" {{ in_array($key, $selectedPlatformIds) ? 'selected' : '' }}>{{ $platform }}</option>
                                                             @endforeach
-                                                        </select> --}}
-                                                        <select name="platform_id" required class="multiple-select" data-placeholder="Choose anything" multiple="multiple">
-                                                            @php
-                                                                $uncategorizedPlatform = \App\Models\Platform::where('name', 'uncategorized')->first();
-                                                                $selectedPlatforms = $post->platforms->pluck('id')->toArray();
-                                                            @endphp
-                                                            @if (in_array($uncategorizedPlatform->id, $selectedPlatforms))
-                                                                <option value="{{ $uncategorizedPlatform->id }}" selected>{{ $uncategorizedPlatform->name }}</option>
-                                                            @endif
-                                                            @foreach ($platforms as $key => $platform)
-                                                                @if ($key !== $uncategorizedPlatform->id)
-                                                                    <option value="{{ $key }}" {{ in_array($key, $selectedPlatforms) ? 'selected' : '' }}>{{ $platform }}</option>
-                                                                @endif
-                                                            @endforeach
-                                                        </select>                                                                                                                                    
-
-                                                        @error('platform_id')
+                                                        </select>
+                                    
+                                                        @error('platforms')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
-                                                        
+                                    
                                                         @if($errors->has('all_fields'))          
                                                             <p class="text-danger">{{ $errors->first('all_fields') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>                                            
-                                    </div>
+                                        </div>
+                                    </div>                                                            
                                     <div class="mb-3">
                                         <label for="inputProductTitle" class="form-label">Post Other</label>                                        
                                         <div class="card">
@@ -160,7 +146,11 @@
 
                                     <div class="mb-3">
                                         <label class="form-label">Post Tags</label>
-                                        <input type="text" class="form-control" value="{{ $tags }}" name="tags" data-role="tagsinput">
+                                        <input type="text" class="form-control" value="{{ $tags }}" name="tags" data-role="tagsinput" required>
+
+                                        @error('tags')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3">
@@ -251,29 +241,6 @@ $(document).ready(function () {
         width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
         placeholder: $(this).data('placeholder'),
         allowClear: Boolean($(this).data('allow-clear')),
-    });
-
-    // Listen for changes in the select input
-    let uncategorizedSelected = true;
-
-    // Listen for changes in the select input
-    $('#platforms').change(function () {
-        const selectedOptions = $(this).val();
-
-        if (!selectedOptions || selectedOptions.length === 0) {
-            // No options selected, re-add "Uncategorized"
-            if (!uncategorizedSelected) {
-                const uncategorizedOption = '<option value="{{ $uncategorizedPlatform->id }}" selected>{{ $uncategorizedPlatform->name }}</option>';
-                $('#platforms').append(uncategorizedOption);
-                uncategorizedSelected = true;
-            }
-        } else {
-            // Check if "Uncategorized" is selected and remove it if necessary
-            if (uncategorizedSelected) {
-                $('#platforms option[value="{{ $uncategorizedPlatform->id }}"]').remove();
-                uncategorizedSelected = false;
-            }
-        }
     });
 
     // Tiny MCE
