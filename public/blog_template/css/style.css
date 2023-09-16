@@ -159,8 +159,10 @@ h1, h2, h3, h4, h5, h6, figure {
         margin-right: 10px;
         color: var(--white); }
   .colorlib-nav .top-menu {
-    padding: 40px 0; }
+    padding: 3rem 0; }
     @media screen and (max-width: 1100px) {
+      .colorlib-nav .top-menu {
+        padding:  2rem !important; }
       .colorlib-nav .top-menu {
         padding: 28px 1em;
         background: var(--dark-1); } }
@@ -471,8 +473,11 @@ h1, h2, h3, h4, h5, h6, figure {
 .colorlib-blog,
 #colorlib-project,
 #colorlib-subscribe {
-  padding: 4em 0;
+  padding: 3em 0;
   clear: both; }
+@media screen and (max-width: 1100px) {
+  .colorlib-blog {
+    padding: 1em 0; } }  
 
 .colorlib-search {
   clear: both; }
