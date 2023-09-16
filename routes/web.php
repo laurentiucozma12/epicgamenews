@@ -67,10 +67,8 @@ Route::get('/storage-link', function () {
     $branchPaths = [
         'development',
         'pre-production',
-        'production', // I didnt test it yet
-        
         ////// I forgot about this, gotta test if I can delete it storage_path('app/public') //////
-        // 'production' => storage_path('app/public'),
+        'production' => storage_path('app/public'),
     ];
 
     // Get the current branch name (assuming you have Git installed)
@@ -85,7 +83,8 @@ Route::get('/storage-link', function () {
     {
         // dd($targetFolder); // "C:\xampp\htdocs\epicgamenews\storage\app\public"
         // dd(public_path('storage')); // "C:\xampp\htdocs\epicgamenews\public\storage"
-        $linkFolder = public_path('storage');    
+        $linkFolder = public_path('storage'); 
+        dd($targetFolder, $linkFolder, symlink($targetFolder, $linkFolder));
         symlink($targetFolder, $linkFolder);        
     } 
     else if ($currentBranch === 'pre-production') 
