@@ -29,6 +29,12 @@
 }
 /****** END OF MY COLORS ******/
 
+/****** ELEMENTS ******/
+hr {
+    background-color: var(--light-gray-1); 
+    height: 0.5px;
+    border: none;}
+/****** END OF ELEMENTS ******/
 
 /****** MESSAGE COLORS ******/
 .global-message {
@@ -220,11 +226,17 @@
 .post-container .text .heading {
     font-size: 35px;
     margin: 0; }
+    @media (max-width: 600px) {
+    .post-container .text .heading {
+        font-size: 25px; } }
 .post-container .text .heading:hover {
     text-decoration: underline; }
 .post-container .text .excerpt {    
     font-size: 25px; 
     margin-bottom: 5px; }
+    @media (max-width: 600px) {
+    .post-container .text .excerpt {
+        font-size: 18px; } }
 .post-container .text .container-meta .meta {
     font-size: 16px;
     display: flex;

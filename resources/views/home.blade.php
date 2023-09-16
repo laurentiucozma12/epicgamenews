@@ -20,8 +20,8 @@
 							<p class="excerpt"> {{ \Str::limit($post->excerpt, 150) }} </p>
 							<div class="container-meta">
 								<div class="meta">
-									<div><a class='date cursor-pointer'><span class="icon-calendar"></span> {{ $post->created_at->diffForHumans() }} </a></div>
 									<div><a class='author cursor-pointer'><span class="icon-user2"></span> By {{ $post->author->name }} </a></div>
+									<div><a class='date cursor-pointer'><span class="icon-calendar"></span> {{ $post->created_at->diffForHumans() }} </a></div>
 									<div class="comments-count">
 										<a href="{{ route('show', $post) }}#post-comments">
 											<span class="icon-chat"></span> {{ $post->comments_count }} 
