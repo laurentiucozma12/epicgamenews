@@ -25,8 +25,8 @@ use App\Http\Controllers\AdminControllers\AdminRolesController;
 use App\Http\Controllers\AdminControllers\AdminUsersController;
 use App\Http\Controllers\AdminControllers\AdminContactsController;
 use App\Http\Controllers\AdminControllers\AdminAboutController;
+use App\Http\Controllers\AdminControllers\AdminStorageLinkController;
 
-use App\Http\Controllers\StorageLinkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\AboutController;
@@ -59,51 +59,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     
     Route::get('about', [AdminAboutController::class, 'edit'])->name('about.edit');
     Route::post('about', [AdminAboutController::class, 'update'])->name('about.update');
+    
+    Route::get('storagelink', [AdminStorageLinkController::class, 'storageLink'])->name('storageLink');
 });
 
 // Front User Routes
-Route::get('/storage-link', function () {
-    // Define the mapping of branch names to their respective storage paths
-    $branchPaths = [
-        'development',
-        'pre-production',
-        ////// I forgot about this, gotta test if I can delete it storage_path('app/public') //////
-        'production' => storage_path('app/public'),
-    ];
-
-    // Get the current branch name (assuming you have Git installed)
-    $currentBranch = trim(shell_exec('git rev-parse --abbrev-ref HEAD'));
-
-    // Check if the current branch exists in the mapping, default to 'production' if not found
-    $targetFolder = $branchPaths[$currentBranch] ?? $branchPaths['production'];
-
-    ////// gotta test if I can make it shorter like if ($currentBranch === 'development' || $currentBranch === 'pre-production' || $currentBranch === 'production') {...} //////
-    // Define the target link folder (public storage)
-    if ($currentBranch === 'development')
-    {
-        // dd($targetFolder); // "C:\xampp\htdocs\epicgamenews\storage\app\public"
-        // dd(public_path('storage')); // "C:\xampp\htdocs\epicgamenews\public\storage"
-        $linkFolder = public_path('storage'); 
-        symlink($targetFolder, $linkFolder);        
-    } 
-    else if ($currentBranch === 'pre-production') 
-    {
-        // dd($targetFolder); // "/home/epicjszd/repositories/preprod-epicgamenews/storage/app/public"
-        // dd(public_path('storage')); // "/home/epicjszd/repositories/preprod-epicgamenews/public/storage"
-        $linkFolder = public_path('storage'); 
-        symlink($targetFolder, $linkFolder);
-    } 
-    else if ($currentBranch === 'production') 
-    {        
-        // dd($targetFolder); // "/home/epicjszd/public_html/storage/app/public"
-        // dd(public_path('storage')); // "/home/epicjszd/public_html/public/storage"
-        $linkFolder = public_path('storage'); 
-        symlink($targetFolder, $linkFolder);
-    }
-
-    return redirect()->route('home');
-});
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/categories/uncategorized', function () {
