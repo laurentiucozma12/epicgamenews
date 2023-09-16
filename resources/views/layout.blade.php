@@ -64,19 +64,14 @@
 	<nav class="colorlib-nav" role="navigation">
 		<div class="top-menu">
 			<div class="container">
-				<div class="row">
-					<div class="col-md-2">
+				<div class="nav-layout-container">
 
-						<div id="colorlib-logo">
-							{{-- de pus in css --}}
-							<a href="{{ route('home') }}" class="logo-route">
-								<img class="logo-new-game-news" src="{{ asset('storage/logo/logo-epic-game-news-25x25.png') }}"> 
-								<span class="title-route">Epic Game News</span>
-							</a>
-						</div>
+						<a href="{{ route('home') }}" class="nav-layout-logo-container logo-route">
+							<img class="logo-new-game-news" src="{{ asset('storage/logo/logo-epic-game-news-25x25.png') }}"> 
+							<h1 class="title-route">Epic Game News</h1>
+						</a>
 
-					</div>
-					<div class="col-md-10 text-right menu-1">
+					<div class="nav-layout-btns-container text-right menu-1">
 
 						<ul>
 							<li><a href="{{ route('home') }}">Home</a></li>
@@ -92,7 +87,7 @@
 
 							@auth
 								<li class="has-dropdown">
-									<a href="">{{ auth()->user()->name }}<span class="caret"></span></a>
+									<a class="cursor-pointer">{{ auth()->user()->name }}<span class="caret"></span></a>
 									<ul class="dropdown">
 										<li>
 											<a 
