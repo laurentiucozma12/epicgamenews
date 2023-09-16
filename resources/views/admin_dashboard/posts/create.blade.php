@@ -44,8 +44,8 @@
                                 <div class="border border-3 p-4 rounded">
 
                                     <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Post Title</label>
-                                        <input type="text" value='{{ old("title") }}' name="title" required class="form-control" id="inputProductTitle">
+                                        <label for="inputPostTitle" class="form-label">Post Title</label>
+                                        <input type="text" value='{{ old("title") }}' name="title" required class="form-control" id="inputPostTitle">
 
                                         @error('title')
                                             <p class="text-danger">{{ $message }}</p>
@@ -53,8 +53,8 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Post Slug</label>
-                                        <input type="text" value='{{ old("slug") }}' name="slug" required class="form-control" id="inputProductTitle">
+                                        <label for="inputPostSlug" class="form-label">Post Slug</label>
+                                        <input type="text" value='{{ old("slug") }}' name="slug" required class="form-control" id="inputPostSlug">
 
                                         @error('slug')
                                             <p class="text-danger">{{ $message }}</p>
@@ -62,8 +62,8 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="inputProductDescription" class="form-label">Post Excerpt</label>
-                                        <textarea class="form-control" required name='excerpt' id="inputProductDescription" rows="3">{{ old("excerpt") }}</textarea>
+                                        <label for="inputPostExcerpt" class="form-label">Post Excerpt</label>
+                                        <textarea class="form-control" required name='excerpt' id="inputPostExcerpt" rows="3">{{ old("excerpt") }}</textarea>
                                     
                                         @error('excerpt')
                                             <p class='text-danger'>{{ $message }}</p>
@@ -71,7 +71,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Post Category</label>                                        
+                                        <label class="form-label">Post Category</label>                                        
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="rounded">
@@ -96,7 +96,7 @@
                                     </div>                                    
 
                                     <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Post Platform</label>                                        
+                                        <label class="form-label">Post Platform</label>                                        
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="rounded">
@@ -125,7 +125,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Post Other</label>                                        
+                                        <label class="form-label">Post Other</label>                                        
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="rounded">
@@ -150,8 +150,8 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label class="form-label">Post Tags</label>
-                                        <input type="text" value="{{ old("tags") }}" class="form-control" name="tags" data-role="tagsinput">
+                                        <label for="inputPostTags" class="form-label">Post Tags</label>
+                                        <input type="text" value="{{ old("tags") }}" class="form-control" name="tags" id="inputPostTags" data-role="tagsinput" required>
 
                                         @error('tags')
                                             <p class="text-danger">{{ $message }}</p>
@@ -161,7 +161,7 @@
                                     <div class="mb-3">
                                         <div class="card">
                                             <div class="card-body">
-                                                <label for="inputProductDescription" class="form-label">Post Thumbnail (Max 1800 x 900)</label>
+                                                <label for="file" class="form-label">Post Thumbnail (Max 1800 x 900)</label>
                                                 <input id='thumbnail' required name='thumbnail' id="file" type="file">
 
                                                 @error('thumbnail')
@@ -173,8 +173,17 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="inputProductDescription" class="form-label">Post Content</label>
-                                        <textarea id="post_content" name="body" class="form-control" id="inputProductDescription" rows="3">{{ old("body") }}</textarea>   
+                                        <label for="inputAuthorThumbnail" class="form-label">Author of the Thumbnail</label>
+                                        <input type="text" value="{{ old("author_thumbnail") }}" class="form-control" name="author_thumbnail" id="inputAuthorThumbnail">
+
+                                        @error('author_thumbnail')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="inputPostContent" class="form-label">Post Content</label>
+                                        <textarea id="inputPostContent" name="body" class="form-control" rows="3">{{ old("body") }}</textarea>   
                                     
                                         @error('body')
                                             <p class="text-danger">{{ $message }}</p>
@@ -251,7 +260,7 @@ $(document).ready(function () {
     });
     
     tinymce.init({
-        selector: 'textarea#post_content',
+        selector: 'textarea#inputPostContent',
         plugins: 'advlist autolink lists link image media charmap print preview hr anchor pagebreak',
         toolbar_mode: 'floating',
         height: '500',

@@ -23,13 +23,14 @@ class AdminPostsController extends Controller
         'category_id' => 'required|numeric',
         'other_id' => 'required|numeric',
         'thumbnail' => 'required|image|dimensions:max_width=1800,max_height=900',
+        'author_thumbnail' => 'required|max:150',
         'body' => 'required',
     ];
 
     public function index()
     {
         return view('admin_dashboard.posts.index', [
-            'posts' => Post::latest()->with(['category', 'other'])->get(),
+            'posts' => Post::latest()->with(['category', 'other'])->paginate(100),
         ]);
     }
 

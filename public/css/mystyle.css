@@ -181,8 +181,40 @@
 /* Others Page */
 
 /* Post Page */
+.thumbnail-container {
+    position: relative;
+    max-width: 100%; }
 .thumbnail-container img {
-    margin: 2rem 0; }
+    margin: 2rem 0; 
+    display: block; 
+    height: auto; 
+    max-width: 100%; 
+    background-repeat: no-repeat; 
+    background-size: cover; }
+.thumbnail-container .author-credit {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: var(--black);
+    background-color: rgba(255, 255, 255, 0.579);
+    padding: 2px 5px;
+    border-radius: 5px;
+    font-size: 10px;
+    text-align: right; }
+    @media (max-width: 1300px) {
+    .thumbnail-container .author-credit {
+        bottom: 3px;
+        right: 3px;
+        padding: 0 2.5px;
+        border-radius: 3px;
+        font-size: 8px; } }
+    @media (max-width: 600px) {
+    .thumbnail-container .author-credit {
+        bottom: 1.5px;
+        right: 1.5px;
+        padding: 0 2px;
+        border-radius: 2px;
+        font-size: 6px; } }
 .classes .desc2 {
     padding-top: 0;}
 .comment-container {

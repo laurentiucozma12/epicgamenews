@@ -32,7 +32,7 @@
                     <table class="table mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>Role#</th>
+                                <th>Role</th>
                                 <th>Role Name</th>
                                 <th>Created at</th>
                                 <th>Actions</th>
@@ -47,7 +47,7 @@
                                                 <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
                                             </div>
                                             <div class="ms-2">
-                                                <h6 class="mb-0 font-14">#P-{{ $role->id }}</h6>
+                                                <h6 class="mb-0 font-14">P-{{ $role->id }}</h6>
                                             </div>
                                         </div>
                                     </td>

@@ -73,7 +73,7 @@
 						</div>
 
                         <div class='mt-4'>
-                        {{ $comments->links() }}
+                        {{ $comments->onEachSide(1)->links('pagination::bootstrap-4') }}
                         </div>
                         
 					</div>

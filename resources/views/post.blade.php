@@ -33,9 +33,10 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="animate-box thumbnail-container">
-                    <img style="display: block; height: auto; max-width: 100%; background-image: url('{{ asset($post->image ? 'storage/' . $post->image->path : 'storage/placeholders/thumbnail_placeholder.svg') }}'); background-repeat: no-repeat; background-size: cover; width: 1800px; height: 900px;" />
-                </div>
+                <figure class="animate-box thumbnail-container">
+                    <img width="1800" height="900" style="background-image: url('{{ asset($post->image ? 'storage/' . $post->image->path : 'storage/placeholders/thumbnail_placeholder.svg') }}');" />
+                    <figcaption class="author-credit">{{ $post->author_thumbnail }}</figcaption>
+                </figure>
             </div>
 
         </div>

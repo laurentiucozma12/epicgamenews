@@ -29,6 +29,7 @@ class PostFactory extends Factory
             'user_id' => User::factory(), 
             'category_id' => Category::all()->random()->id,
             'other_id' => Other::all()->random()->id,
+            'author_thumbnail' => $this->faker->sentence(), 
         ];
     }
 }

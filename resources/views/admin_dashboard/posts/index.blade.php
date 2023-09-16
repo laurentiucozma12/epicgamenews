@@ -93,6 +93,11 @@
                         </tbody>
                     </table>
                 </div>
+                
+                <div class='mt-4'>
+                    {{ $posts->onEachSide(1)->links('pagination::bootstrap-4') }}
+                </div>
+
             </div>
         </div>
 

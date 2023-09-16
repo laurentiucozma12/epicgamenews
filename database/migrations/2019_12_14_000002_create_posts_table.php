@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('excerpt');
+            $table->string('author_thumbnail');
             $table->text('body');
 
             $table->foreignId('user_id');
