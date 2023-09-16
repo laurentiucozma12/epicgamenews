@@ -67,8 +67,10 @@ Route::get('/storage-link', function () {
     $branchPaths = [
         'development',
         'pre-production',
+        'production', // I didnt test it yet
+        
         ////// I forgot about this, gotta test if I can delete it storage_path('app/public') //////
-        'production' => storage_path('app/public'),
+        // 'production' => storage_path('app/public'),
     ];
 
     // Get the current branch name (assuming you have Git installed)
