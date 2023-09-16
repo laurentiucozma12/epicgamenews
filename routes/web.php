@@ -84,7 +84,6 @@ Route::get('/storage-link', function () {
         // dd($targetFolder); // "C:\xampp\htdocs\epicgamenews\storage\app\public"
         // dd(public_path('storage')); // "C:\xampp\htdocs\epicgamenews\public\storage"
         $linkFolder = public_path('storage'); 
-        dd($targetFolder, $linkFolder, symlink($targetFolder, $linkFolder));
         symlink($targetFolder, $linkFolder);        
     } 
     else if ($currentBranch === 'pre-production') 
