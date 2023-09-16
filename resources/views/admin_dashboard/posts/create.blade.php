@@ -16,7 +16,6 @@
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Posts</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
@@ -103,12 +102,12 @@
                                                     <div class="mb-3">
                                                         
                                                         <select id="platforms" name="platforms[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
-                                                            <option value="uncategorized" selected>uncategorized</option>
-                                                            <option value="pc">PC Games</option>
-                                                            <option value="playstation">PlayStation</option>
-                                                            <option value="xbox">Xbox</option>
-                                                            <option value="mobile">Mobile</option>
-                                                            <option value="nintendo">Nintendo</option>
+                                                            <option value="1" selected>uncategorized</option>
+                                                            <option value="2">PC Games</option>
+                                                            <option value="3">PlayStation</option>
+                                                            <option value="4">Xbox</option>
+                                                            <option value="5">Mobile</option>
+                                                            <option value="6">Nintendo</option>
                                                         </select>
 
                                                         @error('platform_id')
@@ -131,9 +130,13 @@
                                                 <div class="rounded">
                                                     <div class="mb-3">
                                                         <select name="other_id" required class="single-select">
-                                                            @foreach ($others as $other)
-                                                                <option value="{{ $other->id }}">{{ $other->name }}</option>                                                                
-                                                            @endforeach
+                                                            <option value="1" selected>uncategorized</option>
+                                                            <option value="2">Game Trailers</option>
+                                                            <option value="3">Anime</option>
+                                                            <option value="4">Cartoons</option>
+                                                            <option value="5">Movies</option>
+                                                            <option value="6">Series</option>
+                                                            <option value="7">Lists</option>
                                                         </select>
 
                                                         @error('other_id')

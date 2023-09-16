@@ -12,7 +12,7 @@
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">All Comments</li>
+								<li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.comments.index') }}">All Comments</a></li>
 							</ol>
 						</nav>
 					</div>
@@ -31,9 +31,9 @@
 							<table class="table mb-0">
 								<thead class="table-light">
 									<tr>
-										<th>Comment#</th>
-										<th>Comment Author</th>
-                                        <th>Comment Body</th>
+										<th>Id</th>
+										<th>Author</th>
+                                        <th>Comment</th>
                                         <th>View Comment</th>
 										<th>Created at</th>
 										<th>Actions</th>
@@ -44,11 +44,8 @@
 									<tr>
 										<td>
 											<div class="d-flex align-items-center">
-												<div>
-													<input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-												</div>
 												<div class="ms-2">
-													<h6 class="mb-0 font-14">#P-{{ $comment->id }}</h6>
+													<h6 class="mb-0 font-14">{{ $comment->id }}</h6>
 												</div>
 											</div>
 										</td>

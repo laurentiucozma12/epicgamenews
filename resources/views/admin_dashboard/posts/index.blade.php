@@ -6,7 +6,6 @@
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Posts</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
@@ -48,11 +47,8 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <div>
-                                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-                                            </div>
                                             <div class="ms-2">
-                                                <h6 class="mb-0 font-14">P-{{ $post->id }}</h6>
+                                                <h6 class="mb-0 font-14">{{ $post->id }}</h6>
                                             </div>
                                         </div>
                                     </td>

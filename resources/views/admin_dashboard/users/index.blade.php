@@ -6,13 +6,12 @@
 			<div class="page-content">
 				<!--breadcrumb-->
 				<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-					<div class="breadcrumb-title pe-3">Users</div>
 					<div class="ps-3">
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">All Users</li>
+								<li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.users.index') }}">All Users</a></li>
 							</ol>
 						</nav>
 					</div>
@@ -31,7 +30,7 @@
 							<table class="table mb-0">
 								<thead class="table-light">
 									<tr>
-										<th>User#</th>
+										<th>Id</th>
 										<th>Image</th>
 										<th>Name</th>
 										<th>Email</th>
@@ -46,11 +45,8 @@
 									<tr>
 										<td>
 											<div class="d-flex align-items-center">
-												<div>
-													<input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-												</div>
 												<div class="ms-2">
-													<h6 class="mb-0 font-14">#U-{{ $user->id }}</h6>
+													<h6 class="mb-0 font-14">{{ $user->id }}</h6>
 												</div>
 											</div>
 										</td>

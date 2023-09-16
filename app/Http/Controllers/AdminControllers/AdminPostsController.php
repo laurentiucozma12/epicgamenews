@@ -21,7 +21,6 @@ class AdminPostsController extends Controller
         'slug' => 'required|max:150',
         'excerpt' => 'required|max:150',
         'category_id' => 'required|numeric',
-        'other_id' => 'required|numeric',
         'thumbnail' => 'required|image|dimensions:max_width=1800,max_height=900',
         'author_thumbnail' => 'required|max:150',
         'body' => 'required',
@@ -30,7 +29,7 @@ class AdminPostsController extends Controller
     public function index()
     {
         return view('admin_dashboard.posts.index', [
-            'posts' => Post::latest()->with(['category', 'other'])->paginate(100),
+            'posts' => Post::latest()->with(['category'])->paginate(100),
         ]);
     }
 
@@ -38,16 +37,15 @@ class AdminPostsController extends Controller
     {
         return view('admin_dashboard.posts.create', [
             'categories' => Category::all(),
-            'others' => Other::all(),
         ]);
     }
 
     public function store(Request $request)
     {
         $selectedCategory = $request->input('category_id'); // 1 is uncategorized
-        $selectedPlatforms = $request->input('platforms', []); // 0 => uncategorized, 1 => pc, etc
+        $selectedPlatforms = $request->input('platforms', []); // 1 is uncategorized
         $selectedOther = $request->input('other_id'); // 1 is uncategorized
-        
+
         if (($selectedCategory !== "1" && $selectedPlatforms[0] !== '1' &&  $selectedOther === "1") 
         || ($selectedCategory === "1" && $selectedPlatforms[0] === '1' &&  $selectedOther !== "1")) {
             $validated = $request->validate($this->rules);
@@ -68,36 +66,11 @@ class AdminPostsController extends Controller
                 ]);
             }
 
-            // An article about a GAME must have 1 CATEGORY and at least 1 PLATFORM that is played on.
-            // If the article is about something else, it has to be posted in OTHER.
-
-            $platformIds = [];
-            // Map platform names to their corresponding IDs
-            foreach ($selectedPlatforms as $selectedPlatform) {
-                switch ($selectedPlatform) {
-                    case 'uncategorized':
-                        $platformIds[] = 1;
-                        break;
-                    case 'PC':
-                        $platformIds[] = 2;
-                        break;
-                    case 'PlayStation':
-                        $platformIds[] = 3;
-                        break;
-                    case 'Xbox':
-                        $platformIds[] = 4;
-                        break;
-                    case 'Mobile':
-                        $platformIds[] = 5;
-                        break;
-                    case 'Nintendo':
-                        $platformIds[] = 6;
-                        break;
-                }
-            }
-
             // Attach platform IDs to the post
-            $post->platforms()->attach($platformIds);
+            $post->platforms()->attach($selectedPlatforms);
+            
+            // Set other IDs to the post
+            $post->update(['other_id' => $selectedOther]);
 
             $tags = explode(',', $request->input('tags'));
             $tags_ids = [];
@@ -124,7 +97,6 @@ class AdminPostsController extends Controller
             ']);
         }
     }
-
 
     public function show(string $id)
     {
@@ -179,7 +151,7 @@ class AdminPostsController extends Controller
         }
 
         $selectedCategory = $request->input('category_id'); // 1 is uncategorized
-        $selectedPlatforms = $request->input('platforms', []); // 0 => uncategorized, 1 => pc, etc
+        $selectedPlatforms = $request->input('platforms', []); // 1 is uncategorized
         $selectedOther = $request->input('other_id'); // 1 is uncategorized
         
         if (($selectedCategory !== "1" && $selectedPlatforms[0] !== '1' &&  $selectedOther === "1") 
@@ -205,7 +177,13 @@ class AdminPostsController extends Controller
                 $tags_ids[] = $existingTag->id;
             }
 
-            $post->tags()->sync($tags_ids);
+            $post->tags()->sync($tags_ids);        
+            
+            // Save the changes to the post
+            $post->other_id = $selectedOther;
+            $post->save();
+
+    
 
             return redirect()->route('admin.posts.edit', $post)->with('success', 'Post has been updated with success');
         } else  {        

@@ -7,7 +7,6 @@
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Categories</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
@@ -32,8 +31,8 @@
                     <table class="table mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>Category</th>
-                                <th>Category Name</th>
+                                <th>Id</th>
+                                <th>Name</th>
                                 <th>Creator</th>
                                 <th>Related Posts</th>
                                 <th>Created at</th>
@@ -45,11 +44,8 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <div>
-                                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-                                            </div>
                                             <div class="ms-2">
-                                                <h6 class="mb-0 font-14">P-{{ $category->id }}</h6>
+                                                <h6 class="mb-0 font-14">{{ $category->id }}</h6>
                                             </div>
                                         </div>
                                     </td>

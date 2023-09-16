@@ -14,13 +14,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">Users</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">New User</li>
+                            </li>                            
+                            <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.users.index') }}">All Users</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.users.create') }}">New User</a></li>
                         </ol>
                     </nav>
                 </div>

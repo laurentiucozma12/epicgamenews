@@ -11,11 +11,6 @@ use App\Models\Other;
 
 class OtherController extends Controller
 {
-    private $rules = [
-        'name' => 'required|min:3|max:30',
-        'slug' => 'required|unique:categories,slug'
-    ];
-
     public function index()
     {        
         $others = Other::withCount('posts')->where('name', '!=', 'uncategorized')->paginate(16);

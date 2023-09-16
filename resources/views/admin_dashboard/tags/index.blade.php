@@ -12,7 +12,7 @@
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">All Tags</li>
+								<li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.tags.index') }}">All Tags</a></li>
 							</ol>
 						</nav>
 					</div>
@@ -30,8 +30,8 @@
 							<table class="table mb-0">
 								<thead class="table-light">
 									<tr>
-										<th>Tag#</th>
-										<th>Tag Name</th>
+										<th>Id</th>
+										<th>Name</th>
                                         <th>Related Posts</th>
 										<th>Created at</th>
 										<th>Actions</th>
@@ -42,11 +42,8 @@
 									<tr>
 										<td>
 											<div class="d-flex align-items-center">
-												<div>
-													<input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-												</div>
 												<div class="ms-2">
-													<h6 class="mb-0 font-14">#P-{{ $tag->id }}</h6>
+													<h6 class="mb-0 font-14">{{ $tag->id }}</h6>
 												</div>
 											</div>
 										</td>
