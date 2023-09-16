@@ -18,6 +18,7 @@ use App\Http\Controllers\AdminControllers\DashboardController;
 use App\Http\Controllers\AdminControllers\AdminPostsController;
 use App\Http\Controllers\AdminControllers\TinyMCEController;
 use App\Http\Controllers\AdminControllers\AdminCategoriesController;
+use App\Http\Controllers\AdminControllers\AdminPlatformsController;
 use App\Http\Controllers\AdminControllers\AdminOthersController;
 use App\Http\Controllers\AdminControllers\AdminTagsController;
 use App\Http\Controllers\AdminControllers\AdminCommentsController;
@@ -46,7 +47,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     Route::post('upload_tinymce_image', [TinyMCEController::class, 'upload_tinymce_image'])->name('upload_tinymce_image');
     
     Route::resource('categories', AdminCategoriesController::class);
-    Route::resource('others', AdminOthersController::class);
+    Route::resource('platforms', AdminPlatformsController::class)->only(['index', 'show']);
+    Route::resource('others', AdminOthersController::class)->only(['index', 'show']);
 
     Route::resource('tags', AdminTagsController::class)->only(['index', 'show', 'destroy']);
     Route::resource('comments', AdminCommentsController::class)->except('show');

@@ -11,8 +11,8 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.others.index') }}">All Others</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.others.show', $other) }}">Related Posts to this Other {{ $other->name }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.platforms.index') }}">All Platforms</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.platforms.show', $platform) }}">Related Posts to this Platform {{ $platform->name }}</a></li>
                     </ol>
                 </nav>
             </div>
@@ -43,7 +43,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($other->posts as $post)
+                            @foreach ($platform->posts as $post)
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">

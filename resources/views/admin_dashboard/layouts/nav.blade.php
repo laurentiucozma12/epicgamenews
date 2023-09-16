@@ -44,6 +44,15 @@
 
         <li>
             <li>
+                <a href="{{ route('admin.platforms.index') }}">
+                    <div class="parent-icon"><i class="bx bx-right-arrow-alt"></i></div>
+                    <div class="menu-title">Platforms</div>
+                </a>
+            </li>
+        </li>
+
+        <li>
+            <li>
                 <a href="{{ route('admin.others.index') }}">
                     <div class="parent-icon"><i class="bx bx-right-arrow-alt"></i></div>
                     <div class="menu-title">Others</div>

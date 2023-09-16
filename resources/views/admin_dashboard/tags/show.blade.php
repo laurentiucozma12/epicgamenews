@@ -6,13 +6,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">{{ $tag->name }} Posts</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Tag Posts</li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.tags.index') }}">All Tags</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.tags.show', $tag) }}">Related posts to this Tag {{ $tag->name }}</a></li>
                         </ol>
                     </nav>
                 </div>
@@ -31,12 +31,12 @@
                         <table class="table mb-0">
                             <thead class="table-light">
                                 <tr>
-                                    <th>Post#</th>
-                                    <th>Post Title</th>
-                                    <th>Post Excerpt</th>
+                                    <th>Post</th>
+                                    <th>Status</th>
+                                    <th>Title</th>
+                                    <th>Excerpt</th>
                                     <th>Category</th>
                                     <th>Created at</th>
-                                    <th>Status</th>
                                     <th>Views</th>
                                     <th>Actions</th>
                                 </tr>
@@ -46,24 +46,25 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <div>
-                                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-                                            </div>
                                             <div class="ms-2">
-                                                <h6 class="mb-0 font-14">#P-{{ $post->id }}</h6>
+                                                <h6 class="mb-0 font-14">{{ $post->id }}</h6>
                                             </div>
                                         </div>
                                     </td>
+
+                                    <td>                                        
+                                        @if($post->approved)
+                                            <div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Approved</div>
+                                        @else
+                                            <div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Not Approved</div>
+                                        @endif
+                                    </td>
+
                                     <td>{{ $post->title }} </td>
 
                                     <td>{{ $post->excerpt }}</td>
                                     <td>{{ $post->category->name }}</td>
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
-                                    
-                                    
-                                    <td>
-                                        <div class="badge rounded-pill @if($post->status === 'published') {{ 'text-info bg-light-info' }} @elseif($post->status === 'draft') {{ 'text-warning bg-light-warning' }} @else {{ 'text-danger bg-light-danger' }} @endif p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>{{ $post->status }}</div>
-                                    </td>
 
                                     <td>{{ $post->views }}</td>
                                     
