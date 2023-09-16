@@ -74,9 +74,6 @@
         font-size: 15px; } }
 .nav-layout-container .nav-layout-btns-container {
     min-width: fit-content; }
-    /* paddingu asta nu mai ma lasa sa apas pe butn */
-/* .nav-layout-container .nav-layout-btns-container ul li a {
-    padding: 0px 12px;} */
 #colorlib-logo .logo-route,
 .admin-sidebar-header .admin-logo-container {
     display: flex; 
@@ -161,6 +158,26 @@
     margin: 0 0 10px 0 !important; }    
 
 /* Pagination Buttons*/
+.pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 10px 20px;
+    line-height: 1.42857;
+    text-decoration: none;
+    color: #337ab7;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-left: -1px; }
+    @media (max-width: 992px) {
+    .pagination {
+        display: flex;
+        justify-content: center; } }
+    @media (max-width: 600px) {
+    .pagination > li > a, .pagination > li > span {
+        padding: 7.5px 15px; } }
+    @media (max-width: 400px) {
+    .pagination > li > a, .pagination > li > span {
+        padding: 2px 8px; } }
 .pagination > .active > a, 
 .pagination > .active > a:hover, 
 .pagination > .active > a:focus, 
@@ -170,24 +187,20 @@
     color: var(--black);
     background-color: var(--white);
     border: 1px solid var(--white);
-    cursor: pointer;
-}
+    cursor: pointer; }
 .pagination > li > a,
 .pagination > li > span,
 .pagination > .disabled > span {
     color: var(--white);
-    background-color: var(--dark-1);
-}
+    background-color: var(--dark-1); }
 .pagination > li > a:hover,
 .pagination > li > span:hover {
     color: var(--white);
     background-color: var(--gray-1);
-    cursor: pointer;
-}
+    cursor: pointer; }
 .pagination > .disabled > span:hover {
     color: var(--white);
-    background-color: var(--gray-1);
-}
+    background-color: var(--gray-1); }
 /****** END OF COMPONENTS******/ 
 
 /****** PAGES ******/

@@ -33,7 +33,7 @@
 					<p class="lead">There are no posts yet.</p>
 				@endforelse
 
-				{{ $posts->onEachSide(1)->links('pagination::bootstrap-4') }}
+				{{ $posts->onEachSide(0)->links('pagination::bootstrap-4') }}
 
 			</div>
 

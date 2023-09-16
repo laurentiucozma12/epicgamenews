@@ -32,7 +32,7 @@
 					<p>There are no posts related to this category</p>
 				@endforelse
 
-				{{ $posts->onEachSide(1)->links('pagination::bootstrap-4') }}
+				{{ $posts->onEachSide(0)->links('pagination::bootstrap-4') }}
 
 			</div>
 
