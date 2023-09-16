@@ -31,6 +31,7 @@
 							</div>
 						</div>
 					</div>		
+					<hr>
 				@empty
 					<p class="lead">There are no posts yet.</p>
 				@endforelse
