@@ -102,7 +102,7 @@
                                                 <div class="rounded">
                                                     <div class="mb-3">
                                                         
-                                                        <select id="platforms" name="platforms[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms">
+                                                        <select id="platforms" name="platforms[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
                                                             <option value="uncategorized" selected>uncategorized</option>
                                                             <option value="pc">PC Games</option>
                                                             <option value="playstation">PlayStation</option>

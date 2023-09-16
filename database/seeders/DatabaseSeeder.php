@@ -61,11 +61,11 @@ class DatabaseSeeder extends Seeder
         \App\Models\Category::factory(10)->create();
 
         \App\Models\Platform::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized', 'user_id' => 1]);
-        \App\Models\Platform::factory(1)->create(['name' => 'pc', 'slug' => 'pc', 'user_id' => 1]);
-        \App\Models\Platform::factory(1)->create(['name' => 'playstation', 'slug' => 'playstation', 'user_id' => 1]);
-        \App\Models\Platform::factory(1)->create(['name' => 'xbox', 'slug' => 'xbox', 'user_id' => 1]);
-        \App\Models\Platform::factory(1)->create(['name' => 'mobile', 'slug' => 'mobile', 'user_id' => 1]);
-        \App\Models\Platform::factory(1)->create(['name' => 'nintendo', 'slug' => 'nintendo', 'user_id' => 1]);
+        \App\Models\Platform::factory(1)->create(['name' => 'PC', 'slug' => 'pc', 'user_id' => 1]);
+        \App\Models\Platform::factory(1)->create(['name' => 'PlayStation', 'slug' => 'playstation', 'user_id' => 1]);
+        \App\Models\Platform::factory(1)->create(['name' => 'Xbox', 'slug' => 'xbox', 'user_id' => 1]);
+        \App\Models\Platform::factory(1)->create(['name' => 'Mobile', 'slug' => 'mobile', 'user_id' => 1]);
+        \App\Models\Platform::factory(1)->create(['name' => 'Nintendo', 'slug' => 'nintendo', 'user_id' => 1]);
 
         \App\Models\Other::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
         \App\Models\Other::factory(10)->create();

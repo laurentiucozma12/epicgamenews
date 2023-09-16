@@ -101,7 +101,7 @@
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
-                                                        <select id="platforms" name="platforms[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms">
+                                                        <select id="platforms" name="platforms[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
                                                             @foreach ($platforms as $key => $platform)
                                                                 <option value="{{ $key }}" {{ in_array($key, $selectedPlatformIds) ? 'selected' : '' }}>{{ $platform }}</option>
                                                             @endforeach

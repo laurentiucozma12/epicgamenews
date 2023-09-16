@@ -26,19 +26,49 @@ class PlatformController extends Controller
             abort(404);
         }
         
-        $posts = $platform->posts()->latest()->paginate(10);
+        $posts = $platform->posts()
+            ->where(function ($query) {
+                $query->where(function ($categoryQuery) {
+                    $categoryQuery->whereDoesntHave('category', function ($categoryQuery) {
+                        $categoryQuery->where('name', 'uncategorized');
+                    });
+                })
+                ->orWhere(function ($platformQuery) {
+                    $platformQuery->whereDoesntHave('platforms', function ($platformQuery) {
+                        $platformQuery->where('name', 'uncategorized');
+                    });
+                })
+                ->orWhere(function ($otherQuery) {
+                    $otherQuery->whereDoesntHave('other', function ($otherQuery) {
+                        $otherQuery->where('name', 'uncategorized');
+                    });
+                });
+            })
+            ->approved()
+            ->withCount('comments')
+            ->paginate(10);
+
 
         // SIDE_RECENT_POSTS Hide all posts that have all 3 (category/platform/other) set on uncategorized
         $recent_posts = Post::latest()
-            ->whereDoesntHave('category', function ($query) {
-                $query->where('name', 'uncategorized');
+            ->where(function ($query) {
+                $query->where(function ($categoryQuery) {
+                    $categoryQuery->whereDoesntHave('category', function ($categoryQuery) {
+                        $categoryQuery->where('name', 'uncategorized');
+                    });
+                })
+                ->orWhere(function ($platformQuery) {
+                    $platformQuery->whereDoesntHave('platforms', function ($platformQuery) {
+                        $platformQuery->where('name', 'uncategorized');
+                    });
+                })
+                ->orWhere(function ($otherQuery) {
+                    $otherQuery->whereDoesntHave('other', function ($otherQuery) {
+                        $otherQuery->where('name', 'uncategorized');
+                    });
+                });
             })
-            ->orWhereDoesntHave('platforms', function ($query) {
-                $query->where('name', 'uncategorized');
-            })
-            ->orWhereDoesntHave('other', function ($query) {
-                $query->where('name', 'uncategorized');
-            })
+            ->approved()
             ->take(5)
             ->get();
             

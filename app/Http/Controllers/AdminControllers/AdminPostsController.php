@@ -44,30 +44,30 @@ class AdminPostsController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate($this->rules);
-        
-        $validated['user_id'] = auth()->id();
-        $post = Post::create($validated);
-
-        if ($request->has('thumbnail')) {
-            $thumbnail = $request->file('thumbnail');
-            $filename = $thumbnail->getClientOriginalName();
-            $file_extension = $thumbnail->getClientOriginalExtension();
-            $path = $thumbnail->store('images', 'public');
-    
-            $post->image()->create([
-                'name' => $filename,
-                'extension' => $file_extension,
-                'path' => $path,
-            ]);
-        }
-
         $selectedCategory = $request->input('category_id'); // 1 is uncategorized
         $selectedPlatforms = $request->input('platforms', []); // 0 => uncategorized, 1 => pc, etc
         $selectedOther = $request->input('other_id'); // 1 is uncategorized
         
-        if (($selectedCategory !== "1" && $selectedPlatforms[0] !== 'uncategorized' &&  $selectedOther === "1") 
-        || ($selectedCategory === "1" && $selectedPlatforms[0] === 'uncategorized' &&  $selectedOther !== "1")) {
+        if (($selectedCategory !== "1" && $selectedPlatforms[0] !== '1' &&  $selectedOther === "1") 
+        || ($selectedCategory === "1" && $selectedPlatforms[0] === '1' &&  $selectedOther !== "1")) {
+            $validated = $request->validate($this->rules);
+            
+            $validated['user_id'] = auth()->id();
+            $post = Post::create($validated);
+
+            if ($request->has('thumbnail')) {
+                $thumbnail = $request->file('thumbnail');
+                $filename = $thumbnail->getClientOriginalName();
+                $file_extension = $thumbnail->getClientOriginalExtension();
+                $path = $thumbnail->store('images', 'public');
+        
+                $post->image()->create([
+                    'name' => $filename,
+                    'extension' => $file_extension,
+                    'path' => $path,
+                ]);
+            }
+
             // An article about a GAME must have 1 CATEGORY and at least 1 PLATFORM that is played on.
             // If the article is about something else, it has to be posted in OTHER.
 
@@ -78,19 +78,19 @@ class AdminPostsController extends Controller
                     case 'uncategorized':
                         $platformIds[] = 1;
                         break;
-                    case 'pc':
+                    case 'PC':
                         $platformIds[] = 2;
                         break;
-                    case 'playstation':
+                    case 'PlayStation':
                         $platformIds[] = 3;
                         break;
-                    case 'xbox':
+                    case 'Xbox':
                         $platformIds[] = 4;
                         break;
-                    case 'mobile':
+                    case 'Mobile':
                         $platformIds[] = 5;
                         break;
-                    case 'nintendo':
+                    case 'Nintendo':
                         $platformIds[] = 6;
                         break;
                 }
@@ -178,28 +178,44 @@ class AdminPostsController extends Controller
             ]);
         }
 
-        // Get the selected platform names from the request
-        $platformIds = $request->input('platforms', []);
+        $selectedCategory = $request->input('category_id'); // 1 is uncategorized
+        $selectedPlatforms = $request->input('platforms', []); // 0 => uncategorized, 1 => pc, etc
+        $selectedOther = $request->input('other_id'); // 1 is uncategorized
+        
+        if (($selectedCategory !== "1" && $selectedPlatforms[0] !== '1' &&  $selectedOther === "1") 
+            || ($selectedCategory === "1" && $selectedPlatforms[0] === '1' &&  $selectedOther !== "1")) {
+                // An article about a GAME must have 1 CATEGORY and at least 1 PLATFORM that is played on.
+                // If the article is about something else, it has to be posted in OTHER.
+            // Get the selected platform names from the request
+            $platformIds = $request->input('platforms', []);
 
-        // Sync the new platforms
-        $post->platforms()->sync($platformIds);
+            // Sync the new platforms
+            $post->platforms()->sync($platformIds);
 
-        $tags = explode(',', $request->input('tags'));
-        $tags_ids = [];
-        foreach ($tags as $tag) {
-            $tag = strtolower(trim($tag)); // Convert to lowercase
-            $existingTag = Tag::firstOrNew(['name' => $tag]);
+            $tags = explode(',', $request->input('tags'));
+            $tags_ids = [];
+            foreach ($tags as $tag) {
+                $tag = strtolower(trim($tag)); // Convert to lowercase
+                $existingTag = Tag::firstOrNew(['name' => $tag]);
 
-            if (!$existingTag->exists) {
-                $existingTag->save();
+                if (!$existingTag->exists) {
+                    $existingTag->save();
+                }
+
+                $tags_ids[] = $existingTag->id;
             }
 
-            $tags_ids[] = $existingTag->id;
+            $post->tags()->sync($tags_ids);
+
+            return redirect()->route('admin.posts.edit', $post)->with('success', 'Post has been updated with success');
+        } else  {        
+            return redirect()->back()->withInput()->withErrors(['all_fields' => 
+            'Articles about games must be posted in category & platforms. Everything else in "other" section.
+            Also do not forget to remove "uncategorized" from platforms section after you choose at least one option.
+            Example 1: An article about Skyrim goes in RPG Category and PC, PlayStation, Xbox and other must be set on "uncategorized".
+            Example 2: An article about a Game Trailer/Movie/Game-Trailer/etc. goes in "Other" section, and Category and Platforms must be set on "uncategorized"
+            ']);
         }
-
-        $post->tags()->sync($tags_ids);
-
-        return redirect()->route('admin.posts.edit', $post)->with('success', 'Post has been updated with success');
     }
 
     public function destroy(Post $post)

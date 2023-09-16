@@ -16,18 +16,26 @@ class HomeController extends Controller
     {
         // POSTS Hide posts that have all 3 (category/platform/other) set on uncategorized
         $posts = Post::latest()
-        ->whereDoesntHave('category', function ($categoryQuery) {
-            $categoryQuery->where('name', 'uncategorized');
-        })
-        ->orWhereDoesntHave('platforms', function ($platformQuery) {
-            $platformQuery->where('name', 'uncategorized');
-        })
-        ->orWhereDoesntHave('other', function ($otherQuery) {
-            $otherQuery->where('name', 'uncategorized');
-        })
-        ->approved()
-        ->withCount('comments')
-        ->paginate(10);
+            ->where(function ($query) {
+                $query->where(function ($categoryQuery) {
+                    $categoryQuery->whereDoesntHave('category', function ($categoryQuery) {
+                        $categoryQuery->where('name', 'uncategorized');
+                    });
+                })
+                ->orWhere(function ($platformQuery) {
+                    $platformQuery->whereDoesntHave('platforms', function ($platformQuery) {
+                        $platformQuery->where('name', 'uncategorized');
+                    });
+                })
+                ->orWhere(function ($otherQuery) {
+                    $otherQuery->whereDoesntHave('other', function ($otherQuery) {
+                        $otherQuery->where('name', 'uncategorized');
+                    });
+                });
+            })
+            ->approved()
+            ->withCount('comments')
+            ->paginate(10);
 
         $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(10)->get();
         $platforms = Platform::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(10)->get();
