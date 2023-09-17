@@ -73,8 +73,8 @@
                     </table>
                 </div>
 
-                <div>
-                    {{ $categories->links() }}
+                <div class='mt-4'>
+                    {{ $categories->onEachSide(0)->links('pagination::bootstrap-4') }}
                 </div>
 
             </div>

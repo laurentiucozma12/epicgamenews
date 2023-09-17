@@ -19,8 +19,10 @@ class AdminOthersController extends Controller
 
     public function show(Other $other)
     {
+        $posts = $other->posts()->latest()->paginate(100);
         return view('admin_dashboard.others.show', [
-            'other' => $other
+            'other' => $other,
+            'posts' => $posts,
         ]);
     }
 }

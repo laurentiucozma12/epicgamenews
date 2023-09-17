@@ -17,8 +17,11 @@ class AdminPlatformsController extends Controller
 
     public function show(Platform $platform)
     {
+        $posts = $platform->posts()->latest()->paginate(100);
+    
         return view('admin_dashboard.platforms.show', [
-            'platform' => $platform
+            'platform' => $platform,
+            'posts' => $posts,
         ]);
     }
 }

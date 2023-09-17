@@ -44,15 +44,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($category->posts as $post)
+                            @foreach ($posts as $post)
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <div>
-                                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-                                            </div>
                                             <div class="ms-2">
-                                                <h6 class="mb-0 font-14">P-{{ $post->id }}</h6>
+                                                <h6 class="mb-0 font-14">{{ $post->id }}</h6>
                                             </div>
                                         </div>
                                     </td>
@@ -93,6 +90,11 @@
                         </tbody>
                     </table>
                 </div>
+                
+                <div class='mt-4'>
+                    {{ $posts->onEachSide(0)->links('pagination::bootstrap-4') }}
+                </div>
+
             </div>
         </div>
 

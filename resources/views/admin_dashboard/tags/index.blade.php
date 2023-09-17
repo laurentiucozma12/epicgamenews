@@ -63,10 +63,10 @@
 								</tbody>
 							</table>
 						</div>
-
-                        <div class='mt-4'>
-                        {{ $tags->links() }}
-                        </div>
+						
+						<div class='mt-4'>
+							{{ $tags->onEachSide(0)->links('pagination::bootstrap-4') }}
+						</div>
                         
 					</div>
 				</div>

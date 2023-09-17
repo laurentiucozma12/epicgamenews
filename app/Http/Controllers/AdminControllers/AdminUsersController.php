@@ -23,7 +23,7 @@ class AdminUsersController extends Controller
     public function index()
     {
         return view('admin_dashboard.users.index', [
-            'users' => User::with('role')->paginate('50')
+            'users' => User::with('role')->paginate(100)
         ]);
     }
 
@@ -69,8 +69,10 @@ class AdminUsersController extends Controller
 
     public function show(User $user)
     {
+        $posts = $user->posts()->latest()->paginate(100);
         return view('admin_dashboard.users.show',[
-            'user' => $user
+            'user' => $user,
+            'posts' => $posts,
         ]);
     }
     

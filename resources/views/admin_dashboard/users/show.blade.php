@@ -42,7 +42,7 @@
 									</tr>
 								</thead>
 								<tbody>
-                                    @foreach($user->posts as $post)
+                                    @foreach($posts as $post)
 									<tr>
 										<td>
 											<div class="d-flex align-items-center">
@@ -81,6 +81,11 @@
 								</tbody>
 							</table>
 						</div>
+						
+						<div class='mt-4'>
+							{{ $posts->onEachSide(0)->links('pagination::bootstrap-4') }}
+						</div>
+
 					</div>
 				</div>
 

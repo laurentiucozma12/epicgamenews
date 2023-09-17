@@ -18,7 +18,7 @@ class AdminCategoriesController extends Controller
     public function index()
     {
         return view('admin_dashboard.categories.index', [
-            'categories' => Category::with('user')->orderBy('id', 'DESC')->paginate(50)
+            'categories' => Category::with('user')->orderBy('id', 'DESC')->paginate(100)
         ]);
     }
 
@@ -38,8 +38,10 @@ class AdminCategoriesController extends Controller
 
     public function show(Category $category)
     {
+        $posts = $category->posts()->latest()->paginate(100);
         return view('admin_dashboard.categories.show', [
-            'category' => $category
+            'category' => $category,
+            'posts' => $posts,
         ]);
     }
 

@@ -12,14 +12,16 @@ class AdminTagsController extends Controller
     public function index()
     {
         return view('admin_dashboard.tags.index', [
-            'tags' => Tag::with('posts')->paginate(50),
+            'tags' => Tag::with('posts')->paginate(100),
         ]);
     }
 
     public function show(Tag $tag)
     {
+        $posts = $tag->posts()->latest()->paginate(100);
         return view('admin_dashboard.tags.show', [
-            'tag' => $tag
+            'tag' => $tag,
+            'posts' => $posts,
         ]);
     }
 
