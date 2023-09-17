@@ -68,7 +68,7 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="input_image" class="form-label">Image</label>
+                                            <label for="input_image" class="form-label">Image (300 x 300)</label>
                                             <input name='image' type='file' class="form-control" id="input_image">
                                         
                                             @error('image')

@@ -67,23 +67,27 @@
                                             @enderror
                                         </div>
 
-                                        <div class='row'>
-                                            <div class='col-md-8'>
-                                                <div class="mb-3">
-                                                    <label for="input_image" class="form-label">Image</label>
-                                                    <input name='image' type='file' class="form-control" id="input_image">
-                                                
-                                                    @error('image')
-                                                        <p class='text-danger'>{{ $message }}</p>
-                                                    @enderror
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                <div class="com-md-8">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <label for="input_image" class="form-label">Image</label>
+                                                            <input name='image' type='file' class="form-control" id="input_image">
+                                                        
+                                                            @error('image')
+                                                                <p class='text-danger'>{{ $message }}</p>
+                                                            @enderror                                                        
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class='col-md-4'>
+                                                    <div class='user-image'>
+                                                        <img src="{{ $user->image ? asset('storage/' . $user->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class='col-md-4'>
-                                                <div class='user-image'>
-                                                    <img src="{{ $user->image ? asset('storage/' . $user->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </div>         
 
                                         <div class="mb-3">
                                             <label for="inputProductTitle" class="form-label">User Role</label>

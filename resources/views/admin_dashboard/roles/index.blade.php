@@ -43,11 +43,8 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <div>
-                                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-                                            </div>
                                             <div class="ms-2">
-                                                <h6 class="mb-0 font-14">P-{{ $role->id }}</h6>
+                                                <h6 class="mb-0 font-14">{{ $role->id }}</h6>
                                             </div>
                                         </div>
                                     </td>

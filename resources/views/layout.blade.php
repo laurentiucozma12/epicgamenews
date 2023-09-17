@@ -100,7 +100,7 @@
 											</form>
 										</li>
 										<li>
-											@if ( auth()->user()->role->name === "admin" )
+											@if ( auth()->user()->role->name !== "user" )
 												<a href="{{ route('admin.index') }}" target="_blank">Admin Dasboard</a>
 											@endif
 										</li>

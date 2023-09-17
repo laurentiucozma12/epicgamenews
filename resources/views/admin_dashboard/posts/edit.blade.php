@@ -154,7 +154,6 @@
 
                                     <div class="mb-3">
                                         <div class="row">
-
                                             <div class="com-md-8">
                                                 <div class="card">
                                                     <div class="card-body">
@@ -171,7 +170,6 @@
                                             <div class="com-md-4">
                                                 <img style="width: 540px" src="/storage/{{ $post->image ? $post->image->path : 'placeholders/thumbnail_placeholder.jpg' }}" class="img-responsive" alt="Post Thumbnail">
                                             </div>
-
                                         </div>
                                     </div>                                    
 

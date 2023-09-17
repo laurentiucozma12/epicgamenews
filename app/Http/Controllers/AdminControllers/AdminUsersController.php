@@ -23,7 +23,7 @@ class AdminUsersController extends Controller
     public function index()
     {
         return view('admin_dashboard.users.index', [
-            'users' => User::with('role')->paginate(100)
+            'users' => User::with('role')->latest()->paginate(100)
         ]);
     }
 
