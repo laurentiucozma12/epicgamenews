@@ -22,7 +22,7 @@ class AdminPostsController extends Controller
         'excerpt' => 'required|max:150',
         'category_id' => 'required|numeric',
         'thumbnail' => 'required|image|dimensions:max_width=1800,max_height=900',
-        'author_thumbnail' => 'required|max:150',
+        'author_thumbnail' => 'nullable|max:150',
         'body' => 'required',
     ];
 
