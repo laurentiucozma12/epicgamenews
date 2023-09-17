@@ -12,7 +12,7 @@ class AdminTagsController extends Controller
     public function index()
     {
         return view('admin_dashboard.tags.index', [
-            'tags' => Tag::with('posts')->paginate(100),
+            'tags' => Tag::with('posts')->latest()->paginate(100),
         ]);
     }
 

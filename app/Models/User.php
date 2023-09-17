@@ -12,6 +12,7 @@ use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Category;
+use App\Models\Tag;
 
 class User extends Authenticatable
 {
@@ -55,5 +56,10 @@ class User extends Authenticatable
     public function categories()
     {
         return $this->hasMany(Category::class);
+    }
+
+    public function tags()
+    {
+        return $this->hasMany(Tag::class);
     }
 }

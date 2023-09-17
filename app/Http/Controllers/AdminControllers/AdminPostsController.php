@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 use App\Models\Category;
 use App\Models\Platform;
@@ -79,6 +80,9 @@ class AdminPostsController extends Controller
                 $existingTag = Tag::firstOrNew(['name' => $tag]);
 
                 if (!$existingTag->exists) {
+                    $existingTag->name = $tag;
+                    $existingTag->slug = Str::slug($tag, '-');
+                    $existingTag->user_id = auth()->id();
                     $existingTag->save();
                 }
 
@@ -171,6 +175,9 @@ class AdminPostsController extends Controller
                 $existingTag = Tag::firstOrNew(['name' => $tag]);
 
                 if (!$existingTag->exists) {
+                    $existingTag->name = $tag;
+                    $existingTag->slug = Str::slug($tag, '-');
+                    $existingTag->user_id = auth()->id();
                     $existingTag->save();
                 }
 
