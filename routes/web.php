@@ -43,7 +43,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
 
     Route::get('/', [DashboardController::class, 'index'])->name('index');
 
-    Route::resource('posts', AdminPostsController::class);
+    Route::resource('posts', AdminPostsController::class)->except('show');
     Route::post('upload_tinymce_image', [TinyMCEController::class, 'upload_tinymce_image'])->name('upload_tinymce_image');
     
     Route::resource('categories', AdminCategoriesController::class);
