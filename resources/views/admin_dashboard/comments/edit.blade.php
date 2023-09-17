@@ -72,12 +72,14 @@
                                             @enderror
                                         </div>
 
-                                        <button class='btn btn-primary' type='submit'>Update Comment</button>
+                                        <div class="update-delete-btn-container">
+                                            <button class='btn btn-primary' type='submit'>Update Comment</button>
 
-                                        <a 
-                                        class='btn btn-danger'
-                                        onclick="event.preventDefault(); document.getElementById('comment_delete_form_{{ $comment->id }}').submit()"
-                                        href="#">Delete Comment</a>
+                                            <a 
+                                            class='btn btn-danger'
+                                            onclick="event.preventDefault(); document.getElementById('comment_delete_form_{{ $comment->id }}').submit()"
+                                            href="#">Delete Comment</a>
+                                        </div>
                                         
                                     </div>
                                 </div>

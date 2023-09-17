@@ -192,12 +192,14 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-check form-switch admin-approve-container">
-                                        <input name='approved' {{ $post->approved ? 'checked' : '' }} class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                        <label class="form-check-label {{ $post->approved ? 'text-success' : 'text-danger' }}" for="flexSwitchCheckChecked">
-                                            <b>{{ $post->approved ? 'Approved' : 'Not approved' }}</b>
-                                        </label>
-                                    </div>
+                                    @if ( auth()->user()->role->name === "admin" )                                    
+                                        <div class="form-check form-switch admin-approve-container">
+                                            <input name='approved' {{ $post->approved ? 'checked' : '' }} class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                            <label class="form-check-label {{ $post->approved ? 'text-success' : 'text-danger' }}" for="flexSwitchCheckChecked">
+                                                <b>{{ $post->approved ? 'Approved' : 'Not approved' }}</b>
+                                            </label>
+                                        </div>
+                                    @endif
                                     
                                     <div class="update-delete-btn-container">
                                         <button class='btn btn-primary' type='submit'>Update Post</button>

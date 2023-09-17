@@ -90,14 +90,16 @@
 
                                     </div>
                                     
-                                    <button class='btn btn-primary' type='submit'>Update Role</button>
+                                    <div class="update-delete-btn-container">
+                                        <button class='btn btn-primary' type='submit'>Update Role</button>
 
-                                    <a 
-                                    class='btn btn-danger'
-                                    onclick="event.preventDefault();document.getElementById('delete_role_{{ $role->id }}').submit()"
-                                    href="#">
-                                        Delete Role
-                                    </a>
+                                        <a 
+                                        class='btn btn-danger'
+                                        onclick="event.preventDefault();document.getElementById('delete_role_{{ $role->id }}').submit()"
+                                        href="#">
+                                            Delete Role
+                                        </a>
+                                    </div>
 
                                 </div>
                             </div>                            

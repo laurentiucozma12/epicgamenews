@@ -111,14 +111,16 @@
                                             </div>
                                         </div>
 
-                                        <button class='btn btn-primary' type='submit'>Update User</button>
+                                        <div class="update-delete-btn-container">
+                                            <button class='btn btn-primary' type='submit'>Update User</button>
 
-                                        <a 
-                                        onclick='event.preventDefault(); document.getElementById("delete_user_{{ $user->id }}").submit()'
-                                        href="#"
-                                        class='btn btn-danger'>
-                                            Delete User
-                                        </a>
+                                            <a 
+                                            onclick='event.preventDefault(); document.getElementById("delete_user_{{ $user->id }}").submit()'
+                                            href="#"
+                                            class='btn btn-danger'>
+                                                Delete User
+                                            </a>
+                                        </div>
                                         
                                     </div>
                                 </div>
