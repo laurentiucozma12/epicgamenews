@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminControllers\DashboardController;
 use App\Http\Controllers\AdminControllers\AdminPostsController;
 use App\Http\Controllers\AdminControllers\TinyMCEController;
+use App\Http\Controllers\AdminControllers\AdminVideoGamesController;
 use App\Http\Controllers\AdminControllers\AdminCategoriesController;
 use App\Http\Controllers\AdminControllers\AdminPlatformsController;
 use App\Http\Controllers\AdminControllers\AdminOthersController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\AdminControllers\AdminStorageLinkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\VideoGameController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\ContactController;
@@ -46,6 +48,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     Route::resource('posts', AdminPostsController::class)->except('show');
     Route::post('upload_tinymce_image', [TinyMCEController::class, 'upload_tinymce_image'])->name('upload_tinymce_image');
     
+    Route::resource('videogames', AdminVideoGamesController::class);
     Route::resource('categories', AdminCategoriesController::class);
     Route::resource('platforms', AdminPlatformsController::class)->only(['index', 'show']);
     Route::resource('others', AdminOthersController::class)->only(['index', 'show']);
@@ -67,6 +70,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
 
 // Front User Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/videogames/uncategorized', function () {
+    abort(404);
+});
+Route::get('/videogames', [VideoGameController::class, 'index'])->name('videogames.index');
+Route::get('/videogames/{videoGame:slug}', [VideoGameController::class, 'show'])->name('videogames.show');
 
 Route::get('/categories/uncategorized', function () {
     abort(404);

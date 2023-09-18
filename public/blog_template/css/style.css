@@ -185,7 +185,9 @@ h1, h2, h3, h4, h5, h6, figure {
       display: none; } }
   .colorlib-nav ul {
     padding: 0;
-    margin: 0; }
+    margin: 0; 
+    display: flex;
+    align-items: center; }
     .colorlib-nav ul li {
       padding: 0;
       margin: 0;
@@ -196,6 +198,11 @@ h1, h2, h3, h4, h5, h6, figure {
       .colorlib-nav ul li a {
         position: relative;
         font-size: 13px;
+        /* !!!!!! 
+        I changed padding: 0 12px; After this, the dropdown buttons will fade too fast so you will not be able to click 
+        the other button. Example in layout navbar, after you log in that button will be your username. If you hover it the 
+        dropdown will be activated. If it has padding 0 you will not be able to click on the buttons related to that dropdown. 
+        !!!!!! */
         padding: 30px 12px;
         font-weight: 400;
         color: var(--white);
@@ -203,7 +210,10 @@ h1, h2, h3, h4, h5, h6, figure {
         -o-transition: 0.5s;
         transition: 0.5s; }
         .colorlib-nav ul li a:hover {
-          color: var(--light-blue-1); }
+          color: var(--light-blue-1); }          
+        @media screen and (max-width: 1200px) { 
+          .colorlib-nav ul li a {             
+            padding: 0 6px !important; } }
       .colorlib-nav ul li.has-dropdown {
         position: relative; }
         .colorlib-nav ul li.has-dropdown .dropdown {

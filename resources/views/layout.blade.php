@@ -75,6 +75,7 @@
 
 						<ul>
 							<li><a href="{{ route('home') }}">Home</a></li>
+							<li><a href="{{ route('videogames.index') }}">Video Games</a></li>
 							<li><a href="{{ route('categories.index') }}">Categories</a></li>
 							<li><a href="{{ route('platforms.index') }}">Platforms</a></li>
 							<li><a href="{{ route('about') }}">About</a></li>
@@ -281,10 +282,11 @@
 <script src="{{ asset('blog_template/js/jquery.countTo.js') }}"></script>
 <!-- Main -->
 <script src="{{ asset('blog_template/js/main.js') }}"></script>
-<!-- My Scripts -->
-<script src="{{ asset('js/functions.js') }}"></script>
 
 @yield('custom_js')
+
+<!-- My Scripts -->
+<script src="{{ asset('js/functions.js') }}"></script>
 {{-- END OF SCRIPTS --}}
 
 </body>

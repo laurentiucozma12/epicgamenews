@@ -11,6 +11,7 @@ use App\Models\Role;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Image;
+use App\Models\VideoGame;
 use App\Models\Category;
 use App\Models\Tag;
 
@@ -51,6 +52,11 @@ class User extends Authenticatable
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function videoGames()
+    {
+        return $this->hasMany(VideoGame::class);
     }
 
     public function categories()

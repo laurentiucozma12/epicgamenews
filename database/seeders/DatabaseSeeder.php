@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::truncate();
         \App\Models\Role::truncate();
+        \App\Models\VideoGame::truncate();
         \App\Models\Category::truncate();
         \App\Models\Platform::truncate();
         \App\Models\Other::truncate();
@@ -56,6 +57,9 @@ class DatabaseSeeder extends Seeder
         {
             $user->image()->save( \App\Models\Image::factory()->make() );
         }
+
+        \App\Models\VideoGame::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
+        \App\Models\VideoGame::factory(30)->create();
 
         \App\Models\Category::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
         \App\Models\Category::factory(10)->create();

@@ -2,31 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\VideoGame;
 use App\Models\Post;
-use App\Models\Category;
 
-class CategoryController extends Controller
-{    
+class VideoGameController extends Controller
+{
     public function index()
     {
-        $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->paginate(16);
+        $videoGames = VideoGame::withCount('posts')->where('name', '!=', 'uncategorized')->paginate(16);
 
-        return view('categories.index', [
-            'categories' => $categories
+        return view('videogames.index', [
+            'videoGames' => $videoGames
         ]);
     }
 
-    public function show(Category $category)
+    public function show(VideoGame $videoGame)
     {
-        if ($category->name === 'uncategorized') {
+        if ($videoGame->name === 'uncategorized') {
             abort(404);
         }
 
-        $posts = $category->posts()
-            ->where(function ($query) {
-                $query->where(function ($categoryQuery) {
+        $posts = $videoGame->posts()
+            ->where(function ($query) {                
+                $query->where(function ($videoGameQuery) {
+                    $videoGameQuery->whereDoesntHave('videoGame', function ($videoGameQuery) {
+                        $videoGameQuery->where('name', 'uncategorized');
+                    });
+                })
+                ->orWhere(function ($categoryQuery) {
                     $categoryQuery->whereDoesntHave('category', function ($categoryQuery) {
                         $categoryQuery->where('name', 'uncategorized');
                     });
@@ -49,7 +55,12 @@ class CategoryController extends Controller
         // SIDE_RECENT_POSTS Hide all posts that have all 3 (category/platform/other) set on uncategorized
         $recent_posts = Post::latest()
             ->where(function ($query) {
-                $query->where(function ($categoryQuery) {
+                $query->where(function ($videoGameQuery) {
+                    $videoGameQuery->whereDoesntHave('category', function ($videoGameQuery) {
+                        $videoGameQuery->where('name', 'uncategorized');
+                    });
+                })
+                ->orWhere(function ($categoryQuery) {
                     $categoryQuery->whereDoesntHave('category', function ($categoryQuery) {
                         $categoryQuery->where('name', 'uncategorized');
                     });
@@ -69,10 +80,13 @@ class CategoryController extends Controller
             ->take(5)
             ->get();
             
-        return view('categories.show', [
-            'category' => $category,
+        $videoGames = VideoGame::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(10)->get();
+
+        return view('videogames.show', [
+            'videoGame' => $videoGame,
             'posts' => $posts,
             'recent_posts' => $recent_posts,
+            'videoGames' => $videoGames,
         ]);
     }
 }

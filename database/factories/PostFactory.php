@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 use App\Models\User;
 use App\Models\Category;
-use App\Models\Platform;
 use App\Models\Other;
+use App\Models\VideoGame;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -27,6 +27,7 @@ class PostFactory extends Factory
             'excerpt' => $this->faker->sentence(), 
             'body' => $this->faker->paragraph(), 
             'user_id' => User::factory(), 
+            'video_game_id' => VideoGame::all()->random()->id,
             'category_id' => Category::all()->random()->id,
             'other_id' => Other::all()->random()->id,
             'author_thumbnail' => $this->faker->sentence(), 

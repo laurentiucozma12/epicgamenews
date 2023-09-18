@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('body');
 
             $table->foreignId('user_id');
+            $table->foreignId('video_game_id');
             $table->foreignId('category_id');
             $table->foreignId('other_id')->default(1);
 

@@ -42,8 +42,6 @@
 			<!-- SIDEBAR: start -->
 			<div class="col-md-3 animate-box">
 				<div class="sidebar">
-				
-					<x-blog.side-categories :categories="$categories"/>
 
 					<x-blog.side-recent-posts :recent_posts="$recent_posts"/>
 

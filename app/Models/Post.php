@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\User;
+use App\Models\VideoGame;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Comment;
@@ -24,9 +25,19 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function videoGame()
+    {
+        return $this->belongsTo(VideoGame::class);
     }
     
     public function platforms()
