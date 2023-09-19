@@ -39,15 +39,6 @@
 				{{ $posts->onEachSide(0)->links('pagination::bootstrap-4') }}
 
 			</div>
-
-			<!-- SIDEBAR: start -->
-			<div class="col-12 col-md-3 animate-box">
-				<div class="sidebar">
-				
-					<x-blog.side-categories :categories="$categories"/>
-
-				</div>
-			</div>
 		</div>
 	</div>
 </div>

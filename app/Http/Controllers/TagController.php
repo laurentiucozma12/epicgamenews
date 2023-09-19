@@ -19,70 +19,26 @@ class TagController extends Controller
 
     public function show(Tag $tag)
     {        
-        // Hide all posts that have all 3 (category/platform/other) set on uncategorized
-        $posts = $tag->posts()
-            ->where(function ($query) {                
-                $query->where(function ($video_gameQuery) {
-                    $video_gameQuery->whereDoesntHave('video_game', function ($video_gameQuery) {
-                        $video_gameQuery->where('name', 'uncategorized');
-                    });
-                })
-                ->orWhere(function ($categoryQuery) {
-                    $categoryQuery->whereDoesntHave('category', function ($categoryQuery) {
-                        $categoryQuery->where('name', 'uncategorized');
-                    });
-                })
-                ->orWhere(function ($platformQuery) {
-                    $platformQuery->whereDoesntHave('platforms', function ($platformQuery) {
-                        $platformQuery->where('name', 'uncategorized');
-                    });
-                })
-                ->orWhere(function ($otherQuery) {
-                    $otherQuery->whereDoesntHave('other', function ($otherQuery) {
-                        $otherQuery->where('name', 'uncategorized');
-                    });
-                });
-            })
+        if ($tag->name === 'uncategorized') {
+            abort(404); }
+
+        $posts = $tag->posts()->excludeUncategorized()
             ->latest()
             ->approved()
             ->withCount('comments')
             ->paginate(10);
 
-        // SIDE_RECENT_POSTS Hide all posts that have all 3 (category/platform/other) set on uncategorized
-        $recent_posts = Post::latest()
-            ->where(function ($query) {                
-                $query->where(function ($video_gameQuery) {
-                    $video_gameQuery->whereDoesntHave('video_game', function ($video_gameQuery) {
-                        $video_gameQuery->where('name', 'uncategorized');
-                    });
-                })
-                ->orWhere(function ($categoryQuery) {
-                    $categoryQuery->whereDoesntHave('category', function ($categoryQuery) {
-                        $categoryQuery->where('name', 'uncategorized');
-                    });
-                })
-                ->orWhere(function ($platformQuery) {
-                    $platformQuery->whereDoesntHave('platforms', function ($platformQuery) {
-                        $platformQuery->where('name', 'uncategorized');
-                    });
-                })
-                ->orWhere(function ($otherQuery) {
-                    $otherQuery->whereDoesntHave('other', function ($otherQuery) {
-                        $otherQuery->where('name', 'uncategorized');
-                    });
-                });
-            })
+        $recent_posts = Post::excludeUncategorized()
+            ->latest()
             ->approved()
-            ->take(5)
-            ->get();
-            
-        $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(10)->get();
+            ->paginate(5);
+
+        $recent_postsArray = $recent_posts->items();
 
         return view('tags.show', [
             'tag' => $tag,
             'posts' => $posts,
-            'recent_posts' => $recent_posts,
-            'categories' => $categories,
+            'recent_posts' => $recent_postsArray,
         ]);
     }
 }

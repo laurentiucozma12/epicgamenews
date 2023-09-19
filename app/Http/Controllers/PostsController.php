@@ -21,43 +21,19 @@ class PostsController extends Controller
             // You can return a response with an error message or a 404 page.
             abort(404);
         }
-
-        // SIDE_RECENT_POSTS Hide all posts that have all 3 (category/platform/other) set on uncategorized
-        $recent_posts = Post::latest()
-            ->where(function ($query) {                
-                $query->where(function ($video_gameQuery) {
-                    $video_gameQuery->whereDoesntHave('video_game', function ($video_gameQuery) {
-                        $video_gameQuery->where('name', 'uncategorized');
-                    });
-                })
-                ->orWhere(function ($categoryQuery) {
-                    $categoryQuery->whereDoesntHave('categories', function ($categoryQuery) {
-                        $categoryQuery->where('name', 'uncategorized');
-                    });
-                })
-                ->orWhere(function ($platformQuery) {
-                    $platformQuery->whereDoesntHave('platforms', function ($platformQuery) {
-                        $platformQuery->where('name', 'uncategorized');
-                    });
-                })
-                ->orWhere(function ($otherQuery) {
-                    $otherQuery->whereDoesntHave('other', function ($otherQuery) {
-                        $otherQuery->where('name', 'uncategorized');
-                    });
-                });
-            })
+        
+        $recent_posts = Post::excludeUncategorized()
+            ->latest()
             ->approved()
-            ->take(5)
-            ->get();
+            ->paginate(5);
 
-        $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(12)->get();
+        $recent_postsArray = $recent_posts->items();
 
         $tags = $post->tags;
 
         return view('post', [
             'post' => $post,
-            'recent_posts' => $recent_posts,
-            'categories' => $categories,
+            'recent_posts' => $recent_postsArray,
             'tags' => $tags,
         ]);
     }

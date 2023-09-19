@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', $other->name . ' | Epic Game News')
+@section('title', ucfirst($other->name) . ' | Epic Game News')
 
 @section('content')
 

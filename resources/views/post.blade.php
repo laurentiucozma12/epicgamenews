@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', $post->title . ' | Epic Game News')
+@section('title', ucfirst($post->title) . ' | Epic Game News')
 
 @section('custom_css')
     

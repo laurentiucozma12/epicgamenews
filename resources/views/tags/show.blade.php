@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', $tag->name . ' Tag | Epic Game News')
+@section('title', ucfirst($tag->name) . ' Tag | Epic Game News')
 
 @section('content')
 
@@ -41,8 +41,6 @@
 			<!-- SIDEBAR: start -->
 			<div class="col-md-4 animate-box">
 				<div class="sidebar">
-				
-					<x-blog.side-categories :categories="$categories"/>
 
 					<x-blog.side-recent-posts :recent_posts="$recent_posts"/>
 

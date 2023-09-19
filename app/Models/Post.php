@@ -70,4 +70,30 @@ class Post extends Model
     {
         return $query->where('approved', 1); 
     }
+
+    public function scopeExcludeUncategorized($query)
+    {
+        return $query->where(function ($query) {
+            $query->where(function ($video_gameQuery) {
+                $video_gameQuery->whereDoesntHave('video_game', function ($video_gameQuery) {
+                    $video_gameQuery->where('name', 'uncategorized');
+                });
+            })
+            ->orWhere(function ($categoryQuery) {
+                $categoryQuery->whereDoesntHave('categories', function ($categoryQuery) {
+                    $categoryQuery->where('name', 'uncategorized');
+                });
+            })
+            ->orWhere(function ($platformQuery) {
+                $platformQuery->whereDoesntHave('platforms', function ($platformQuery) {
+                    $platformQuery->where('name', 'uncategorized');
+                });
+            })
+            ->orWhere(function ($otherQuery) {
+                $otherQuery->whereDoesntHave('other', function ($otherQuery) {
+                    $otherQuery->where('name', 'uncategorized');
+                });
+            });
+        });
+    }
 }
