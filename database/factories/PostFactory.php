@@ -28,7 +28,6 @@ class PostFactory extends Factory
             'body' => $this->faker->paragraph(), 
             'user_id' => User::factory(), 
             'video_game_id' => VideoGame::all()->random()->id,
-            'category_id' => Category::all()->random()->id,
             'other_id' => Other::all()->random()->id,
             'author_thumbnail' => $this->faker->sentence(), 
         ];

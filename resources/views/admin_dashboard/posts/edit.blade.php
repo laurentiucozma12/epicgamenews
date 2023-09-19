@@ -96,29 +96,29 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label class="form-label">Post Category</label>                                        
+                                        <label class="form-label">Post Category</label>
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
-                                                        <select name="category_id" required class="single-select">
+                                                        <select id="categories" name="categories[]" multiple="multiple" class="multiple-select" data-placeholder="Choose categories" required>
                                                             @foreach ($categories as $key => $category)
-                                                                <option {{ $post->category_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $category }}</option>                                                                
+                                                                <option value="{{ $key }}" {{ in_array($key, $selectedCategformIds) ? 'selected' : '' }}>{{ $category }}</option>
                                                             @endforeach
                                                         </select>
-
-                                                        @error('category_id')
+                                    
+                                                        @error('categories')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
-
+                                    
                                                         @if($errors->has('all_fields'))          
                                                             <p class="text-danger">{{ $errors->first('all_fields') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>                                            
-                                    </div>
+                                        </div>
+                                    </div>          
 
                                     <div class="mb-3">
                                         <label class="form-label">Post Platform</label>

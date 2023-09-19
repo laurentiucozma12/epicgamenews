@@ -34,7 +34,7 @@ class OtherController extends Controller
                     });
                 })
                 ->orWhere(function ($categoryQuery) {
-                    $categoryQuery->whereDoesntHave('category', function ($categoryQuery) {
+                    $categoryQuery->whereDoesntHave('categories', function ($categoryQuery) {
                         $categoryQuery->where('name', 'uncategorized');
                     });
                 })
@@ -63,7 +63,7 @@ class OtherController extends Controller
                     });
                 })
                 ->orWhere(function ($categoryQuery) {
-                    $categoryQuery->whereDoesntHave('category', function ($categoryQuery) {
+                    $categoryQuery->whereDoesntHave('categories', function ($categoryQuery) {
                         $categoryQuery->where('name', 'uncategorized');
                     });
                 })

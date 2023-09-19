@@ -22,7 +22,6 @@ class AdminPostsController extends Controller
         'title' => 'required|max:150',
         'slug' => 'required|max:150',
         'excerpt' => 'required|max:150',
-        'category_id' => 'required|numeric',
         'video_game_id' => 'required|numeric',
         'thumbnail' => 'required|image|dimensions:max_width=1800,max_height=900',
         'author_thumbnail' => 'nullable|max:150',
@@ -39,7 +38,7 @@ class AdminPostsController extends Controller
     public function create()
     {
         return view('admin_dashboard.posts.create', [
-            'video_games' => VideoGame::all(),
+            'video_games' => VideoGame::all(),            
             'categories' => Category::all(),
         ]);
     }
@@ -47,13 +46,13 @@ class AdminPostsController extends Controller
     public function store(Request $request)
     {
         $selectedVideoGame = $request->input('video_game_id'); // 1 is uncategorized
-        $selectedCategory = $request->input('category_id'); // 1 is uncategorized
+        $selectedCategories = $request->input('categories', []); // 1 is uncategorized
         $selectedPlatforms = $request->input('platforms', []); // 1 is uncategorized
         $selectedOther = $request->input('other_id'); // 1 is uncategorized
         
-        if (($selectedVideoGame !== "1" && $selectedCategory !== "1" && $selectedPlatforms[0] !== '1' &&  $selectedOther === "1") 
+        if (($selectedVideoGame !== "1" && $selectedCategories[0] !== "1" && $selectedPlatforms[0] !== '1' &&  $selectedOther === "1") 
             // game name, categories of the game and plaforms that can be played on are required
-        || ($selectedVideoGame !== "1" && $selectedCategory === "1" && $selectedPlatforms[0] === '1' &&  $selectedOther !== "1")) {
+        || ($selectedVideoGame !== "1" && $selectedCategories[0] === "1" && $selectedPlatforms[0] === '1' &&  $selectedOther !== "1")) {
             // or game name and other if the article is about something else related to a game (like an anime/movie/etc. based on a game)
 
             $validated = $request->validate($this->rules);
@@ -74,10 +73,12 @@ class AdminPostsController extends Controller
                 ]);
             }
 
-            // Attach platform IDs to the post
+            // Attach categories and platforms IDs to the post
+            $post->categories()->attach($selectedCategories);
             $post->platforms()->attach($selectedPlatforms);
             
-            // Set other IDs to the post
+            // Set video game and other IDs to the post
+            $post->update(['video_game_id' => $selectedVideoGame]);
             $post->update(['other_id' => $selectedOther]);
 
             $tags = explode(',', $request->input('tags'));
@@ -124,33 +125,36 @@ class AdminPostsController extends Controller
                 $tags .= ', ';
         }
 
-        // Pass all the platforms
-        $platforms = Platform::pluck('name', 'id');
+        // Pass all the categories and platforms
+        $categories = Category::pluck('categories.name', 'categories.id');
+        $platforms = Platform::pluck('platforms.name', 'platforms.id');
 
-        // Pass the selected platforms
+        // Pass the selected categories and platforms
+        $selectedCategformIds = $post->categories->pluck('id')->toArray();
         $selectedPlatformIds = $post->platforms->pluck('id')->toArray();
         
         return view('admin_dashboard.posts.edit', [
             'post' => $post,
             'tags' => $tags,
             'video_games' => VideoGame::pluck('name', 'id'),
-            'categories' => Category::pluck('name', 'id'),
-            'others' => Other::pluck('name', 'id'),
+            'categories' => $categories,
+            'selectedCategformIds' => $selectedCategformIds,
             'platforms' => $platforms,
             'selectedPlatformIds' => $selectedPlatformIds,
+            'others' => Other::pluck('name', 'id'),
         ]);
     }
 
     public function update(Request $request, Post $post)
     {
         $selectedVideoGame = $request->input('video_game_id'); // 1 is uncategorized
-        $selectedCategory = $request->input('category_id'); // 1 is uncategorized
+        $selectedCategories = $request->input('categories', []); // 1 is uncategorized
         $selectedPlatforms = $request->input('platforms', []); // 1 is uncategorized
         $selectedOther = $request->input('other_id'); // 1 is uncategorized
         
-        if (($selectedVideoGame !== "1" && $selectedCategory !== "1" && $selectedPlatforms[0] !== '1' &&  $selectedOther === "1") 
+        if (($selectedVideoGame !== "1" && $selectedCategories[0] !== "1" && $selectedPlatforms[0] !== '1' &&  $selectedOther === "1") 
             // game name, categories of the game and plaforms that can be played on are required
-        || ($selectedVideoGame !== "1" && $selectedCategory === "1" && $selectedPlatforms[0] === '1' &&  $selectedOther !== "1")) {
+        || ($selectedVideoGame !== "1" && $selectedCategories[0] === "1" && $selectedPlatforms[0] === '1' &&  $selectedOther !== "1")) {
             // or game name and other if the article is about something else related to a game (like an anime/movie/etc. based on a game)
 
             $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1800,max_height=900';
@@ -172,9 +176,11 @@ class AdminPostsController extends Controller
                 ]);
             }
 
+            $categoryIds = $request->input('categories', []);
             $platformIds = $request->input('platforms', []);
 
-            // Sync the new platforms
+            // Sync the new categories and platforms
+            $post->categories()->sync($categoryIds);
             $post->platforms()->sync($platformIds);
 
             $tags = explode(',', $request->input('tags'));
@@ -196,6 +202,7 @@ class AdminPostsController extends Controller
             $post->tags()->sync($tags_ids);        
             
             // Save the changes to the post
+            $post->video_game_id = $selectedVideoGame;
             $post->other_id = $selectedOther;
             $post->save();    
 

@@ -33,7 +33,7 @@ class VideoGameController extends Controller
                     });
                 })
                 ->orWhere(function ($categoryQuery) {
-                    $categoryQuery->whereDoesntHave('category', function ($categoryQuery) {
+                    $categoryQuery->whereDoesntHave('categories', function ($categoryQuery) {
                         $categoryQuery->where('name', 'uncategorized');
                     });
                 })
@@ -57,12 +57,12 @@ class VideoGameController extends Controller
         $recent_posts = Post::latest()
             ->where(function ($query) {
                 $query->where(function ($video_gameQuery) {
-                    $video_gameQuery->whereDoesntHave('category', function ($video_gameQuery) {
+                    $video_gameQuery->whereDoesntHave('video_game', function ($video_gameQuery) {
                         $video_gameQuery->where('name', 'uncategorized');
                     });
                 })
                 ->orWhere(function ($categoryQuery) {
-                    $categoryQuery->whereDoesntHave('category', function ($categoryQuery) {
+                    $categoryQuery->whereDoesntHave('categories', function ($categoryQuery) {
                         $categoryQuery->where('name', 'uncategorized');
                     });
                 })

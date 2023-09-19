@@ -18,7 +18,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title' , 'slug', 'excerpt', 'body', 'user_id', 'video_game_id', 'category_id', 'other_id', 'author_thumbnail', 'approved'];
+    protected $fillable = ['title' , 'slug', 'excerpt', 'body', 'user_id', 'video_game_id', 'other_id', 'author_thumbnail', 'approved'];
 
     public function author()
     {
@@ -30,9 +30,9 @@ class Post extends Model
         return $this->hasMany(Post::class);
     }
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class, 'post_category', 'post_id', 'category_id');
     }
 
     public function video_game()
@@ -41,8 +41,8 @@ class Post extends Model
     }
     
     public function platforms()
-    {
-        return $this->belongsToMany(Platform::class, 'post_platform');
+    {        
+        return $this->belongsToMany(Category::class, 'post_platform', 'post_id', 'platform_id');
     }
 
     public function other()
@@ -52,7 +52,7 @@ class Post extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
     }
 
     public function comments()

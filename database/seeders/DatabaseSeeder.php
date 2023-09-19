@@ -87,6 +87,12 @@ class DatabaseSeeder extends Seeder
 
         foreach($posts as $post) 
         {
+            $categories_ids = [];
+            $categories_ids[] = \App\Models\Platform::all()->random()->id;
+            $categories_ids[] = \App\Models\Platform::all()->random()->id;
+            $categories_ids[] = \App\Models\Platform::all()->random()->id;
+            $post->categories()->sync( $categories_ids );
+
             $platforms_ids = [];
             $platforms_ids[] = \App\Models\Platform::all()->random()->id;
             $platforms_ids[] = \App\Models\Platform::all()->random()->id;

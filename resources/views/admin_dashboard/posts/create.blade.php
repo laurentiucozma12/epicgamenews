@@ -100,13 +100,15 @@
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
-                                                        <select name="category_id" required class="single-select">
+                                                        <select id="categories" name="categories[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
                                                             @foreach ($categories as $category)
-                                                                <option value="{{ $category->id }}">{{ $category->name }}</option>                                                                
+                                                                <option value="{{ $category->id }}" {{ $category->name === 'uncategorized' ? 'selected' : '' }}>
+                                                                    {{ $category->name }}
+                                                                </option>     
                                                             @endforeach
                                                         </select>
 
-                                                        @error('category_id')
+                                                        @error('categories')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
 
@@ -117,7 +119,7 @@
                                                 </div>
                                             </div>
                                         </div>                                            
-                                    </div>                                    
+                                    </div>
 
                                     <div class="mb-3">
                                         <label class="form-label">Post Platform</label>                                        
@@ -135,7 +137,7 @@
                                                             <option value="6">Nintendo</option>
                                                         </select>
 
-                                                        @error('platform_id')
+                                                        @error('platforms')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
 
