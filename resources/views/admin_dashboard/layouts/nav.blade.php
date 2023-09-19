@@ -7,7 +7,6 @@
                 <h4 class="title-route">EGN</h4>
             </a>
         </div>
-        <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i></div>
     </div>
     <!--navigation-->
     <ul class="metismenu" id="menu">

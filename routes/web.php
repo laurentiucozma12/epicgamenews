@@ -100,6 +100,9 @@ Route::get('/about', AboutController::class)->name('about');
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+Route::get('/tag/uncategorized', function () {
+    abort(404);
+});
 Route::get('/tag/{tag:name}', [TagController::class, 'show'])->name('tags.show');
 
 Route::middleware('auth')->group(function () {
