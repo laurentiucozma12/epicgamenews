@@ -195,21 +195,27 @@ h1, h2, h3, h4, h5, h6, figure {
       display: inline;
       font-weight: 400;
       text-transform: uppercase; }
-      .colorlib-nav ul li a {
-        position: relative;
-        font-size: 13px;
+      .colorlib-nav ul .font-changed {
+        transition-duration: 0.5s;
+        font-size: 13px; 
         /* !!!!!! 
         I changed padding: 0 12px; After this, the dropdown buttons will fade too fast so you will not be able to click 
         the other button. Example in layout navbar, after you log in that button will be your username. If you hover it the 
         dropdown will be activated. If it has padding 0 you will not be able to click on the buttons related to that dropdown. 
         !!!!!! */
-        padding: 30px 12px;
+        padding: 30px 12px; }     
+        .colorlib-nav ul .font-changed-btn {
+          font-size: 12px; } 
+        .colorlib-nav ul .first-btn {
+          margin-bottom: 10px !important; } 
+      .colorlib-nav ul li a {
+        position: relative;
         font-weight: 400;
         color: var(--white);
         -webkit-transition: 0.5s;
         -o-transition: 0.5s;
         transition: 0.5s; }
-        .colorlib-nav ul li a:hover {
+        .colorlib-nav ul .font-changed:hover {
           color: var(--light-blue-1); }          
         @media screen and (max-width: 1200px) { 
           .colorlib-nav ul li a {             
@@ -217,7 +223,7 @@ h1, h2, h3, h4, h5, h6, figure {
       .colorlib-nav ul li.has-dropdown {
         position: relative; }
         .colorlib-nav ul li.has-dropdown .dropdown {
-          width: 140px;
+          min-width: 125px;
           -webkit-box-shadow: 0px 14px 33px -9px var(--light-blue-1);
           -moz-box-shadow: 0px 14px 33px -9px var(--light-blue-1);
           box-shadow: 0px 14px 33px -9px var(--light-blue-1);
@@ -229,7 +235,7 @@ h1, h2, h3, h4, h5, h6, figure {
           left: 0;
           text-align: left;
           background: var(--black);
-          padding: 20px;
+          padding: 10px;
           -webkit-border-radius: 4px;
           -moz-border-radius: 4px;
           -ms-border-radius: 4px;
@@ -262,7 +268,7 @@ h1, h2, h3, h4, h5, h6, figure {
               text-transform: none;
               font-size: 13px;
               letter-spacing: 0; }
-              .colorlib-nav ul li.has-dropdown .dropdown li a:hover {
+              .colorlib-nav ul li.has-dropdown .dropdown a:hover {
                 color: var(--light-blue-1); }
         .colorlib-nav ul li.has-dropdown:hover a, .colorlib-nav ul li.has-dropdown:focus a {
           color: var(--white); }

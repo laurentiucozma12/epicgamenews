@@ -74,13 +74,13 @@
 					<div class="nav-layout-btns-container text-right menu-1">
 
 						<ul>
-							<a href="{{ route('home') }}"><li>Home</li></a>
-							<a href="{{ route('video_games.index') }}"><li>Video Games</li></a>
-							<a href="{{ route('categories.index') }}"><li>Categories</li></a>
-							<a href="{{ route('platforms.index') }}"><li>Platforms</li></a>
-							<a href="{{ route('about') }}"><li>About</li></a>
-							<a href="{{ route('contact.create') }}"><li>Contact</li></a>
-							<a href="{{ route('others.index') }}"><li>Others</li></a>
+							<a href="{{ route('home') }}"><li class="font-changed">Home</li></a>
+							<a href="{{ route('video_games.index') }}"><li class="font-changed">Video Games</li></a>
+							<a href="{{ route('categories.index') }}"><li class="font-changed">Categories</li></a>
+							<a href="{{ route('platforms.index') }}"><li class="font-changed">Platforms</li></a>
+							<a href="{{ route('about') }}"><li class="font-changed">About</li></a>
+							<a href="{{ route('contact.create') }}"><li class="font-changed">Contact</li></a>
+							<a href="{{ route('others.index') }}"><li class="font-changed">Others</li></a>
 
 							@guest
 								<li class="btn-cta"><a href="{{ route('login') }}"><span>Login</span></a></li>
@@ -88,12 +88,12 @@
 
 							@auth
 								<li class="has-dropdown">
-									<a class="cursor-pointer">{{ auth()->user()->name }}<span class="caret"></span></a>
+									<a class="cursor-pointer font-changed">{{ auth()->user()->name }}<span class="caret"></span></a>
 									<ul class="dropdown">										
 										<a 
 										onclick="event.preventDefault();
 										document.getElementById('nav-logout-form').submit()"
-										href=""><li>Logout</li></a>
+										href=""><li class="font-changed-btn first-btn">Logout</li></a>
 
 										<form id="nav-logout-form" action="{{ route('logout') }}" method="POST">
 											@csrf
@@ -101,7 +101,7 @@
 									
 										@if ( auth()->user()->role->name !== "user" )
 											<a href="{{ route('admin.index') }}" target="_blank">
-												<li>Admin Dasboard</li>
+												<li class="font-changed-btn">Admin Dasboard</li>
 											</a>
 										@endif
 									</ul>
