@@ -74,13 +74,13 @@
 					<div class="nav-layout-btns-container text-right menu-1">
 
 						<ul>
-							<li><a href="{{ route('home') }}">Home</a></li>
-							<li><a href="{{ route('video_games.index') }}">Video Games</a></li>
-							<li><a href="{{ route('categories.index') }}">Categories</a></li>
-							<li><a href="{{ route('platforms.index') }}">Platforms</a></li>
-							<li><a href="{{ route('about') }}">About</a></li>
-							<li><a href="{{ route('contact.create') }}">Contact</a></li>
-							<li><a href="{{ route('others.index') }}">Others</a></li>
+							<a href="{{ route('home') }}"><li>Home</li></a>
+							<a href="{{ route('video_games.index') }}"><li>Video Games</li></a>
+							<a href="{{ route('categories.index') }}"><li>Categories</li></a>
+							<a href="{{ route('platforms.index') }}"><li>Platforms</li></a>
+							<a href="{{ route('about') }}"><li>About</li></a>
+							<a href="{{ route('contact.create') }}"><li>Contact</li></a>
+							<a href="{{ route('others.index') }}"><li>Others</li></a>
 
 							@guest
 								<li class="btn-cta"><a href="{{ route('login') }}"><span>Login</span></a></li>
@@ -89,22 +89,21 @@
 							@auth
 								<li class="has-dropdown">
 									<a class="cursor-pointer">{{ auth()->user()->name }}<span class="caret"></span></a>
-									<ul class="dropdown">
-										<li>
-											<a 
-											onclick="event.preventDefault();
-											document.getElementById('nav-logout-form').submit()"
-											href="">Logout</a>
+									<ul class="dropdown">										
+										<a 
+										onclick="event.preventDefault();
+										document.getElementById('nav-logout-form').submit()"
+										href=""><li>Logout</li></a>
 
-											<form id="nav-logout-form" action="{{ route('logout') }}" method="POST">
-												@csrf
-											</form>
-										</li>
-										<li>
-											@if ( auth()->user()->role->name !== "user" )
-												<a href="{{ route('admin.index') }}" target="_blank">Admin Dasboard</a>
-											@endif
-										</li>
+										<form id="nav-logout-form" action="{{ route('logout') }}" method="POST">
+											@csrf
+										</form>
+									
+										@if ( auth()->user()->role->name !== "user" )
+											<a href="{{ route('admin.index') }}" target="_blank">
+												<li>Admin Dasboard</li>
+											</a>
+										@endif
 									</ul>
 								</li>
 							@endauth								

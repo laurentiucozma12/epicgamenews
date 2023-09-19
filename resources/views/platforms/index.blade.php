@@ -16,10 +16,6 @@
                                 <div class="text category-container">
                                     <h3 class="heading"><a href="{{ route('platforms.show', $platform) }}"> {{ $platform->name }} </a></h3>
                                     <div class="meta">
-                                        <div><a class='date' href="#"><span class="icon-calendar"></span> {{ $platform->created_at->diffForHumans() }} </a></div>
-                                        <br>
-                                        <div><a href="#"><span class="icon-user2"></span> {{ $platform->name }} </a></div>
-                                        <br>
                                         <div class="posts-count">
                                             <a href="{{ route('platforms.show', $platform) }}">
                                                 <span class="icon-tag"></span> {{ $platform->posts_count . (($platform->posts_count === 1) ? ' Article' : ' Articles') }}

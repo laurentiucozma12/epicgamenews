@@ -16,10 +16,6 @@
                                 <div class="text category-container">
                                     <h3 class="heading"><a href="{{ route('others.show', $other) }}"> {{ $other->name }} </a></h3>
                                     <div class="meta">
-                                        <div><a class='date' href="#"><span class="icon-calendar"></span> {{ $other->created_at->diffForHumans() }} </a></div>
-                                        <br>
-                                        <div><a href="#"><span class="icon-user2"></span> {{ $other->name }} </a></div>
-                                        <br>
                                         <div class="posts-count">
                                             <a href="{{ route('others.show', $other) }}">
                                                 <span class="icon-tag"></span> {{ $other->posts_count . (($other->posts_count === 1) ? ' Article' : ' Articles') }}

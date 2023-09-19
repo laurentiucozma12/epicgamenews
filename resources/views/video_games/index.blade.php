@@ -17,10 +17,6 @@
                                 <div class="text category-container">
                                     <h3 class="heading"><a href="{{ route('video_games.show', $video_game) }}"> {{ ucfirst($video_game->name) }} </a></h3>
                                     <div class="meta">
-                                        <div><a class='date' href="#"><span class="icon-calendar"></span> {{ $video_game->created_at->diffForHumans() }} </a></div>
-                                        <br>
-                                        <div><a href="#"><span class="icon-user2"></span> {{ $video_game->user->name }} </a></div>
-                                        <br>
                                         <div class="posts-count">
                                             <a href="{{ route('video_games.show', $video_game) }}">
                                                 <span class="icon-tag"></span> {{ $video_game->posts_count . (($video_game->posts_count === 1) ? ' Article' : ' Articles') }}
