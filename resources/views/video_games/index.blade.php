@@ -15,7 +15,7 @@
                         <div class='col-md-3'>
                             <div class="block-21 d-flex animate-box post">
                                 <div class="text category-container">
-                                    <h3 class="heading"><a href="{{ route('video_games.show', $video_game) }}"> {{ $video_game->name }} </a></h3>
+                                    <h3 class="heading"><a href="{{ route('video_games.show', $video_game) }}"> {{ ucfirst($video_game->name) }} </a></h3>
                                     <div class="meta">
                                         <div><a class='date' href="#"><span class="icon-calendar"></span> {{ $video_game->created_at->diffForHumans() }} </a></div>
                                         <br>

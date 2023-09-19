@@ -15,7 +15,7 @@
                         <div class='col-md-3'>
                             <div class="block-21 d-flex animate-box post">
                                 <div class="text category-container">
-                                    <h3 class="heading"><a href="{{ route('categories.show', $category) }}"> {{ $category->name }} </a></h3>
+                                    <h3 class="heading"><a href="{{ route('categories.show', $category) }}"> {{ ucfirst($category->name) }} </a></h3>
                                     <div class="meta">
                                         <div><a class='date' href="#"><span class="icon-calendar"></span> {{ $category->created_at->diffForHumans() }} </a></div>
                                         <br>

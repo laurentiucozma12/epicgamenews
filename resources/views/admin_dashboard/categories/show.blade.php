@@ -62,7 +62,14 @@
                                     </td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->excerpt }}</td>
-                                    <td>{{ $post->category->name }}</td>
+                                    <td>
+                                        @foreach($post->categories as $category)
+                                            {{ $category->name }}
+                                            @if (!$loop->last)
+                                                , 
+                                            @endif
+                                        @endforeach    
+                                    </td>
                                     <td>
                                         @foreach($post->platforms as $platform)
                                             {{ $platform->name }}

@@ -31,11 +31,14 @@
                         <table class="table mb-0">
                             <thead class="table-light">
                                 <tr>
-                                    <th>Post</th>
+                                    <th>Id</th>
                                     <th>Status</th>
                                     <th>Title</th>
                                     <th>Excerpt</th>
-                                    <th>Category</th>
+                                    <th>Video Game</th>
+                                    <th>Categories</th>
+                                    <th>Platforms</th>
+                                    <th>Other</th>
                                     <th>Created at</th>
                                     <th>Views</th>
                                     <th>Actions</th>
@@ -51,7 +54,6 @@
                                             </div>
                                         </div>
                                     </td>
-
                                     <td>                                        
                                         @if($post->approved)
                                             <div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Approved</div>
@@ -59,15 +61,28 @@
                                             <div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Not Approved</div>
                                         @endif
                                     </td>
-
-                                    <td>{{ $post->title }} </td>
-
+                                    <td>{{ $post->title }}</td>
                                     <td>{{ $post->excerpt }}</td>
-                                    <td>{{ $post->category->name }}</td>
+                                    <td>{{ $post->video_game->name }}</td>
+                                    <td>
+                                        @foreach($post->categories as $category)
+                                            {{ $category->name }}
+                                            @if (!$loop->last)
+                                                , 
+                                            @endif
+                                        @endforeach    
+                                    </td>
+                                    <td>                                        
+                                        @foreach($post->platforms as $platform)
+                                            {{ $platform->name }}
+                                            @if (!$loop->last)
+                                                , 
+                                            @endif
+                                        @endforeach      
+                                    </td>
+                                    <td>{{ $post->other->name }}</td>
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
-
-                                    <td>{{ $post->views }}</td>
-                                    
+                                    <td>{{ $post->views }}</td>                                    
                                     <td>
                                         <div class="d-flex order-actions">
                                             <a href="{{ route('admin.posts.edit', $post) }}" class=""><i class='bx bxs-edit'></i></a>

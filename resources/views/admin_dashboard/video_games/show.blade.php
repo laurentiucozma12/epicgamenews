@@ -31,12 +31,12 @@
                     <table class="table mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>Posts</th>
+                                <th>Id</th>
                                 <th>Status</th>
-                                <th>Post Title</th>
-                                <th>Post Excerpt</th>
+                                <th>Title</th>
+                                <th>Excerpt</th>
                                 <th>Video Game</th>
-                                <th>Category</th>
+                                <th>Categories</th>
                                 <th>Platforms</th>
                                 <th>Other</th>
                                 <th>Created at</th>
@@ -64,14 +64,21 @@
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->excerpt }}</td>
                                     <td>{{ $post->video_game->name }}</td>
-                                    <td>{{ $post->category->name }}</td>
                                     <td>
+                                        @foreach($post->categories as $category)
+                                            {{ $category->name }}
+                                            @if (!$loop->last)
+                                                , 
+                                            @endif
+                                        @endforeach    
+                                    </td>
+                                    <td>                                        
                                         @foreach($post->platforms as $platform)
                                             {{ $platform->name }}
                                             @if (!$loop->last)
                                                 , 
                                             @endif
-                                        @endforeach    
+                                        @endforeach      
                                     </td>
                                     <td>{{ $post->other->name }}</td>
                                     <td>{{ $post->created_at->diffForHumans() }}</td>

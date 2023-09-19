@@ -34,7 +34,8 @@
                                 <th>Status</th>
                                 <th>Title</th>
                                 <th>Excerpt</th>
-                                <th>Category</th>
+                                <th>Video Game</th>
+                                <th>Categories</th>
                                 <th>Platforms</th>
                                 <th>Other</th>
                                 <th>Created at</th>
@@ -61,7 +62,15 @@
                                     </td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->excerpt }}</td>
-                                    <td>{{ $post->category->name }}</td>
+                                    <td>{{ $post->video_game->name }}</td>
+                                    <td>
+                                        @foreach($post->categories as $category)
+                                            {{ $category->name }}
+                                            @if (!$loop->last)
+                                                , 
+                                            @endif
+                                        @endforeach    
+                                    </td>
                                     <td>                                        
                                         @foreach($post->platforms as $platform)
                                             {{ $platform->name }}
