@@ -21,10 +21,10 @@
         
         <div class="card">
             <div class="card-body p-4">
-                <h5 class="card-title">Edit Video Game: {{ $videoGame->name }}</h5>
+                <h5 class="card-title">Edit Video Game: {{ $video_game->name }}</h5>
                 <hr/>
 
-                <form action="{{ route('admin.videogames.update', $videoGame) }}" method="POST">
+                <form action="{{ route('admin.video_games.update', $video_game) }}" method="POST">
                     @csrf
                     @method('PATCH')
 
@@ -35,7 +35,7 @@
 
                                     <div class="mb-3">
                                         <label for="inputProductTitle" class="form-label">Video Game Name</label>
-                                        <input type="text" value='{{ old("name", $videoGame->name) }}' name="name" required class="form-control" id="inputProductTitle">
+                                        <input type="text" value='{{ old("name", $video_game->name) }}' name="name" required class="form-control" id="inputProductTitle">
 
                                         @error('name')
                                             <p class="text-danger">{{ $message }}</p>
@@ -44,7 +44,7 @@
 
                                     <div class="mb-3">
                                         <label for="inputProductTitle" class="form-label">Video Game Slug</label>
-                                        <input type="text" value='{{ old("slug", $videoGame->slug) }}' name="slug" required class="form-control" id="inputProductTitle">
+                                        <input type="text" value='{{ old("slug", $video_game->slug) }}' name="slug" required class="form-control" id="inputProductTitle">
 
                                         @error('slug')
                                             <p class="text-danger">{{ $message }}</p>
@@ -56,7 +56,7 @@
 
                                         <a 
                                         class='btn btn-danger'
-                                        onclick="event.preventDefault();document.getElementById('delete_videogame_{{ $videoGame->id }}').submit()"
+                                        onclick="event.preventDefault();document.getElementById('delete_video_game_{{ $video_game->id }}').submit()"
                                         href="#">
                                             Delete Video Game
                                         </a>
@@ -68,7 +68,7 @@
                     </div>                        
                 </form><!--end form-->
                 
-                <form id="delete_videogame_{{ $videoGame->id }}" method="POST" action="{{ route('admin.videogames.destroy', $videoGame) }}">
+                <form id="delete_video_game_{{ $video_game->id }}" method="POST" action="{{ route('admin.video_games.destroy', $video_game) }}">
                     @csrf
                     @method('DELETE')
                 </form>

@@ -37,8 +37,8 @@
             </a>
 
             <ul>
-                <li> <a href="{{ route('admin.videogames.index') }}"><i class="bx bx-right-arrow-alt"></i>All Video Games</a></li>
-                <li> <a href="{{ route('admin.videogames.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Video Games</a></li>                          
+                <li> <a href="{{ route('admin.video_games.index') }}"><i class="bx bx-right-arrow-alt"></i>All Video Games</a></li>
+                <li> <a href="{{ route('admin.video_games.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Video Games</a></li>                          
             </ul>
         </li>
 

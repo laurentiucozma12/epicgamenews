@@ -11,8 +11,8 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                         </li>                        
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.videogames.index') }}">All Video Games</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.videogames.show', $videoGame) }}">Related Posts to this Video Game {{ $videoGame->name }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.index') }}">All Video Games</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.show', $video_game) }}">Related Posts to this Video Game {{ $video_game->name }}</a></li>
                     </ol>
                 </nav>
             </div>
@@ -25,7 +25,7 @@
                     <div class="position-relative">
                         <input type="text" class="form-control ps-5 radius-30" placeholder="Search Order"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
                     </div>
-                    <div class="ms-auto"><a href="{{ route('admin.videogames.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New Video Game</a></div>
+                    <div class="ms-auto"><a href="{{ route('admin.video_games.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New Video Game</a></div>
                 </div>
                 <div class="table-responsive">
                     <table class="table mb-0">
@@ -63,7 +63,7 @@
                                     </td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->excerpt }}</td>
-                                    <td>{{ $post->videoGame->name }}</td>
+                                    <td>{{ $post->video_game->name }}</td>
                                     <td>{{ $post->category->name }}</td>
                                     <td>
                                         @foreach($post->platforms as $platform)

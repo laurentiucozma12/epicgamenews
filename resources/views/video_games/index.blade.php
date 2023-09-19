@@ -11,19 +11,19 @@
 
                 <div class="row">
 
-                    @forelse ($videoGames as $videoGame)
+                    @forelse ($video_games as $video_game)
                         <div class='col-md-3'>
                             <div class="block-21 d-flex animate-box post">
                                 <div class="text category-container">
-                                    <h3 class="heading"><a href="{{ route('videogames.show', $videoGame) }}"> {{ $videoGame->name }} </a></h3>
+                                    <h3 class="heading"><a href="{{ route('video_games.show', $video_game) }}"> {{ $video_game->name }} </a></h3>
                                     <div class="meta">
-                                        <div><a class='date' href="#"><span class="icon-calendar"></span> {{ $videoGame->created_at->diffForHumans() }} </a></div>
+                                        <div><a class='date' href="#"><span class="icon-calendar"></span> {{ $video_game->created_at->diffForHumans() }} </a></div>
                                         <br>
-                                        <div><a href="#"><span class="icon-user2"></span> {{ $videoGame->user->name }} </a></div>
+                                        <div><a href="#"><span class="icon-user2"></span> {{ $video_game->user->name }} </a></div>
                                         <br>
                                         <div class="posts-count">
-                                            <a href="{{ route('videogames.show', $videoGame) }}">
-                                                <span class="icon-tag"></span> {{ $videoGame->posts_count . (($videoGame->posts_count === 1) ? ' Article' : ' Articles') }}
+                                            <a href="{{ route('video_games.show', $video_game) }}">
+                                                <span class="icon-tag"></span> {{ $video_game->posts_count . (($video_game->posts_count === 1) ? ' Article' : ' Articles') }}
                                             </a>
                                         </div>
                                     </div>
@@ -36,7 +36,7 @@
                     
                 </div>
 
-				{{ $videoGames->onEachSide(1)->links('pagination::bootstrap-4') }}
+				{{ $video_games->onEachSide(1)->links('pagination::bootstrap-4') }}
 
 			</div>
 		</div>

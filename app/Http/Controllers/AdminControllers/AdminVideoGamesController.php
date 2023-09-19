@@ -13,26 +13,30 @@ class AdminVideoGamesController extends Controller
 {
     private $rules = [
         'name' => 'required|min:3|max:30',
-        'slug' => 'required|unique:videogames,slug',
+        'slug' => 'required|unique:video_games,slug',
     ];
     
     public function index()
     {
-        $videoGames = VideoGame::with('user')->paginate(100);
+        $video_games = VideoGame::with('user')->paginate(100);
         
-        return view('admin_dashboard.videogames.index', [
-            'videoGames' => $videoGames
+        return view('admin_dashboard.video_games.index', [
+            'video_games' => $video_games
         ]);
     }
 
     public function create()
     {
-        return view('admin_dashboard.videogames.create');
+        return view('admin_dashboard.video_games.create');
     }
 
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate($this->rules);
+        $validated['user_id'] = auth()->id();
+        VideoGame::create($validated);
+
+        return redirect()->route('admin.video_games.create')->with('success', 'Video Game has been Created');
     }
 
     public function show(string $id)

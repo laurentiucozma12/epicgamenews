@@ -75,7 +75,7 @@
 
 						<ul>
 							<li><a href="{{ route('home') }}">Home</a></li>
-							<li><a href="{{ route('videogames.index') }}">Video Games</a></li>
+							<li><a href="{{ route('video_games.index') }}">Video Games</a></li>
 							<li><a href="{{ route('categories.index') }}">Categories</a></li>
 							<li><a href="{{ route('platforms.index') }}">Platforms</a></li>
 							<li><a href="{{ route('about') }}">About</a></li>

@@ -48,7 +48,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     Route::resource('posts', AdminPostsController::class)->except('show');
     Route::post('upload_tinymce_image', [TinyMCEController::class, 'upload_tinymce_image'])->name('upload_tinymce_image');
     
-    Route::resource('videogames', AdminVideoGamesController::class);
+    Route::resource('video_games', AdminVideoGamesController::class);
     Route::resource('categories', AdminCategoriesController::class);
     Route::resource('platforms', AdminPlatformsController::class)->only(['index', 'show']);
     Route::resource('others', AdminOthersController::class)->only(['index', 'show']);
@@ -71,11 +71,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
 // Front User Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/videogames/uncategorized', function () {
+Route::get('/video_games/uncategorized', function () {
     abort(404);
 });
-Route::get('/videogames', [VideoGameController::class, 'index'])->name('videogames.index');
-Route::get('/videogames/{videoGame:slug}', [VideoGameController::class, 'show'])->name('videogames.show');
+Route::get('/video_games', [VideoGameController::class, 'index'])->name('video_games.index');
+Route::get('/video_games/{video_game:slug}', [VideoGameController::class, 'show'])->name('video_games.show');
 
 Route::get('/categories/uncategorized', function () {
     abort(404);

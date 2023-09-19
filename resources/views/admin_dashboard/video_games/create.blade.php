@@ -11,8 +11,8 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.videogames.index') }}">All Video Games</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.videogames.create') }}">Add New Video Game</a></li>    
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.index') }}">All Video Games</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.create') }}">Add New Video Game</a></li>    
                     </ol>
                 </nav>
             </div>
@@ -24,7 +24,7 @@
                 <h5 class="card-title">Add New Video Game</h5>
                 <hr/>
 
-                <form action="{{ route('admin.videogames.store') }}" method="POST">
+                <form action="{{ route('admin.video_games.store') }}" method="POST">
                     @csrf
 
                     <div class="form-body mt-4">
