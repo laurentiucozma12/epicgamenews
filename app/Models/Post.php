@@ -35,7 +35,7 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function videoGame()
+    public function video_game()
     {
         return $this->belongsTo(VideoGame::class);
     }

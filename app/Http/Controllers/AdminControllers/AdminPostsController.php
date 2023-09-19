@@ -22,6 +22,7 @@ class AdminPostsController extends Controller
         'slug' => 'required|max:150',
         'excerpt' => 'required|max:150',
         'category_id' => 'required|numeric',
+        'video_game_id' => 'required|numeric',
         'thumbnail' => 'required|image|dimensions:max_width=1800,max_height=900',
         'author_thumbnail' => 'nullable|max:150',
         'body' => 'required',
@@ -43,6 +44,7 @@ class AdminPostsController extends Controller
 
     public function store(Request $request)
     {
+        $selectedVideoGame = $request->input('video_game_id'); // 1 is uncategorized
         $selectedCategory = $request->input('category_id'); // 1 is uncategorized
         $selectedPlatforms = $request->input('platforms', []); // 1 is uncategorized
         $selectedOther = $request->input('other_id'); // 1 is uncategorized

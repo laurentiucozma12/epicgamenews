@@ -13,13 +13,12 @@ class VideoGame extends Model
 {
     use HasFactory;
 
-    protected $table = 'video_games';
-
     protected $fillable = ['name', 'slug', 'user_id'];
     
     public function posts()
     {
-        return $this->hasMany(Post::class, 'video_game_id');
+        // return $this->hasMany(Post::class, 'video_game_id');
+        return $this->hasMany(Post::class);
     }
 
     public function user()

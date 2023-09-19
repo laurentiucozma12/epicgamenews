@@ -12,7 +12,8 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Edit Video Game</li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.index') }}">All Video Games</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.edit', $video_game) }}">Edit Video Game {{ $video_game->name }}</a></li>
                     </ol>
                 </nav>
             </div>

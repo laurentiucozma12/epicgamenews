@@ -19,11 +19,10 @@ return new class extends Migration
             $table->string('author_thumbnail')->nullable();
             $table->text('body');
 
-            $table->foreignId('user_id');
-            $table->foreignId('video_game_id');
-            $table->foreignId('category_id');
+            $table->foreignId('user_id')->default(1);
+            $table->foreignId('video_game_id')->default(1);
+            $table->foreignId('category_id')->default(1);
             $table->foreignId('other_id')->default(1);
-
 
             $table->integer('views')->default(0);
             $table->boolean('approved')->default(false);
