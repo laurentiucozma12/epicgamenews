@@ -18,7 +18,7 @@ class AdminVideoGamesController extends Controller
     
     public function index()
     {
-        $video_games = VideoGame::with('user')->paginate(100);
+        $video_games = VideoGame::with('user')->orderBy('id', 'DESC')->paginate(100);
         
         return view('admin_dashboard.video_games.index', [
             'video_games' => $video_games
