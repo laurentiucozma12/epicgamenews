@@ -68,7 +68,7 @@
 
 						<a href="{{ route('home') }}" class="nav-layout-logo-container logo-route">
 							<img class="logo-new-game-news" src="{{ asset('storage/logo/logo-epic-game-news-25x25.png') }}"> 
-							<h1 class="title-route">Epic Game News</h1>
+							<h1 class="title-route"><b>Epic Game News</b></h1>
 						</a>
 
 					<div class="nav-layout-btns-container text-right menu-1">
@@ -83,7 +83,7 @@
 							<a href="{{ route('others.index') }}"><li class="font-changed">Others</li></a>
 
 							@guest
-								<li class="btn-cta"><a href="{{ route('login') }}"><span>Login</span></a></li>
+								<li class="btn-cta"><a href="{{ route('login') }}"><span class="login-page-btn">Login</span></a></li>
 							@endguest
 
 							@auth

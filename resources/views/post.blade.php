@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>{{ $post->title }}</h1>
+                <h1><b>{{ $post->title }}<b></h1>
             </div>
         </div>
         <div class="row">
@@ -28,7 +28,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <span> By {{ $post->author->name }} Published {{ $post->created_at->diffForHumans() }} </span>
+                <span> By {{ $post->author->name }}, published {{ $post->created_at->diffForHumans() }} </span>
             </div>
         </div>
         <div class="row">
@@ -55,7 +55,7 @@
                 <div class="row row-pb-lg animate-box">
                     <div class="col-md-12">
 
-                        <h2 class="colorlib-heading-2">{{ count($post->comments) }} Comments</h2>
+                        <h2 class="colorlib-heading-2"><b>{{ count($post->comments) }} Comments</b></h2>
 
                         @foreach($post->comments as $comment)
 
@@ -86,7 +86,7 @@
 
                         <x-blog.message :status="'success'"/>
 
-                        <h2 class="colorlib-heading-2">Comments</h2>
+                        <h2 class="colorlib-heading-2"><b>Comments</b></h2>
                         
                         @auth
                             <form  autocomplete="off" method="POST" action="{{ route('add_comment', $post) }}">

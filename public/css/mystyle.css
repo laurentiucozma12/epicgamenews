@@ -88,7 +88,9 @@ hr {
     height: 25px; }
 #colorlib-logo .logo-route .title-route,
 .admin-sidebar-header .title-route {
-    margin: 2.5px 0 0 5px; }
+    margin: 2.5px 0 0 5px;
+    font-family: "Rubik", Arial, sans-serif !important;
+    font-weight: 900; }
 .cursor-pointer {
     cursor: pointer; }
 /* Menu Toggle Button -  Mobile Screen */
@@ -229,8 +231,10 @@ hr {
     @media (max-width: 600px) {
     .post-container .text .heading {
         font-size: 25px; } }
-.post-container .text .heading:hover {
-    text-decoration: underline; }
+.post-container .text .heading a:hover{
+    text-decoration: underline;
+    color: var(--light-blue-1); 
+    text-decoration-color: var(--light-blue-1); }
 .post-container .text .excerpt {    
     font-size: 25px; 
     margin-bottom: 5px; }

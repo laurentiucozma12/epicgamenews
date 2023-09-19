@@ -16,7 +16,7 @@
 						class="link-img">
 						<img src="{{ asset( 'storage/' .$post->image->path. '' ) }}" class="post-thumbnail" alt=""></a>
 						<div class="text">
-							<h3 class="heading"><a href="{{ route('show', $post) }}"> {{ $post->title }} </a></h3>
+							<h3 class="heading"><a href="{{ route('show', $post) }}"><b> {{ $post->title }} </b></a></h3>
 							<p class="excerpt"> {{ \Str::limit($post->excerpt, 150) }} </p>
 							<div class="container-meta">
 								<div class="meta">

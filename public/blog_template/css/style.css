@@ -195,9 +195,15 @@ h1, h2, h3, h4, h5, h6, figure {
       display: inline;
       font-weight: 400;
       text-transform: uppercase; }
+      .colorlib-nav ul .login-page-btn {
+        font-size: 13px;
+        font-weight: 700; }
+      .colorlib-nav ul .login-page-btn:hover {
+        color: var(--black); }
       .colorlib-nav ul .font-changed {
         transition-duration: 0.5s;
         font-size: 13px; 
+        font-weight: 700;
         /* !!!!!! 
         I changed padding: 0 12px; After this, the dropdown buttons will fade too fast so you will not be able to click 
         the other button. Example in layout navbar, after you log in that button will be your username. If you hover it the 
@@ -205,7 +211,8 @@ h1, h2, h3, h4, h5, h6, figure {
         !!!!!! */
         padding: 30px 12px; }     
         .colorlib-nav ul .font-changed-btn {
-          font-size: 12px; } 
+          font-size: 12px;
+          font-weight: 700; } 
         .colorlib-nav ul .first-btn {
           margin-bottom: 10px !important; } 
       .colorlib-nav ul li a {
@@ -223,7 +230,7 @@ h1, h2, h3, h4, h5, h6, figure {
       .colorlib-nav ul li.has-dropdown {
         position: relative; }
         .colorlib-nav ul li.has-dropdown .dropdown {
-          min-width: 125px;
+          min-width: 140px;
           -webkit-box-shadow: 0px 14px 33px -9px var(--light-blue-1);
           -moz-box-shadow: 0px 14px 33px -9px var(--light-blue-1);
           box-shadow: 0px 14px 33px -9px var(--light-blue-1);
@@ -277,7 +284,7 @@ h1, h2, h3, h4, h5, h6, figure {
         color: var(--dark-1); }
         .colorlib-nav ul li.btn-cta a span {
           background: var(--white);
-          padding: 8px 15px;
+          padding: 3px 15px;
           display: -moz-inline-stack;
           display: inline-block;
           zoom: 1;
