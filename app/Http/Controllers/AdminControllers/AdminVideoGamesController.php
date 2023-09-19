@@ -5,59 +5,51 @@ namespace App\Http\Controllers\AdminControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Validation\Rule;
+
+use App\Models\VideoGame;
+
 class AdminVideoGamesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    private $rules = [
+        'name' => 'required|min:3|max:30',
+        'slug' => 'required|unique:videogames,slug',
+    ];
+    
     public function index()
     {
-        //
+        $videoGames = VideoGame::with('user')->paginate(100);
+        
+        return view('admin_dashboard.videogames.index', [
+            'videoGames' => $videoGames
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin_dashboard.videogames.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
