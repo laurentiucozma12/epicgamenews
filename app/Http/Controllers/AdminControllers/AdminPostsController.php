@@ -14,6 +14,7 @@ use App\Models\Platform;
 use App\Models\Other;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\VideoGame;
 
 class AdminPostsController extends Controller
 {
@@ -31,13 +32,14 @@ class AdminPostsController extends Controller
     public function index()
     {
         return view('admin_dashboard.posts.index', [
-            'posts' => Post::latest()->with(['category'])->paginate(100),
+            'posts' => Post::latest()->paginate(100),
         ]);
     }
 
     public function create()
     {
         return view('admin_dashboard.posts.create', [
+            'video_games' => VideoGame::all(),
             'categories' => Category::all(),
         ]);
     }
@@ -48,9 +50,12 @@ class AdminPostsController extends Controller
         $selectedCategory = $request->input('category_id'); // 1 is uncategorized
         $selectedPlatforms = $request->input('platforms', []); // 1 is uncategorized
         $selectedOther = $request->input('other_id'); // 1 is uncategorized
+        
+        if (($selectedVideoGame !== "1" && $selectedCategory !== "1" && $selectedPlatforms[0] !== '1' &&  $selectedOther === "1") 
+            // game name, categories of the game and plaforms that can be played on are required
+        || ($selectedVideoGame !== "1" && $selectedCategory === "1" && $selectedPlatforms[0] === '1' &&  $selectedOther !== "1")) {
+            // or game name and other if the article is about something else related to a game (like an anime/movie/etc. based on a game)
 
-        if (($selectedCategory !== "1" && $selectedPlatforms[0] !== '1' &&  $selectedOther === "1") 
-        || ($selectedCategory === "1" && $selectedPlatforms[0] === '1' &&  $selectedOther !== "1")) {
             $validated = $request->validate($this->rules);
             
             $validated['user_id'] = auth()->id();
@@ -95,11 +100,11 @@ class AdminPostsController extends Controller
             
             return redirect()->route('admin.posts.create')->with('success', 'Post has been created.');
         } else  {        
-            return redirect()->back()->withInput()->withErrors(['all_fields' => 
-                'Articles about games must be posted in category & platforms. Everything else in "other" section.
-                Also do not forget to remove "uncategorized" from platforms section after you choose at least one option.
-                Example 1: An article about Skyrim goes in RPG Category and PC, PlayStation, Xbox and other must be set on "uncategorized".
-                Example 2: An article about a Game Trailer/Movie/Game-Trailer/etc. goes in "Other" section, and Category and Platforms must be set on "uncategorized"
+            return redirect()->back()->withInput()->withErrors(['all_fields' => '
+                Articles must have a (video game, categories and platforms) OR (video game and others).
+                Also do not forget to remove "uncategorized" from categories and platforms section after you choose at least one option.
+                Example 1: An article about Witcher 3 goes in Witcher 3 (video game field), RPG & Action (categories field), PC & PlayStation & Xbox (platforms field), (and other filed must be set on "uncategorized").
+                Example 2: An article about Witcher from Netflix Series goes in goes in Witcher 3 (video game field), Series (other filed), (and the rest remain on uncategorized).
             ']);
         }
     }
@@ -128,6 +133,7 @@ class AdminPostsController extends Controller
         return view('admin_dashboard.posts.edit', [
             'post' => $post,
             'tags' => $tags,
+            'video_games' => VideoGame::pluck('name', 'id'),
             'categories' => Category::pluck('name', 'id'),
             'others' => Other::pluck('name', 'id'),
             'platforms' => $platforms,
@@ -137,15 +143,16 @@ class AdminPostsController extends Controller
 
     public function update(Request $request, Post $post)
     {
+        $selectedVideoGame = $request->input('video_game_id'); // 1 is uncategorized
         $selectedCategory = $request->input('category_id'); // 1 is uncategorized
         $selectedPlatforms = $request->input('platforms', []); // 1 is uncategorized
         $selectedOther = $request->input('other_id'); // 1 is uncategorized
         
-        if (($selectedCategory !== "1" && $selectedPlatforms[0] !== '1' &&  $selectedOther === "1") 
-            || ($selectedCategory === "1" && $selectedPlatforms[0] === '1' &&  $selectedOther !== "1")) {
-            // An article about a GAME must have 1 CATEGORY and at least 1 PLATFORM that is played on.
-            // If the article is about something else, it has to be posted in OTHER.
-            // Get the selected platform names from the request
+        if (($selectedVideoGame !== "1" && $selectedCategory !== "1" && $selectedPlatforms[0] !== '1' &&  $selectedOther === "1") 
+            // game name, categories of the game and plaforms that can be played on are required
+        || ($selectedVideoGame !== "1" && $selectedCategory === "1" && $selectedPlatforms[0] === '1' &&  $selectedOther !== "1")) {
+            // or game name and other if the article is about something else related to a game (like an anime/movie/etc. based on a game)
+
             $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1800,max_height=900';
             $validated = $request->validate($this->rules);
             $validated['approved'] = $request->input('approved') !== null;
@@ -194,11 +201,11 @@ class AdminPostsController extends Controller
 
             return redirect()->route('admin.posts.edit', $post)->with('success', 'Post has been updated with success');
         } else  {        
-            return redirect()->back()->withInput()->withErrors(['all_fields' => 
-                'Articles about games must be posted in category & platforms. Everything else in "other" section.
-                Also do not forget to remove "uncategorized" from platforms section after you choose at least one option.
-                Example 1: An article about Skyrim goes in RPG Category and PC, PlayStation, Xbox and other must be set on "uncategorized".
-                Example 2: An article about a Game Trailer/Movie/Game-Trailer/etc. goes in "Other" section, and Category and Platforms must be set on "uncategorized"
+            return redirect()->back()->withInput()->withErrors(['all_fields' => '
+                Articles must have a (video game, categories and platforms) OR (video game and others).
+                Also do not forget to remove "uncategorized" from categories and platforms section after you choose at least one option.
+                Example 1: An article about Witcher 3 goes in Witcher 3 (video game field), RPG & Action (categories field), PC & PlayStation & Xbox (platforms field), (and other filed must be set on "uncategorized").
+                Example 2: An article about Witcher from Netflix Series goes in goes in Witcher 3 (video game field), Series (other filed), (and the rest remain on uncategorized).
             ']);
         }
     }

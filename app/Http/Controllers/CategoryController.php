@@ -25,8 +25,13 @@ class CategoryController extends Controller
         }
 
         $posts = $category->posts()
-            ->where(function ($query) {
-                $query->where(function ($categoryQuery) {
+            ->where(function ($query) {                
+                $query->where(function ($video_gameQuery) {
+                    $video_gameQuery->whereDoesntHave('video_game', function ($video_gameQuery) {
+                        $video_gameQuery->where('name', 'uncategorized');
+                    });
+                })
+                ->orWhere(function ($categoryQuery) {
                     $categoryQuery->whereDoesntHave('category', function ($categoryQuery) {
                         $categoryQuery->where('name', 'uncategorized');
                     });
@@ -42,14 +47,20 @@ class CategoryController extends Controller
                     });
                 });
             })
+            ->latest()
             ->approved()
             ->withCount('comments')
             ->paginate(10);
 
         // SIDE_RECENT_POSTS Hide all posts that have all 3 (category/platform/other) set on uncategorized
         $recent_posts = Post::latest()
-            ->where(function ($query) {
-                $query->where(function ($categoryQuery) {
+            ->where(function ($query) {                
+                $query->where(function ($video_gameQuery) {
+                    $video_gameQuery->whereDoesntHave('video_game', function ($video_gameQuery) {
+                        $video_gameQuery->where('name', 'uncategorized');
+                    });
+                })
+                ->orWhere(function ($categoryQuery) {
                     $categoryQuery->whereDoesntHave('category', function ($categoryQuery) {
                         $categoryQuery->where('name', 'uncategorized');
                     });

@@ -12,19 +12,25 @@ class PostsController extends Controller
     public function show(Post $post)
     {       
         if (
+            ($post->video_game && $post->video_game->name === 'uncategorized') &&
             ($post->category && $post->category->name === 'uncategorized') &&
             ($post->platform && $post->platform->name === 'uncategorized') &&
             ($post->other && $post->other->name === 'uncategorized')
         ) {
-            // The post is uncategorized in all three categories, so deny access.
+            // The post is uncategorized in all fields, the access is denied.
             // You can return a response with an error message or a 404 page.
             abort(404);
         }
 
         // SIDE_RECENT_POSTS Hide all posts that have all 3 (category/platform/other) set on uncategorized
         $recent_posts = Post::latest()
-            ->where(function ($query) {
-                $query->where(function ($categoryQuery) {
+            ->where(function ($query) {                
+                $query->where(function ($video_gameQuery) {
+                    $video_gameQuery->whereDoesntHave('video_game', function ($video_gameQuery) {
+                        $video_gameQuery->where('name', 'uncategorized');
+                    });
+                })
+                ->orWhere(function ($categoryQuery) {
                     $categoryQuery->whereDoesntHave('category', function ($categoryQuery) {
                         $categoryQuery->where('name', 'uncategorized');
                     });

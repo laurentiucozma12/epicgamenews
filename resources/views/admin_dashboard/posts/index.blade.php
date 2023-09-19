@@ -34,6 +34,7 @@
                                 <th>Status</th>
                                 <th>Post Title</th>
                                 <th>Post Excerpt</th>
+                                <th>Video Game</th>
                                 <th>Category</th>
                                 <th>Platform</th>
                                 <th>Other</th>
@@ -61,7 +62,8 @@
                                     </td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->excerpt }}</td> 
-                                    <td>{{ optional($post->category)->name }}</td>
+                                    <td>{{ $post->video_game->name }}</td>
+                                    <td>{{ $post->category->name }}</td>
                                     <td>
                                         @foreach($post->platforms as $platform)
                                             {{ $platform->name }}
@@ -70,7 +72,7 @@
                                             @endif
                                         @endforeach
                                     </td>                                    
-                                    <td>{{ optional($post->other)->name }}</td>                                    
+                                    <td>{{ $post->other->name }}</td>                                    
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
                                     <td>{{ $post->views }}</td>
                                     <td>

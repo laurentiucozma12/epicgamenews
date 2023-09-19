@@ -48,6 +48,7 @@ class VideoGameController extends Controller
                     });
                 });
             })
+            ->latest()
             ->approved()
             ->withCount('comments')
             ->paginate(10);

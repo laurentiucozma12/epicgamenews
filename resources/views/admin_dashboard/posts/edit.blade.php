@@ -71,6 +71,31 @@
                                     </div>
 
                                     <div class="mb-3">
+                                        <label class="form-label">Post Video Game</label>                                        
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="rounded">
+                                                    <div class="mb-3">
+                                                        <select name="video_game_id" required class="single-select">
+                                                            @foreach ($video_games as $key => $video_game)
+                                                                <option {{ $post->video_game_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $video_game }}</option>                                                                
+                                                            @endforeach
+                                                        </select>
+
+                                                        @error('video_game_id')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+
+                                                        @if($errors->has('all_fields'))          
+                                                            <p class="text-danger">{{ $errors->first('all_fields') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                            
+                                    </div>
+
+                                    <div class="mb-3">
                                         <label class="form-label">Post Category</label>                                        
                                         <div class="card">
                                             <div class="card-body">
@@ -94,6 +119,7 @@
                                             </div>
                                         </div>                                            
                                     </div>
+
                                     <div class="mb-3">
                                         <label class="form-label">Post Platform</label>
                                         <div class="card">
@@ -117,7 +143,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>                                                            
+                                    </div>          
+
                                     <div class="mb-3">
                                         <label class="form-label">Post Other</label>                                        
                                         <div class="card">

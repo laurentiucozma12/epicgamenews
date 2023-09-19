@@ -21,8 +21,13 @@ class TagController extends Controller
     {        
         // Hide all posts that have all 3 (category/platform/other) set on uncategorized
         $posts = $tag->posts()
-            ->where(function ($query) {
-                $query->where(function ($categoryQuery) {
+            ->where(function ($query) {                
+                $query->where(function ($video_gameQuery) {
+                    $video_gameQuery->whereDoesntHave('video_game', function ($video_gameQuery) {
+                        $video_gameQuery->where('name', 'uncategorized');
+                    });
+                })
+                ->orWhere(function ($categoryQuery) {
                     $categoryQuery->whereDoesntHave('category', function ($categoryQuery) {
                         $categoryQuery->where('name', 'uncategorized');
                     });
@@ -38,14 +43,20 @@ class TagController extends Controller
                     });
                 });
             })
+            ->latest()
             ->approved()
             ->withCount('comments')
             ->paginate(10);
 
         // SIDE_RECENT_POSTS Hide all posts that have all 3 (category/platform/other) set on uncategorized
         $recent_posts = Post::latest()
-            ->where(function ($query) {
-                $query->where(function ($categoryQuery) {
+            ->where(function ($query) {                
+                $query->where(function ($video_gameQuery) {
+                    $video_gameQuery->whereDoesntHave('video_game', function ($video_gameQuery) {
+                        $video_gameQuery->where('name', 'uncategorized');
+                    });
+                })
+                ->orWhere(function ($categoryQuery) {
                     $categoryQuery->whereDoesntHave('category', function ($categoryQuery) {
                         $categoryQuery->where('name', 'uncategorized');
                     });
@@ -65,17 +76,13 @@ class TagController extends Controller
             ->take(5)
             ->get();
             
-        $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
-        $platforms = Platform::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
-        $others = Other::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
+        $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->orderBy('posts_count', 'desc')->take(10)->get();
 
         return view('tags.show', [
             'tag' => $tag,
             'posts' => $posts,
             'recent_posts' => $recent_posts,
             'categories' => $categories,
-            'platforms' => $platforms,
-            'others' => $others,
         ]);
     }
 }
