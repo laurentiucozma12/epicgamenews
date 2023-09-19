@@ -232,6 +232,7 @@ hr {
     .post-container .text .heading {
         font-size: 25px; } }
 .post-container .text .heading a:hover{
+    transition: 1s;
     text-decoration: underline;
     color: var(--light-blue-1); 
     text-decoration-color: var(--light-blue-1); }
