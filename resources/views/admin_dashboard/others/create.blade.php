@@ -11,8 +11,8 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.index') }}">All Video Games</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.create') }}">Add New Video Game</a></li>    
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.others.index') }}">All Others</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.others.create') }}">Add New Other</a></li>    
                     </ol>
                 </nav>
             </div>
@@ -21,10 +21,10 @@
         
         <div class="card">
             <div class="card-body p-4">
-                <h5 class="card-title">Add New Video Game</h5>
+                <h5 class="card-title">Add New Other</h5>
                 <hr/>
 
-                <form action="{{ route('admin.video_games.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.others.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-body mt-4">
@@ -33,7 +33,7 @@
                                 <div class="border border-3 p-4 rounded">
 
                                     <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Video Game Name</label>
+                                        <label for="inputProductTitle" class="form-label">Other Name</label>
                                         <input type="text" value='{{ old("name") }}' name="name" required class="form-control" id="inputProductTitle">
 
                                         @error('name')
@@ -42,18 +42,18 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Video Game Slug</label>
+                                        <label for="inputProductTitle" class="form-label">Other Slug</label>
                                         <input type="text" value='{{ old("slug") }}' name="slug" required class="form-control" id="inputProductTitle">
 
                                         @error('slug')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
-                                    </div>                                    
+                                    </div>
 
                                     <div class="mb-3">
                                         <div class="card">
                                             <div class="card-body">
-                                                <label for="file" class="form-label">Video Game Thumbnail (Max 1920 x 1080)</label>
+                                                <label for="file" class="form-label">Other Thumbnail (Max 1920 x 1080)</label>
                                                 <input id='thumbnail' required name='thumbnail' id="file" type="file">
 
                                                 @error('thumbnail')
@@ -63,8 +63,8 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <button class='btn btn-primary' type='submit'>Add Video Game</button>
+                                    
+                                    <button class='btn btn-primary' type='submit'>Add Other</button>
 
                                 </div>
                             </div>                            

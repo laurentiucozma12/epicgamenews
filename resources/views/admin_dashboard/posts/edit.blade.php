@@ -184,7 +184,7 @@
                                             <div class="com-md-8">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <label for="file" class="form-label">Post Thumbnail (Max 1800 x 900)</label>
+                                                        <label for="file" class="form-label">Post Thumbnail (Max 1920 x 1080)</label>
                                                         <input id='thumbnail' name='thumbnail' id="file" type="file">
 
                                                         @error('thumbnail')
@@ -198,7 +198,7 @@
                                                 <img style="width: 540px" src="/storage/{{ $post->image ? $post->image->path : 'placeholders/thumbnail_placeholder.jpg' }}" class="img-responsive" alt="Post Thumbnail">
                                             </div>
                                         </div>
-                                    </div>                                    
+                                    </div>
 
                                     <div class="mb-3">
                                         <label for="inputAuthorThumbnail" class="form-label">Author of the Thumbnail</label>

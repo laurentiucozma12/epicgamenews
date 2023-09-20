@@ -9,8 +9,7 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
-                        </li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a></li>
                         <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.posts.index') }}">All Posts</a></li>
                     </ol>
                 </nav>
@@ -32,6 +31,7 @@
                             <tr>
                                 <th>All Post</th>
                                 <th>Status</th>
+                                <th>Thumbnail</th>
                                 <th>Post Title</th>
                                 <th>Post Excerpt</th>
                                 <th>Video Game</th>
@@ -60,8 +60,11 @@
                                             <div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Not Approved</div>
                                         @endif
                                     </td>
+                                    <td>
+                                        <img width='50' src="{{ $post->image ? asset('storage/' . $post->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="">    
+                                    </td>
                                     <td>{{ $post->title }}</td>
-                                    <td>{{ $post->excerpt }}</td> 
+                                    <td>{{ $post->excerpt }}</td>
                                     <td>{{ $post->video_game->name }}</td>
                                     <td>
                                         @foreach($post->categories as $category)

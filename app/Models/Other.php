@@ -12,19 +12,20 @@ class Other extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['name', 'slug', 'user_id'];
 
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
     
-    protected static function boot()
+    public function user()
     {
-        parent::boot();
-
-        static::creating(function ($other) {
-            $other->slug = Str::slug($other->name);
-        });
+        return $this->belongsTo(User::class);
+    }
+    
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 }

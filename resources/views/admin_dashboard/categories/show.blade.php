@@ -31,11 +31,12 @@
                     <table class="table mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>Posts</th>
+                                <th>Id</th>
                                 <th>Status</th>
-                                <th>Post Title</th>
-                                <th>Post Excerpt</th>
-                                <th>Category</th>
+                                <th>Title</th>
+                                <th>Excerpt</th>
+                                <th>Video Game</th>
+                                <th>Categories</th>
                                 <th>Platforms</th>
                                 <th>Other</th>
                                 <th>Created at</th>
@@ -62,6 +63,7 @@
                                     </td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->excerpt }}</td>
+                                    <td>{{ $post->video_game->name }}</td>
                                     <td>
                                         @foreach($post->categories as $category)
                                             {{ $category->name }}

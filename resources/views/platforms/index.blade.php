@@ -13,16 +13,23 @@
                     @forelse ($platforms as $platform)
                         <div class='col-md-3'>
                             <div class="block-21 d-flex animate-box post">
-                                <div class="text category-container">
-                                    <h3 class="heading"><a href="{{ route('platforms.show', $platform) }}"> {{ $platform->name }} </a></h3>
-                                    <div class="meta">
-                                        <div class="posts-count">
-                                            <a href="{{ route('platforms.show', $platform) }}">
-                                                <span class="icon-tag"></span> {{ $platform->posts_count . (($platform->posts_count === 1) ? ' Article' : ' Articles') }}
-                                            </a>
+
+                                <div class="category-container">
+                                    <a href="{{ route('others.show', $platform) }}">
+                                        <div class="image-container">
+                                            <img src="{{ asset( 'storage/' .$platform->image->path. '') }}">
                                         </div>
-                                    </div>
+                                        <div class="text-container">
+                                            <h3 class="heading">{{ $platform->name }}</h3>
+                                            <div class="meta">
+                                                <div class="posts-count">
+                                                    <span class="icon-tag"></span> {{ $platform->posts_count . (($platform->posts_count === 1) ? ' Article' : ' Articles') }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
+
                             </div>
                         </div>
                     @empty

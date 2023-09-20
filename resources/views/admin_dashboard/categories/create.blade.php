@@ -24,7 +24,7 @@
                 <h5 class="card-title">Add New Category</h5>
                 <hr/>
 
-                <form action="{{ route('admin.categories.store') }}" method="POST">
+                <form action="{{ route('admin.categories.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-body mt-4">
@@ -48,6 +48,20 @@
                                         @error('slug')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <label for="file" class="form-label">Other Thumbnail (Max 1920 x 1080)</label>
+                                                <input id='thumbnail' required name='thumbnail' id="file" type="file">
+
+                                                @error('thumbnail')
+                                                    <p class='text-danger'>{{ $message }}</p>
+                                                @enderror
+
+                                            </div>
+                                        </div>
                                     </div>
                                     
                                     <button class='btn btn-primary' type='submit'>Add Category</button>

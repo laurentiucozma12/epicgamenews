@@ -10,8 +10,7 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
-                        </li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a></li>
                         <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.index') }}">All Video Games</a></li>       
                     </ol>
                 </nav>
@@ -32,6 +31,7 @@
                         <thead class="table-light">
                             <tr>
                                 <th>Id</th>
+                                <th>Thumbnail</th>
                                 <th>Name</th>
                                 <th>Creator</th>
                                 <th>Related Posts</th>
@@ -49,13 +49,15 @@
                                             </div>
                                         </div>
                                     </td>
+                                    <td>
+                                        <img width='50' src="{{ $video_game->image ? asset('storage/' . $video_game->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="">    
+                                    </td>
                                     <td>{{ $video_game->name }}</td>
                                     <td>{{ $video_game->user->name }}</td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.video_games.show', $video_game) }}">Related Posts</a>    
                                     </td>
                                     <td>{{ $video_game->created_at->diffForHumans() }}</td>
-
                                     <td>
                                         <div class="d-flex order-actions">
                                             <a href="{{ route('admin.video_games.edit', $video_game) }}" ><i class='bx bxs-edit'></i></a>

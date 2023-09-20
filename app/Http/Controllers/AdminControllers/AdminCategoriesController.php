@@ -11,8 +11,9 @@ use App\Models\Category;
 class AdminCategoriesController extends Controller
 {
     private $rules = [
-        'name' => 'required|min:3|max:30',
-        'slug' => 'required|unique:categories,slug'
+        'name' => 'required|min:2|max:30',
+        'slug' => 'required|unique:categories,slug',
+        'thumbnail' => 'required|image|dimensions:max_width=1920,max_height=1080',
     ];
     
     public function index()
@@ -33,7 +34,20 @@ class AdminCategoriesController extends Controller
     {
         $validated = $request->validate($this->rules);
         $validated['user_id'] = auth()->id();
-        Category::create($validated);
+        $category = Category::create($validated);
+        
+        if ($request->has('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
+            $filename = $thumbnail->getClientOriginalName();
+            $file_extension = $thumbnail->getClientOriginalExtension();
+            $path = $thumbnail->store('categories', 'public');
+    
+            $category->image()->create([
+                'name' => $filename,
+                'extension' => $file_extension,
+                'path' => $path,
+            ]);
+        }
 
         return redirect()->route('admin.categories.create')->with('success', 'Category has been Created');
     }

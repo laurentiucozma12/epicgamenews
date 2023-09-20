@@ -12,8 +12,9 @@ use App\Models\VideoGame;
 class AdminVideoGamesController extends Controller
 {
     private $rules = [
-        'name' => 'required|min:3|max:30',
-        'slug' => 'required|unique:video_games,slug',
+        'name' => 'required|min:2|max:30',
+        'slug' => 'required|unique:others,slug',
+        'thumbnail' => 'required|image|dimensions:max_width=1920,max_height=1080',
     ];
     
     public function index()
@@ -30,11 +31,25 @@ class AdminVideoGamesController extends Controller
         return view('admin_dashboard.video_games.create');
     }
 
+
     public function store(Request $request)
     {
         $validated = $request->validate($this->rules);
         $validated['user_id'] = auth()->id();
-        VideoGame::create($validated);
+        $video_game = VideoGame::create($validated);
+        
+        if ($request->has('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
+            $filename = $thumbnail->getClientOriginalName();
+            $file_extension = $thumbnail->getClientOriginalExtension();
+            $path = $thumbnail->store('video_games', 'public');
+    
+            $video_game->image()->create([
+                'name' => $filename,
+                'extension' => $file_extension,
+                'path' => $path,
+            ]);
+        }
 
         return redirect()->route('admin.video_games.create')->with('success', 'Video Game has been Created');
     }

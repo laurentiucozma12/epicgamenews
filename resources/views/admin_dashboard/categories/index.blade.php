@@ -32,6 +32,7 @@
                         <thead class="table-light">
                             <tr>
                                 <th>Id</th>
+                                <th>Thumbnail</th>
                                 <th>Name</th>
                                 <th>Creator</th>
                                 <th>Related Posts</th>
@@ -48,6 +49,9 @@
                                                 <h6 class="mb-0 font-14">{{ $category->id }}</h6>
                                             </div>
                                         </div>
+                                    </td>
+                                    <td>
+                                        <img width='50' src="{{ $category->image ? asset('storage/' . $category->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="">    
                                     </td>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->user->name }}</td>

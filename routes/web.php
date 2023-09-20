@@ -50,8 +50,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     
     Route::resource('video_games', AdminVideoGamesController::class);
     Route::resource('categories', AdminCategoriesController::class);
-    Route::resource('platforms', AdminPlatformsController::class)->only(['index', 'show']);
-    Route::resource('others', AdminOthersController::class)->only(['index', 'show']);
+    Route::resource('platforms', AdminPlatformsController::class);
+    Route::resource('others', AdminOthersController::class);
 
     Route::resource('tags', AdminTagsController::class)->only(['index', 'show', 'destroy']);
     Route::resource('comments', AdminCommentsController::class)->except('show');

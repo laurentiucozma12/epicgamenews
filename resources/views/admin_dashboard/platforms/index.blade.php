@@ -10,8 +10,7 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
-                        </li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a></li>
                         <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.platforms.index') }}">All Platforms</a></li>       
                     </ol>
                 </nav>
@@ -31,10 +30,13 @@
                         <thead class="table-light">
                             <tr>
                                 <th>Id</th>
+                                <th>Thumbnail</th>
                                 <th>Name</th>
+                                <th>Creator</th>
                                 <th>Slug</th>
                                 <th>Related Posts</th>
                                 <th>Created at</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,12 +49,26 @@
                                             </div>
                                         </div>
                                     </td>
+                                    <td>
+                                        <img width='50' src="{{ $platform->image ? asset('storage/' . $platform->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="">    
+                                    </td>
                                     <td>{{ $platform->name }}</td>
-                                    <td>{{ $platform->name }}</td>
+                                    <td>{{ $platform->user->name }}</td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.platforms.show', $platform) }}">Related Posts</a>    
                                     </td>
                                     <td>{{ $platform->created_at->diffForHumans() }}</td>
+                                    <td>
+                                        <div class="d-flex order-actions">
+                                            <a href="{{ route('admin.platforms.edit', $platform) }}" ><i class='bx bxs-edit'></i></a>
+                                            <a href="#" onclick="event.preventDefault(); document.getElementById('delete_form_{{ $platform->id }}').submit()" class="ms-3"><i class='bx bxs-trash'></i></a>
+                                        
+                                            <form method="POST" action="{{ route('admin.platforms.destroy', $platform) }}" id="delete_form_{{ $platform->id }}">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

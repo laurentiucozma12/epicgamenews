@@ -52,6 +52,27 @@
                                         @enderror
                                     </div>
                                     
+                                    <div class="mb-3">
+                                        <div class="row">
+                                            <div class="com-md-8">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <label for="file" class="form-label">Category Thumbnail (Max 1920 x 1080)</label>
+                                                        <input id='thumbnail' name='thumbnail' id="file" type="file">
+
+                                                        @error('thumbnail')
+                                                            <p class='text-danger'>{{ $message }}</p>
+                                                        @enderror
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="com-md-4">
+                                                <img style="width: 540px" src="/storage/{{ $category->image ? $category->image->path : 'placeholders/thumbnail_placeholder.jpg' }}" class="img-responsive" alt="Post Thumbnail">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="update-delete-btn-container">
                                         <button class='btn btn-primary' type='submit'>Update Category</button>
 

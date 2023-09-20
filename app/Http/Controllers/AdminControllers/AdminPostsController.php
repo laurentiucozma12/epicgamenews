@@ -15,6 +15,7 @@ use App\Models\Other;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\VideoGame;
+use PhpParser\Node\Expr\AssignOp\Plus;
 
 class AdminPostsController extends Controller
 {
@@ -23,7 +24,7 @@ class AdminPostsController extends Controller
         'slug' => 'required|max:150',
         'excerpt' => 'required|max:150',
         'video_game_id' => 'required|numeric',
-        'thumbnail' => 'required|image|dimensions:max_width=1800,max_height=900',
+        'thumbnail' => 'required|image|dimensions:max_width=1920,max_height=1080',
         'author_thumbnail' => 'nullable|max:150',
         'body' => 'required',
     ];
@@ -40,6 +41,8 @@ class AdminPostsController extends Controller
         return view('admin_dashboard.posts.create', [
             'video_games' => VideoGame::all(),            
             'categories' => Category::all(),
+            'platforms' => Platform::all(),
+            'others' => Other::all(),
         ]);
     }
 
@@ -157,7 +160,7 @@ class AdminPostsController extends Controller
         || ($selectedVideoGame !== "1" && $selectedCategories[0] === "1" && $selectedPlatforms[0] === '1' &&  $selectedOther !== "1")) {
             // or game name and other if the article is about something else related to a game (like an anime/movie/etc. based on a game)
 
-            $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1800,max_height=900';
+            $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1920,max_height=1080';
             $validated = $request->validate($this->rules);
             $validated['approved'] = $request->input('approved') !== null;
             

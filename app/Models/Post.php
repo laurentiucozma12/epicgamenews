@@ -29,15 +29,15 @@ class Post extends Model
     {
         return $this->hasMany(Post::class);
     }
+    
+    public function video_game()
+    {
+        return $this->belongsTo(VideoGame::class);
+    }
 
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'post_category', 'post_id', 'category_id');
-    }
-
-    public function video_game()
-    {
-        return $this->belongsTo(VideoGame::class);
     }
     
     public function platforms()

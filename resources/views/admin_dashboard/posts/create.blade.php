@@ -118,7 +118,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>                                            
+                                        </div>
                                     </div>
 
                                     <div class="mb-3">
@@ -127,14 +127,12 @@
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
-                                                        
                                                         <select id="platforms" name="platforms[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
-                                                            <option value="1" selected>uncategorized</option>
-                                                            <option value="2">PC Games</option>
-                                                            <option value="3">PlayStation</option>
-                                                            <option value="4">Xbox</option>
-                                                            <option value="5">Mobile</option>
-                                                            <option value="6">Nintendo</option>
+                                                            @foreach ($platforms as $platform)
+                                                                <option value="{{ $platform->id }}" {{ $platform->name === 'uncategorized' ? 'selected' : '' }}>
+                                                                    {{ $platform->name }}
+                                                                </option>     
+                                                            @endforeach
                                                         </select>
 
                                                         @error('platforms')
@@ -147,7 +145,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>                                            
+                                        </div>
                                     </div>
 
                                     <div class="mb-3">
@@ -157,26 +155,22 @@
                                                 <div class="rounded">
                                                     <div class="mb-3">
                                                         <select name="other_id" required class="single-select">
-                                                            <option value="1" selected>uncategorized</option>
-                                                            <option value="2">Game Trailers</option>
-                                                            <option value="3">Anime</option>
-                                                            <option value="4">Cartoons</option>
-                                                            <option value="5">Movies</option>
-                                                            <option value="6">Series</option>
-                                                            <option value="7">Lists</option>
+                                                            @foreach ($others as $other)
+                                                                <option value="{{ $other->id }}">{{ $other->name }}</option>                                                                
+                                                            @endforeach
                                                         </select>
 
                                                         @error('other_id')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
 
-                                                        @if($errors->has('all_fields'))          
+                                                        @if($errors->has('all_fields'))
                                                             <p class="text-danger">{{ $errors->first('all_fields') }}</p>
                                                         @endif
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>                                            
+                                        </div>
                                     </div>
 
                                     <div class="mb-3">
@@ -191,7 +185,7 @@
                                     <div class="mb-3">
                                         <div class="card">
                                             <div class="card-body">
-                                                <label for="file" class="form-label">Post Thumbnail (Max 1800 x 900)</label>
+                                                <label for="file" class="form-label">Post Thumbnail (Max 1920 x 1080)</label>
                                                 <input id='thumbnail' required name='thumbnail' id="file" type="file">
 
                                                 @error('thumbnail')

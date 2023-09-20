@@ -12,19 +12,20 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.index') }}">All Video Games</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.edit', $video_game) }}">Edit Video Game {{ $video_game->name }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.platforms.index') }}">All Platforms</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.platforms.edit', $platform) }}">Edit Platform {{ $platform->name }}</a></li>
                     </ol>
                 </nav>
             </div>
         </div>
         <!--end breadcrumb-->
+        
         <div class="card">
             <div class="card-body p-4">
-                <h5 class="card-title">Edit Video Game: {{ $video_game->name }}</h5>
+                <h5 class="card-title">Edit Platform: {{ $platform->name }}</h5>
                 <hr/>
 
-                <form action="{{ route('admin.video_games.update', $video_game) }}" method="POST">
+                <form action="{{ route('admin.platforms.update', $platform) }}" method="POST">
                     @csrf
                     @method('PATCH')
 
@@ -34,8 +35,8 @@
                                 <div class="border border-3 p-4 rounded">
 
                                     <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Video Game Name</label>
-                                        <input type="text" value='{{ old("name", $video_game->name) }}' name="name" required class="form-control" id="inputProductTitle">
+                                        <label for="inputProductTitle" class="form-label">Platform Name</label>
+                                        <input type="text" value='{{ old("name", $platform->name) }}' name="name" required class="form-control" id="inputProductTitle">
 
                                         @error('name')
                                             <p class="text-danger">{{ $message }}</p>
@@ -43,20 +44,20 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Video Game Slug</label>
-                                        <input type="text" value='{{ old("slug", $video_game->slug) }}' name="slug" required class="form-control" id="inputProductTitle">
+                                        <label for="inputProductTitle" class="form-label">Platform Slug</label>
+                                        <input type="text" value='{{ old("slug", $platform->slug) }}' name="slug" required class="form-control" id="inputProductTitle">
 
                                         @error('slug')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
-                                    
+
                                     <div class="mb-3">
                                         <div class="row">
                                             <div class="com-md-8">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <label for="file" class="form-label">Video Game Thumbnail (Max 1920 x 1080)</label>
+                                                        <label for="file" class="form-label">Platform Thumbnail (Max 1920 x 1080)</label>
                                                         <input id='thumbnail' name='thumbnail' id="file" type="file">
 
                                                         @error('thumbnail')
@@ -67,19 +68,19 @@
                                                 </div>
                                             </div>
                                             <div class="com-md-4">
-                                                <img style="width: 540px" src="/storage/{{ $video_game->image ? $video_game->image->path : 'placeholders/thumbnail_placeholder.jpg' }}" class="img-responsive" alt="Post Thumbnail">
+                                                <img style="width: 540px" src="/storage/{{ $platform->image ? $platform->image->path : 'placeholders/thumbnail_placeholder.jpg' }}" class="img-responsive" alt="Post Thumbnail">
                                             </div>
                                         </div>
                                     </div>
-
+                                    
                                     <div class="update-delete-btn-container">
-                                        <button class='btn btn-primary' type='submit'>Update Video Game</button>
+                                        <button class='btn btn-primary' type='submit'>Update Platform</button>
 
                                         <a 
                                         class='btn btn-danger'
-                                        onclick="event.preventDefault();document.getElementById('delete_video_game_{{ $video_game->id }}').submit()"
+                                        onclick="event.preventDefault();document.getElementById('delete_platform_{{ $platform->id }}').submit()"
                                         href="#">
-                                            Delete Video Game
+                                            Delete Platform
                                         </a>
                                     </div>
 
@@ -89,7 +90,7 @@
                     </div>                        
                 </form><!--end form-->
                 
-                <form id="delete_video_game_{{ $video_game->id }}" method="POST" action="{{ route('admin.video_games.destroy', $video_game) }}">
+                <form id="delete_platform_{{ $platform->id }}" method="POST" action="{{ route('admin.platforms.destroy', $platform) }}">
                     @csrf
                     @method('DELETE')
                 </form>

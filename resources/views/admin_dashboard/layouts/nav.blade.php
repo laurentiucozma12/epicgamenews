@@ -43,7 +43,7 @@
 
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-menu'></i></div>
+                <div class="parent-icon"><i class='bx bx-category'></i></div>
                 <div class="menu-title">Categories</div>
             </a>
 
@@ -54,21 +54,27 @@
         </li>
 
         <li>
-            <li>
-                <a href="{{ route('admin.platforms.index') }}">
-                    <div class="parent-icon"><i class="bx bx-right-arrow-alt"></i></div>
-                    <div class="menu-title">Platforms</div>
-                </a>
-            </li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-mouse'></i></div>
+                <div class="menu-title">Platforms</div>
+            </a>
+
+            <ul>
+                <li> <a href="{{ route('admin.platforms.index') }}"><i class="bx bx-right-arrow-alt"></i>All Platforms</a></li>
+                <li> <a href="{{ route('admin.platforms.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Platform</a></li>                          
+            </ul>
         </li>
 
         <li>
-            <li>
-                <a href="{{ route('admin.others.index') }}">
-                    <div class="parent-icon"><i class="bx bx-right-arrow-alt"></i></div>
-                    <div class="menu-title">Others</div>
-                </a>
-            </li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-movie'></i></div>
+                <div class="menu-title">Others</div>
+            </a>
+
+            <ul>
+                <li> <a href="{{ route('admin.others.index') }}"><i class="bx bx-right-arrow-alt"></i>All Others</a></li>
+                <li> <a href="{{ route('admin.others.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Other</a></li>                          
+            </ul>
         </li>
 
         <li>

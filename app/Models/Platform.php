@@ -12,7 +12,7 @@ class Platform extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['name', 'slug', 'user_id'];
 
     public function posts()
     {
@@ -26,5 +26,15 @@ class Platform extends Model
         static::creating(function ($platform) {
             $platform->slug = Str::slug($platform->name);
         });
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 }
