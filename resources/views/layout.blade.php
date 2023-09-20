@@ -114,13 +114,6 @@
 			</div>
 		</div>
 	</nav>
-	<aside id="colorlib-hero">
-		<div class="flexslider">
-			<ul class="slides">
-				{{-- This aside is used for spacing around navbar --}}
-			</ul>
-		</div>
-	</aside>
 	{{-- END OF NAVBAR --}}
 
 	{{-- CONTENT OF THE PAGE --}}

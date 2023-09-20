@@ -6,6 +6,7 @@
     --blue-2: #5bc0de;
     --blue-3: #46b8da;
     --dark-1: #161616;
+    --dark-2: #111111;
     --dark-gray: #202020;
     --gray-1: #313131;
     --green-1: #5cb85c;
@@ -88,11 +89,23 @@ hr {
     height: 25px; }
 #colorlib-logo .logo-route .title-route,
 .admin-sidebar-header .title-route {
-    margin: 2.5px 0 0 5px;
+    margin: 0 0 0 5px !important;
     font-family: "Rubik", Arial, sans-serif !important;
     font-weight: 900; }
 .cursor-pointer {
     cursor: pointer; }
+/* Menu - PC Screen */
+.colorlib-nav {
+    background-color: var(--dark-2);
+    position: static !important;
+    margin-bottom: 3em; }
+    @media screen and (max-width: 776px) {
+        .top-menu .container {
+            padding: 0;}
+        .colorlib-nav {
+            margin-bottom: 1em; } }
+.colorlib-blog {
+    padding: 0; }
 /* Menu Toggle Button -  Mobile Screen */
 .colorlib-nav-toggle.colorlib-nav-white > i,
 .colorlib-nav-toggle:focus.colorlib-nav-white > i,
@@ -230,6 +243,7 @@ hr {
     margin: 0; }
     @media (max-width: 600px) {
     .post-container .text .heading {
+        margin-top: 0.5rem;
         font-size: 25px; } }
 .post-container .text .heading a:hover{
     transition: 1s;
