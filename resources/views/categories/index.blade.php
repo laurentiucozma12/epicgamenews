@@ -16,7 +16,7 @@
                             <div class="block-21 d-flex animate-box post">
 
                                 <div class="category-container">
-                                    <a href="{{ route('others.show', $category) }}">
+                                    <a href="{{ route('categories.show', $category) }}">
                                         <div class="image-container">
                                             <img src="{{ asset( 'storage/' .$category->image->path. '') }}">
                                         </div>
