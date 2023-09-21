@@ -25,7 +25,7 @@
                 <h5 class="card-title">Edit Category: {{ $category->name }}</h5>
                 <hr/>
 
-                <form action="{{ route('admin.categories.update', $category) }}" method="POST">
+                <form action="{{ route('admin.categories.update', $category) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 

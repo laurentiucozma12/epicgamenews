@@ -24,7 +24,7 @@
                 <h5 class="card-title">Edit Video Game: {{ $video_game->name }}</h5>
                 <hr/>
 
-                <form action="{{ route('admin.video_games.update', $video_game) }}" method="POST">
+                <form action="{{ route('admin.video_games.update', $video_game) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 

@@ -68,4 +68,40 @@ class AdminOthersController extends Controller
             'other' => $other
         ]);
     }
+
+    public function update(Request $request, Other $other)
+    {
+        $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1920,max_height=1080';
+        $this->rules['slug'] = ['required', Rule::unique('others')->ignore($other)];
+        $validated = $request->validate($this->rules);
+        $other->update($validated);
+        
+        if ($request->has('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
+            $filename = $thumbnail->getClientOriginalName();
+            $file_extension = $thumbnail->getClientOriginalExtension();
+            $path = $thumbnail->store('images', 'public');
+
+            $other->image()->update([
+                'name' => $filename,
+                'extension' => $file_extension,
+                'path' => $path,
+            ]);
+        }
+
+        return redirect()->route('admin.others.edit', $other)->with('success', 'Video Game has been Updated');
+    }
+
+    public function destroy(Other $other)
+    {
+        $default_category_id = Other::where('name', 'uncategorized')->first()->id;
+
+        if ($other->name === 'uncategorized')
+            abort('404');
+
+        $other->posts()->update(['category_id' => $default_category_id]);
+
+        $other->delete();
+        return redirect()->route('admin.others.index')->with('success', 'Video Game has been Deleted');
+    }
 }

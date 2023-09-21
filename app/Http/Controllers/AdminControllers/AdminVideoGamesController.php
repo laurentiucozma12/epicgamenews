@@ -4,7 +4,6 @@ namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use Illuminate\Validation\Rule;
 
 use App\Models\VideoGame;
@@ -73,9 +72,23 @@ class AdminVideoGamesController extends Controller
 
     public function update(Request $request, VideoGame $video_game)
     {
+        $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1920,max_height=1080';
         $this->rules['slug'] = ['required', Rule::unique('video_games')->ignore($video_game)];
         $validated = $request->validate($this->rules);
         $video_game->update($validated);
+        
+        if ($request->has('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
+            $filename = $thumbnail->getClientOriginalName();
+            $file_extension = $thumbnail->getClientOriginalExtension();
+            $path = $thumbnail->store('images', 'public');
+
+            $video_game->image()->update([
+                'name' => $filename,
+                'extension' => $file_extension,
+                'path' => $path,
+            ]);
+        }
 
         return redirect()->route('admin.video_games.edit', $video_game)->with('success', 'Video Game has been Updated');
     }

@@ -23,7 +23,7 @@
                 <h5 class="card-title">Edit Other: {{ $other->name }}</h5>
                 <hr/>
 
-                <form action="{{ route('admin.others.update', $other) }}" method="POST">
+                <form action="{{ route('admin.others.update', $other) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 

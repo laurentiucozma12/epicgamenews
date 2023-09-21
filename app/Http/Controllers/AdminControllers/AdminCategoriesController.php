@@ -71,9 +71,23 @@ class AdminCategoriesController extends Controller
 
     public function update(Request $request, Category $category)
     {
+        $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1920,max_height=1080';
         $this->rules['slug'] = ['required', Rule::unique('categories')->ignore($category)];
         $validated = $request->validate($this->rules);
         $category->update($validated);
+        
+        if ($request->has('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
+            $filename = $thumbnail->getClientOriginalName();
+            $file_extension = $thumbnail->getClientOriginalExtension();
+            $path = $thumbnail->store('images', 'public');
+
+            $category->image()->update([
+                'name' => $filename,
+                'extension' => $file_extension,
+                'path' => $path,
+            ]);
+        }
 
         return redirect()->route('admin.categories.edit', $category)->with('success', 'Category has been Updated');
     }
