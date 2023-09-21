@@ -47,7 +47,7 @@ class AdminUsersController extends Controller
             
             $filename = $image->getClientOriginalName();
             $file_extension = $image->getClientOriginalExtension();
-            $path = $image->store('images', 'public');
+            $path = $image->store('users', 'public');
 
             $user->image()->create([
                 'name' => $filename,
@@ -95,7 +95,7 @@ class AdminUsersController extends Controller
             $image = $request->file('image');
             $filename = $image->getClientOriginalName();
             $file_extension = $image->getClientOriginalExtension();
-            $path = $image->store('images', 'public');
+            $path = $image->store('users', 'public');
 
             $user->image()->create([
                 'name' => $filename,
