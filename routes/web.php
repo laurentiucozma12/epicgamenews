@@ -65,6 +65,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     Route::post('about', [AdminAboutController::class, 'update'])->name('about.update');
     
     Route::get('storagelink', [AdminStorageLinkController::class, 'storageLink'])->name('storageLink');
+    
 });
 
 // Front User Routes
