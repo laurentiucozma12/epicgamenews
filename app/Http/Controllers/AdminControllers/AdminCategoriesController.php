@@ -80,7 +80,7 @@ class AdminCategoriesController extends Controller
             $thumbnail = $request->file('thumbnail');
             $filename = $thumbnail->getClientOriginalName();
             $file_extension = $thumbnail->getClientOriginalExtension();
-            $path = $thumbnail->store('images', 'public');
+            $path = $thumbnail->store('categories', 'public');
 
             $category->image()->update([
                 'name' => $filename,

@@ -25,7 +25,7 @@
                 <h5 class="card-title">Edit Platform: {{ $platform->name }}</h5>
                 <hr/>
 
-                <form action="{{ route('admin.platforms.update', $platform) }}" method="POST">
+                <form action="{{ route('admin.platforms.update', $platform) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 

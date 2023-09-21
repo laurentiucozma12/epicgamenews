@@ -46,11 +46,50 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
 
     Route::resource('posts', AdminPostsController::class)->except('show');
     Route::post('upload_tinymce_image', [TinyMCEController::class, 'upload_tinymce_image'])->name('upload_tinymce_image');
-    
-    Route::resource('video_games', AdminVideoGamesController::class);
-    Route::resource('categories', AdminCategoriesController::class);
-    Route::resource('platforms', AdminPlatformsController::class);
-    Route::resource('others', AdminOthersController::class);
+
+    Route::prefix('video_games')->group(function () {
+        Route::get('/', [AdminVideoGamesController::class, 'index'])->name('video_games.index');
+        Route::get('/create', [AdminVideoGamesController::class, 'create'])->name('video_games.create');
+        Route::post('/', [AdminVideoGamesController::class, 'store'])->name('video_games.store');
+        Route::get('/{video_game}/edit', [AdminVideoGamesController::class, 'edit'])->name('video_games.edit');
+        Route::put('/{video_game}', [AdminVideoGamesController::class, 'update'])->name('video_games.update');
+        Route::patch('/{video_game}', [AdminVideoGamesController::class, 'update']);
+        Route::delete('/{video_game}', [AdminVideoGamesController::class, 'destroy'])->name('video_games.destroy');
+        Route::get('/{video_game}', [AdminVideoGamesController::class, 'show'])->name('video_games.show');
+    });
+
+    Route::prefix('categories')->group(function () {
+        Route::get('/', [AdminCategoriesController::class, 'index'])->name('categories.index');
+        Route::get('/create', [AdminCategoriesController::class, 'create'])->name('categories.create');
+        Route::post('/', [AdminCategoriesController::class, 'store'])->name('categories.store');
+        Route::get('/{category}/edit', [AdminCategoriesController::class, 'edit'])->name('categories.edit');
+        Route::put('/{category}', [AdminCategoriesController::class, 'update'])->name('categories.update');
+        Route::patch('/{category}', [AdminCategoriesController::class, 'update']);
+        Route::delete('/{category}', [AdminCategoriesController::class, 'destroy'])->name('categories.destroy');
+        Route::get('/{category}', [AdminCategoriesController::class, 'show'])->name('categories.show');
+    });
+
+    Route::prefix('platforms')->group(function () {
+        Route::get('/', [AdminPlatformsController::class, 'index'])->name('platforms.index');
+        Route::get('/create', [AdminPlatformsController::class, 'create'])->name('platforms.create');
+        Route::post('/', [AdminPlatformsController::class, 'store'])->name('platforms.store');
+        Route::get('/{platform}/edit', [AdminPlatformsController::class, 'edit'])->name('platforms.edit');
+        Route::put('/{platform}', [AdminPlatformsController::class, 'update'])->name('platforms.update');
+        Route::patch('/{platform}', [AdminPlatformsController::class, 'update']);
+        Route::delete('/{platform}', [AdminPlatformsController::class, 'destroy'])->name('platforms.destroy');
+        Route::get('/{platform}', [AdminPlatformsController::class, 'show'])->name('platforms.show');
+    });
+
+    Route::prefix('others')->group(function () {
+        Route::get('/', [AdminOthersController::class, 'index'])->name('others.index');
+        Route::get('/create', [AdminOthersController::class, 'create'])->name('others.create');
+        Route::post('/', [AdminOthersController::class, 'store'])->name('others.store');
+        Route::get('/{other}/edit', [AdminOthersController::class, 'edit'])->name('others.edit');
+        Route::put('/{other}', [AdminOthersController::class, 'update'])->name('others.update');
+        Route::patch('/{other}', [AdminOthersController::class, 'update']);
+        Route::delete('/{other}', [AdminOthersController::class, 'destroy'])->name('others.destroy');
+        Route::get('/{other}', [AdminOthersController::class, 'show'])->name('others.show');
+    });
 
     Route::resource('tags', AdminTagsController::class)->only(['index', 'show', 'destroy']);
     Route::resource('comments', AdminCommentsController::class)->except('show');

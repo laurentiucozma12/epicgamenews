@@ -80,7 +80,7 @@ class AdminVideoGamesController extends Controller
             $thumbnail = $request->file('thumbnail');
             $filename = $thumbnail->getClientOriginalName();
             $file_extension = $thumbnail->getClientOriginalExtension();
-            $path = $thumbnail->store('images', 'public');
+            $path = $thumbnail->store('video_games', 'public');
 
             $video_game->image()->update([
                 'name' => $filename,
@@ -94,12 +94,12 @@ class AdminVideoGamesController extends Controller
 
     public function destroy(VideoGame $video_game)
     {
-        $default_category_id = VideoGame::where('name', 'uncategorized')->first()->id;
+        $default_video_game_id = VideoGame::where('name', 'uncategorized')->first()->id;
 
         if ($video_game->name === 'uncategorized')
             abort('404');
 
-        $video_game->posts()->update(['category_id' => $default_category_id]);
+        $video_game->posts()->update(['video_game_id' => $default_video_game_id]);
 
         $video_game->delete();
         return redirect()->route('admin.video_games.index')->with('success', 'Video Game has been Deleted');

@@ -94,12 +94,12 @@ class AdminOthersController extends Controller
 
     public function destroy(Other $other)
     {
-        $default_category_id = Other::where('name', 'uncategorized')->first()->id;
+        $default_other_id = Other::where('name', 'uncategorized')->first()->id;
 
         if ($other->name === 'uncategorized')
             abort('404');
 
-        $other->posts()->update(['category_id' => $default_category_id]);
+        $other->posts()->update(['other_id' => $default_other_id]);
 
         $other->delete();
         return redirect()->route('admin.others.index')->with('success', 'Video Game has been Deleted');

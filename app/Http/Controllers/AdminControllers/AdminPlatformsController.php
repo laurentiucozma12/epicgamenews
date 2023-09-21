@@ -80,7 +80,7 @@ class AdminPlatformsController extends Controller
             $thumbnail = $request->file('thumbnail');
             $filename = $thumbnail->getClientOriginalName();
             $file_extension = $thumbnail->getClientOriginalExtension();
-            $path = $thumbnail->store('images', 'public');
+            $path = $thumbnail->store('platforms', 'public');
 
             $platform->image()->update([
                 'name' => $filename,
@@ -94,12 +94,12 @@ class AdminPlatformsController extends Controller
 
     public function destroy(Platform $platform)
     {
-        $default_category_id = Platform::where('name', 'uncategorized')->first()->id;
+        $default_platform_id = Platform::where('name', 'uncategorized')->first()->id;
 
         if ($platform->name === 'uncategorized')
             abort('404');
 
-        $platform->posts()->update(['category_id' => $default_category_id]);
+        $platform->posts()->update(['platform_id' => $default_platform_id]);
 
         $platform->delete();
         return redirect()->route('admin.platforms.index')->with('success', 'Video Game has been Deleted');
