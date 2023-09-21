@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Image;
 
 class Category extends Model
 {

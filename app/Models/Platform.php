@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Str;
 use App\Models\Post;
+use App\Models\Image;
 
 class Platform extends Model
 {

@@ -11,7 +11,6 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Comment;
 use App\Models\Image;
-use App\Models\Platform;
 use App\Models\Other;
 
 class Post extends Model
