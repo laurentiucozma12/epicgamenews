@@ -30,7 +30,6 @@ class AdminVideoGamesController extends Controller
         return view('admin_dashboard.video_games.create');
     }
 
-
     public function store(Request $request)
     {
         $validated = $request->validate($this->rules);

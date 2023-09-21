@@ -12,7 +12,7 @@ class AdminCategoriesController extends Controller
 {
     private $rules = [
         'name' => 'required|min:2|max:30',
-        'slug' => 'required|unique:others,slug',
+        'slug' => 'required|unique:categories,slug',
         'thumbnail' => 'required|image|dimensions:max_width=1920,max_height=1080',
     ];
     

@@ -40,7 +40,6 @@ use App\Http\Controllers\OtherController;
 use App\Http\Controllers\TagController;
 
 // Admin Dashboard Routes
-
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions'])->group(function(){
 
     Route::get('/', [DashboardController::class, 'index'])->name('index');
@@ -49,12 +48,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     Route::post('upload_tinymce_image', [TinyMCEController::class, 'upload_tinymce_image'])->name('upload_tinymce_image');
     
     Route::resource('video_games', AdminVideoGamesController::class);
-
     Route::resource('categories', AdminCategoriesController::class);
-    // Route::resource('categories', AdminCategoriesController::class)->only(['index', 'create', 'store', 'update', 'destroy']);
-    // Route::patch('categories', [AdminCategoriesController::class, 'edit'])->name('categories.edit');
-    // Route::patch('categories', [AdminCategoriesController::class, 'show'])->name('categories.show');
-
     Route::resource('platforms', AdminPlatformsController::class);
     Route::resource('others', AdminOthersController::class);
 
