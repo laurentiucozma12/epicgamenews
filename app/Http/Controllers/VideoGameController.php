@@ -13,6 +13,10 @@ class VideoGameController extends Controller
     public function index()
     {
         $video_games = VideoGame::withCount('posts')->where('name', '!=', 'uncategorized')->paginate(16);
+        
+        $video_games->each(function ($video_game) {
+            $video_game->has_image = $video_game->image()->exists();
+        });
 
         return view('video_games.index', [
             'video_games' => $video_games

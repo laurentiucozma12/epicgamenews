@@ -59,25 +59,72 @@ class DatabaseSeeder extends Seeder
         }
 
         \App\Models\VideoGame::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
-        \App\Models\VideoGame::factory(30)->create();
+        $video_games = \App\Models\VideoGame::factory(30)->create();
+
+        foreach ($video_games as $video_game)
+        {
+            $video_game->image()->save( \App\Models\Image::factory()->make() );
+        }
 
         \App\Models\Category::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
-        \App\Models\Category::factory(10)->create();
+        $categories = \App\Models\Category::factory(10)->create();
 
-        \App\Models\Platform::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
-        \App\Models\Platform::factory(1)->create(['name' => 'PC', 'slug' => 'pc']);
-        \App\Models\Platform::factory(1)->create(['name' => 'PlayStation', 'slug' => 'playstation']);
-        \App\Models\Platform::factory(1)->create(['name' => 'Xbox', 'slug' => 'xbox']);
-        \App\Models\Platform::factory(1)->create(['name' => 'Mobile', 'slug' => 'mobile']);
-        \App\Models\Platform::factory(1)->create(['name' => 'Nintendo', 'slug' => 'nintendo']);
+        foreach ($categories as $category)
+        {
+            $category->image()->save( \App\Models\Image::factory()->make() );
+        }
+        
+        // \App\Models\Platform::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
+        // \App\Models\Platform::factory(1)->create(['name' => 'PC', 'slug' => 'pc']);
+        // \App\Models\Platform::factory(1)->create(['name' => 'PlayStation', 'slug' => 'playstation']);
+        // \App\Models\Platform::factory(1)->create(['name' => 'Xbox', 'slug' => 'xbox']);
+        // \App\Models\Platform::factory(1)->create(['name' => 'Mobile', 'slug' => 'mobile']);
+        // \App\Models\Platform::factory(1)->create(['name' => 'Nintendo', 'slug' => 'nintendo']);
+        
+        $platformsData = [
+            (object)['name' => 'uncategorized', 'slug' => 'uncategorized'],
+            (object)['name' => 'PC', 'slug' => 'pc'],
+            (object)['name' => 'PlayStation', 'slug' => 'playstation'],
+            (object)['name' => 'Xbox', 'slug' => 'xbox'],
+            (object)['name' => 'Mobile', 'slug' => 'mobile'],
+            (object)['name' => 'Nintendo', 'slug' => 'nintendo'],
+        ];
+        
+        foreach ($platformsData as $platform) {
+            $platform = \App\Models\Platform::factory()->create([
+                'name' => $platform->name,
+                'slug' => $platform->slug,
+            ]);
 
-        \App\Models\Other::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
-        \App\Models\Other::factory(1)->create(['name' => 'Game Trailers', 'slug' => 'game-trailers']);
-        \App\Models\Other::factory(1)->create(['name' => 'Anime', 'slug' => 'anime']);
-        \App\Models\Other::factory(1)->create(['name' => 'Cartoons', 'slug' => 'cartoons']);
-        \App\Models\Other::factory(1)->create(['name' => 'Movies', 'slug' => 'movies']);
-        \App\Models\Other::factory(1)->create(['name' => 'Series', 'slug' => 'series']);
-        \App\Models\Other::factory(1)->create(['name' => 'Lists', 'slug' => 'lists']);
+            $platform->image()->save( \App\Models\Image::factory()->make() );
+        }
+
+        // \App\Models\Other::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
+        // \App\Models\Other::factory(1)->create(['name' => 'Game Trailers', 'slug' => 'game-trailers']);
+        // \App\Models\Other::factory(1)->create(['name' => 'Anime', 'slug' => 'anime']);
+        // \App\Models\Other::factory(1)->create(['name' => 'Cartoons', 'slug' => 'cartoons']);
+        // \App\Models\Other::factory(1)->create(['name' => 'Movies', 'slug' => 'movies']);
+        // \App\Models\Other::factory(1)->create(['name' => 'Series', 'slug' => 'series']);
+        // \App\Models\Other::factory(1)->create(['name' => 'Lists', 'slug' => 'lists']);
+        
+        $othersData = [
+            (object)['name' => 'uncategorized', 'slug' => 'uncategorized'],
+            (object)['name' => 'Game Trailers', 'slug' => 'game-trailers'],
+            (object)['name' => 'Anime', 'slug' => 'anime'],
+            (object)['name' => 'Cartoons', 'slug' => 'cartoons'],
+            (object)['name' => 'Movies', 'slug' => 'movies'],
+            (object)['name' => 'Series', 'slug' => 'series'],
+            (object)['name' => 'Lists', 'slug' => 'lists'],
+        ];
+        
+        foreach ($othersData as $other) {
+            $other = \App\Models\Other::factory()->create([
+                'name' => $other->name,
+                'slug' => $other->slug,
+            ]);
+
+            $other->image()->save( \App\Models\Image::factory()->make() );
+        }
 
         $posts = \App\Models\Post::factory(200)->create(['approved' => true]);;
 
