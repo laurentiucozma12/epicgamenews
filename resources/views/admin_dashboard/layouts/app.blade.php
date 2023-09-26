@@ -25,9 +25,9 @@
     <link href="{{ asset('admin_dashboard_assets/css/dark-theme.css') }}" rel="stylesheet" />
     <link href="{{ asset('admin_dashboard_assets/css/semi-dark.css') }}" rel="stylesheet" />
     <link href="{{ asset('admin_dashboard_assets/css/header-colors.css') }}" rel="stylesheet" />
-    <link href="{{ asset('admin_dashboard_assets/css/my_style.css') }}" rel="stylesheet" />
 
     {{-- My Style --}}    
+    <link href="{{ asset('admin_dashboard_assets/css/my_style.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/mystyle.css') }}" rel="stylesheet" />
     
     <title>Admin Dashboard - New Game News </title>
