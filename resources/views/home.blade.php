@@ -18,8 +18,8 @@
 						</a>
 						<div class="text">
 							<div>
-								<h3 class="heading"><a href="{{ route('show', $post) }}"><b> {{ $post->title }} </b></a></h3>
-								<p class="excerpt"> {{ \Str::limit($post->excerpt, 150) }} </p>
+								<h3 class="heading"><a href="{{ route('show', $post) }}"><b> {{ ucfirst($post->title) }} </b></a></h3>
+								<p class="excerpt"> {{ ucfirst(\Str::limit($post->excerpt, 150)) }} </p>
 							</div>
 							<div class="container-meta">
 								<div class="meta">

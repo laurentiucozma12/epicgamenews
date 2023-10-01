@@ -89,8 +89,8 @@ class AdminPostsController extends Controller
                 $croppedImagePath = public_path('storage/images/' . $filename);
                 $croppedImage = ImageManager::make($croppedImagePath);
 
-                // Resize the cropped image (e.g., to 425x225)
-                $croppedImage->resize(425, 225, function ($constraint) {
+                // Resize the cropped image (e.g., to 1280 x 720)
+                $croppedImage->resize(1280 , 720, function ($constraint) {
                     $constraint->aspectRatio();
                 });
                 
