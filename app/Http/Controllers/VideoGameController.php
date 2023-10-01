@@ -32,7 +32,6 @@ class VideoGameController extends Controller
         $posts = Post::excludeUncategorized()
             ->latest()
             ->approved()
-            ->withCount('comments')
             ->paginate(10);
 
         $recent_posts = Post::excludeUncategorized()

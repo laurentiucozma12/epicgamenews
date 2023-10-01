@@ -54,11 +54,6 @@ class Post extends Model
         return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
     }
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');

@@ -22,7 +22,6 @@ use App\Http\Controllers\AdminControllers\AdminCategoriesController;
 use App\Http\Controllers\AdminControllers\AdminPlatformsController;
 use App\Http\Controllers\AdminControllers\AdminOthersController;
 use App\Http\Controllers\AdminControllers\AdminTagsController;
-use App\Http\Controllers\AdminControllers\AdminCommentsController;
 use App\Http\Controllers\AdminControllers\AdminRolesController;
 use App\Http\Controllers\AdminControllers\AdminUsersController;
 use App\Http\Controllers\AdminControllers\AdminContactsController;
@@ -93,7 +92,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     });
 
     Route::resource('tags', AdminTagsController::class)->only(['index', 'show', 'destroy']);
-    Route::resource('comments', AdminCommentsController::class)->except('show');
 
     Route::resource('roles', AdminRolesController::class)->except('show');
     Route::resource('users', AdminUsersController::class);
@@ -154,4 +152,3 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/{post:slug}', [PostsController::class, 'show'])->name('show');
-Route::post('/{post:slug}', [PostsController::class, 'addComment'])->name('add_comment');

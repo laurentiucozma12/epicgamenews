@@ -13,7 +13,6 @@ class HomeController extends Controller
         $posts = Post::excludeUncategorized()
             ->latest()
             ->approved()
-            ->withCount('comments')
             ->paginate(10);
 
         return view('home', [

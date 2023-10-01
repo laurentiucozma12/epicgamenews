@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Other::truncate();
         \App\Models\Post::truncate();
         \App\Models\Tag::truncate();
-        \App\Models\Comment::truncate();
         \App\Models\Image::truncate();
 
         Schema::enableForeignKeyConstraints();
@@ -127,8 +126,6 @@ class DatabaseSeeder extends Seeder
         }
 
         $posts = \App\Models\Post::factory(200)->create(['approved' => true]);;
-
-        \App\Models\Comment::factory(100)->create();
 
         \App\Models\Tag::factory(10)->create();
 

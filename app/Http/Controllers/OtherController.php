@@ -28,7 +28,6 @@ class OtherController extends Controller
         $posts = $other->posts()->excludeUncategorized()
             ->latest()
             ->approved()
-            ->withCount('comments')
             ->paginate(10);
 
         $recent_posts = Post::excludeUncategorized()
