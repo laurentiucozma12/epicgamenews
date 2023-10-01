@@ -1509,7 +1509,7 @@ input[type="text"] {
   right: 0;
   top: 0;
   bottom: 0;
-  padding: 75px 40px 40px 40px;
+  padding: 40px;
   overflow-y: auto;
   display: none;
   -moz-transform: translateX(100%);

@@ -232,20 +232,23 @@ hr {
         .post-container { 
             display: block; } }
 .ads-container {
-    margin-bottom: 30px;
-    height: 300px; 
-    border: 5px solid green; }
+    margin-bottom: 30px; }
+.ads-container img {
+    width: 100%; }
 .post-container .link-img {
     width: 33%; 
     margin-right: 20px; }
 .post-container .link-img .post-thumbnail {
     width: 100%;
-    min-height: 230px; 
+    min-height: fit-content; 
     object-fit: cover; }
 .post-container .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
     width: 67%; }
 .post-container .text .heading {
-    font-size: 35px;
+    font-size: 25px;
     margin: 0; }
     @media (max-width: 600px) {
     .post-container .text .heading {
@@ -257,20 +260,23 @@ hr {
     color: var(--light-blue-1); 
     text-decoration-color: var(--light-blue-1); }
 .post-container .text .excerpt {    
-    font-size: 25px; 
+    font-size: 20px; 
     margin-bottom: 5px; }
     @media (max-width: 600px) {
     .post-container .text .excerpt {
-        font-size: 18px; } }
+        font-size: 13px; } }
+    .post-container .text .container-meta {
+        display: flex;
+        flex-direction: column; }
 .post-container .text .container-meta .meta {
-    font-size: 16px;
+    font-size: 11px;
     display: flex;
     bottom: 0; }    
 .post-container .text .container-meta .meta .date { 
     margin-right: 20px; }
 .post-container .text .container-meta .meta .author { 
     margin-right: 20px; }
-    @media (max-width: 600px) {
+    @media (max-width: 992px) {
         .post-container .text .container-meta {
             display: flex;
             flex-direction: column;

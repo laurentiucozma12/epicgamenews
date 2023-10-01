@@ -101,7 +101,7 @@ class AdminPostsController extends Controller
                 $resizedImageName = $formattedDate . '-' . Auth::user()->name . '-' . $filename;
 
                 // Save the resized image using Laravel's Storage facade
-                $resizedImagePath = 'images/' . $resizedImageName ; // Modify the filename if needed
+                $resizedImagePath = 'images/' . $resizedImageName;
                 Storage::disk('public')->put($resizedImagePath, $croppedImage->stream());
 
                 // Delete the old image
@@ -112,7 +112,7 @@ class AdminPostsController extends Controller
                 $post->image()->create([
                     'name' => $resizedImageName ,
                     'extension' => $file_extension,
-                    'path' => 'storage/images' . $filename,
+                    'path' => $resizedImagePath,
                 ]);
             }
 

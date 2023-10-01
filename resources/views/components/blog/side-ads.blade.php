@@ -1,5 +1,5 @@
 @props(['ads'])
 
 <div class="ads-container">
-    ADS
+    <img src="{{ asset('storage/ads/chad-meme.jpg') }}" class="post-thumbnail" alt="">						
 </div>
