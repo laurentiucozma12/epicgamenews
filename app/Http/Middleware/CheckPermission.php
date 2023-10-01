@@ -10,7 +10,7 @@ class CheckPermission
 {
     public function handle(Request $request, Closure $next): Response
     {    
-        if (auth()->user()->role->name === 'admin')
+    if (auth()->user()->role->name === 'admin')
             return $next($request);
             
         // 1 - get route name

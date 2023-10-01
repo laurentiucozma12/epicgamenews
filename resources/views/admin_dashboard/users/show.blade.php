@@ -33,6 +33,7 @@
 									<tr>
 										<th>Id</th>
 										<th>Status</th>
+										<th>Thumbnail</th>
 										<th>Title</th>
 										<th>Excerpt</th>
 										<th>Video Game</th>
@@ -60,6 +61,9 @@
 											@else
 												<div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Not Approved</div>
 											@endif
+										</td>
+										<td>
+											<img width='50' src="{{ $post->image ? asset('storage/' . $post->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="">    
 										</td>
 										<td>{{ $post->title }} </td>
 										<td>{{ $post->excerpt }}</td>

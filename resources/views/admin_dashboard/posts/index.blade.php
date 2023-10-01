@@ -61,7 +61,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <img width='50' src="{{ $post->image ? asset('storage/' . $post->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="">    
+                                        <img width='50' src="{{ $post->image ? asset('storage/' . $post->image->path) : asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="">    
                                     </td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->excerpt }}</td>

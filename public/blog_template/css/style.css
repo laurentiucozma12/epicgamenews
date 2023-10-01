@@ -1115,7 +1115,7 @@ h1, h2, h3, h4, h5, h6, figure {
   .block-21 .text {
     width: 60%;
     padding: 1.5em;
-    border: 1px solid var(--white); }
+    border: 1px solid var(--light-gray-1); }
     .block-21 .text .heading {
       font-size: 20px;
       font-weight: 400; }

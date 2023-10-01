@@ -16,7 +16,7 @@ class AdminRolesController extends Controller
     public function index()
     {
         return view('admin_dashboard.roles.index', [
-            'roles' => Role::paginate(20),
+            'roles' => Role::orderBy('id', 'DESC')->get(),
         ]);
     }
     
@@ -48,6 +48,10 @@ class AdminRolesController extends Controller
 
     public function update(Request $request, Role $role)
     {
+        if ($role->name === 'admin') {
+            return redirect()->route('admin.roles.index')->with('error', 'You cannot update the admin role.');
+        }
+
         $this->rules['name'] = ['required', Rule::unique('roles')->ignore($role)];
         $validated = $request->validate($this->rules);
         $permissions = $request->input('permissions');
@@ -60,6 +64,10 @@ class AdminRolesController extends Controller
 
     public function destroy(Role $role)
     {
+        if ($role->name === 'admin') {
+            return redirect()->route('admin.roles.index')->with('error', 'You cannot delete the admin role.');
+        }
+
         $role->delete();
         return redirect()->route('admin.roles.index', $role)->with('success', 'Role has been deleted');
     }

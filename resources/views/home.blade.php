@@ -7,7 +7,7 @@
 <div class="colorlib-blog">
 	<div class="container">
 		<div class="row">
-			<div class="col-12 col-md-9 posts-col">
+			<div class="col-12 col-lg-8 posts-col">
 
 				@forelse ($posts as $post)
 					<div class="post-container">
@@ -38,6 +38,11 @@
 
 				{{ $posts->onEachSide(0)->links('pagination::bootstrap-4') }}
 
+			</div>			
+			<div class="col-12 col-lg-4">
+				
+				<x-blog.side-ads/>
+				
 			</div>
 		</div>
 	</div>

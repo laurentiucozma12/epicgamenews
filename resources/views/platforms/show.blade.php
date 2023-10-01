@@ -7,7 +7,7 @@
 <div class="colorlib-blog">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-9 posts-col">
+			<div class="col-12 col-lg-8 posts-col">
 
 				@forelse ($posts as $post)
 					<div class="post-container">
@@ -41,9 +41,11 @@
 			</div>
 
 			<!-- SIDEBAR: start -->
-			<div class="col-md-3 animate-box">
+			<div class="col-12 col-lg-4 animate-box">
 				<div class="sidebar">
 
+					<x-blog.side-ads/>
+					
 					<x-blog.side-recent-posts :recent_posts="$recent_posts"/>
 
 				</div>

@@ -28,6 +28,7 @@ use App\Http\Controllers\AdminControllers\AdminUsersController;
 use App\Http\Controllers\AdminControllers\AdminContactsController;
 use App\Http\Controllers\AdminControllers\AdminAboutController;
 use App\Http\Controllers\AdminControllers\AdminStorageLinkController;
+use App\Http\Controllers\AdminControllers\AdminImagesController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;

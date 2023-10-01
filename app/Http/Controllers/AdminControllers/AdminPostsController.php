@@ -5,6 +5,9 @@ namespace App\Http\Controllers\AdminControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -17,6 +20,8 @@ use App\Models\Tag;
 use App\Models\VideoGame;
 use PhpParser\Node\Expr\AssignOp\Plus;
 
+use Intervention\Image\ImageManagerStatic as ImageManager;
+
 class AdminPostsController extends Controller
 {
     private $rules = [
@@ -24,7 +29,7 @@ class AdminPostsController extends Controller
         'slug' => 'required|max:150',
         'excerpt' => 'required|max:150',
         'video_game_id' => 'required|numeric',
-        'thumbnail' => 'required|image|dimensions:max_width=1920,max_height=1080',
+        'thumbnail' => 'required|image|max:1920',
         'author_thumbnail' => 'nullable|max:150',
         'body' => 'required',
     ];
@@ -59,20 +64,55 @@ class AdminPostsController extends Controller
             // or game name and other if the article is about something else related to a game (like an anime/movie/etc. based on a game)
 
             $validated = $request->validate($this->rules);
-            
+        
             $validated['user_id'] = auth()->id();
+        
+            // Create the Post
             $post = Post::create($validated);
+            
+            if ($request->hasFile('thumbnail')) {
 
-            if ($request->has('thumbnail')) {
                 $thumbnail = $request->file('thumbnail');
                 $filename = $thumbnail->getClientOriginalName();
-                $file_extension = $thumbnail->getClientOriginalExtension();
-                $path = $thumbnail->store('images', 'public');
-        
+                $file_extension  = $thumbnail->getClientOriginalExtension();
+
+                // Get the base64-encoded image data from the request
+                $croppedImageData = $request->input('croppedImageData');
+
+                // Decode the base64 data into binary format
+                $croppedImageBinary = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $croppedImageData));
+
+                // Save the binary data as an image file using Laravel's Storage facade
+                Storage::disk('public')->put('images/' . $filename, $croppedImageBinary);
+
+                // Create an Intervention Image instance from the saved image
+                $croppedImagePath = public_path('storage/images/' . $filename);
+                $croppedImage = ImageManager::make($croppedImagePath);
+
+                // Resize the cropped image (e.g., to 425x225)
+                $croppedImage->resize(425, 225, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                
+                // Format the date as needed, e.g., '2023-09-21'
+                $formattedDate = now()->format('Y-m-d');
+                
+                // Modify the filename to include author name and date
+                $resizedImageName = $formattedDate . '-' . Auth::user()->name . '-' . $filename;
+
+                // Save the resized image using Laravel's Storage facade
+                $resizedImagePath = 'images/' . $resizedImageName ; // Modify the filename if needed
+                Storage::disk('public')->put($resizedImagePath, $croppedImage->stream());
+
+                // Delete the old image
+                $oldImagePath = 'images/' . $filename;
+                Storage::disk('public')->delete($oldImagePath);
+
+                // Associate the image with the post
                 $post->image()->create([
-                    'name' => $filename,
+                    'name' => $resizedImageName ,
                     'extension' => $file_extension,
-                    'path' => $path,
+                    'path' => 'storage/images' . $filename,
                 ]);
             }
 

@@ -109,7 +109,7 @@
             </ul>
         </li>
 
-        <hr>        
+        <hr>
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-user'></i></div>

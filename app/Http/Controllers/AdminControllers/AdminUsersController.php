@@ -78,6 +78,14 @@ class AdminUsersController extends Controller
     
     public function update(Request $request, User $user)
     {
+        // Transform the input role_id into an int (othewise it will be a string)
+        $role_id = intval($request->input('role_id'));
+
+        // Check if the user is trying to change their own role
+        if ($user->id === auth()->id() && $role_id !== $user->role_id) {
+            return redirect()->back()->with('error', 'You can not update your role.');
+        }
+
         $this->rules['password'] = 'nullable|min:3|max:20';
         $this->rules['email'] = ['required', 'email', Rule::unique('users')->ignore($user)];
 
@@ -112,9 +120,15 @@ class AdminUsersController extends Controller
         if($user->id === auth()->id())
             return redirect()->back()->with('error', 'You can not delete yourself.');
 
-        User::whereHas('role', function($query){
+        $adminUser = User::whereHas('role', function($query) {
             $query->where('name', 'admin');
-        })->first()->posts()->saveMany( $user->posts );
+        })->first();
+
+        // When you delete an user, the author of posts is set to admin
+        foreach ($user->posts as $post) {
+            $post->user_id = $adminUser->id;
+            $post->save();
+        }
 
         $user->delete();
         return redirect()->route('admin.users.index')->with('success', 'User has been deleted.');
