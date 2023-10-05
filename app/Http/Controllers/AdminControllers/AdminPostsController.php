@@ -12,6 +12,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
+use Carbon\Carbon;
+
 use App\Models\Category;
 use App\Models\Platform;
 use App\Models\Other;
@@ -93,9 +95,15 @@ class AdminPostsController extends Controller
                 $croppedImage->resize(1280 , 720, function ($constraint) {
                     $constraint->aspectRatio();
                 });
-                
-                // Format the date as needed, e.g., '2023-09-21'
-                $formattedDate = now()->format('Y-m-d');
+
+                // Set the desired locale to Romanian
+                setlocale(LC_TIME, 'ro_RO.utf8');
+
+                // Create a Carbon instance for the current date and time
+                $now = Carbon::now('Europe/Bucharest');
+
+                // Format the date and time in Romanian format
+                $formattedDate = $now->formatLocalized('%Y-%m-%d-%H-%M-%S');
                 
                 // Modify the filename to include author name and date
                 $resizedImageName = $formattedDate . '-' . Auth::user()->name . '-' . $filename;

@@ -203,7 +203,6 @@
                                                 {{-- Store the url of the cropped image --}} 
                                                 <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
 
-
                                                 <h5>Cropped Image</h5>
                                                 <img id="croppedImage" src="#" alt="Cropped image" style="display: none; width: 540px">
                                             </div>
@@ -272,7 +271,6 @@
 <link href="{{ asset('admin_dashboard_assets/jquery/jquery-3.6.0.min.js') }}" rel="stylesheet" />
 
 {{-- Crop --}}
-{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 
@@ -314,14 +312,45 @@ $(document).ready(function() {
     // Handle the "Crop and Upload" button click
     $('#cropAndUpload').on('click', function() {
         croppedImageDataURL = cropper.getCroppedCanvas().toDataURL();
-        $('#croppedImageData').val(croppedImageDataURL);
 
-        uploadCroppedImage();
+        // Convert the cropped image to WebP
+        convertToWebP(croppedImageDataURL);
         
         $('#cropImageModal').modal('hide');        
         $('#croppedImage').attr('src', croppedImageDataURL);
         $('#croppedImage').show();
     });
+
+    // Function to convert the image to WebP
+    function convertToWebP(dataURL) {
+        const image = new Image();
+        image.src = dataURL;
+
+        image.onload = function() {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+
+            canvas.width = image.width;
+            canvas.height = image.height;
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+            // Convert the canvas to WebP format
+            canvas.toBlob(function(blob) {
+                const reader = new FileReader();
+
+                reader.onloadend = function() {
+                    const webpDataURL = reader.result;
+
+                    // Set the WebP data URL in the hidden input
+                    $('#croppedImageData').val(webpDataURL);
+                };
+
+                // Convert the blob to a data URL with the "image/webp" MIME type
+                blob.type = 'image/webp';
+                reader.readAsDataURL(blob);
+            }, 'image/webp');
+        };
+    }
 
     // Upload the cropped image to the server
     function uploadCroppedImage() {
