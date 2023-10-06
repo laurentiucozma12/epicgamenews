@@ -1,4 +1,28 @@
-
+:root {
+    --bg-filter: #c8c8c814;
+    --black: #000000;
+    --blue-1: #5f97ff;
+    --blue-2: #5bc0de;
+    --blue-3: #46b8da;
+    --dark-1: #161616;
+    --dark-gray: #202020;
+    --gray-1: #313131;
+    --green-1: #5cb85c;
+    --green-2: #4cae4c;
+    --light-gray-1: #5e5e5e;
+    --light-gray-2: #c5c5c5;
+    --light-blue-1: #0EF1FF;
+    --light-blue-2: #000000;
+    --light-green: #32AC1E;
+    --light-green-hover: #3ac924;
+    --red-1: red;
+    --red-2: #d9534f;
+    --red-3: #d43f3a ;
+    --orange-1: #F7AF1D;
+    --orange-2: #f0ad4e;
+    --orange-3: #eea236;
+    --white: #ffffff;
+}
 /*
 Template Name: Rocker Admin
 Author: codervent
@@ -34,7 +58,7 @@ a {
 	background: #fff;
 	border-right: 0 solid #e4e4e4;
 	z-index: 11;
-	box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%)!important;
+	box-shadow: 0 2px 6px 0 var(--light-blue-1)!important;
 	transition: all .2s ease-out
 }
 
@@ -48,9 +72,10 @@ a {
 	bottom: 0;
 	padding: 0 15px;
 	z-index: 5;
-	background: #fff;
+	color: var(--white);
+	background: var(--dark-gray);
 	background-clip: padding-box;
-	border-bottom: 1px solid #e4e4e4
+	border-bottom: 1px solid var(--light-blue-1)
 }
 
 .logo-icon {
@@ -80,8 +105,8 @@ a {
 	background: #fff;
 	border-bottom: 1px solid rgb(228 228 228 / 0%);
 	z-index: 10;
-	-webkit-box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 0px 6px 0 rgb(206 206 238 / 54%);
-    box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 0px 6px 0 rgb(206 206 238 / 54%);
+	-webkit-box-shadow: 0 2px 6px 0 var(--light-blue-1), 0 0px 6px 0 var(--light-blue-3);
+    box-shadow: 0 2px 6px 0 var(--light-blue-1), 0 0px 6px 0 var(--light-blue-3);
 }
 
 .topbar .navbar {
@@ -99,11 +124,13 @@ a {
 }
 
 .page-content {
-	padding: 1.5rem 1.5rem 0.7rem 1.5rem
+	padding: 1.5rem 1.5rem 0.7rem 1.5rem;
+	background-color: var(--dark-gray);
 }
 
 .page-footer {
-	background: #fff;
+	color: var(--white);
+	background: var(--dark-gray);
 	left: 250px;
 	right: 0;
 	bottom: 0;
@@ -132,6 +159,13 @@ a {
 	margin: 0;
 	list-style: none;
 	background: 0 0
+}
+
+.metismenu {
+	background-color: var(--dark-gray) !important;
+}
+.metismenu a {
+	color: var(--white) !important;
 }
 
 .sidebar-wrapper .metismenu {
@@ -206,8 +240,8 @@ a {
 }
 
 .sidebar-wrapper .metismenu ul {
-	border: 1px solid #ededed;
-	background: #fff
+	border: 1px solid var(--dark-1);
+	background: transparent
 }
 
 .sidebar-wrapper .metismenu ul ul a {
@@ -222,9 +256,9 @@ a {
 .sidebar-wrapper .metismenu a:active,
 .sidebar-wrapper .metismenu a:focus,
 .sidebar-wrapper .metismenu a:hover {
-	color: #008cff;
+	color: var(--light-blue-1);
 	text-decoration: none;
-	background: rgb(13 110 253 / .12)
+	background: var(--dark-1);
 }
 
 .menu-label {
@@ -338,12 +372,12 @@ a {
 	line-height: 40px;
 	text-align: center;
 	font-size: 26px;
-	color: #fff;
+	color: var(--black);
 	position: fixed;
 	border-radius: 10px;
 	bottom: 20px;
 	right: 12px;
-	background-color: #008cff;
+	background-color: var(--light-blue-1);
 	z-index: 5
 }
 
@@ -622,7 +656,7 @@ a {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: #f1f1f1;
+	background: var(--light-gray-2);
 	border: 1px solid #eeecec;
 	text-align: center;
 	border-radius: 20%;
@@ -2031,14 +2065,14 @@ input::placeholder {
 }
 
 .search-control {
-	background-color: #f7f7ff;
+	background-color: var(--dark-gray);
     border: 1px solid #e9e9f6;
 	padding-left: 2.5rem
 }
 
 .search-control-2 {
 	color: #fff;
-	background-color: #212529;
+	background-color: var(--light-gray-1);
 	border: 1px solid rgb(255 255 255 / 12%)!important;
 	padding-right: 2.5rem
 }
@@ -2046,12 +2080,12 @@ input::placeholder {
 .search-control-2:focus {
 	color: #fff;
 	padding-right: 2.5rem;
-	background-color: #212529;
+	background-color: var(--light-gray-1);
 	box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25)
 }
 
 input.search-control-2::placeholder {
-	color: #fff!important;
+	color: var(--black)!important;
 	opacity: .5!important
 }
 
@@ -2070,7 +2104,7 @@ input.search-control-2::placeholder {
 .topbar .navbar .navbar-nav .nav-link {
 	padding-right: .8rem;
 	padding-left: .8rem;
-	color: #252323;
+	color: var(--white);
 	font-size: 22px
 }
 
@@ -2105,19 +2139,25 @@ input.search-control-2::placeholder {
 .user-info .user-name {
 	font-size: 15px;
 	font-weight: 500;
-	color: #413c3c
+	color: var(--white);
 }
 
 .user-info .designattion {
 	font-size: 13px;
-	color: #a9a8a8
+	color: var(--white);
+}
+.user-info .designattion a {
+	color: var(--white);
+}
+.user-info .designattion a:hover {
+	color: var(--light-blue-1);
+	transition: 1s;
 }
 
 .user-box {
 	display: flex;
 	align-items: center;
 	height: 60px;
-	border-left: 1px solid #f0f0f0;
 	margin-left: 1rem
 }
 
@@ -2351,9 +2391,9 @@ input.search-control-2::placeholder {
 	height: 40px;
 	line-height: 40px;
 	font-size: 24px;
-	background: #008cff;
+	background: var(--light-blue-1);
 	box-shadow: 0 .3rem .6rem rgba(0, 0, 0, .13);
-	color: #fff;
+	color: var(--blackf);
 	text-align: center;
 	border-top-left-radius: 10px;
 	border-bottom-left-radius: 10px;
@@ -2453,7 +2493,7 @@ input.search-control-2::placeholder {
 	}
 	.search-control {
 		background-color: #fff;
-		border: 1px solid #f2efef00;
+		border: 1px solid var(--white);
 		padding-left: 2.5rem
 	}
 	.search-control-2 {

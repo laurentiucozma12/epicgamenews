@@ -89,6 +89,7 @@ hr {
     height: 25px; }
 #colorlib-logo .logo-route .title-route,
 .admin-sidebar-header .title-route {
+    color: var(--white);
     margin: 0 0 0 5px !important;
     font-family: "Rubik", Arial, sans-serif !important;
     font-weight: 900; }
