@@ -124,6 +124,7 @@ a {
 }
 
 .page-content {
+	min-height: 100vh !important;
 	padding: 1.5rem 1.5rem 0.7rem 1.5rem;
 	background-color: var(--dark-gray);
 }
@@ -662,7 +663,11 @@ a {
 	border-radius: 20%;
 	color: #2b2a2a
 }
-
+.order-actions a:hover {
+	transition: 0.5s;
+	color: var(--black);
+	background-color: var(--white);
+}
 .customers-list .customers-list-item {
 	-webkit-transition: all .2s;
 	-o-transition: all .2s;
