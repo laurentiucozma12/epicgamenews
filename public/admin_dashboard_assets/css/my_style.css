@@ -69,3 +69,18 @@ a:hover {
     background-color: #f7f7f7;
     overflow: hidden;
 }
+
+.select2-container--bootstrap4 .select2-selection {
+    border: 1px solid var(--white);
+	background-color: var(--dark-gray); }
+.select2-container--bootstrap4 .select2-selection .select2-search__field {
+	background-color: var(--dark-gray); }
+.select2-dropdown {
+	background-color: var(--dark-gray); }
+.select2-container--bootstrap4 {
+    color: var(--white); }
+.select2-container--bootstrap4 .select2-dropdown .select2-results__option[aria-selected=true] {
+    color: var(--white);
+    background-color: var(--light-gray-1); }
+.select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice {
+    color: var(--white);}

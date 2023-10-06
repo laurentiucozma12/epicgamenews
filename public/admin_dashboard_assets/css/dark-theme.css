@@ -1,3 +1,53 @@
+:root {
+	--bs-blue: #008cff;
+	--bs-indigo: #6610f2;
+	--bs-purple: #6f42c1;
+	--bs-pink: #d63384;
+	--bs-red: #fd3550;
+	--bs-orange: #fd7e14;
+	--bs-yellow: #ffc107;
+	--bs-green: #15ca20;
+	--bs-teal: #20c997;
+	--bs-cyan: #0dcaf0;
+	--bs-white: #fff;
+	--bs-gray: #6c757d;
+	--bs-gray-dark: #343a40;
+	--bs-primary: #008cff;
+	--bs-secondary: #6c757d;
+	--bs-success: #15ca20;
+	--bs-info: #0dcaf0;
+	--bs-warning: #ffc107;
+	--bs-danger: #fd3550;
+	--bs-light: #f8f9fa;
+	--bs-dark: #212529;
+	--bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+	--bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+	--bg-filter: #c8c8c814;
+    --black: #000000;
+    --blue-1: #5f97ff;
+    --blue-2: #5bc0de;
+    --blue-3: #46b8da;
+    --dark-1: #161616;
+    --dark-gray: #202020;
+    --gray-1: #313131;
+    --green-1: #5cb85c;
+    --green-2: #4cae4c;
+    --light-gray-1: #5e5e5e;
+    --light-gray-2: #c5c5c5;
+    --light-blue-1: #0EF1FF;
+    --light-blue-2: #c2fcff;
+    --light-blue-3: #1cd1da;
+    --light-green: #32AC1E;
+    --light-green-hover: #3ac924;
+    --red-1: red;
+    --red-2: #d9534f;
+    --red-3: #d43f3a ;
+    --orange-1: #F7AF1D;
+    --orange-2: #f0ad4e;
+    --orange-3: #eea236;
+    --white: #ffffff;
+}
 html.dark-theme .switcher-wrapper {
 	background: #1e1e1e
 }
@@ -585,12 +635,12 @@ html.dark-theme .picker__input {
 	background-color: #1e1e1e!important;
 	border: 1px solid rgb(255 255 255 / 34%)!important
 }
+
+
 html.dark-theme .select2-container--bootstrap4 .select2-selection {
-	background-color: rgb(255 255 255 / .14);
 	border: 1px solid rgb(255 255 255 / .35)
 }
 html.dark-theme .select2-dropdown {
-	background-color: #171717;
 	border: 1px solid rgb(255 255 255 / 38%)
 }
 html.dark-theme .select2-search--dropdown .select2-search__field {
