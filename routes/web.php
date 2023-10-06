@@ -94,7 +94,20 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     Route::resource('tags', AdminTagsController::class)->only(['index', 'show', 'destroy']);
 
     Route::resource('roles', AdminRolesController::class)->except('show');
-    Route::resource('users', AdminUsersController::class);
+    // Route::resource('users', AdminUsersController::class);
+    Route::prefix('users')->group(function () {
+        Route::get('/', [AdminUsersController::class, 'index'])->name('users.index');
+        Route::get('/create', [AdminUsersController::class, 'create'])->name('users.create');
+        Route::post('/', [AdminUsersController::class, 'store'])->name('users.store');
+        Route::get('/{user}/edit', [AdminUsersController::class, 'edit'])->name('users.edit');
+        Route::put('/{user}', [AdminUsersController::class, 'update'])->name('users.update');
+        Route::patch('/{user}', [AdminUsersController::class, 'update']);
+        Route::delete('/{user}', [AdminUsersController::class, 'destroy'])->name('users.destroy');
+        Route::get('/users', [AdminUsersController::class, 'showUsers'])->name('users.showUsers');
+        Route::get('/{user}/related-posts', [AdminUsersController::class, 'showPosts'])->name('users.showPosts');
+        Route::get('/{user}/related-video-games', [AdminUsersController::class, 'showVideoGames'])->name('users.showVideoGames');
+        Route::get('/{user}/related-categories', [AdminUsersController::class, 'showCategories'])->name('users.showCategories');
+    });
     
     Route::get('contacts', [AdminContactsController::class, 'index'])->name('contacts');
     Route::delete('contacts/{contact}', [AdminContactsController::class, 'destroy'])->name('contacts.destroy');

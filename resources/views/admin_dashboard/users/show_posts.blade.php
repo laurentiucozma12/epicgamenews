@@ -12,7 +12,7 @@
 								<li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
 								</li>								
 								<li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.users.index') }}">All Users</a></li>
-								<li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.users.show', $user) }}">{{$user->name}}'s Posts</a></li>
+								<li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.users.showUsers', $user) }}">{{$user->name}}'s Posts</a></li>
 							</ol>
 						</nav>
 					</div>

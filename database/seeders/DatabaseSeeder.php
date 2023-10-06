@@ -50,7 +50,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'laurentiucozma12@gmail.com',
             'role_id' => 2
         ]);
-        $users = \App\Models\User::factory(10)->create();
 
         foreach ($users as $user)
         {

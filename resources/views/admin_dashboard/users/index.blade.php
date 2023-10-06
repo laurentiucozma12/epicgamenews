@@ -35,6 +35,8 @@
 										<th>Email</th>
 										<th>Role</th>
 										<th>Related Posts</th>
+										<th>Related Video Games</th>
+										<th>Related Categories</th>
 										<th>Created at</th>
 										<th>Actions</th>
 									</tr>
@@ -56,7 +58,13 @@
                                         <td>{{ $user->email }} </td>
                                         <td>{{ $user->role->name }}</td>
                                         <td>
-                                            <a class='btn btn-primary btn-sm' href="{{ route('admin.users.show', $user) }}">Related Posts</a>
+                                            <a class='btn btn-primary btn-sm' href="{{ route('admin.users.showPosts', $user) }}">{{ count($user->posts) }} Posts</a>
+                                        </td>
+                                        <td>
+                                            <a class='btn btn-primary btn-sm' href="{{ route('admin.users.showVideoGames', $user) }}">{{ count($user->videoGames) }} Video Games</a>
+                                        </td>
+                                        <td>
+                                            <a class='btn btn-primary btn-sm' href="{{ route('admin.users.showCategories', $user) }}">{{ count($user->categories) }} Categories</a>
                                         </td>
                                         <td>{{ $user->created_at->diffForHumans() }}</td>
                                         <td>

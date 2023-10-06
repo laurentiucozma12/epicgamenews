@@ -67,12 +67,39 @@ class AdminUsersController extends Controller
         ]);
     }
 
-    public function show(User $user)
+    public function showUsers(User $user)
     {
         $posts = $user->posts()->latest()->paginate(100);
-        return view('admin_dashboard.users.show',[
+        return view('admin_dashboard.users.show_users',[
             'user' => $user,
             'posts' => $posts,
+        ]);
+    }
+
+    public function showPosts(User $user)
+    {
+        $posts = $user->posts()->latest()->paginate(100);
+        return view('admin_dashboard.users.show_posts',[
+            'user' => $user,
+            'posts' => $posts,
+        ]);
+    }
+
+    public function showVideoGames(User $user)
+    {
+        $video_games = $user->videoGames()->latest()->paginate(100);
+        return view('admin_dashboard.users.show_video_games',[
+            'user' => $user,
+            'video_games' => $video_games,
+        ]);
+    }
+
+    public function showCategories(User $user)
+    {
+        $categories = $user->categories()->latest()->paginate(100);
+        return view('admin_dashboard.users.show_categories',[
+            'user' => $user,
+            'categories' => $categories,
         ]);
     }
     
