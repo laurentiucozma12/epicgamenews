@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
         }
 
         \App\Models\VideoGame::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
-        $video_games = \App\Models\VideoGame::factory(30)->create();
+        $video_games = \App\Models\VideoGame::factory(10)->create();
 
         foreach ($video_games as $video_game)
         {
@@ -125,9 +125,9 @@ class DatabaseSeeder extends Seeder
             $other->image()->save( \App\Models\Image::factory()->make() );
         }
 
-        $posts = \App\Models\Post::factory(200)->create(['approved' => true]);;
+        $posts = \App\Models\Post::factory(10)->create(['approved' => true]);;
 
-        \App\Models\Tag::factory(10)->create();
+        \App\Models\Tag::factory(1)->create();
 
         foreach($posts as $post) 
         {

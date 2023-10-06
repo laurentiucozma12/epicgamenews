@@ -17,7 +17,7 @@
                                 <div class="category-container">
                                     <a href="{{ route('platforms.show', $platform) }}">
                                         <div class="image-container">
-                                            <img src="{{ asset( 'storage/' .$platform->image->path. '') }}">
+                                            <img src="{{ asset($platform->image ? 'storage/' . $platform->image->path : 'storage/placeholders/thumbnail_placeholder.jpg') }}">
                                         </div>
                                         <div class="text-container">
                                             <h3 class="heading">{{ $platform->name }}</h3>

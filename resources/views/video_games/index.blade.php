@@ -18,7 +18,7 @@
                                 <div class="category-container">
                                     <a href="{{ route('video_games.show', $video_game) }}">
                                         <div class="image-container">
-                                            <img src="{{ asset( 'storage/' .$video_game->image->path. '') }}">
+                                            <img src="{{ asset($video_game->image ? 'storage/' . $video_game->image->path : 'storage/placeholders/thumbnail_placeholder.jpg') }}">                                            
                                         </div>
                                         <div class="text-container">
                                             <h3 class="heading">{{ $video_game->name }}</h3>

@@ -14,7 +14,7 @@
 						<a 
 						href="{{ route('show', $post) }}" 
 						class="link-img">
-							<img src="{{ asset('storage/' . $post->image->path) }}" class="post-thumbnail" alt="">						
+							<img src="{{ $post->image ? asset('storage/' . $post->image->path) : asset('storage/placeholders/thumbnail_placeholder.jpg') }}" class="post-thumbnail" alt="">						
 						</a>
 						<div class="text">
 							<div>

@@ -18,7 +18,7 @@
                                 <div class="category-container">
                                     <a href="{{ route('categories.show', $category) }}">
                                         <div class="image-container">
-                                            <img src="{{ asset( 'storage/' .$category->image->path. '') }}">
+                                            <img src="{{ asset($category->image ? 'storage/' . $category->image->path : 'storage/placeholders/thumbnail_placeholder.jpg') }}">
                                         </div>
                                         <div class="text-container">
                                             <h3 class="heading">{{ $category->name }}</h3>

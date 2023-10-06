@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-12">
                 <figure class="animate-box thumbnail-container">
-                    <img width="1800" height="900" style="background-image: url('{{ asset($post->image ? 'storage/' . $post->image->path : 'storage/placeholders/thumbnail_placeholder.svg') }}');" />
+                    <img width="1800" height="900" style="background-image: url('{{ asset($post->image ? 'storage/' . $post->image->path : 'storage/placeholders/thumbnail_placeholder.jpg') }}');" />
                     @if ($post->author_thumbnail) <figcaption class="author-credit">{{ $post->author_thumbnail }}</figcaption> @endif
                 </figure>
             </div>
