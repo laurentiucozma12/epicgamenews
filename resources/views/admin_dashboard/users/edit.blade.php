@@ -83,7 +83,7 @@
                                                 </div>
                                                 <div class='col-md-4'>
                                                     <div class='user-image'>
-                                                        <img src="{{ $user->image ? asset('storage/' . $user->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="">
+                                                        <img src="{{ $user->image ? asset('storage/' . $user->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="post thumbnail">
                                                     </div>
                                                 </div>
                                             </div>

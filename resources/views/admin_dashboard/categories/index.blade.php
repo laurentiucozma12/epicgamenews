@@ -50,7 +50,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <img width='50' src="{{ $category->image ? asset('storage/' . $category->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="">    
+                                        <img width='50' src="{{ $category->image ? asset('storage/' . $category->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="post thumbnail">    
                                     </td>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->user->name }}</td>
