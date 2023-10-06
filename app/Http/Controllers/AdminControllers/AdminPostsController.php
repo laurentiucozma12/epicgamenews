@@ -12,8 +12,6 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-use Carbon\Carbon;
-
 use App\Models\Category;
 use App\Models\Platform;
 use App\Models\Other;
@@ -97,13 +95,11 @@ class AdminPostsController extends Controller
                 });
 
                 // Set the desired locale to Romanian
-                setlocale(LC_TIME, 'ro_RO.utf8');
-
-                // Create a Carbon instance for the current date and time
-                $now = Carbon::now('Europe/Bucharest');
-
+                $now = now();
+                $now->setLocale('ro_RO');
+                
                 // Format the date and time in Romanian format
-                $formattedDate = $now->formatLocalized('%Y-%m-%d-%H-%M-%S');
+                $formattedDate = $now->translatedFormat('Y-m-d-H-M-s');
                 
                 // Modify the filename to include author name and date
                 $resizedImageName = $formattedDate . '-' . Auth::user()->name . '-' . $filename;
@@ -112,16 +108,18 @@ class AdminPostsController extends Controller
                 $resizedImagePath = 'images/' . $resizedImageName;
                 Storage::disk('public')->put($resizedImagePath, $croppedImage->stream());
 
-                // Delete the old image
-                $oldImagePath = 'images/' . $filename;
-                Storage::disk('public')->delete($oldImagePath);
+                // START aici tre un if daca ii create sau update pt cand optimizez codul
+                    // Delete the original image
+                    $originalImagePath = 'images/' . $filename;
+                    Storage::disk('public')->delete($originalImagePath);
 
-                // Associate the image with the post
-                $post->image()->create([
-                    'name' => $resizedImageName ,
-                    'extension' => $file_extension,
-                    'path' => $resizedImagePath,
-                ]);
+                    // Associate the image with the post
+                    $post->image()->create([
+                        'name' => $resizedImageName ,
+                        'extension' => $file_extension,
+                        'path' => $resizedImagePath,
+                    ]);
+                // END
             }
 
             // Attach categories and platforms IDs to the post
@@ -207,23 +205,57 @@ class AdminPostsController extends Controller
             // game name, categories of the game and plaforms that can be played on are required
         || ($selectedVideoGame !== "1" && $selectedCategories[0] === "1" && $selectedPlatforms[0] === '1' &&  $selectedOther !== "1")) {
             // or game name and other if the article is about something else related to a game (like an anime/movie/etc. based on a game)
+           
+            $updateRules = $this->rules;
+            $updateRules['thumbnail'] = 'nullable|image|max:1920';            
+            $validated = $request->validate($updateRules);
 
-            $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1920,max_height=1080';
-            $validated = $request->validate($this->rules);
-            $validated['approved'] = $request->input('approved') !== null;
-            
+            $validated['approved'] = $request->input('approved') !== null;            
             $post->update($validated);
 
-            if ($request->has('thumbnail')) {
+            if ($request->hasFile('thumbnail')) {
+
                 $thumbnail = $request->file('thumbnail');
                 $filename = $thumbnail->getClientOriginalName();
-                $file_extension = $thumbnail->getClientOriginalExtension();
-                $path = $thumbnail->store('images', 'public');
+                $file_extension  = $thumbnail->getClientOriginalExtension();
 
+                // Get the base64-encoded image data from the request
+                $croppedImageData = $request->input('croppedImageData');
+                // Decode the base64 data into binary format
+                $croppedImageBinary = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $croppedImageData));
+                
+                // Save the binary data as an image file using Laravel's Storage facade
+                Storage::disk('public')->put('images/' . $filename, $croppedImageBinary);
+                
+                // Create an Intervention Image instance from the saved image
+                $croppedImagePath = public_path('storage/images/' . $filename);
+                $croppedImage = ImageManager::make($croppedImagePath);
+                
+                // Resize the cropped image (e.g., to 1280 x 720)
+                $croppedImage->resize(1280 , 720, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+
+                // Format the date and time in Romanian format
+                $now = now()->setTimezone('Europe/Bucharest');
+                $formattedDate = $now->format('Y-m-d-H-i-s');
+                
+                // Modify the filename to include author name and date
+                $resizedImageName = $formattedDate . '-' . Auth::user()->name . '-' . $filename;
+
+                // Save the resized image using Laravel's Storage facade
+                $resizedImagePath = 'images/' . $resizedImageName;
+                Storage::disk('public')->put($resizedImagePath, $croppedImage->stream());
+                
+                // Delete the original image and original image path if it exists
+                $originalImagePath = 'images/' . $filename;
+                Storage::disk('public')->delete($originalImagePath);
+
+                // Associate the image with the post
                 $post->image()->update([
                     'name' => $filename,
                     'extension' => $file_extension,
-                    'path' => $path,
+                    'path' => $resizedImagePath,
                 ]);
             }
 

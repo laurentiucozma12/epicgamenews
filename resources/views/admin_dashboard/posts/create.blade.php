@@ -252,7 +252,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelCrop">Cancel</button>
                 <button type="button" class="btn btn-primary" id="cropAndUpload">Crop and Upload</button>
             </div>
         </div>
@@ -296,10 +296,24 @@ $(document).ready(function() {
         cropper = null;
     });
 
+    let previousFileName = null; // Initialize with null
+
     // Show the image cropping modal when an image is selected
     $('#thumbnail').on('change', function(event) {
         const file = event.target.files[0];
         const fileReader = new FileReader();
+
+        // Get the value from the file input element
+        const filePath = $('#thumbnail').val();
+        // Use JavaScript to extract only the file name
+        const fileName = filePath.split('\\').pop();
+        
+        if (fileName === previousFileName) {
+            clearSelectedImage();            
+        }
+
+        // Update the previous file name
+        previousFileName = file.name;
 
         fileReader.onload = function(e) {
             $('#imageToCrop').attr('src', e.target.result);
@@ -309,17 +323,37 @@ $(document).ready(function() {
         fileReader.readAsDataURL(file);
     });
 
-    // Handle the "Crop and Upload" button click
+   // Handle the "Crop and Upload" button click
     $('#cropAndUpload').on('click', function() {
         croppedImageDataURL = cropper.getCroppedCanvas().toDataURL();
 
         // Convert the cropped image to WebP
         convertToWebP(croppedImageDataURL);
-        
-        $('#cropImageModal').modal('hide');        
+
+        $('#cropImageModal').modal('hide');
         $('#croppedImage').attr('src', croppedImageDataURL);
         $('#croppedImage').show();
     });
+
+    // Prevent modal from closing when clicking outside
+    $('#cropImageModal').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+
+    // Handle the "Cancel" button click
+    $('#cancelCrop').on('click', function() {
+        clearSelectedImage();
+        $('#cropImageModal').modal('hide');
+    });
+
+    // Clear selected image data and image preview
+    function clearSelectedImage() {
+        $('#thumbnail').val(''); // Clear the thumbnail input value
+        $('#imageToCrop').attr('src', ''); // Clear the image preview
+        $('#croppedImageData').val(''); // Clear the hidden input value
+        $('#croppedImage').attr('src', '').hide(); // Remove the cropped image preview and hide it
+    }
 
     // Function to convert the image to WebP
     function convertToWebP(dataURL) {
