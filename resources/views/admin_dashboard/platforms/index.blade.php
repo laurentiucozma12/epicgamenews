@@ -33,10 +33,10 @@
                                 <th>Id</th>
                                 <th>Thumbnail</th>
                                 <th>Name</th>
-                                <th>Creator</th>
                                 <th>Slug</th>
                                 <th>Related Posts</th>
                                 <th>Created at</th>
+                                <th>Created By</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -54,11 +54,12 @@
                                         <img width='50' src="{{ $platform->image ? asset('storage/' . $platform->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="post thumbnail">    
                                     </td>
                                     <td>{{ $platform->name }}</td>
-                                    <td>{{ $platform->user->name }}</td>
+                                    <td>{{ $platform->slug }}</td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.platforms.show', $platform) }}">Related Posts</a>    
                                     </td>
                                     <td>{{ $platform->created_at->diffForHumans() }}</td>
+                                    <td>{{ $platform->user->name }}</td>
                                     <td>
                                         <div class="d-flex order-actions">
                                             <a href="{{ route('admin.platforms.edit', $platform) }}" ><i class='bx bxs-edit'></i></a>

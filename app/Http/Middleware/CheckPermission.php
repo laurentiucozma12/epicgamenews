@@ -10,9 +10,12 @@ class CheckPermission
 {
     public function handle(Request $request, Closure $next): Response
     {    
-    if (auth()->user()->role->name === 'admin')
-            return $next($request);
-            
+        foreach (auth()->user()->roles as $role) {
+            if ($role->name !== 'user') {    
+                return $next($request);            
+            }
+        }
+                
         // 1 - get route name
         $route_name = $request->route()->getName();
         // 2 - get permissions for this authenticated person

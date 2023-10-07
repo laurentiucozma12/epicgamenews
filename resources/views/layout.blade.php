@@ -99,11 +99,13 @@
 											@csrf
 										</form>
 									
-										@if ( auth()->user()->role->name !== "user" )
-											<a href="{{ route('admin.index') }}" target="_blank">
-												<li class="font-changed-btn">Admin Dasboard</li>
-											</a>
-										@endif
+										@foreach (auth()->user()->roles as $role)
+											@if ( $role->name !== "user" )
+												<a href="{{ route('admin.index') }}" target="_blank">
+													<li class="font-changed-btn">Admin Dasboard</li>
+												</a>
+											@endif
+										@endforeach
 									</ul>
 								</li>
 							@endauth								
