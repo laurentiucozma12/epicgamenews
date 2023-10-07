@@ -38,7 +38,8 @@
                                 <th>Category</th>
                                 <th>Platform</th>
                                 <th>Other</th>
-                                <th>Created at</th>
+                                <th>Created At</th>
+                                <th>Created By</th>
                                 <th>Views</th>
                                 <th>Actions</th>
                             </tr>
@@ -84,6 +85,7 @@
                                     </td>                                    
                                     <td>{{ $post->other->name }}</td>                                    
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
+                                    <td>{{ $post->author->name }}</td>
                                     <td>{{ $post->views }}</td>
                                     <td>
                                         <div class="d-flex order-actions">

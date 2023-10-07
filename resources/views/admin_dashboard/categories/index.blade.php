@@ -24,7 +24,7 @@
                     <div class="position-relative">
                         <input type="text" class="form-control ps-5 radius-30" placeholder="Search Order"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
                     </div>
-                    <div class="ms-auto"><a href="{{ route('admin.categories.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New Video Game</a></div>
+                    <div class="ms-auto"><a href="{{ route('admin.categories.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New Category</a></div>
                 </div>
                 <div class="table-responsive">
                     <table class="table mb-0">
@@ -33,9 +33,9 @@
                                 <th>Id</th>
                                 <th>Thumbnail</th>
                                 <th>Name</th>
-                                <th>Creator</th>
                                 <th>Related Posts</th>
-                                <th>Created at</th>
+                                <th>Created At</th>
+                                <th>Created By</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -53,11 +53,11 @@
                                         <img width='50' src="{{ $category->image ? asset('storage/' . $category->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="post thumbnail">    
                                     </td>
                                     <td>{{ $category->name }}</td>
-                                    <td>{{ $category->user->name }}</td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.categories.show', $category) }}">Related Posts</a>    
                                     </td>
                                     <td>{{ $category->created_at->diffForHumans() }}</td>
+                                    <td>{{ $category->user->name }}</td>
                                     <td>
                                         <div class="d-flex order-actions">
                                             <a href="{{ route('admin.categories.edit', $category) }}" ><i class='bx bxs-edit'></i></a>

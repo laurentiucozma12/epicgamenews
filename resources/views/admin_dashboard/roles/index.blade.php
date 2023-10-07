@@ -34,7 +34,8 @@
                             <tr>
                                 <th>Role</th>
                                 <th>Role Name</th>
-                                <th>Created at</th>
+                                <th>Created At</th>
+                                <th>Created By</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -50,6 +51,7 @@
                                     </td>
                                     <td>{{ $role->name }}</td>
                                     <td>{{ $role->created_at->diffForHumans() }}</td>
+                                    <td>{{ $role->user->name }}</td>
 
                                     <td>
                                         <div class="d-flex order-actions">

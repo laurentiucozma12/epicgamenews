@@ -32,8 +32,8 @@
 										<th>Id</th>
 										<th>Name</th>
                                         <th>Related Posts</th>
-										<th>Author</th>
 										<th>Created at</th>
+										<th>Created by</th>
 										<th>Actions</th>
 									</tr>
 								</thead>
@@ -51,8 +51,8 @@
                                         <td>
                                             <a class='btn btn-primary btn-sm' href="{{ route('admin.tags.show', $tag) }}">Related Posts</a>
                                         </td>
-										<td>{{ $tag->user->name }} </td>
                                         <td>{{ $tag->created_at->diffForHumans() }}</td>
+										<td>{{ $tag->user->name }} </td>
                                         <td>
 											<div class="d-flex order-actions">
 												<a href="#" onclick="event.preventDefault(); document.getElementById('delete_form_{{ $tag->id }}').submit();" class="ms-3"><i class='bx bxs-trash'></i></a>

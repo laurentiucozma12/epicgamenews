@@ -10,10 +10,11 @@ class CreatePostPlatformTable extends Migration
     {
         Schema::create('post_platform', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('post_id');
-            $table->unsignedBigInteger('platform_id');
             
+            $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+
+            $table->unsignedBigInteger('platform_id');
             $table->foreign('platform_id')->references('id')->on('platforms')->onDelete('cascade');
             
             $table->timestamps();
