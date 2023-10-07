@@ -32,10 +32,9 @@
                     <table class="table mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>Role</th>
-                                <th>Role Name</th>
+                                <th>Id</th>
+                                <th>Name</th>
                                 <th>Created At</th>
-                                <th>Created By</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -51,8 +50,6 @@
                                     </td>
                                     <td>{{ $role->name }}</td>
                                     <td>{{ $role->created_at->diffForHumans() }}</td>
-                                    <td>{{ $role->user->name }}</td>
-
                                     <td>
                                         <div class="d-flex order-actions">
                                             <a href="{{ route('admin.roles.edit', $role) }}" class=""><i class='bx bxs-edit'></i></a>
