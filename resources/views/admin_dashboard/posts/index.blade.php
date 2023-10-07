@@ -29,7 +29,7 @@
                     <table class="table mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>All Post</th>
+                                <th>Id</th>
                                 <th>Status</th>
                                 <th>Thumbnail</th>
                                 <th>Post Title</th>

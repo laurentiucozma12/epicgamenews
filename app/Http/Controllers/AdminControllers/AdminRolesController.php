@@ -15,8 +15,10 @@ class AdminRolesController extends Controller
 
     public function index()
     {
+        $roles = Role::with('user')->orderBy('id', 'DESC')->paginate(100);
+        
         return view('admin_dashboard.roles.index', [
-            'roles' => Role::orderBy('id', 'DESC')->get(),
+            'roles' => $roles
         ]);
     }
     

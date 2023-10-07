@@ -72,13 +72,6 @@ class DatabaseSeeder extends Seeder
             $category->image()->save( \App\Models\Image::factory()->make() );
         }
         
-        // \App\Models\Platform::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
-        // \App\Models\Platform::factory(1)->create(['name' => 'PC', 'slug' => 'pc']);
-        // \App\Models\Platform::factory(1)->create(['name' => 'PlayStation', 'slug' => 'playstation']);
-        // \App\Models\Platform::factory(1)->create(['name' => 'Xbox', 'slug' => 'xbox']);
-        // \App\Models\Platform::factory(1)->create(['name' => 'Mobile', 'slug' => 'mobile']);
-        // \App\Models\Platform::factory(1)->create(['name' => 'Nintendo', 'slug' => 'nintendo']);
-        
         $platformsData = [
             (object)['name' => 'uncategorized', 'slug' => 'uncategorized'],
             (object)['name' => 'PC', 'slug' => 'pc'],
@@ -96,14 +89,6 @@ class DatabaseSeeder extends Seeder
 
             $platform->image()->save( \App\Models\Image::factory()->make() );
         }
-
-        // \App\Models\Other::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
-        // \App\Models\Other::factory(1)->create(['name' => 'Game Trailers', 'slug' => 'game-trailers']);
-        // \App\Models\Other::factory(1)->create(['name' => 'Anime', 'slug' => 'anime']);
-        // \App\Models\Other::factory(1)->create(['name' => 'Cartoons', 'slug' => 'cartoons']);
-        // \App\Models\Other::factory(1)->create(['name' => 'Movies', 'slug' => 'movies']);
-        // \App\Models\Other::factory(1)->create(['name' => 'Series', 'slug' => 'series']);
-        // \App\Models\Other::factory(1)->create(['name' => 'Lists', 'slug' => 'lists']);
         
         $othersData = [
             (object)['name' => 'uncategorized', 'slug' => 'uncategorized'],
