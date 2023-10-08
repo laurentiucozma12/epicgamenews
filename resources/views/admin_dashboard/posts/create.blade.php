@@ -108,7 +108,7 @@
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
-                                                        <select id="categories" name="categories[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
+                                                        <select id="categories" name="categories[]" multiple="multiple" class="multiple-select" data-placeholder="Choose categories" required>
                                                             @foreach ($categories as $category)
                                                                 <option value="{{ $category->id }}" {{ $category->name === 'uncategorized' ? 'selected' : '' }}>
                                                                     {{ $category->name }}
