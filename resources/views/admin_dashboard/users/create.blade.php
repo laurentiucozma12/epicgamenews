@@ -18,7 +18,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
-                            </li>                            
+                            </li>
                             <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.users.index') }}">All Users</a></li>
                             <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.users.create') }}">New User</a></li>
                         </ol>

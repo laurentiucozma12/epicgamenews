@@ -24,13 +24,15 @@
     --white: #ffffff;
 }
 
-
-/* Start Bootstrap */
+/****** Start Bootstrap ******/
+.bg-primary {
+    color: var(--black);
+    background-color: var(--light-blue-1) !important; }
 .select2-container--bootstrap4 .select2-selection {
     border: 1px solid var(--white);
-	background-color: var(--dark-gray); }
+	background-color: var(--gray-1); }
 .select2-container--bootstrap4 .select2-selection .select2-search__field {
-	background-color: var(--dark-gray); }
+	background-color: var(--gray-1); }
 .select2-dropdown {
 	background-color: var(--dark-gray); }
 .select2-container--bootstrap4 {
@@ -39,7 +41,8 @@
     color: var(--white);
     background-color: var(--light-gray-1); }
 .select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice {
-    color: var(--white); }
+    color: var(--white); 
+    background-color: var(--light-gray-1); }
 .card {
     background-color: var(--dark-gray); }
 .card h1,
@@ -60,7 +63,174 @@
     background-color: var(--dark-gray); }
 .permission input {
     margin-right: 0.5rem; }
-/* End Bootstrap */
+.sidebar-header {
+    color: var(--white);
+    background: var(--dark-gray);
+    border-bottom: 1px solid var(--light-blue-1); }
+.topbar {
+    -webkit-box-shadow: 0 2px 6px 0 var(--light-blue-1), 0 0px 6px 0 var(--light-blue-3);
+    box-shadow: 0 2px 6px 0 var(--light-blue-1), 0 0px 6px 0 var(--light-blue-3);
+}
+.page-content {
+	min-height: 100vh !important;
+	background-color: var(--dark-gray);
+}
+.page-footer {
+	color: var(--white);
+	background: var(--dark-gray);
+}
+.sidebar-wrapper {    
+    box-shadow: 0 2px 6px 0 var(--light-blue-1), 0 2px 6px 0 var(--light-blue-3) !important;
+}
+.sidebar-wrapper .metismenu ul {
+	border: 1px solid var(--dark-1);
+	background: transparent
+}
+.sidebar-wrapper .metismenu .mm-active>a,
+.sidebar-wrapper .metismenu a:active,
+.sidebar-wrapper .metismenu a:focus,
+.sidebar-wrapper .metismenu a:hover {
+	color: var(--light-blue-1);
+	background: var(--dark-1);
+}
+.back-to-top {
+	color: var(--black);
+	background-color: var(--light-blue-1);
+}
+.order-actions a {
+	background: var(--light-gray-2);
+}
+.order-actions a:hover {
+	transition: 0.5s;
+	color: var(--black);
+	background-color: var(--white);
+}
+.search-control,
+.search-control-2 {
+	background-color: var(--dark-gray);
+}
+.search-control:focus,
+.search-control-2:focus {
+	background-color: var(--light-gray-1);
+}
+input.search-control-2::placeholder {
+	color: var(--black)!important;
+}
+.topbar .navbar .navbar-nav .nav-link {
+	color: var(--white);
+}
+.user-info .user-name {
+	color: var(--white);
+}
+.user-info .designattion {
+	color: var(--white);
+}
+.user-info .designattion a {
+	color: var(--white);
+}
+.user-info .designattion a:hover {
+	color: var(--light-blue-1);
+	transition: 1s;
+}
+.user-box {
+    border-left: 0;
+}
+.switcher-btn {
+	background: var(--light-blue-1);
+	color: var(--blackf);
+}
+.search-control {
+    border: 1px solid var(--white);
+}
+.table>:not(caption)>*>* {
+	color: var(--white);
+	background-color: var(--dark-gray);
+}
+.table tbody tr td div h6 {
+	color: var(--white); 
+}
+.form-control {
+	color: var(--white);
+	background-color: var(--gray-1);
+}
+.form-control:focus {
+	color: var(--white);
+	background-color: var(--gray-1);
+	border-color: var(--white);
+}
+.form-control::-webkit-input-placeholder,
+.form-control::-moz-placeholder,
+.form-control::placeholder {
+	color: var(--white) !important;
+}
+.form-control:disabled, .form-control[readonly] {
+	background-color: var(--dark-gray);
+}
+.form-control::file-selector-button {
+	color: var(--white);
+	background-color: var(--dark-gray);
+}
+.form-control:hover:not(:disabled):not([readonly])::file-selector-button {
+	background-color: #dde0e3;
+}
+.form-control::-webkit-file-upload-button {
+	color: var(--white);
+	background-color: var(--dark-gray);
+}
+.form-control:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
+	background-color: var(--dark-gray);
+}
+.form-control-plaintext {
+	color: var(--white);
+}
+.btn-primary {
+	color: var(--black);
+	background-color: var(--light-blue-1);
+	border-color: var(--light-blue-1)
+}
+.btn-primary:hover {
+	color: var(--dark-1);
+	background-color: var(--light-blue-3);
+	border-color: var(--light-blue-3)
+}
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+	background-color: var(--light-blue-3);
+	border-color: var(--light-blue-3);
+	box-shadow: 0 0 0 .25rem #31e5fd80;
+}
+.btn-check:active+.btn-primary, .btn-check:checked+.btn-primary, .btn-primary.active, .btn-primary:active, .show>.btn-primary.dropdown-toggle {
+	background-color: var(--light-blue-3);
+	border-color: var(--light-blue-3)
+}
+.btn-check:active+.btn-primary:focus, .btn-check:checked+.btn-primary:focus, .btn-primary.active:focus, .btn-primary:active:focus, .show>.btn-primary.dropdown-toggle:focus {
+	box-shadow: 0 0 0 .25rem #31e5fd80;
+}
+.navbar {
+	background-color: var(--dark-gray);
+}
+.card {
+	box-shadow: 0 2px 6px 0 var(--light-blue-1), 0 2px 6px 0 var(--light-blue-3);
+}
+.card-body {
+	flex: 1 1 auto;
+	color: var(--white) !important;
+	background-color: var(--dark-gray);
+}
+.card-body h5 { 
+	color: var(--white) !important;
+}
+.card-title {
+	color: var(--white);
+}
+
+
+.metismenu {
+	background-color: var(--dark-gray) !important;
+}
+.metismenu a {
+	color: var(--white) !important;
+}
+/****** End Bootstrap ******/
 
 body {
     color: var(--white); }

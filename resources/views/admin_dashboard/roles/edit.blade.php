@@ -91,7 +91,7 @@
 
                                     </div>
                                     
-                                    <div class="update-delete-btn-container">
+                                    <div class="d-flex justify-content-center">
                                         <button class='btn btn-primary' type='submit'>Update Role</button>
 
                                         <a 

@@ -47,8 +47,7 @@
 
                     <div class="form-body mt-4">
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="border border-3 p-4 rounded">
+                            <div class="col-lg-12">                                
 
                                     <div class="mb-3">
                                         <label for="inputPostTitle" class="form-label">Post Title</label>
@@ -79,7 +78,7 @@
 
                                     <div class="mb-3">
                                         <label class="form-label">Post Video Game</label>                                        
-                                        <div class="card">
+                                        <div class="card shadow-none border">
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
@@ -104,7 +103,7 @@
 
                                     <div class="mb-3">
                                         <label class="form-label">Post Category</label>
-                                        <div class="card">
+                                        <div class="card shadow-none border">
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
@@ -129,7 +128,7 @@
 
                                     <div class="mb-3">
                                         <label class="form-label">Post Platform</label>
-                                        <div class="card">
+                                        <div class="card shadow-none border">
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
@@ -154,7 +153,7 @@
 
                                     <div class="mb-3">
                                         <label class="form-label">Post Other</label>                                        
-                                        <div class="card">
+                                        <div class="card shadow-none border">
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
@@ -189,7 +188,7 @@
                                     <div class="mb-3">
                                         <div class="row">
                                             <div class="com-md-8">
-                                                <div class="card">
+                                                <div class="card shadow-none border">
                                                     <div class="card-body">
                                                         <label for="file" class="form-label">Post Thumbnail (Max 1920)</label>
                                                         <input id='thumbnail' name='thumbnail' id="file" accept="image/*" type="file" class="mb-3">
@@ -228,7 +227,7 @@
                                         @enderror
                                     </div>
 
-                                    @if ( auth()->user()->role->name === "admin" )                                    
+                                    @if ( auth()->user()->roles->contains('name', 'admin') )                                    
                                         <div class="form-check form-switch admin-approve-container">
                                             <input name='approved' {{ $post->approved ? 'checked' : '' }} class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
                                             <label class="form-check-label {{ $post->approved ? 'text-success' : 'text-danger' }}" for="flexSwitchCheckChecked">
@@ -237,7 +236,7 @@
                                         </div>
                                     @endif
                                     
-                                    <div class="update-delete-btn-container">
+                                    <div class="d-flex justify-content-between">
                                         <button class='btn btn-primary' type='submit'>Update Post</button>
                                         
                                         <a 
@@ -247,8 +246,7 @@
                                             Delete Post
                                         </a>
                                     </div>
-
-                                </div>
+                                
                             </div>                            
                         </div><!--end row-->
                     </div>                        

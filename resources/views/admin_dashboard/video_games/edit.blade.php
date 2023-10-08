@@ -31,7 +31,6 @@
                     <div class="form-body mt-4">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="border border-3 p-4 rounded">
 
                                     <div class="mb-3">
                                         <label for="inputProductTitle" class="form-label">Video Game Name</label>
@@ -54,7 +53,7 @@
                                     <div class="mb-3">
                                         <div class="row">
                                             <div class="com-md-8">
-                                                <div class="card">
+                                                <div class="card shadow-none border">
                                                     <div class="card-body">
                                                         <label for="file" class="form-label">Video Game Thumbnail (Max 1920 x 1080)</label>
                                                         <input id='thumbnail' name='thumbnail' id="file" type="file">
@@ -72,7 +71,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="update-delete-btn-container">
+                                    <div class="d-flex justify-content-between">
                                         <button class='btn btn-primary' type='submit'>Update Video Game</button>
 
                                         <a 
@@ -83,7 +82,6 @@
                                         </a>
                                     </div>
 
-                                </div>
                             </div>                            
                         </div><!--end row-->
                     </div>                        

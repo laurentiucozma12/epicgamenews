@@ -19,6 +19,7 @@
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                             </li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.users.index') }}">All Users</a></li>
                             <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.users.edit', $user) }}">Edit User {{ $user->name }}</a></li>
                         </ol>
                     </nav>
@@ -28,7 +29,7 @@
           
             <div class="card">
                 <div class="card-body p-4">
-                    <h5 class="card-title">Add New User</h5>
+                    <h5 class="card-title">Edit User</h5>
                     <hr/>
 
                     <form action="{{ route('admin.users.update', $user) }}" method='post' enctype='multipart/form-data'>
@@ -74,7 +75,7 @@
                                                     <div class="mb-3">
                                                         <select required name='role_id' class="single-select">
                                                             @foreach($roles as $key => $role)
-                                                            <option {{ $user->role_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $role }}</option>
+                                                                <option {{ $user->role_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $role }}</option>
                                                             @endforeach
                                                         </select>
 
