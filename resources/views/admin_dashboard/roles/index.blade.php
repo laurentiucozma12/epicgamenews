@@ -51,7 +51,7 @@
                                     </td>
                                     <td>{{ $role->name }}</td>
                                     <td>{{ $role->created_at->diffForHumans() }}</td>
-                                    <td>{{ $role->user->name }}</td>
+                                    <td>{{ $role->createdByUser->name }}</td>
                                     <td>
                                         <div class="d-flex order-actions">
                                             <a href="{{ route('admin.roles.edit', $role) }}" class=""><i class='bx bxs-edit'></i></a>
@@ -70,7 +70,7 @@
                 </div>
 
                 <div>
-                    {{ $roles->links() }}
+                    {{-- {{ $roles->links() }} --}}
                 </div>
 
             </div>

@@ -14,11 +14,11 @@ class AdminRolesController extends Controller
     private $rules = ['name' => 'required|unique:roles,name'];
 
     public function index()
-    {
-        $roles = Role::with('users')->orderBy('id', 'DESC')->paginate(100);
-        
+    { 
+        $roles = Role::with('createdByUser')->orderBy('id', 'DESC')->paginate(100);
+
         return view('admin_dashboard.roles.index', [
-            'roles' => $roles
+            'roles' => $roles,
         ]);
     }
     
