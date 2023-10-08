@@ -55,7 +55,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class='row'>
+                                    <div class='row mb-3'>
                                         <div class='col-md-6'>
                                             <div class="mb-3">
                                                 <label for="input_image1" class="form-label">First Image (Max 540 x 340)</label>
@@ -67,9 +67,7 @@
                                             </div>
                                         
                                             <hr>
-                                            <div class='user-image'>
-                                                <img class='img-fluid img-thumbnail' src="{{ asset('storage/' . $about->about_first_image) }}">
-                                            </div>
+                                            <img class='img-fluid' src="{{ asset('storage/' . $about->about_first_image) }}">
                                         </div>
 
                                         <div class='col-md-6'>
@@ -83,9 +81,7 @@
                                             </div>
 
                                             <hr>
-                                            <div class='user-image'>
-                                                <img class='img-fluid img-thumbnail' src="{{ asset('storage/' . $about->about_second_image) }}">
-                                            </div>
+                                            <img class='img-fluid' src="{{ asset('storage/' . $about->about_second_image) }}">
                                         </div>
                                     </div>
                                     

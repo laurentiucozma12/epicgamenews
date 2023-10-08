@@ -56,7 +56,11 @@
                                         </td>
                                         <td>{{ $user->name }} </td>
                                         <td>{{ $user->email }} </td>
-                                        <td>{{ $user->role->name }}</td>
+                                        <td>
+											@foreach ($user->roles as $role)
+												{{ $role->name }}
+											@endforeach
+										</td>
                                         <td>
                                             <a class='btn btn-primary btn-sm' href="{{ route('admin.users.showPosts', $user) }}">{{ count($user->posts) }} Posts</a>
                                         </td>

@@ -407,9 +407,6 @@ hr {
     margin: 0 1.5rem 0 0; }
 .admin-approve-container .form-check-label {
     font-size: 15pt; }
-.update-delete-btn-container {
-    display: flex;
-    justify-content: space-around; }
 .form-check-input:checked {
     background-color: #15ca20 !important;    
     border-color: #0faa1a !important; }

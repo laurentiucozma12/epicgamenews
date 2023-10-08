@@ -13,7 +13,7 @@ class CheckPermission
     public function handle(Request $request, Closure $next): Response
     {
         // Check if role is !== than user, give acces to admin panel
-        if (!auth()->user()->roles->contains('name', 'user')) {    
+        if (auth()->user()->roles->isNotEmpty() && !auth()->user()->roles->contains('name', 'user')) {    
             return $next($request);            
         }
 

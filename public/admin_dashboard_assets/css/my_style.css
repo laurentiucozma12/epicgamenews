@@ -111,3 +111,6 @@ a:hover {
     background-color: #f7f7f7;
     overflow: hidden;
 }
+
+.user-image img {
+    max-width: 224px !important; }

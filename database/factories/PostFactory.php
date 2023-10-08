@@ -18,7 +18,7 @@ class PostFactory extends Factory
             'slug'=> $this->faker->unique()->slug(), 
             'excerpt' => $this->faker->sentence(), 
             'body' => $this->faker->paragraph(), 
-            'user_id' => User::factory(), 
+            'user_id' => User::all()->random()->id, 
             'video_game_id' => VideoGame::all()->random()->id,
             'other_id' => Other::all()->random()->id,
             'author_thumbnail' => $this->faker->sentence(), 
