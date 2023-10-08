@@ -38,11 +38,18 @@ class DatabaseSeeder extends Seeder
         $blog_routes = Route::getRoutes();
         $permissions_ids = [];
 
-        foreach($blog_routes as $route)
-        {
-            if(strpos($route->getName(), 'admin') !== false) {
-                $permission = \App\Models\Permission::create(['name' => $route->getName()]);
-                $permissions_ids[] = $permission->id;
+        foreach ($blog_routes as $route) {
+            if (strpos($route->getName(), 'admin') !== false) {
+                $permissionName = $route->getName();
+
+                // Check if the permission already exists
+                $existingPermission = \App\Models\Permission::where('name', $permissionName)->first();
+
+                if (!$existingPermission) {
+                    // Permission doesn't exist, create it
+                    $permission = \App\Models\Permission::create(['name' => $permissionName]);
+                    $permissions_ids[] = $permission->id;
+                }
             }
         }
         
