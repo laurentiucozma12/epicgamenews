@@ -33,6 +33,7 @@
                                 <th>Id</th>
                                 <th>Thumbnail</th>
                                 <th>Name</th>
+                                <th>Slug</th>
                                 <th>Related Posts</th>
                                 <th>Created At</th>
                                 <th>Created By</th>
@@ -53,6 +54,7 @@
                                         <img width='50' src="{{ $category->image ? asset('storage/' . $category->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="post thumbnail">    
                                     </td>
                                     <td>{{ $category->name }}</td>
+                                    <td>{{ $category->slug }}</td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.categories.show', $category) }}">Related Posts</a>    
                                     </td>

@@ -33,6 +33,7 @@
                                 <th>Id</th>
                                 <th>Thumbnail</th>
                                 <th>Name</th>
+                                <th>Slug</th>
                                 <th>Related Posts</th>
                                 <th>Created At</th>
                                 <th>Created By</th>
@@ -53,6 +54,7 @@
                                         <img width='50' src="{{ $video_game->image ? asset('storage/' . $video_game->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="post thumbnail">    
                                     </td>
                                     <td>{{ $video_game->name }}</td>
+                                    <td>{{ $video_game->slug }}</td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.video_games.show', $video_game) }}">Related Posts</a>    
                                     </td>
