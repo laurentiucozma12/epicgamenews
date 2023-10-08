@@ -60,7 +60,7 @@
 
                                         <div class="row">
 
-                                            @php                                                
+                                            @php
                                                 $the_count = count($permissions);
                                                 $start = 0;
                                             @endphp

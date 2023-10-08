@@ -17,6 +17,7 @@
             </a>            
         </li>
 
+        <hr>   
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-message-square-edit'></i></div>
@@ -97,7 +98,6 @@
             </ul>
         </li>
 
-        <hr>
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-user'></i></div>

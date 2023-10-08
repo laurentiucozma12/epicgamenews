@@ -52,6 +52,14 @@
 .card-body p,
 .text-secondary {
     color: var(--white) !important; }
+.permission {
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    border: 1px solid var(--light-gray-1);
+    background-color: var(--dark-gray); }
+.permission input {
+    margin-right: 0.5rem; }
 /* End Bootstrap */
 
 body {

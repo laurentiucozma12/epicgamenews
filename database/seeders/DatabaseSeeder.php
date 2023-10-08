@@ -34,7 +34,18 @@ class DatabaseSeeder extends Seeder
         $userRole = \App\Models\Role::factory()->create(['name' => 'user']);
         $adminRole = \App\Models\Role::factory()->create(['name' => 'admin']);
 
-        // Assign the 'admin' role to a specific user
+        // Create Permissions
+        $blog_routes = Route::getRoutes();
+        $permissions_ids = [];
+        foreach($blog_routes as $route)
+        {
+            if(strpos($route->getName(), 'admin') !== false) {
+                $permission = \App\Models\Permission::create(['name' => $route->getName()]);
+                $permissions_ids[] = $permission->id;
+            }
+        }
+        
+        // Assign the 'admin' role to your account for faster testing
         $adminUser = \App\Models\User::factory()->create([
             'name' => 'Lau',
             'email' => 'laurentiucozma12@gmail.com',
