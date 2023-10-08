@@ -94,7 +94,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     Route::resource('tags', AdminTagsController::class)->only(['index', 'show', 'destroy']);
 
     Route::resource('roles', AdminRolesController::class)->except('show');
-    // Route::resource('users', AdminUsersController::class);
+    
     Route::prefix('users')->group(function () {
         Route::get('/', [AdminUsersController::class, 'index'])->name('users.index');
         Route::get('/create', [AdminUsersController::class, 'create'])->name('users.create');

@@ -31,12 +31,13 @@ class DatabaseSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         // Create Roles
-        $userRole = \App\Models\Role::factory()->create(['name' => 'user']);
-        $adminRole = \App\Models\Role::factory()->create(['name' => 'admin']);
+        $user_role = \App\Models\Role::factory()->create(['name' => 'user']);
+        $admin_role = \App\Models\Role::factory()->create(['name' => 'admin']);
 
         // Create Permissions
         $blog_routes = Route::getRoutes();
         $permissions_ids = [];
+
         foreach($blog_routes as $route)
         {
             if(strpos($route->getName(), 'admin') !== false) {
@@ -45,20 +46,22 @@ class DatabaseSeeder extends Seeder
             }
         }
         
+        \App\Models\Role::where('name', 'admin')->first()->permissions()->sync( $permissions_ids );
+        
         // Assign the 'admin' role to your account for faster testing
         $adminUser = \App\Models\User::factory()->create([
             'name' => 'Lau',
             'email' => 'laurentiucozma12@gmail.com',
         ]);
 
-        $adminUser->roles()->attach($adminRole->id);
+        $adminUser->roles()->attach($admin_role->id);
 
         // Create Users
         $users = \App\Models\User::factory(10)->create();
 
         // Attach roles to users
-        $users->each(function ($user) use ($userRole) {
-            $user->roles()->attach($userRole->id);
+        $users->each(function ($user) use ($user_role) {
+            $user->roles()->attach($user_role->id);
         });
 
         \App\Models\VideoGame::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);

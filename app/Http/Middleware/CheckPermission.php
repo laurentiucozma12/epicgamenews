@@ -6,30 +6,34 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use App\Models\Role;
+
 class CheckPermission
 {
     public function handle(Request $request, Closure $next): Response
-    {    
-        foreach (auth()->user()->roles as $role) {
-            if ($role->name !== 'user') {    
-                return $next($request);            
-            }
+    {
+        // Check if role is !== than user, give acces to admin panel
+        if (!auth()->user()->roles->contains('name', 'user')) {    
+            return $next($request);            
         }
-                
-        // 1 - get route name
+
+        // Get the route name
         $route_name = $request->route()->getName();
-        // 2 - get permissions for this authenticated person
-        $routes_arr = auth()->user()->role->permissions->toArray();
-        // 3 - compare this route name with user permissions
-        foreach ($routes_arr as $route) {            
-            // 4 - if this route name is one of these permissions            
-            if ($route['name'] === $route_name) {
-                // 5 - allow user to acces
-                return $next($request);
+
+        // Get permissions for this authenticated person
+        $userPermissions = [];
+        foreach (auth()->user()->roles as $role) {
+            foreach ($role->permissions as $permission) {
+                $userPermissions[] = $permission->name;
             }
         }
 
+        // Compare this route name with user permissions
+        if (in_array($route_name, $userPermissions)) {
+            return $next($request);
+        }
+        
+        // Access Denied
         abort(403, 'Access Denied | Unauthorized');
-        // 6 - else abort 403  Unauthorized Access
     }
 }
