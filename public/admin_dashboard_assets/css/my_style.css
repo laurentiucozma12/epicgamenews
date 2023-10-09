@@ -52,7 +52,6 @@
 .card h5,
 .card h6,
 .card small,
-.card-body p,
 .text-secondary {
     color: var(--white) !important; }
 .permission {

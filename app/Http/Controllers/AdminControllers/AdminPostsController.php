@@ -54,7 +54,7 @@ class AdminPostsController extends Controller
     public function store(Request $request)
     {
         $selectedVideoGame = $request->input('video_game_id'); // 1 is uncategorized
-        $selectedCategories = $request->input('categories', []); // 1 is uncategorized
+        $selectedCategories = $request->input('categorieselectedPlatformIdss', []); // 1 is uncategorized
         $selectedPlatforms = $request->input('platforms', []); // 1 is uncategorized
         $selectedOther = $request->input('other_id'); // 1 is uncategorized
         
@@ -63,11 +63,8 @@ class AdminPostsController extends Controller
         || ($selectedVideoGame !== "1" && $selectedCategories[0] === "1" && $selectedPlatforms[0] === '1' &&  $selectedOther !== "1")) {
             // or game name and other if the article is about something else related to a game (like an anime/movie/etc. based on a game)
 
-            $validated = $request->validate($this->rules);
-        
+            $validated = $request->validate($this->rules);        
             $validated['user_id'] = auth()->id();
-        
-            // Create the Post
             $post = Post::create($validated);
             
             if ($request->hasFile('thumbnail')) {
@@ -287,7 +284,7 @@ class AdminPostsController extends Controller
             // Save the changes to the post
             $post->video_game_id = $selectedVideoGame;
             $post->other_id = $selectedOther;
-            $post->save();    
+            $post->save();
 
             return redirect()->route('admin.posts.edit', $post)->with('success', 'Post has been updated with success');
         } else  {        

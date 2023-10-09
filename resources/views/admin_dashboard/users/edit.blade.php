@@ -68,21 +68,24 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">User Role</label>
+                                        <label class="form-label">User Role</label>
                                         <div class="card shadow-none">
                                             <div class="card-body p-0">
                                                 <div class="rounded">
                                                     <div class="mb-3">
-                                                        <select required name='role_id' class="single-select">
-                                                            @foreach($roles as $key => $role)
-                                                                <option {{ $user->role_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $role }}</option>
+                                                        <select id="roles" name="roles[]" multiple="multiple" class="multiple-select" data-placeholder="Choose roles" required>
+                                                            @foreach ($roles as $key => $role)
+                                                                <option value="{{ $key }}" {{ in_array($key, $selectedRoleIds) ? 'selected' : '' }}>{{ $role }}</option>
                                                             @endforeach
                                                         </select>
-
-                                                        @error('role_id')
-                                                            <p class='text-danger'>{{ $message }}</p>
+                                    
+                                                        @error('roles')
+                                                            <p class="text-danger">{{ $message }}</p>
                                                         @enderror
-
+                                    
+                                                        @if($errors->has('all_fields'))          
+                                                            <p class="text-danger">{{ $errors->first('all_fields') }}</p>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -151,9 +154,14 @@
 
 <script>
     $(document).ready(function () {
-        
 
         $('.single-select').select2({
+            theme: 'bootstrap4',
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            allowClear: Boolean($(this).data('allow-clear')),
+        });
+        $('.multiple-select').select2({
             theme: 'bootstrap4',
             width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
             placeholder: $(this).data('placeholder'),

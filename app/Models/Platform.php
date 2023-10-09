@@ -17,7 +17,7 @@ class Platform extends Model
 
     public function posts()
     {
-        return $this->belongsToMany(Post::class, 'post_platform', 'post_id', 'platform_id');
+        return $this->belongsToMany(Post::class, 'post_platform', 'platform_id', 'post_id');
     }
     
     protected static function boot()

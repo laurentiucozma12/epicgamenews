@@ -15,30 +15,29 @@ class AdminUsersController extends Controller
     private $rules = [
         'name' => 'required|min:3',
         'email' => 'required|email|unique:users,email',
-        'password' => 'required|min:8|max:20',
-        'image' => 'nullable|file|mimes:jpg,png,webp,svg,jpeg|dimensions:max_width=300,max_height=300',
-        'role_id' => 'required|numeric'
+        'password' => 'required|min:3|max:20',
+        'image' => 'nullable|image|dimensions:max_width=1920,max_height=1080',
     ];
 
     public function index()
     {
         return view('admin_dashboard.users.index', [
-            'users' => User::with('roles')->latest()->paginate(100)
+            'users' => User::with('roles')->orderBy('id', 'DESC')->paginate(100)
         ]);
     }
 
     public function create()
     {
         return view('admin_dashboard.users.create', [
-            'roles' => Role::pluck('name', 'id'),
+            'roles' => Role::all(),
         ]);
     }
 
     public function store(Request $request)
     {
+        $selectedRole = $request->input('roles', []);
         $validated = $request->validate($this->rules);
         $validated['password'] = Hash::make($request->input('password'));
-
         $user = User::create($validated);
 
         if($request->has('image'))
@@ -56,20 +55,27 @@ class AdminUsersController extends Controller
             ]);
         }
 
+        $user->roles()->attach($selectedRole);
+
         return redirect()->route('admin.users.create')->with('success', 'User has been created.');
     }
 
     public function edit(User $user)
-    {
+    {        
+        $roles = Role::pluck('roles.name', 'roles.id');
+        $selectedRoleIds = $user->roles->pluck('id')->toArray();
+
         return view('admin_dashboard.users.edit', [
             'user' => $user,
-            'roles' => Role::pluck('name', 'id')
+            'roles' => $roles,
+            'selectedRoleIds' => $selectedRoleIds,
         ]);
     }
 
     public function showUsers(User $user)
     {
-        $posts = $user->posts()->latest()->paginate(100);
+        $posts = $user->posts()->latest()->paginate(100);        
+
         return view('admin_dashboard.users.show_users',[
             'user' => $user,
             'posts' => $posts,
@@ -105,28 +111,38 @@ class AdminUsersController extends Controller
     
     public function update(Request $request, User $user)
     {
-        // Transform the input role_id into an int (othewise it will be a string)
-        $role_id = intval($request->input('role_id'));
+        // Transform the input role_ids into an array
+        $roleIds = $request->input('roles', []);
 
         // Check if the user is trying to change their own role
-        if ($user->id === auth()->id() && $role_id !== $user->role_id) {
-            return redirect()->back()->with('error', 'You can not update your role.');
+        if ($user->id === auth()->id() && !in_array($user->role_id, $roleIds)) {
+            return redirect()->back()->with('error', 'You cannot update your role.');
         }
 
-        $this->rules['password'] = 'nullable|min:3|max:20';
-        $this->rules['email'] = ['required', 'email', Rule::unique('users')->ignore($user)];
+        // Validate the request data
+        $validated = $request->validate([
+            'name' => 'required|min:3',
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user)],
+            'password' => 'nullable|min:3|max:20',
+            'image' => 'nullable|image|dimensions:max_width=1920,max_height=1080',
+        ]);
 
-        $validated = $request->validate($this->rules);
-        
-        if($validated['password'] === null)
-            unset($validated['password']);
-        else 
+        // Hash the password if provided and not null
+        if ($request->filled('password')) {
             $validated['password'] = Hash::make($request->input('password'));
+        } else {
+            // Remove the password from the validated data to avoid updating it
+            unset($validated['password']);
+        }
 
+        // Update the user with the validated data
         $user->update($validated);
 
-        if($request->has('image'))
-        {
+        // Sync the roles without detaching
+        $user->roles()->sync($roleIds);
+
+        // Handle image upload if provided
+        if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = $image->getClientOriginalName();
             $file_extension = $image->getClientOriginalExtension();
@@ -135,13 +151,13 @@ class AdminUsersController extends Controller
             $user->image()->create([
                 'name' => $filename,
                 'extension' => $file_extension,
-                'path' => $path
+                'path' => $path,
             ]);
         }
 
         return redirect()->route('admin.users.edit', $user)->with('success', 'User has been updated.');
     }
-    
+
     public function destroy(User $user)
     {
         if($user->id === auth()->id())
