@@ -51,7 +51,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <img width='50' src="{{ $other->image ? asset('storage/' . $other->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="post thumbnail">    
+                                        <img width='50' src="{{ $other->image ? asset('storage/' . $other->image->path) : asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="post thumbnail">    
                                     </td>
                                     <td>{{ $other->name }}</td>
                                     <td>{{ $other->slug }}</td>
