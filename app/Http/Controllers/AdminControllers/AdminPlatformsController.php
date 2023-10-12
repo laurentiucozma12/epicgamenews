@@ -89,7 +89,7 @@ class AdminPlatformsController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.platforms.edit', $platform)->with('success', 'Video Game has been Updated');
+        return redirect()->route('admin.platforms.edit', $platform)->with('success', 'Platform has been Updated');
     }
 
     public function destroy(Platform $platform)
@@ -102,6 +102,6 @@ class AdminPlatformsController extends Controller
         $platform->posts()->update(['platform_id' => $default_platform_id]);
 
         $platform->delete();
-        return redirect()->route('admin.platforms.index')->with('success', 'Video Game has been Deleted');
+        return redirect()->route('admin.platforms.index')->with('success', 'Platform has been Deleted');
     }
 }

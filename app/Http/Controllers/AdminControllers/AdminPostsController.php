@@ -54,10 +54,10 @@ class AdminPostsController extends Controller
     public function store(Request $request)
     {
         $selectedVideoGame = $request->input('video_game_id'); // 1 is uncategorized
-        $selectedCategories = $request->input('categorieselectedPlatformIdss', []); // 1 is uncategorized
+        $selectedCategories = $request->input('categories', []); // 1 is uncategorized
         $selectedPlatforms = $request->input('platforms', []); // 1 is uncategorized
         $selectedOther = $request->input('other_id'); // 1 is uncategorized
-        
+        dd( $selectedVideoGame, $selectedCategories, $selectedPlatforms, $selectedOther);
         if (($selectedVideoGame !== "1" && $selectedCategories[0] !== "1" && $selectedPlatforms[0] !== '1' &&  $selectedOther === "1") 
             // game name, categories of the game and plaforms that can be played on are required
         || ($selectedVideoGame !== "1" && $selectedCategories[0] === "1" && $selectedPlatforms[0] === '1' &&  $selectedOther !== "1")) {
