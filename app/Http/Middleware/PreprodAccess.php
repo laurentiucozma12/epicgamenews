@@ -14,7 +14,7 @@ class PreprodAccess
         if ($currentBranch === 'pre-production') 
         {
             $clientIP = $request->ip();   
-            if ($clientIP !== '83.103.225.235')
+            if ($clientIP !== '83.103.225.235' || $clientIP !== '5.14.139.23')
                 abort(403, 'Access Denied | Unauthorized');
             else
                 return $next($request);
