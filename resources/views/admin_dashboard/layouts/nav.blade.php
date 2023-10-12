@@ -84,6 +84,14 @@
                 <div class="menu-title">Tags</div>
             </a>
         </li>
+        
+        <hr>
+        <li>
+            <a href="{{ route('admin.about.edit') }}"> 
+                <div class="parent-icon"><i class='bx bx-info-square'></i></div>
+                <div class="menu-title">About</div>
+            </a>
+        </li>
 
         <hr>        
         <li>
@@ -112,20 +120,24 @@
 
         <hr>        
         <li>
-            <a href="{{ route('admin.contacts') }}">
-                <div class="parent-icon"><i class='bx bx-mail-send'></i></div>
-                <div class="menu-title">Contacts</div>
+            <a href="{{ route('admin.terminal.index') }}">
+                <div class="parent-icon"><i class='bx bx-terminal'></i></div>
+                <div class="menu-title">Terminal</div>
             </a>
         </li>
 
-        <hr>
-        <li>
-            <a href="{{ route('admin.about.edit') }}"> 
-                <div class="parent-icon"><i class='bx bx-info-square'></i></div>
-                <div class="menu-title">About</div>
-            </a>
-        </li>
-
+        @if ( auth()->user()->roles->isNotEmpty() 
+        && auth()->user()->roles->contains('name', 'admin') 
+        && !auth()->user()->roles->contains('name', 'user'))
+            <hr>
+            <li>
+                <a href="{{ route('admin.contacts') }}">
+                    <div class="parent-icon"><i class='bx bx-mail-send'></i></div>
+                    <div class="menu-title">Contacts</div>
+                </a>
+            </li>
+        @endif
+        
         <hr>
         <li>
             <a href="{{ route('home') }}" target="_blank">

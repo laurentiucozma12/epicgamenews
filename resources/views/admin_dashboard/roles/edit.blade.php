@@ -1,19 +1,5 @@
 @extends("admin_dashboard.layouts.app")
 
-@section('style')
-<style>
-    .permission {
-        background-color: white;
-        padding: 5px 10px;
-        display: inline-block;
-        font-size: 15px;
-        margin: 10px;
-        cursor: pointer;    
-        width: 100%;
-    }
-</style>
-@endsection
-
 @section("wrapper")
 <!--start page wrapper -->
 <div class="page-wrapper">
@@ -46,7 +32,6 @@
                     <div class="form-body mt-4">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="border border-3 p-4 rounded">
 
                                     <div class="mb-3">
                                         <label for="inputProductTitle" class="form-label">Role Name</label>
@@ -91,7 +76,7 @@
 
                                     </div>
                                     
-                                    <div class="d-flex justify-content-center">
+                                    <div class="d-flex justify-content-between">
                                         <button class='btn btn-primary' type='submit'>Update Role</button>
 
                                         <a 
@@ -102,7 +87,6 @@
                                         </a>
                                     </div>
 
-                                </div>
                             </div>                            
                         </div><!--end row-->
                     </div>                        

@@ -35,14 +35,9 @@
 
 <body>
     
-    @if (Session::has('success'))
-        <div class="general-message alert alert-info">{{ Session::get('success') }}</div>    
-    @endif
-    
-    @if (Session::has('error'))
-        <div class="general-message alert alert-danger">{{ Session::get('error') }}</div>    
-    @endif
-    
+    {{-- Alert Messages --}}
+    <x-blog.message/>
+
 	<!--wrapper-->
 	<div class="wrapper">
 		<!--start header -->
@@ -160,13 +155,31 @@
         </div>
     </div>
     <!--end switcher-->
+    
 	<!-- Bootstrap JS -->
 	<script src="{{ asset('admin_dashboard_assets/js/bootstrap.bundle.min.js') }}"></script>
+
 	<!--plugins-->
 	<script src="{{ asset('admin_dashboard_assets/js/jquery.min.js') }}"></script>
 	<script src="{{ asset('admin_dashboard_assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
 	<script src="{{ asset('admin_dashboard_assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
 	<script src="{{ asset('admin_dashboard_assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+    
+    {{-- Alert Messages --}}
+    <script>
+        $(document).ready(function () {
+        
+            setTimeout(() => {
+                $(".general-message").fadeOut();
+            }, 5000);
+
+            setTimeout(() => {
+                $(".info-message").fadeOut();
+            }, 60000);
+
+        });
+    </script>
+
 	<!--app JS-->
 	<script src="{{ asset('admin_dashboard_assets/js/app.js') }}"></script>
 	@yield("script")
