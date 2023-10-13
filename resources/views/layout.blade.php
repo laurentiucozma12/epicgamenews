@@ -79,11 +79,11 @@
 							<a href="{{ route('categories.index') }}"><li class="font-changed">Categories</li></a>
 							<a href="{{ route('platforms.index') }}"><li class="font-changed">Platforms</li></a>
 							<a href="{{ route('about') }}"><li class="font-changed">About</li></a>
-							<a href="{{ route('contact.create') }}"><li class="font-changed">Contact</li></a>
+							{{-- <a href="{{ route('contact.create') }}"><li class="font-changed">Contact</li></a> --}}
 							<a href="{{ route('others.index') }}"><li class="font-changed">Others</li></a>
 
 							@guest
-								<li class="btn-cta"><a href="{{ route('login') }}"><span class="login-page-btn">Login</span></a></li>
+								{{-- <li class="btn-cta"><a href="{{ route('login') }}"><span class="login-page-btn">Login</span></a></li> --}}
 							@endguest
 
 							@auth
@@ -126,7 +126,8 @@
 	<div id="colorlib-subscribe" class="subs-img" style="background-image: url({{ asset('blog_template/images/img_bg_2.jpg') }});">
 		<div class="overlay"></div>
 		<div class="first-container">
-			<div class="container">
+
+			{{-- <div class="container">
 				<div >
 					<div class="text-center colorlib-heading animate-box">
 						<h2>Subscribe Newsletter</h2>
@@ -147,7 +148,8 @@
 						</form>
 					</div>
 				</div>
-			</div>				
+			</div> --}}
+			
 		</div>
 	</div>
 	{{-- END OF SUBSCRIBE NEWSLETTER --}}
@@ -234,7 +236,7 @@
 					<div class="col-md-12 text-center">
 						<p>
 							<small class="block">
-								&copy;Copyright &copy;
+								&copy; Copyright 
 								<script>document.write(new Date().getFullYear());</script> 
 								All rights reserved | This website is made by <a href="{{ route('home') }}">Epic Game News</a>
 							</small>
