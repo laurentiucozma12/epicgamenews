@@ -123,10 +123,11 @@
 	{{-- END OF CONTENT OF THE PAGE --}}
 
 	{{-- SUBSCRIBE NEWSLETTER --}}
-	{{-- <div id="colorlib-subscribe" class="subs-img" style="background-image: url({{ asset('blog_template/images/img_bg_2.jpg') }});">
+	<div id="colorlib-subscribe" class="subs-img" style="background-image: url({{ asset('blog_template/images/img_bg_2.jpg') }});">
 		<div class="overlay"></div>
 		<div class="first-container">
-			<div class="container">
+
+			{{-- <div class="container">
 				<div >
 					<div class="text-center colorlib-heading animate-box">
 						<h2>Subscribe Newsletter</h2>
@@ -147,9 +148,10 @@
 						</form>
 					</div>
 				</div>
-			</div>				
+			</div> --}}
+			
 		</div>
-	</div> --}}
+	</div>
 	{{-- END OF SUBSCRIBE NEWSLETTER --}}
 	
 	{{-- FOOTER AND COPYRIGHT --}}
