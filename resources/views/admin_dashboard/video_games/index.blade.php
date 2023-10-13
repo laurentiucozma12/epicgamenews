@@ -51,7 +51,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <img width='50' src="{{ $video_game->image ? asset('storage/' . $video_game->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="post thumbnail">    
+                                        <img width='50' src="{{ $video_game->image ? asset('storage/' . $video_game->image->path) : asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="post thumbnail">    
                                     </td>
                                     <td>{{ $video_game->name }}</td>
                                     <td>{{ $video_game->slug }}</td>
