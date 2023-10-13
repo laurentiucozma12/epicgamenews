@@ -29,7 +29,7 @@ class VideoGameController extends Controller
             abort(404);
         }
         
-        $posts = Post::excludeUncategorized()
+        $posts = $video_game->posts()->excludeUncategorized()
             ->latest()
             ->approved()
             ->paginate(10);
