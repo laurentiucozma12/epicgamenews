@@ -54,7 +54,7 @@ class AdminPostsController extends Controller
     public function store(Request $request)
     {
         $selectedVideoGame = $request->input('video_game_id'); // 1 is uncategorized
-        $selectedCategories = $request->input('categorieselectedPlatformIdss', []); // 1 is uncategorized
+        $selectedCategories = $request->input('categories', []); // 1 is uncategorized
         $selectedPlatforms = $request->input('platforms', []); // 1 is uncategorized
         $selectedOther = $request->input('other_id'); // 1 is uncategorized
         
