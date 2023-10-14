@@ -85,11 +85,11 @@
                                                         <select name="video_game_id" required class="single-select">
                                                             @foreach ($video_games as $key => $video_game)
                                                                 {{ 
-                                                                    use Monolog/Logger;
-                                                                    use Monolog/Handler/StreamHandler;
-                                                                    $logger = new Logger('info');
-                                                                    $logger->pushHandler(new StreamHandler(__DIR__.'/log_file.log', Logger::DEBUG));
-                                                                    $logger->info('test');
+                                                                    Log::channel('custom_testing')->info('video_game_id input testing for value in edit.blade', [
+                                                                        $video_games,
+                                                                        $key,
+                                                                        $video_game
+                                                                    ]);
                                                                 }}
                                                                 <option {{ $post->video_game_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $video_game }}</option>
                                                             @endforeach
