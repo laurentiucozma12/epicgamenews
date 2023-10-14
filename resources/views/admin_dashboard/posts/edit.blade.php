@@ -82,7 +82,7 @@
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
-                                                        <select name="video_game" required class="single-select">
+                                                        <select name="video_game_id" required class="single-select">
                                                             @foreach ($video_games as $key => $video_game)
                                                                 <option {{ $post->video_game_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $video_game }}</option>
                                                             @endforeach
@@ -107,13 +107,13 @@
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
-                                                        <select id="categories" name="categories[]" multiple="multiple" class="multiple-select" data-placeholder="Choose categories" required>
+                                                        <select id="categories_ids" name="categories_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose categories" required>
                                                             @foreach ($categories as $key => $category)
                                                                 <option value="{{ $key }}" {{ in_array($key, $selectedCategFormIds) ? 'selected' : '' }}>{{ $category }}</option>
                                                             @endforeach
                                                         </select>
                                     
-                                                        @error('categories')
+                                                        @error('categories_ids')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
                                     
@@ -132,16 +132,16 @@
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
-                                                        <select id="platforms" name="platforms[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
+                                                        <select id="platforms_ids" name="platforms_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
                                                             @foreach ($platforms as $key => $platform)
                                                                 <option value="{{ $key }}" {{ in_array($key, $selectedPlatFormIds) ? 'selected' : '' }}>{{ $platform }}</option>
                                                             @endforeach
                                                         </select>
                                     
-                                                        @error('platforms')
+                                                        @error('platforms_ids')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
-                                    
+
                                                         @if($errors->has('all_fields'))          
                                                             <p class="text-danger">{{ $errors->first('all_fields') }}</p>
                                                         @endif

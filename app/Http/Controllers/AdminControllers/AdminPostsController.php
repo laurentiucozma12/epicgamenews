@@ -54,8 +54,8 @@ class AdminPostsController extends Controller
     public function store(Request $request)
     {
         $selectedVideoGame = $request->input('video_game_id'); // 1 is uncategorized
-        $selectedCategories = $request->input('categories', []); // 1 is uncategorized
-        $selectedPlatforms = $request->input('platforms', []); // 1 is uncategorized
+        $selectedCategories = $request->input('categories_ids', []); // 1 is uncategorized
+        $selectedPlatforms = $request->input('platforms_ids', []); // 1 is uncategorized
         $selectedOther = $request->input('other_id'); // 1 is uncategorized
         
         if (($selectedVideoGame !== "1" && $selectedCategories[0] !== "1" && $selectedPlatforms[0] !== '1' &&  $selectedOther === "1") 
@@ -171,9 +171,11 @@ class AdminPostsController extends Controller
                 $tags .= ', ';
         }
 
-        // Pass all the categories and platforms
+        // Pass all the SELECTED video_game, categories, platforms, other
+        $video_game = VideoGame::pluck('video_game.name', 'video_game.id');
         $categories = Category::pluck('categories.name', 'categories.id');
         $platforms = Platform::pluck('platforms.name', 'platforms.id');
+        $other = Other::pluck('other.name', 'other.id');
 
         // Pass the selected categories and platforms
         $selectedCategFormIds = $post->categories->pluck('id')->toArray();
@@ -182,20 +184,20 @@ class AdminPostsController extends Controller
         return view('admin_dashboard.posts.edit', [
             'post' => $post,
             'tags' => $tags,
-            'video_game' => VideoGame::pluck('name', 'id'),
+            'video_game' => $video_game,
             'categories' => $categories,
             'selectedCategFormIds' => $selectedCategFormIds,
             'platforms' => $platforms,
             'selectedPlatFormIds' => $selectedPlatFormIds,
-            'others' => Other::pluck('name', 'id'),
+            'others' => $other,
         ]);
     }
 
     public function update(Request $request, Post $post)
     {
         $selectedVideoGame = $request->input('video_game_id'); // 1 is uncategorized
-        $selectedCategories = $request->input('categories', []); // 1 is uncategorized
-        $selectedPlatforms = $request->input('platforms', []); // 1 is uncategorized
+        $selectedCategories = $request->input('categories_ids', []); // 1 is uncategorized
+        $selectedPlatforms = $request->input('platforms_ids', []); // 1 is uncategorized
         $selectedOther = $request->input('other_id'); // 1 is uncategorized
         
         if (($selectedVideoGame !== "1" && $selectedCategories[0] !== "1" && $selectedPlatforms[0] !== '1' &&  $selectedOther === "1") 

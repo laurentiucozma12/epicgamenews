@@ -108,7 +108,7 @@
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
-                                                        <select id="categories" name="categories[]" multiple="multiple" class="multiple-select" data-placeholder="Choose categories" required>
+                                                        <select id="categories_ids" name="categories_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose categories" required>
                                                             @foreach ($categories as $category)
                                                                 <option value="{{ $category->id }}" {{ $category->name === 'uncategorized' ? 'selected' : '' }}>
                                                                     {{ $category->name }}
@@ -116,7 +116,7 @@
                                                             @endforeach
                                                         </select>
 
-                                                        @error('categories')
+                                                        @error('categories_ids')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
 
@@ -135,7 +135,7 @@
                                             <div class="card-body">
                                                 <div class="rounded">
                                                     <div class="mb-3">
-                                                        <select id="platforms" name="platforms[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
+                                                        <select id="platforms_ids" name="platforms_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
                                                             @foreach ($platforms as $platform)
                                                                 <option value="{{ $platform->id }}" {{ $platform->name === 'uncategorized' ? 'selected' : '' }}>
                                                                     {{ $platform->name }}
@@ -143,7 +143,7 @@
                                                             @endforeach
                                                         </select>
 
-                                                        @error('platforms')
+                                                        @error('platforms_ids')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
 
