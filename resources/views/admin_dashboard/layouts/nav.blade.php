@@ -13,6 +13,13 @@
         <li>
             <a href="{{ route('admin.index') }}">
                 <div class="parent-icon"><i class='bx bx-home-circle'></i></div>
+                <div class="menu-title">Home</div>
+            </a>            
+        </li>
+
+        <li>
+            <a href="{{ route('admin.dashboard.index') }}">
+                <div class="parent-icon"><i class='bx bx-line-chart'></i></div>
                 <div class="menu-title">Dashboard</div>
             </a>            
         </li>

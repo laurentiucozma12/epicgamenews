@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 | 
 */ 
 
-use App\Http\Controllers\AdminControllers\DashboardController;
+use App\Http\Controllers\AdminControllers\AdminHomeController;
+use App\Http\Controllers\AdminControllers\AdminDashboardController;
 use App\Http\Controllers\AdminControllers\AdminPostsController;
 use App\Http\Controllers\AdminControllers\TinyMCEController;
 use App\Http\Controllers\AdminControllers\AdminVideoGamesController;
@@ -44,7 +45,9 @@ use App\Http\Controllers\TagController;
 // Admin Dashboard Routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions'])->group(function(){
 
-    Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/', [AdminHomeController::class, 'index'])->name('index');
+    
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
 
     Route::resource('posts', AdminPostsController::class)->except('show');
     Route::post('upload_tinymce_image', [TinyMCEController::class, 'upload_tinymce_image'])->name('upload_tinymce_image');
