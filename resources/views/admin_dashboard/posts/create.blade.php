@@ -51,8 +51,8 @@
                                 <div class="border border-3 p-4 rounded">
 
                                     <div class="mb-3">
-                                        <label for="inputPostTitle" class="form-label">Post Title</label>
-                                        <input type="text" value='{{ old("title") }}' name="title" required class="form-control" id="inputPostTitle">
+                                        <label for="title" class="form-label">Post Title</label>
+                                        <input type="text" value='{{ old("title") }}' name="title" required class="form-control" id="title">
 
                                         @error('title')
                                             <p class="text-danger">{{ $message }}</p>
@@ -60,8 +60,8 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="inputPostSlug" class="form-label">Post Slug</label>
-                                        <input type="text" value='{{ old("slug") }}' name="slug" required class="form-control" id="inputPostSlug">
+                                        <label for="slug" class="form-label">Post Slug</label>
+                                        <input type="text" value='{{ old("slug") }}' name="slug" required class="form-control" id="slug">
 
                                         @error('slug')
                                             <p class="text-danger">{{ $message }}</p>
@@ -69,8 +69,8 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="inputPostExcerpt" class="form-label">Post Excerpt</label>
-                                        <textarea class="form-control" required name='excerpt' id="inputPostExcerpt" rows="3">{{ old("excerpt") }}</textarea>
+                                        <label for="excerpt" class="form-label">Post Excerpt</label>
+                                        <textarea class="form-control" required name='excerpt' id="excerpt" rows="3">{{ old("excerpt") }}</textarea>
                                     
                                         @error('excerpt')
                                             <p class='text-danger'>{{ $message }}</p>
@@ -85,13 +85,7 @@
                                                     <div class="mb-3">
                                                         <select name="video_game_id" required class="single-select">
                                                             @foreach ($video_games as $video_game)
-                                                                {{-- <option value="{{ $video_game->id }}">{{ $video_game->name }}</option>--}}
-                                                                
-                                                                @if (old('video_game_id'))
-                                                                    <option value="{{ $video_game->id }}">{{ $video_game->name }}</option>   
-                                                                @else
-                                                                    <option value="{{ $video_game->id }}" {{ $video_game->name === 'uncategorized' ? 'selected' : '' }}>{{ old('video_game_id', $video_game->name) }}</option>
-                                                                @endif
+                                                                <option value="{{ $video_game->id }}">{{ $video_game->name }}</option>                                                                
                                                             @endforeach 
                                                         </select>
 
@@ -115,12 +109,10 @@
                                                 <div class="rounded">
                                                     <div class="mb-3">
                                                         <select id="categories" name="categories[]" multiple="multiple" class="multiple-select" data-placeholder="Choose categories" required>
-                                                            @foreach ($categories as $category)                                                                
-                                                                @if (old('category_id'))
-                                                                    <option value="{{ $category->id }}" {{ in_array($category->id, old('category_id')) ? 'selected' : '' }}>{{ $category->name }}</option>   
-                                                                @else
-                                                                    <option value="{{ $category->id }}" {{ $category->name === 'uncategorized' ? 'selected' : '' }}>{{ $category->name }}</option>
-                                                                @endif     
+                                                            @foreach ($categories as $category)
+                                                                <option value="{{ $category->id }}" {{ $category->name === 'uncategorized' ? 'selected' : '' }}>
+                                                                    {{ $category->name }}
+                                                                </option>     
                                                             @endforeach
                                                         </select>
 
@@ -145,14 +137,9 @@
                                                     <div class="mb-3">
                                                         <select id="platforms" name="platforms[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
                                                             @foreach ($platforms as $platform)
-                                                                {{-- <option value="{{ $platform->id }}" {{ $platform->name === 'uncategorized' ? 'selected' : '' }}>
+                                                                <option value="{{ $platform->id }}" {{ $platform->name === 'uncategorized' ? 'selected' : '' }}>
                                                                     {{ $platform->name }}
-                                                                </option> --}}
-                                                                @if (old('platform_id'))
-                                                                    <option value="{{ $platform->id }}" {{ in_array($platform->id, old('platform_id')) ? 'selected' : '' }}>{{ $platform->name }}</option>   
-                                                                @else
-                                                                    <option value="{{ $platform->id }}" {{ $platform->name === 'uncategorized' ? 'selected' : '' }}>{{ $platform->name }}</option>
-                                                                @endif      
+                                                                </option>     
                                                             @endforeach
                                                         </select>
 
@@ -177,13 +164,7 @@
                                                     <div class="mb-3">
                                                         <select name="other_id" required class="single-select">
                                                             @foreach ($others as $other)
-                                                                {{-- <option value="{{ $other->id }}" @if (old('other_id') == $other->id) selected >{{ $other->name }}</option>--}}
-                                                                
-                                                                @if (old('other_id'))
-                                                                    <option value="{{ $other->id }}">{{ $other->name }}</option>   
-                                                                @else
-                                                                    <option value="{{ $other->id }}" {{ $other->name === 'uncategorized' ? 'selected' : '' }}>{{ $other->name }}</option>
-                                                                @endif   
+                                                                <option value="{{ $other->id }}">{{ $other->name }}</option>                                                                
                                                             @endforeach
                                                         </select>
 
@@ -229,8 +210,8 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="inputAuthorThumbnail" class="form-label">Author of the Thumbnail</label>
-                                        <input type="text" value="{{ old("author_thumbnail") }}" class="form-control" name="author_thumbnail" id="inputAuthorThumbnail">
+                                        <label for="author_thumbnail" class="form-label">Author of the Thumbnail</label>
+                                        <input type="text" value="{{ old("author_thumbnail") }}" class="form-control" name="author_thumbnail" id="author_thumbnail">
 
                                         @error('author_thumbnail')
                                             <p class="text-danger">{{ $message }}</p>
@@ -238,8 +219,8 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="inputPostContent" class="form-label">Post Content</label>
-                                        <textarea id="inputPostContent" name="body" class="form-control" rows="3">{{ old("body") }}</textarea>   
+                                        <label for="body" class="form-label">Post Content</label>
+                                        <textarea id="body" name="body" class="form-control" rows="3">{{ old("body") }}</textarea>   
                                     
                                         @error('body')
                                             <p class="text-danger">{{ $message }}</p>
@@ -495,7 +476,7 @@ $(document).ready(function() {
     });
     
     tinymce.init({
-        selector: 'textarea#inputPostContent',
+        selector: 'textarea#body',
         plugins: 'advlist autolink lists link image media charmap print preview hr anchor pagebreak',
         toolbar_mode: 'floating',
         height: '500',
