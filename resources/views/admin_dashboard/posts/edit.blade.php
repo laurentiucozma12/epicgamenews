@@ -86,9 +86,11 @@
                                                             @foreach ($video_games as $key => $video_game)
                                                                 <option {{ $post->video_game_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $video_game }}</option>
                                                                 @php
-                                                                    Log::channel('custom_testing')->info('Testing video_game_id input', ['post->video_game_id' => $post->video_game_id]);
-                                                                    Log::channel('custom_testing')->info('Testing video_game_id input', ['key' => $key]);
-                                                                    Log::channel('custom_testing')->info('Testing video_game_id input', ['video_game' => $video_game]);
+                                                                    Log::channel('custom_testing')->info('Testing video_game_id input', [
+                                                                        'post->video_game_id' => $post->video_game_id,
+                                                                        'key' => $key,
+                                                                        'video_game' => $video_game,
+                                                                    ]);
                                                                 @endphp
                                                             @endforeach
                                                         </select>
