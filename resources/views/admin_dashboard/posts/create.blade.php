@@ -90,7 +90,7 @@
                                                                 @if (old('video_game_id'))
                                                                     <option value="{{ $video_game->id }}">{{ $video_game->name }}</option>   
                                                                 @else
-                                                                    <option value="{{ $video_game->id }}" {{ $video_game->name === 'uncategorized' ? 'selected' : '' }}>{{ old($video_game->name) }}</option>
+                                                                    <option value="{{ $video_game->id }}" {{ $video_game->name === 'uncategorized' ? 'selected' : '' }}>{{ old('video_game_id', $video_game->name) }}</option>
                                                                 @endif
                                                             @endforeach 
                                                         </select>
