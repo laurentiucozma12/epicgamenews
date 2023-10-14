@@ -85,18 +85,6 @@
                                                         <select name="video_game_id" required class="single-select">
                                                             @foreach ($video_games as $key => $video_game)
                                                                 <option {{ $post->video_game_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $video_game }}</option>
-                                                                @php
-                                                                    $selected = $post->video_game_id === $key ? 'selected' : '';
-                                                                    Log::channel('custom_testing')->info('Testing video_game_id input', [
-                                                                        'post->video_game_id' => $selected,
-                                                                    ]);
-                                                                    Log::channel('custom_testing')->info('Testing video_game_id input', [
-                                                                        'key' => $key,
-                                                                    ]);
-                                                                    Log::channel('custom_testing')->info('New line', [
-                                                                        '/////////////////////////////////////////////////////////////////'
-                                                                    ]);
-                                                                @endphp
                                                             @endforeach
                                                         </select>
 

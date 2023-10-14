@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers\AdminControllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Tag;
+use App\Models\Other;
 
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Post; 
+use App\Models\Category;
 
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Platform;
+use App\Models\VideoGame;
 use Illuminate\Support\Str;
 
-use App\Models\Category;
-use App\Models\Platform;
-use App\Models\Other;
-use App\Models\Post; 
-use App\Models\Tag;
-use App\Models\VideoGame;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Expr\AssignOp\Plus;
+use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Validator;
 use Intervention\Image\ImageManagerStatic as ImageManager;
 
 class AdminPostsController extends Controller
@@ -172,10 +173,14 @@ class AdminPostsController extends Controller
         }
 
         // Pass all the SELECTED video_game, categories, platforms, other
-        $video_games = VideoGame::pluck('name', 'id');
+        $video_games = VideoGame::pluck('name', 'id');;
         $categories = Category::pluck('categories.name', 'categories.id');
         $platforms = Platform::pluck('platforms.name', 'platforms.id');
         $others = Other::pluck('name', 'id');
+        
+        Log::channel('custom_testing')->info('Testing video_game_id input', [
+            'video_games' => $video_games,
+        ]);
 
         // Pass the selected categories and platforms
         $selectedCategFormIds = $post->categories->pluck('id')->toArray();
