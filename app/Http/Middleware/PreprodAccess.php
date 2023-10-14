@@ -15,9 +15,12 @@ class PreprodAccess
         {
             $clientIP = $request->ip();   
             if ($clientIP === '83.103.225.235' || $clientIP === '5.14.139.23')
+            {
                 return $next($request);
-            else
+            }    
+            else {
                 abort(403, 'Access Denied | Unauthorized');
+            }
         }
 
         return $next($request);
