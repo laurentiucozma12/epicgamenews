@@ -109,7 +109,7 @@ class AdminPostsController extends Controller
                     // Delete the original image
                     $originalImagePath = 'images/' . $filename;
                     Storage::disk('public')->delete($originalImagePath);
-                    dd($resizedImageName, $file_extension, $resizedImagePath);
+                    dd($resizedImageName, $file_extension, $resizedImagePath); //small test
                     // Associate the image with the post
                     $post->image()->create([
                         'name' => $resizedImageName ,
