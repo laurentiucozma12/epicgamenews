@@ -172,10 +172,10 @@ class AdminPostsController extends Controller
         }
 
         // Pass all the SELECTED video_game, categories, platforms, other
-        $video_game = VideoGame::pluck('video_game.name', 'video_game.id');
+        $video_game = VideoGame::pluck('name', 'id');
         $categories = Category::pluck('categories.name', 'categories.id');
         $platforms = Platform::pluck('platforms.name', 'platforms.id');
-        $other = Other::pluck('other.name', 'other.id');
+        $other = Other::pluck('name', 'id');
 
         // Pass the selected categories and platforms
         $selectedCategFormIds = $post->categories->pluck('id')->toArray();
