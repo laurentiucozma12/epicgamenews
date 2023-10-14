@@ -176,17 +176,17 @@ class AdminPostsController extends Controller
         $platforms = Platform::pluck('platforms.name', 'platforms.id');
 
         // Pass the selected categories and platforms
-        $selectedCategformIds = $post->categories->pluck('id')->toArray();
-        $selectedPlatformIds = $post->platforms->pluck('id')->toArray();
+        $selectedCategFormIds = $post->categories->pluck('id')->toArray();
+        $selectedPlatFormIds = $post->platforms->pluck('id')->toArray();
         
         return view('admin_dashboard.posts.edit', [
             'post' => $post,
             'tags' => $tags,
-            'video_games' => VideoGame::pluck('name', 'id'),
+            'video_game' => VideoGame::pluck('name', 'id'),
             'categories' => $categories,
-            'selectedCategformIds' => $selectedCategformIds,
+            'selectedCategFormIds' => $selectedCategFormIds,
             'platforms' => $platforms,
-            'selectedPlatformIds' => $selectedPlatformIds,
+            'selectedPlatFormIds' => $selectedPlatFormIds,
             'others' => Other::pluck('name', 'id'),
         ]);
     }
