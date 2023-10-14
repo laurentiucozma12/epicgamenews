@@ -84,18 +84,7 @@
                                                     <div class="mb-3">
                                                         <select name="video_game_id" required class="single-select">
                                                             @foreach ($video_games as $key => $video_game)
-                                                                <option {{ $post->video_game_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $video_game }}</option>
-                                                                @php
-                                                                    Log::channel('custom_testing')->info('Testing video_game_id input', [
-                                                                        'post->video_game_id' => $post->video_game_id,
-                                                                    ]);
-                                                                    Log::channel('custom_testing')->info('Testing video_game_id input', [
-                                                                        'key' => $key,
-                                                                    ]);
-                                                                    Log::channel('custom_testing')->info('New line', [
-                                                                        '/////////////////////////////////////////////////////////////////'
-                                                                    ]);
-                                                                @endphp
+                                                                <option {{ intval($post->video_game_id) === $key ? 'selected' : '' }} value="{{ $key }}">{{ $video_game }}</option>
                                                             @endforeach
                                                         </select>
 
@@ -170,7 +159,7 @@
                                                     <div class="mb-3">
                                                         <select name="other_id" required class="single-select">
                                                             @foreach ($others as $key => $other)
-                                                                <option {{ $post->other_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $other }}</option>                                                                
+                                                                <option {{ intval($post->other_id) === $key ? 'selected' : '' }} value="{{ $key }}">{{ $other }}</option>                                                                
                                                             @endforeach
                                                         </select>
 

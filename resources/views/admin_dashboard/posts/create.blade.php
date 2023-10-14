@@ -85,7 +85,7 @@
                                                     <div class="mb-3">
                                                         <select name="video_game_id" required class="single-select">
                                                             @foreach ($video_games as $video_game)
-                                                                <option value="{{ $video_game->id }}">{{ $video_game->name }}</option>                                                                
+                                                                <option value="{{ intval($video_game->id) }}">{{ $video_game->name }}</option>                                                                
                                                             @endforeach 
                                                         </select>
 
@@ -164,7 +164,7 @@
                                                     <div class="mb-3">
                                                         <select name="other_id" required class="single-select">
                                                             @foreach ($others as $other)
-                                                                <option value="{{ $other->id }}">{{ $other->name }}</option>                                                                
+                                                                <option value="{{ intval($other->id) }}">{{ $other->name }}</option>                                                                
                                                             @endforeach
                                                         </select>
 
