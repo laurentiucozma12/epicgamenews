@@ -130,6 +130,7 @@ return [
 
         'custom_testing' => [
             'driver' => 'single',
+            'tap' => [SimpleFormatter::class],
             'path' => storage_path('logs/edit_post.log'),
             'lever' => 'debug',
         ],
