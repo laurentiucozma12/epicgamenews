@@ -177,10 +177,6 @@ class AdminPostsController extends Controller
         $categories = Category::pluck('categories.name', 'categories.id');
         $platforms = Platform::pluck('platforms.name', 'platforms.id');
         $others = Other::pluck('name', 'id');
-        
-        Log::channel('custom_testing')->info('Testing video_game_id input', [
-            'video_games' => $video_games,
-        ]);
 
         // Pass the selected categories and platforms
         $selectedCategFormIds = $post->categories->pluck('id')->toArray();
