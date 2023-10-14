@@ -84,12 +84,14 @@
                                                     <div class="mb-3">
                                                         <select name="video_game_id" required class="single-select">
                                                             @foreach ($video_games as $key => $video_game)
+                                                            <option {{ $post->video_game_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $video_game }}</option>
                                                                 {{ 
-                                                                    Log::channel('custom_testing')->info('video_game_id input testing for value in edit.blade', [
+                                                                    Log::channel('custom_testing')->info('testing video_game_id input', [
+                                                                        $post->video_game_id,
+                                                                        $key,
                                                                         $video_game
                                                                     ]);
                                                                 }}
-                                                                <option {{ $post->video_game_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $video_game }}</option>
                                                             @endforeach
                                                         </select>
 
