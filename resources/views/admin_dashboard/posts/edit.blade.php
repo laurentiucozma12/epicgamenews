@@ -86,8 +86,6 @@
                                                             @foreach ($video_games as $key => $video_game)
                                                                 {{ 
                                                                     Log::channel('custom_testing')->info('video_game_id input testing for value in edit.blade', [
-                                                                        $video_games,
-                                                                        $key,
                                                                         $video_game
                                                                     ]);
                                                                 }}
