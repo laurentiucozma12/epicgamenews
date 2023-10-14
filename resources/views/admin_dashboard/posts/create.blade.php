@@ -85,7 +85,13 @@
                                                     <div class="mb-3">
                                                         <select name="video_game_id" required class="single-select">
                                                             @foreach ($video_games as $video_game)
-                                                                <option value="{{ $video_game->id }}">{{ $video_game->name }}</option>                                                                
+                                                                {{-- <option value="{{ $video_game->id }}">{{ $video_game->name }}</option>--}}
+                                                                
+                                                                @if (old('video_game_id'))
+                                                                    <option value="{{ $video_game->id }}">{{ $video_game->name }}</option>   
+                                                                @else
+                                                                    <option value="{{ $video_game->id }}" {{ $video_game->name === 'uncategorized' ? 'selected' : '' }}>{{ $video_game->name }}</option>
+                                                                @endif
                                                             @endforeach 
                                                         </select>
 
@@ -109,10 +115,12 @@
                                                 <div class="rounded">
                                                     <div class="mb-3">
                                                         <select id="categories" name="categories[]" multiple="multiple" class="multiple-select" data-placeholder="Choose categories" required>
-                                                            @foreach ($categories as $category)
-                                                                <option value="{{ $category->id }}" {{ $category->name === 'uncategorized' ? 'selected' : '' }}>
-                                                                    {{ $category->name }}
-                                                                </option>     
+                                                            @foreach ($categories as $category)                                                                
+                                                                @if (old('category_id'))
+                                                                    <option value="{{ $category->id }}" {{ in_array($category->id, old('category_id')) ? 'selected' : '' }}>{{ $category->name }}</option>   
+                                                                @else
+                                                                    <option value="{{ $category->id }}" {{ $category->name === 'uncategorized' ? 'selected' : '' }}>{{ $category->name }}</option>
+                                                                @endif     
                                                             @endforeach
                                                         </select>
 
@@ -137,9 +145,14 @@
                                                     <div class="mb-3">
                                                         <select id="platforms" name="platforms[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
                                                             @foreach ($platforms as $platform)
-                                                                <option value="{{ $platform->id }}" {{ $platform->name === 'uncategorized' ? 'selected' : '' }}>
+                                                                {{-- <option value="{{ $platform->id }}" {{ $platform->name === 'uncategorized' ? 'selected' : '' }}>
                                                                     {{ $platform->name }}
-                                                                </option>     
+                                                                </option> --}}
+                                                                @if (old('platform_id'))
+                                                                    <option value="{{ $platform->id }}" {{ in_array($platform->id, old('platform_id')) ? 'selected' : '' }}>{{ $platform->name }}</option>   
+                                                                @else
+                                                                    <option value="{{ $platform->id }}" {{ $platform->name === 'uncategorized' ? 'selected' : '' }}>{{ $platform->name }}</option>
+                                                                @endif      
                                                             @endforeach
                                                         </select>
 
@@ -164,7 +177,13 @@
                                                     <div class="mb-3">
                                                         <select name="other_id" required class="single-select">
                                                             @foreach ($others as $other)
-                                                                <option value="{{ $other->id }}" @if (old('other_id') == $other->id) selected >{{ $other->name }}</option>                                                                
+                                                                {{-- <option value="{{ $other->id }}" @if (old('other_id') == $other->id) selected >{{ $other->name }}</option>--}}
+                                                                
+                                                                @if (old('other_id'))
+                                                                    <option value="{{ $other->id }}">{{ $other->name }}</option>   
+                                                                @else
+                                                                    <option value="{{ $other->id }}" {{ $other->name === 'uncategorized' ? 'selected' : '' }}>{{ $other->name }}</option>
+                                                                @endif   
                                                             @endforeach
                                                         </select>
 
