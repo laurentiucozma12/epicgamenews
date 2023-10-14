@@ -116,7 +116,6 @@ class AdminPostsController extends Controller
                         'extension' => $file_extension,
                         'path' => $resizedImagePath,
                     ]);
-                    dd($post->image());
                 // END
             }
 
