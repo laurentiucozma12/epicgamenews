@@ -84,7 +84,7 @@
                                                     <div class="mb-3">
                                                         <select name="video_game_id" required class="single-select">
                                                             @foreach ($video_games as $key => $video_game)
-                                                                <option {{ $post->video_game_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ old("video_game_id", $post->$video_game) }}</option>                                                      
+                                                                <option {{ $post->video_game_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $video_game }}</option>
                                                             @endforeach
                                                         </select>
 
@@ -109,7 +109,7 @@
                                                     <div class="mb-3">
                                                         <select id="categories" name="categories[]" multiple="multiple" class="multiple-select" data-placeholder="Choose categories" required>
                                                             @foreach ($categories as $key => $category)
-                                                                <option value="{{ $key }}" {{ in_array($key, $selectedCategformIds) ? 'selected' : '' }}>{{ old("categories", $post->categories) }}</option>
+                                                                <option value="{{ $key }}" {{ in_array($key, $selectedCategformIds) ? 'selected' : '' }}>{{ $category }}</option>
                                                             @endforeach
                                                         </select>
                                     
@@ -134,7 +134,7 @@
                                                     <div class="mb-3">
                                                         <select id="platforms" name="platforms[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
                                                             @foreach ($platforms as $key => $platform)
-                                                                <option value="{{ $key }}" {{ in_array($key, $selectedPlatformIds) ? 'selected' : '' }}>{{ old("platforms", $post->platforms) }}</option>
+                                                                <option value="{{ $key }}" {{ in_array($key, $selectedPlatformIds) ? 'selected' : '' }}>{{ $platform }}</option>
                                                             @endforeach
                                                         </select>
                                     
@@ -159,7 +159,7 @@
                                                     <div class="mb-3">
                                                         <select name="other_id" required class="single-select">
                                                             @foreach ($others as $key => $other)
-                                                                <option {{ $post->other_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ old("other_id", $post->other_id) }}</option>                                                                
+                                                                <option {{ $post->other_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $other }}</option>                                                                
                                                             @endforeach
                                                         </select>
 
@@ -177,8 +177,8 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="tags" class="form-label">Post Tags</label>
-                                        <input type="text" class="form-control" value="{{ old("tags", $tags) }}" name="tags" data-role="tagsinput"  id="tags" required>
+                                        <label for="inputPostTags" class="form-label">Post Tags</label>
+                                        <input type="text" class="form-control" value="{{ $tags }}" name="tags" data-role="tagsinput"  id="inputPostTags" required>
 
                                         @error('tags')
                                             <p class="text-danger">{{ $message }}</p>
