@@ -164,7 +164,7 @@
                                                     <div class="mb-3">
                                                         <select name="other_id" required class="single-select">
                                                             @foreach ($others as $other)
-                                                                <option value="{{ $other->id }}">{{ $other->name }}</option>                                                                
+                                                                <option value="{{ $other->id }}" @if (old('other_id') == $other->id) selected >{{ $other->name }}</option>                                                                
                                                             @endforeach
                                                         </select>
 
@@ -182,8 +182,8 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="inputPostTags" class="form-label">Post Tags</label>
-                                        <input type="text" value="{{ old("tags") }}" class="form-control" name="tags" id="inputPostTags" data-role="tagsinput" required>
+                                        <label for="tags" class="form-label">Post Tags</label>
+                                        <input type="text" value="{{ old("tags") }}" class="form-control" name="tags" id="tags" data-role="tagsinput" required>
 
                                         @error('tags')
                                             <p class="text-danger">{{ $message }}</p>
