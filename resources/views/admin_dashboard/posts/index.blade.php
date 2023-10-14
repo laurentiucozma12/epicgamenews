@@ -76,6 +76,7 @@
                                         @endforeach
                                     </td>                                    
                                     <td>
+                                        {{-- {{dd($post->platforms) }} --}}
                                         @foreach($post->platforms as $platform)
                                             {{ $platform->name }}
                                             @if (!$loop->last)

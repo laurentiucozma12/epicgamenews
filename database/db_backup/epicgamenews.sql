@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 13, 2023 at 06:21 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: localhost:3306
+-- Generation Time: Oct 14, 2023 at 02:07 PM
+-- Server version: 10.5.20-MariaDB-cll-lve-log
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `epicgamenews`
+-- Database: `epicjszd_db`
 --
 
 -- --------------------------------------------------------
@@ -466,12 +466,12 @@ CREATE TABLE `platforms` (
 --
 
 INSERT INTO `platforms` (`id`, `name`, `slug`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'uncategorized', 'uncategorized', 9, '2023-10-12 13:54:58', '2023-10-12 13:54:58'),
+(1, 'uncategorized', 'uncategorized', 1, '2023-10-12 13:54:58', '2023-10-12 13:54:58'),
 (2, 'PC', 'pc', 1, '2023-10-12 13:54:58', '2023-10-12 13:54:58'),
-(3, 'PlayStation', 'playstation', 10, '2023-10-12 13:54:58', '2023-10-12 13:54:58'),
+(3, 'PlayStation', 'playstation', 1, '2023-10-12 13:54:58', '2023-10-12 13:54:58'),
 (4, 'Xbox', 'xbox', 1, '2023-10-12 13:54:58', '2023-10-12 13:54:58'),
-(5, 'Mobile', 'mobile', 11, '2023-10-12 13:54:58', '2023-10-12 13:54:58'),
-(6, 'Nintendo', 'nintendo', 9, '2023-10-12 13:54:58', '2023-10-12 13:54:58');
+(5, 'Mobile', 'mobile', 1, '2023-10-12 13:54:58', '2023-10-12 13:54:58'),
+(6, 'Nintendo', 'nintendo', 1, '2023-10-12 13:54:58', '2023-10-12 13:54:58');
 
 -- --------------------------------------------------------
 
