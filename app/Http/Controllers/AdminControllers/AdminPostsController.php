@@ -172,10 +172,10 @@ class AdminPostsController extends Controller
         }
 
         // Pass all the SELECTED video_game, categories, platforms, other
-        $video_game = VideoGame::pluck('name', 'id');
+        $video_games = VideoGame::pluck('name', 'id');
         $categories = Category::pluck('categories.name', 'categories.id');
         $platforms = Platform::pluck('platforms.name', 'platforms.id');
-        $other = Other::pluck('name', 'id');
+        $others = Other::pluck('name', 'id');
 
         // Pass the selected categories and platforms
         $selectedCategFormIds = $post->categories->pluck('id')->toArray();
@@ -184,12 +184,12 @@ class AdminPostsController extends Controller
         return view('admin_dashboard.posts.edit', [
             'post' => $post,
             'tags' => $tags,
-            'video_game' => $video_game,
+            'video_games' => $video_games,
             'categories' => $categories,
             'selectedCategFormIds' => $selectedCategFormIds,
             'platforms' => $platforms,
             'selectedPlatFormIds' => $selectedPlatFormIds,
-            'others' => $other,
+            'others' => $others,
         ]);
     }
 
