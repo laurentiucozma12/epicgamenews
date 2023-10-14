@@ -84,7 +84,13 @@
                                                     <div class="mb-3">
                                                         <select name="video_game_id" required class="single-select">
                                                             @foreach ($video_games as $key => $video_game)
-                                                                {{ dd($video_games, $key, $post->video_game_id) }}
+                                                                {{ 
+                                                                    use Monolog/Logger;
+                                                                    use Monolog/Handler/StreamHandler;
+                                                                    $logger = new Logger('info');
+                                                                    $logger->pushHandler(new StreamHandler(__DIR__.'/log_file.log', Logger::DEBUG));
+                                                                    $logger->info('test');
+                                                                }}
                                                                 <option {{ $post->video_game_id === $key ? 'selected' : '' }} value="{{ $key }}">{{ $video_game }}</option>
                                                             @endforeach
                                                         </select>
