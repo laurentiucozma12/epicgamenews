@@ -259,6 +259,10 @@
 {{-- SCRIPTS --}}
  <!-- jQuery -->
 <script src="{{ asset('blog_template/js/jquery.min.js') }}"></script>
+
+{{-- Ajax Lazy Loading --}}
+<script src="{{ asset('blog_template/js/ajax-lazy-loading.js') }}"></script>
+
 <!-- jQuery Easing -->
 <script src="{{ asset('blog_template/js/jquery.easing.1.3.js') }}"></script>
 <!-- Bootstrap -->
@@ -284,6 +288,14 @@
 <!-- My Scripts -->
 <script src="{{ asset('js/functions.js') }}"></script>
 {{-- END OF SCRIPTS --}}
+
+<script>
+	 $(document).ready(function () {
+        
+		$('img').lazyload();
+
+	 });
+</script>
 
 </body>
 </html>

@@ -159,8 +159,13 @@
 	<!-- Bootstrap JS -->
 	<script src="{{ asset('admin_dashboard_assets/js/bootstrap.bundle.min.js') }}"></script>
 
-	<!--plugins-->
+	<!--jQuery-->
 	<script src="{{ asset('admin_dashboard_assets/js/jquery.min.js') }}"></script>
+
+    {{-- Ajax Lazy Loading --}}
+    <script src="{{ asset('blog_template/js/ajax-lazy-loading.js') }}"></script>
+
+    {{-- plugins --}}
 	<script src="{{ asset('admin_dashboard_assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
 	<script src="{{ asset('admin_dashboard_assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
 	<script src="{{ asset('admin_dashboard_assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
@@ -169,6 +174,8 @@
     <script>
         $(document).ready(function () {
         
+            $('img').lazyload();
+
             setTimeout(() => {
                 $(".general-message").fadeOut();
             }, 5000);
