@@ -1,5 +1,3 @@
-@props(['tags'])
-
 <div class="side">
     <h3 class="sidbar-heading tags-big-title">Tags</h3>
     <div class="block-26">

@@ -30,43 +30,46 @@
                     <div class="form-body mt-4">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="border border-3 p-4 rounded">
 
-                                    <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Video Game Name</label>
-                                        <input type="text" value='{{ old("name") }}' name="name" required class="form-control" id="inputProductTitle">
+                                <div class="mb-3">
+                                    <label for="inputProductTitle" class="form-label">Video Game Name</label>
+                                    <input type="text" value='{{ old("name") }}' name="name" required class="form-control" id="inputProductTitle">
 
-                                        @error('name')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
+                                    @error('name')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
 
-                                    <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Video Game Slug</label>
-                                        <input type="text" value='{{ old("slug") }}' name="slug" required class="form-control" id="inputProductTitle">
+                                <div class="mb-3">
+                                    <label for="inputProductTitle" class="form-label">Video Game Slug</label>
+                                    <input type="text" value='{{ old("slug") }}' name="slug" required class="form-control" id="inputProductTitle">
 
-                                        @error('slug')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>                                    
+                                    @error('slug')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="thumbnail" class="form-label">Post Thumbnail (Max 1920)</label>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <input id="thumbnail" name="thumbnail" type="file" accept="image/*" class="mb-3">
 
-                                    <div class="mb-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <label for="file" class="form-label">Video Game Thumbnail (Max 1920 x 1080)</label>
-                                                <input id='thumbnail' required name='thumbnail' id="file" type="file">
+                                            @error('thumbnail')
+                                                <p class='text-danger'>{{ $message }}</p>
+                                            @enderror
 
-                                                @error('thumbnail')
-                                                    <p class='text-danger'>{{ $message }}</p>
-                                                @enderror
+                                            {{-- Store the url of the cropped image --}} 
+                                            <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
 
-                                            </div>
+                                            <h5>Cropped Image</h5>
+                                            <img id="croppedImage" src="#" alt="Cropped image" style="display: none; width: 540px">
                                         </div>
                                     </div>
-
-                                    <button class='btn btn-primary' type='submit'>Add Video Game</button>
-
                                 </div>
+
+                                <button class='btn btn-primary' type='submit'>Add Video Game</button>
+
                             </div>                            
                         </div><!--end row-->
                     </div>                        
@@ -75,19 +78,9 @@
         </div>
     </div>
 </div>
+
+{{-- Crop Modal --}}
+<x-crop-modal />
+
 <!--end page wrapper -->
-@endsection
-
-@section("script")
-<script>
-
-$(document).ready(function () {
-
-    setTimeout(() => {
-        $('.general-message').fadeOut();
-    }, 5000);
-
-});
-
-</script>
 @endsection

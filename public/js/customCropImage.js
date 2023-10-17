@@ -107,44 +107,5 @@ $(document).ready(function() {
             }, 'image/webp');
         };
     }
-
-    // Upload the cropped image to the server
-    function uploadCroppedImage() {
-        const formData = new FormData();
-        formData.append('_token', $('input[name=_token]').val());
-        formData.append('thumbnail', dataURLtoFile(croppedImageDataURL, 'cropped-image.png'));
-
-        $.ajax({
-            url: "{{ route('admin.posts.store') }}",
-            method: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-                if (response.status === 'success') {
-                    $('#croppedImage').attr('src', "{{ env('APP_UPLOADS_URL') }}/" + response.filename);
-                    $('#croppedImage').show();
-                }
-            },
-            error: function(xhr, status, error) {
-                // Handle errors
-            },
-        });
-    }
-
-    // Helper function to convert a data URL to a File object
-    function dataURLtoFile(dataURL, filename) {
-        const arr = dataURL.split(',');
-        const mime = arr[0].match(/:(.*?);/)[1];
-        const bstr = atob(arr[1]);
-        let n = bstr.length;
-        const u8arr = new Uint8Array(n);
-
-        while (n--) {
-            u8arr[n] = bstr.charCodeAt(n);
-        }
-
-        return new File([u8arr], filename, { type: mime });
-    }
     ////// End of Cropping //////
 });

@@ -30,189 +30,188 @@
                     <div class="form-body mt-4">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="border border-3 p-4 rounded">
 
-                                    <div class="mb-3">
-                                        <label for="title" class="form-label">Post Title</label>
-                                        <input type="text" value='{{ old("title") }}' name="title" required class="form-control" id="title">
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Post Title</label>
+                                    <input type="text" value='{{ old("title") }}' name="title" required class="form-control" id="title">
 
-                                        @error('title')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="slug" class="form-label">Post Slug</label>
-                                        <input type="text" value='{{ old("slug") }}' name="slug" required class="form-control" id="slug">
-
-                                        @error('slug')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="excerpt" class="form-label">Post Excerpt</label>
-                                        <textarea class="form-control" required name='excerpt' id="excerpt" rows="3">{{ old("excerpt") }}</textarea>
-                                    
-                                        @error('excerpt')
-                                            <p class='text-danger'>{{ $message }}</p>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label">Post Video Game</label>                                        
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="rounded">
-                                                    <div class="mb-3">
-                                                        <select name="video_game_id" required class="single-select">
-                                                            @foreach ($video_games as $video_game)
-                                                                <option value="{{ intval($video_game->id) }}">{{ $video_game->name }}</option>                                                                
-                                                            @endforeach 
-                                                        </select>
-
-                                                        @error('video_game_id')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-
-                                                        @if($errors->has('all_fields'))
-                                                            <p class="text-danger">{{ $errors->first('all_fields') }}</p>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label">Post Category</label>                                        
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="rounded">
-                                                    <div class="mb-3">
-                                                        <select id="categories_ids" name="categories_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose categories" required>
-                                                            @foreach ($categories as $category)
-                                                                <option value="{{ $category->id }}" {{ $category->name === 'uncategorized' ? 'selected' : '' }}>
-                                                                    {{ $category->name }}
-                                                                </option>     
-                                                            @endforeach
-                                                        </select>
-
-                                                        @error('categories_ids')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-
-                                                        @if($errors->has('all_fields'))
-                                                            <p class="text-danger">{{ $errors->first('all_fields') }}</p>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label">Post Platform</label>                                        
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="rounded">
-                                                    <div class="mb-3">
-                                                        <select id="platforms_ids" name="platforms_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
-                                                            @foreach ($platforms as $platform)
-                                                                <option value="{{ $platform->id }}" {{ $platform->name === 'uncategorized' ? 'selected' : '' }}>
-                                                                    {{ $platform->name }}
-                                                                </option>     
-                                                            @endforeach
-                                                        </select>
-
-                                                        @error('platforms_ids')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-
-                                                        @if($errors->has('all_fields'))
-                                                            <p class="text-danger">{{ $errors->first('all_fields') }}</p>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label">Post Other</label>                                        
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="rounded">
-                                                    <div class="mb-3">
-                                                        <select name="other_id" required class="single-select">
-                                                            @foreach ($others as $other)
-                                                                <option value="{{ intval($other->id) }}">{{ $other->name }}</option>                                                                
-                                                            @endforeach
-                                                        </select>
-
-                                                        @error('other_id')
-                                                            <p class="text-danger">{{ $message }}</p>
-                                                        @enderror
-
-                                                        @if($errors->has('all_fields'))
-                                                            <p class="text-danger">{{ $errors->first('all_fields') }}</p>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="tags" class="form-label">Post Tags</label>
-                                        <input type="text" value="{{ old("tags") }}" class="form-control" name="tags" id="tags" data-role="tagsinput" required>
-
-                                        @error('tags')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                
-                                    <div class="mb-3">
-                                        <label for="thumbnail" class="form-label">Post Thumbnail (Max 1920)</label>
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <input id="thumbnail" name="thumbnail" type="file" accept="image/*" class="mb-3">
-
-                                                @error('thumbnail')
-                                                    <p class='text-danger'>{{ $message }}</p>
-                                                @enderror
-
-                                                {{-- Store the url of the cropped image --}} 
-                                                <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
-
-                                                <h5>Cropped Image</h5>
-                                                <img id="croppedImage" src="#" alt="Cropped image" style="display: none; width: 540px">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="author_thumbnail" class="form-label">Author of the Thumbnail</label>
-                                        <input type="text" value="{{ old("author_thumbnail") }}" class="form-control" name="author_thumbnail" id="author_thumbnail">
-
-                                        @error('author_thumbnail')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="body" class="form-label">Post Content</label>
-                                        <textarea id="body" name="body" class="form-control" rows="3">{{ old("body") }}</textarea>   
-                                    
-                                        @error('body')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                    
-                                    <button class='btn btn-primary' type='submit'>Add Post</button>
-
+                                    @error('title')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
-                            </div>                            
+
+                                <div class="mb-3">
+                                    <label for="slug" class="form-label">Post Slug</label>
+                                    <input type="text" value='{{ old("slug") }}' name="slug" required class="form-control" id="slug">
+
+                                    @error('slug')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="excerpt" class="form-label">Post Excerpt</label>
+                                    <textarea class="form-control" required name='excerpt' id="excerpt" rows="3">{{ old("excerpt") }}</textarea>
+                                
+                                    @error('excerpt')
+                                        <p class='text-danger'>{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Post Video Game</label>                                        
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="rounded">
+                                                <div class="mb-3">
+                                                    <select name="video_game_id" required class="single-select">
+                                                        @foreach ($video_games as $video_game)
+                                                            <option value="{{ intval($video_game->id) }}">{{ $video_game->name }}</option>                                                                
+                                                        @endforeach 
+                                                    </select>
+
+                                                    @error('video_game_id')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+
+                                                    @if($errors->has('all_fields'))
+                                                        <p class="text-danger">{{ $errors->first('all_fields') }}</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Post Category</label>                                        
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="rounded">
+                                                <div class="mb-3">
+                                                    <select id="categories_ids" name="categories_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose categories" required>
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->id }}" {{ $category->name === 'uncategorized' ? 'selected' : '' }}>
+                                                                {{ $category->name }}
+                                                            </option>     
+                                                        @endforeach
+                                                    </select>
+
+                                                    @error('categories_ids')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+
+                                                    @if($errors->has('all_fields'))
+                                                        <p class="text-danger">{{ $errors->first('all_fields') }}</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Post Platform</label>                                        
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="rounded">
+                                                <div class="mb-3">
+                                                    <select id="platforms_ids" name="platforms_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
+                                                        @foreach ($platforms as $platform)
+                                                            <option value="{{ $platform->id }}" {{ $platform->name === 'uncategorized' ? 'selected' : '' }}>
+                                                                {{ $platform->name }}
+                                                            </option>     
+                                                        @endforeach
+                                                    </select>
+
+                                                    @error('platforms_ids')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+
+                                                    @if($errors->has('all_fields'))
+                                                        <p class="text-danger">{{ $errors->first('all_fields') }}</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Post Other</label>                                        
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="rounded">
+                                                <div class="mb-3">
+                                                    <select name="other_id" required class="single-select">
+                                                        @foreach ($others as $other)
+                                                            <option value="{{ intval($other->id) }}">{{ $other->name }}</option>                                                                
+                                                        @endforeach
+                                                    </select>
+
+                                                    @error('other_id')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+
+                                                    @if($errors->has('all_fields'))
+                                                        <p class="text-danger">{{ $errors->first('all_fields') }}</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="tags" class="form-label">Post Tags</label>
+                                    <input type="text" value="{{ old("tags") }}" class="form-control" name="tags" id="tags" data-role="tagsinput" required>
+
+                                    @error('tags')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            
+                                <div class="mb-3">
+                                    <label for="thumbnail" class="form-label">Post Thumbnail (Max 1920)</label>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <input id="thumbnail" name="thumbnail" type="file" accept="image/*" class="mb-3">
+
+                                            @error('thumbnail')
+                                                <p class='text-danger'>{{ $message }}</p>
+                                            @enderror
+
+                                            {{-- Store the url of the cropped image --}} 
+                                            <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
+
+                                            <h5>Cropped Image</h5>
+                                            <img id="croppedImage" src="#" alt="Cropped image" style="display: none; width: 540px">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="author_thumbnail" class="form-label">Author of the Thumbnail</label>
+                                    <input type="text" value="{{ old("author_thumbnail") }}" class="form-control" name="author_thumbnail" id="author_thumbnail">
+
+                                    @error('author_thumbnail')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="body" class="form-label">Post Content</label>
+                                    <textarea id="body" name="body" class="form-control" rows="3">{{ old("body") }}</textarea>   
+                                
+                                    @error('body')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                
+                                <button class='btn btn-primary' type='submit'>Add Post</button>
+
+                            </div>
+                                            
                         </div><!--end row-->
                     </div>                        
                 </form><!--end form-->
@@ -221,25 +220,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="cropImageModal" tabindex="-1" aria-labelledby="cropImageModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="cropImageModalLabel">Crop Image</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="img-container">
-                    <img id="imageToCrop" src="#" alt="Image to crop">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelCrop">Cancel</button>
-                <button type="button" class="btn btn-primary" id="cropAndUpload">Crop and Upload</button>
-            </div>
-        </div>
-    </div>
-</div>
+{{-- Crop Modal --}}
+<x-crop-modal />
 
 <!--end page wrapper -->
 @endsection
@@ -309,13 +291,6 @@ $(document).ready(function() {
         allowClear: Boolean($(this).data('allow-clear')),
     });
     ////// End of Select //////
-
-    ////// General Message //////
-        setTimeout(() => {
-            $('.general-message').fadeOut();
-        }, 5000);
-    ////// End of General Message //////
-
 });
 </script>
 @endsection
