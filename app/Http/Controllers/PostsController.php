@@ -31,7 +31,7 @@ class PostsController extends Controller
 
         $tags = $post->tags;
 
-        return view('components/blog/post', [
+        return view('components/post', [
             'post' => $post,
             'recent_posts' => $recent_postsArray,
             'tags' => $tags,

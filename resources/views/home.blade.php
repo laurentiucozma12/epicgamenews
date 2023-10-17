@@ -9,7 +9,7 @@
 		<div class="row">
 			<div class="col-12 col-lg-8 posts-col">
 
-				<x-blog.posts :posts="$posts" />
+				<x-posts :posts="$posts" />
 
 			</div>			
 			<div class="col-12 col-lg-4">
