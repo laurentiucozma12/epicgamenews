@@ -125,14 +125,6 @@
             </ul>
         </li>
 
-        <hr>        
-        <li>
-            <a href="{{ route('admin.terminal.index') }}">
-                <div class="parent-icon"><i class='bx bx-terminal'></i></div>
-                <div class="menu-title">Terminal</div>
-            </a>
-        </li>
-
         @if ( auth()->user()->roles->isNotEmpty() 
         && auth()->user()->roles->contains('name', 'admin') 
         && !auth()->user()->roles->contains('name', 'user'))

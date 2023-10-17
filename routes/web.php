@@ -28,7 +28,6 @@ use App\Http\Controllers\AdminControllers\AdminUsersController;
 use App\Http\Controllers\AdminControllers\AdminContactsController;
 use App\Http\Controllers\AdminControllers\AdminAboutController;
 use App\Http\Controllers\AdminControllers\AdminStorageLinkController;
-use App\Http\Controllers\AdminControllers\AdminTerminalController;
 use App\Http\Controllers\AdminControllers\AdminImagesController; 
 
 
@@ -119,14 +118,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     
     Route::get('about', [AdminAboutController::class, 'edit'])->name('about.edit');
     Route::post('about', [AdminAboutController::class, 'update'])->name('about.update');
-    
-    Route::get('storagelink', [AdminStorageLinkController::class, 'storageLink'])->name('storageLink');
-
-    Route::prefix('terminal')->group(function () {
-        Route::get('/', [AdminTerminalController::class, 'index'])->name('terminal.index');
-        Route::post('/migrate', [AdminTerminalController::class, 'migrate'])->name('terminal.migrate');
-        Route::post('/migrateStatus', [AdminTerminalController::class, 'migrateStatus'])->name('terminal.migrateStatus');
-    });
     
 });
 

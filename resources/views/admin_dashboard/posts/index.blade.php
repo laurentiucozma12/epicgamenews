@@ -117,10 +117,8 @@
 </div>
 <!--end page wrapper -->
 @endsection
-
 @section("script")
 <script>
-    
 $(document).ready(function () {
 
     setTimeout(() => {
@@ -128,6 +126,5 @@ $(document).ready(function () {
     }, 5000);
 
 });
-
 </script>
 @endsection

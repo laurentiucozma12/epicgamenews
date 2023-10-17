@@ -18,8 +18,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\AdminControllers\AdminCropResizeImage;
 
-
-
 class AdminPostsController extends Controller
 {
     private $rules = [
