@@ -157,6 +157,10 @@ hr {
 .categories-big-title {
     margin: 0 0 10px 0 !important; }
 
+/* side-ads.blade.php */
+.meme-img {
+    max-width: 450px; }
+
 /* Recent News: side-recent-posts.blade.php */
 .recent-news-big-title {
     margin: 0 0 10px 0 !important; }
