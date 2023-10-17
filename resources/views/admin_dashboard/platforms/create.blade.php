@@ -30,43 +30,46 @@
                     <div class="form-body mt-4">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="border border-3 p-4 rounded">
 
-                                    <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Platform Name</label>
-                                        <input type="text" value='{{ old("name") }}' name="name" required class="form-control" id="inputProductTitle">
+                                <div class="mb-3">
+                                    <label for="inputProductTitle" class="form-label">Platform Name</label>
+                                    <input type="text" value='{{ old("name") }}' name="name" required class="form-control" id="inputProductTitle">
 
-                                        @error('name')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
+                                    @error('name')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
 
-                                    <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Platform Slug</label>
-                                        <input type="text" value='{{ old("slug") }}' name="slug" required class="form-control" id="inputProductTitle">
+                                <div class="mb-3">
+                                    <label for="inputProductTitle" class="form-label">Platform Slug</label>
+                                    <input type="text" value='{{ old("slug") }}' name="slug" required class="form-control" id="inputProductTitle">
 
-                                        @error('slug')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
+                                    @error('slug')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
 
-                                    <div class="mb-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <label for="file" class="form-label">Platform Thumbnail (Max 1920 x 1080)</label>
-                                                <input id='thumbnail' required name='thumbnail' id="file" type="file">
+                                <div class="mb-3">
+                                    <label for="thumbnail" class="form-label">Platform Thumbnail (Max 1920)</label>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <input id="thumbnail" name="thumbnail" type="file" accept="image/*" class="mb-3">
 
-                                                @error('thumbnail')
-                                                    <p class='text-danger'>{{ $message }}</p>
-                                                @enderror
+                                            @error('thumbnail')
+                                                <p class='text-danger'>{{ $message }}</p>
+                                            @enderror
 
-                                            </div>
+                                            {{-- Store the url of the cropped image --}} 
+                                            <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
+
+                                            <h5>Cropped Image</h5>
+                                            <img id="croppedImage" class="cropped-thumbnail" src="#" alt="Cropped image">
                                         </div>
                                     </div>
-                                    
-                                    <button class='btn btn-primary' type='submit'>Add Platform</button>
-
                                 </div>
+                                
+                                <button class='btn btn-primary' type='submit'>Add Platform</button>
+
                             </div>                            
                         </div><!--end row-->
                     </div>                        

@@ -13,7 +13,7 @@ class AdminCategoriesController extends Controller
     private $rules = [
         'name' => 'required|min:2|max:30',
         'slug' => 'required|unique:others,slug',
-        'thumbnail' => 'required|image|dimensions:max_width=1920,max_height=1080',
+        'thumbnail' => 'required|image|max:1920',
     ];
     
     public function index()
@@ -35,18 +35,14 @@ class AdminCategoriesController extends Controller
         $validated = $request->validate($this->rules);
         $validated['user_id'] = auth()->id();
         $category = Category::create($validated);
-        
-        if ($request->has('thumbnail')) {
-            $thumbnail = $request->file('thumbnail');
-            $filename = $thumbnail->getClientOriginalName();
-            $file_extension = $thumbnail->getClientOriginalExtension();
-            $path = $thumbnail->store('categories', 'public');
-    
-            $category->image()->create([
-                'name' => $filename,
-                'extension' => $file_extension,
-                'path' => $path,
-            ]);
+
+        if ($request->hasFile('thumbnail')) {
+            $adminCropResizeImage = new AdminCropResizeImage();
+            $store = 'categories';
+            $maxWidth = 720;
+            $maxHeight = 405;
+            $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight, $store);
+            $category->image()->create($imageData);
         }
 
         return redirect()->route('admin.categories.create')->with('success', 'Category has been Created');
@@ -71,22 +67,20 @@ class AdminCategoriesController extends Controller
 
     public function update(Request $request, Category $category)
     {
-        $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1920,max_height=1080';
+        $updateRules['thumbnail'] = 'nullable|image|max:1920';
         $this->rules['slug'] = ['required', Rule::unique('categories')->ignore($category)];
         $validated = $request->validate($this->rules);
         $category->update($validated);
-        
-        if ($request->has('thumbnail')) {
-            $thumbnail = $request->file('thumbnail');
-            $filename = $thumbnail->getClientOriginalName();
-            $file_extension = $thumbnail->getClientOriginalExtension();
-            $path = $thumbnail->store('categories', 'public');
 
-            $category->image()->update([
-                'name' => $filename,
-                'extension' => $file_extension,
-                'path' => $path,
-            ]);
+        if ($request->hasFile('thumbnail')) {
+            $store = 'categories';
+            $maxWidth = 720;
+            $maxHeight = 405;
+            
+            // Upload and save the new image
+            $adminCropResizeImage = new AdminCropResizeImage();
+            $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight, $store);
+            $category->image()->update($imageData);          
         }
 
         return redirect()->route('admin.categories.edit', $category)->with('success', 'Category has been Updated');

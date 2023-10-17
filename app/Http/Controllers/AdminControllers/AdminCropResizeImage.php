@@ -11,7 +11,7 @@ use Intervention\Image\ImageManagerStatic as ImageManager;
 
 class AdminCropResizeImage extends Controller
 {
-    public function cropResizeImage(Request $request, $maxWidth, $maxHeight) {
+    public function cropResizeImage(Request $request, $maxWidth, $maxHeight, $store) {
         $thumbnail = $request->file('thumbnail');
         $filename = $thumbnail->getClientOriginalName();
         $file_extension = $thumbnail->getClientOriginalExtension();
@@ -19,7 +19,7 @@ class AdminCropResizeImage extends Controller
         // Get the base64-encoded image data from the request and decode it into binary format and save it using Laravel's Storage facade
         $croppedImageData = $request->input('croppedImageData');
         $croppedImageBinary = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $croppedImageData));
-        Storage::disk('public')->put('images/' . $filename, $croppedImageBinary);
+        Storage::disk('public')->put($store . '/' . $filename, $croppedImageBinary);
 
         // Create an Intervention Image instance from the binary data
         $croppedImage = ImageManager::make($croppedImageBinary);
@@ -40,11 +40,11 @@ class AdminCropResizeImage extends Controller
         $resizedImageName = $formattedDate . '-' . Auth::user()->name . '-' . $filename;
 
         // Save the resized image using Laravel's Storage facade
-        $resizedImagePath = 'images/' . $resizedImageName;
+        $resizedImagePath = $store . '/' . $resizedImageName;
         Storage::disk('public')->put($resizedImagePath, $croppedImage->stream());
 
         // Delete the old image
-        Storage::disk('public')->delete('images/' . $filename);
+        Storage::disk('public')->delete($store . '/' . $filename);
 
         // Return the image data
         $imageData = [

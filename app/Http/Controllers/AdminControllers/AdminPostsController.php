@@ -57,9 +57,10 @@ class AdminPostsController extends Controller
 
             if ($request->hasFile('thumbnail')) {
                 $adminCropResizeImage = new AdminCropResizeImage();
+                $store = 'images';
                 $maxWidth = 1280;
                 $maxHeight = 720;
-                $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight);
+                $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight, $store);
                 $post->image()->create($imageData);                
             }
 
@@ -119,24 +120,19 @@ class AdminPostsController extends Controller
         if ($this->validateArticleData($request)) {
 
             $updateRules = $this->rules;
-            $updateRules['thumbnail'] = 'nullable|image|max:1920';            
+            $updateRules['thumbnail'] = 'nullable|image|max:1920';
             $validated = $request->validate($updateRules);
 
             $validated['approved'] = $request->input('approved') !== null;            
             $post->update($validated);
 
             if ($request->hasFile('thumbnail')) {
-                // Delete the old image if it exists
-                if ($post && $post->image) {
-                    $oldImagePath = 'images/' . $post->image->name;
-                    Storage::disk('public')->delete($oldImagePath);
-                }
-                
-                // Upload and save the new image
-                $adminCropResizeImage = new AdminCropResizeImage();
+                $store = 'images';
                 $maxWidth = 1280;
                 $maxHeight = 720;
-                $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight);
+                // Upload and save the new image
+                $adminCropResizeImage = new AdminCropResizeImage();
+                $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight, $store);
                 $post->image()->update($imageData);          
             }
             

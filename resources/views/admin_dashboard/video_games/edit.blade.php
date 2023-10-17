@@ -49,24 +49,27 @@
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
-                                    
+
                                     <div class="mb-3">
                                         <div class="row">
                                             <div class="com-md-8">
                                                 <div class="card shadow-none border">
                                                     <div class="card-body">
-                                                        <label for="file" class="form-label">Video Game Thumbnail (Max 1920 x 1080)</label>
-                                                        <input id='thumbnail' name='thumbnail' id="file" type="file">
+                                                        <label for="file" class="form-label">Video Game Thumbnail (Max 1920)</label>
+                                                        <input id='thumbnail' name='thumbnail' id="file" accept="image/*" type="file" class="mb-3">
 
                                                         @error('thumbnail')
                                                             <p class='text-danger'>{{ $message }}</p>
                                                         @enderror
 
+                                                        {{-- Store the url of the cropped image --}} 
+                                                        <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
+
+                                                        <h5>Cropped Image</h5>
+                                                        <img id="croppedImage" src="/storage/{{ $video_game->image ? $video_game->image->path : 'placeholders/thumbnail_placeholder.jpg' }}" class="cropped-thumbnail-edit" alt="Cropped image">
+
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="com-md-4">
-                                                <img style="width: 540px" src="/storage/{{ $video_game->image ? $video_game->image->path : 'placeholders/thumbnail_placeholder.jpg' }}" class="img-responsive" alt="Post Thumbnail">
                                             </div>
                                         </div>
                                     </div>

@@ -358,3 +358,5 @@ a:hover {
 .cropped-thumbnail {
     display: none;
     width: 540px; }
+.cropped-thumbnail-edit {
+    width: 540px; }

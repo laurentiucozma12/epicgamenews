@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\AdminControllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\VideoGame;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-use App\Models\VideoGame;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class AdminVideoGamesController extends Controller
 {
     private $rules = [
         'name' => 'required|min:2|max:30',
         'slug' => 'required|unique:others,slug',
-        'thumbnail' => 'required|image|dimensions:max_width=1920,max_height=1080',
+        'thumbnail' => 'required|image|max:1920',
     ];
     
     public function index()
@@ -35,18 +36,14 @@ class AdminVideoGamesController extends Controller
         $validated = $request->validate($this->rules);
         $validated['user_id'] = auth()->id();
         $video_game = VideoGame::create($validated);
-        
-        if ($request->has('thumbnail')) {
-            $thumbnail = $request->file('thumbnail');
-            $filename = $thumbnail->getClientOriginalName();
-            $file_extension = $thumbnail->getClientOriginalExtension();
-            $path = $thumbnail->store('video_games', 'public');
-    
-            $video_game->image()->create([
-                'name' => $filename,
-                'extension' => $file_extension,
-                'path' => $path,
-            ]);
+
+        if ($request->hasFile('thumbnail')) {
+            $adminCropResizeImage = new AdminCropResizeImage();
+            $store = 'video_games';
+            $maxWidth = 720;
+            $maxHeight = 405;
+            $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight, $store);
+            $video_game->image()->create($imageData);
         }
 
         return redirect()->route('admin.video_games.create')->with('success', 'Video Game has been Created');
@@ -71,22 +68,20 @@ class AdminVideoGamesController extends Controller
 
     public function update(Request $request, VideoGame $video_game)
     {
-        $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1920,max_height=1080';
         $this->rules['slug'] = ['required', Rule::unique('video_games')->ignore($video_game)];
+        $updateRules['thumbnail'] = 'nullable|image|max:1920';
         $validated = $request->validate($this->rules);
         $video_game->update($validated);
-        
-        if ($request->has('thumbnail')) {
-            $thumbnail = $request->file('thumbnail');
-            $filename = $thumbnail->getClientOriginalName();
-            $file_extension = $thumbnail->getClientOriginalExtension();
-            $path = $thumbnail->store('video_games', 'public');
 
-            $video_game->image()->update([
-                'name' => $filename,
-                'extension' => $file_extension,
-                'path' => $path,
-            ]);
+        if ($request->hasFile('thumbnail')) {
+            $store = 'video_games';
+            $maxWidth = 720;
+            $maxHeight = 405;
+            
+            // Upload and save the new image
+            $adminCropResizeImage = new AdminCropResizeImage();
+            $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight, $store);
+            $video_game->image()->update($imageData);          
         }
 
         return redirect()->route('admin.video_games.edit', $video_game)->with('success', 'Video Game has been Updated');

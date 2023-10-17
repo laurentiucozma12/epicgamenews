@@ -13,7 +13,7 @@ class AdminPlatformsController extends Controller
     private $rules = [
         'name' => 'required|min:2|max:30',
         'slug' => 'required|unique:others,slug',
-        'thumbnail' => 'required|image|dimensions:max_width=1920,max_height=1080',
+        'thumbnail' => 'required|image|max:1920',
     ];
 
     public function index()
@@ -35,18 +35,14 @@ class AdminPlatformsController extends Controller
         $validated = $request->validate($this->rules);
         $validated['user_id'] = auth()->id();
         $platform = Platform::create($validated);
-        
-        if ($request->has('thumbnail')) {
-            $thumbnail = $request->file('thumbnail');
-            $filename = $thumbnail->getClientOriginalName();
-            $file_extension = $thumbnail->getClientOriginalExtension();
-            $path = $thumbnail->store('platforms', 'public');
-    
-            $platform->image()->create([
-                'name' => $filename,
-                'extension' => $file_extension,
-                'path' => $path,
-            ]);
+
+        if ($request->hasFile('thumbnail')) {
+            $adminCropResizeImage = new AdminCropResizeImage();
+            $store = 'platforms';
+            $maxWidth = 720;
+            $maxHeight = 405;
+            $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight, $store);
+            $platform->image()->create($imageData);
         }
 
         return redirect()->route('admin.platforms.create')->with('success', 'Platform has been Created');
@@ -71,22 +67,20 @@ class AdminPlatformsController extends Controller
 
     public function update(Request $request, Platform $platform)
     {
-        $this->rules['thumbnail'] = 'nullable|image|dimensions:max_width=1920,max_height=1080';
+        $updateRules['thumbnail'] = 'nullable|image|max:1920';
         $this->rules['slug'] = ['required', Rule::unique('platforms')->ignore($platform)];
         $validated = $request->validate($this->rules);
         $platform->update($validated);
-        
-        if ($request->has('thumbnail')) {
-            $thumbnail = $request->file('thumbnail');
-            $filename = $thumbnail->getClientOriginalName();
-            $file_extension = $thumbnail->getClientOriginalExtension();
-            $path = $thumbnail->store('platforms', 'public');
 
-            $platform->image()->update([
-                'name' => $filename,
-                'extension' => $file_extension,
-                'path' => $path,
-            ]);
+        if ($request->hasFile('thumbnail')) {
+            $store = 'platforms';
+            $maxWidth = 720;
+            $maxHeight = 405;
+            
+            // Upload and save the new image
+            $adminCropResizeImage = new AdminCropResizeImage();
+            $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight, $store);
+            $platform->image()->update($imageData);          
         }
 
         return redirect()->route('admin.platforms.edit', $platform)->with('success', 'Platform has been Updated');

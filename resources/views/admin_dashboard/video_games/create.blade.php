@@ -63,7 +63,7 @@
                                             <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
 
                                             <h5>Cropped Image</h5>
-                                            <img id="croppedImage" src="#" alt="Cropped image" style="display: none; width: 540px">
+                                            <img id="croppedImage" class="cropped-thumbnail" src="#" alt="Cropped image">
                                         </div>
                                     </div>
                                 </div>
