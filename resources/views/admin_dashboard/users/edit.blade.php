@@ -94,33 +94,30 @@
                                     
                                 </div>                                
                                 <div class="col-12 col-lg-6">
-
                                     <div class="mb-3">
 
-                                            <div>
-
-                                                <div class="card shadow-none">
-                                                    <div class="card-body p-0">
-                                                        <label for="input_image" class="form-label">Image</label>
-                                                        <input name='image' type='file' class="form-control" id="input_image">
-                                                    
-                                                        @error('image')
-                                                            <p class='text-danger'>{{ $message }}</p>
-                                                        @enderror                                                        
-                                                    </div>
+                                        <div>
+                                            <div class="card shadow-none">
+                                                <div class="card-body p-0">
+                                                    <label for="input_image" class="form-label">Image</label>
+                                                    <input name='image' type='file' class="form-control" id="input_image">
+                                                
+                                                    @error('image')
+                                                        <p class='text-danger'>{{ $message }}</p>
+                                                    @enderror                                                        
                                                 </div>
-
-                                                {{-- This label is invisible, just for design purpose --}}
-                                                <label class="invisible"></label>
-
                                             </div>
-                                            
-                                            <div class='user-image'>
-                                                <img src="{{ $user->image ? asset('storage/' . $user->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="post thumbnail">
-                                            </div>
+
+                                            {{-- This label is invisible, just for design purpose --}}
+                                            <label class="invisible"></label>
+
+                                        </div>
+                                        
+                                        <div class='user-image'>
+                                            <img src="{{ $user->image ? asset('storage/' . $user->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="post thumbnail">
+                                        </div>
 
                                     </div>
-
                                 </div>
 
                                 <div class="d-flex justify-content-between">
