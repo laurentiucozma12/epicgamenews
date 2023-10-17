@@ -53,8 +53,8 @@ class AdminPostsController extends Controller
 
             $validated = $request->validate($this->rules);        
             $validated['user_id'] = auth()->id();
-            $post = Post::create($validated);            
-            
+            $post = Post::create($validated);
+
             if ($request->hasFile('thumbnail')) {
                 $adminCropResizeImage = new AdminCropResizeImage();
                 $maxWidth = 1280;
@@ -72,9 +72,9 @@ class AdminPostsController extends Controller
                 'video_game_id' => $request->input('video_game_id'),
                 'other_id' => $request->input('other_id')
             ]);
-            
+
             $this->syncTags($request, $post);            
-            
+
             return redirect()->route('admin.posts.create')->with('success', 'Post has been created.');
         } else {
             return redirect()->back()->withInput()->withErrors($this->buildValidationErrorMessage());
