@@ -2,16 +2,6 @@
 
 @section('title', ucfirst($post->title) . ' | Epic Game News')
 
-@section('custom_css')
-    
-    <style>
-        .class-single .desc img {
-            width: 100%;
-        }
-    </style>
-
-@endsection
-
 @section('content')
 
     <div class="container single-post-container">

@@ -415,3 +415,8 @@ hr {
     background-color: #15ca20 !important;    
     border-color: #0faa1a !important; }
 /************ END OF ADMIN SIDE ************/
+
+
+.class-single .desc img {
+    width: 100%;
+}
