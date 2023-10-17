@@ -182,9 +182,10 @@
 
                                                         {{-- Store the url of the cropped image --}} 
                                                         <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
-                                                        
+
                                                         <h5>Cropped Image</h5>
-                                                        <img style="width: 540px" id="croppedImage" src="/storage/{{ $post->image ? $post->image->path : 'placeholders/thumbnail_placeholder.jpg' }}" class="img-responsive" alt="Cropped image">
+                                                        <img id="croppedImage" src="/storage/{{ $post->image ? $post->image->path : 'placeholders/thumbnail_placeholder.jpg' }}" class="cropped-thumbnail" alt="Cropped image">
+
                                                     </div>
                                                 </div>
                                             </div>

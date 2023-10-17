@@ -355,3 +355,6 @@ a:hover {
     height: 500px;
     background-color: #f7f7f7;
     overflow: hidden; }
+.cropped-thumbnail {
+    display: none;
+    width: 540px; }
