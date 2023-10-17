@@ -15,8 +15,9 @@ class PreprodAccess
         if ($currentBranch === 'pre-production') 
         {
             $clientIP = $request->ip();
+            
             Log::channel('custom_testing')->info('image_saving_name', [$clientIP]);
-            Log::channel('custom_testing')->info('image_saving_name', ['///////////////////////////////////////////////']);
+            
             // home ip
             if ($clientIP === '83.103.225.235'
             // mobile hotspot
