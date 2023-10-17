@@ -199,7 +199,7 @@
     {{-- Alert Messages --}}
     <script>
         $(document).ready(function () {
-        
+
             $('img').lazyload();
 
             setTimeout(() => {
