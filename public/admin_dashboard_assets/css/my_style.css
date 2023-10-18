@@ -274,8 +274,8 @@ input.search-control-2::placeholder {
 /* END - Components used in more pages */
 
 body {
+    font-family: 'Roboto', sans-serif;
     color: var(--white); }
-
 a {
     color: var(--white);
 }

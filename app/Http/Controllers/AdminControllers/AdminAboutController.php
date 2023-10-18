@@ -24,21 +24,7 @@ class AdminAboutController extends Controller
             'about_our_mission' => 'required',
             'about_our_vision' => 'required',
             'about_services' => 'required',
-            'about_first_image' => 'nullable|image|dimensions:max_width=540,max_height=340',
-            'about_second_image' => 'nullable|image|dimensions:max_width=540,max_height=340',
         ]);
-
-        if (request()->has('about_first_image')) {
-            $about_first_image = request()->file('about_first_image');
-            $path = $about_first_image->store('about', 'public');
-            $validated['about_first_image'] = $path;
-        }
-
-        if (request()->has('about_second_image')) {
-            $about_second_image = request()->file('about_second_image');
-            $path = $about_second_image->store('about', 'public');
-            $validated['about_second_image'] = $path;
-        }
 
         About::find(1)->update($validated);
         return redirect()->route('admin.about.edit')->with('success', 'about has been updated');
