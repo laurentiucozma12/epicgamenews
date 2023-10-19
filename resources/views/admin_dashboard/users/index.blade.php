@@ -30,6 +30,7 @@
 								<thead class="table-light">
 									<tr>
 										<th>Id</th>
+										<th>Status</th>
 										<th>Image</th>
 										<th>Name</th>
 										<th>Email</th>
@@ -50,6 +51,13 @@
 													<h6 class="mb-0 font-14">{{ $user->id }}</h6>
 												</div>
 											</div>
+										</td>
+										<td>
+											@if($user->status)
+												<div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Active</div>
+											@else
+												<div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Inactive</div>
+											@endif
 										</td>
 										<td>
                                             <img width='50' src="{{ $user->image ? asset('storage/' . $user->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="post thumbnail">    
