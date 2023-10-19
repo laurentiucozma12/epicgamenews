@@ -130,7 +130,7 @@ return [
 
         'custom_testing' => [
             'driver' => 'single',
-            'path' => storage_path('logs/ip_test.log'),
+            'path' => storage_path('logs/other_input.log'),
             'lever' => 'debug',
         ],
     ],

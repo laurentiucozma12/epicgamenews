@@ -12,11 +12,19 @@ class VideoGameController extends Controller
 {
     public function index()
     {
-        $video_games = VideoGame::withCount('posts')->where('name', '!=', 'uncategorized')->deleted()->paginate(16);
-        
-        $video_games->each(function ($video_game) {
-            $video_game->has_image = $video_game->image()->exists();
-        });
+        $video_games = VideoGame::withCount(['posts' => function ($query) {
+            // Count only the posts that are NOT 'deleted' or 'uncategorized'
+            $query->where('deleted', '=', 0)
+                ->where('name', '!=', 'uncategorized');
+        }])
+        ->whereHas('posts', function ($query) {
+            // Send only the posts where count is bigger than 0
+            $query->where('deleted', '=', 0)
+                ->where('name', '!=', 'uncategorized');
+        })
+        ->where('name', '!=', 'uncategorized')
+        ->deleted()
+        ->paginate(16);
 
         return view('video_games.index', [
             'video_games' => $video_games

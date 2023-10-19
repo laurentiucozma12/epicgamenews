@@ -13,7 +13,19 @@ class PlatformController extends Controller
 {    
     public function index()
     {
-        $platforms = Platform::withCount('posts')->where('name', '!=', 'uncategorized')->deleted()->paginate(16);
+        $platforms = Platform::withCount(['posts' => function ($query) {
+            // Count only the posts that are NOT 'deleted' or 'uncategorized'
+            $query->where('deleted', '=', 0)
+                ->where('name', '!=', 'uncategorized');
+        }])
+        ->whereHas('posts', function ($query) {
+            // Send only the posts where count is bigger than 0
+            $query->where('deleted', '=', 0)
+                ->where('name', '!=', 'uncategorized');
+        })
+        ->where('name', '!=', 'uncategorized')
+        ->deleted()
+        ->paginate(16);
 
         return view('platforms.index', [
             'platforms' => $platforms

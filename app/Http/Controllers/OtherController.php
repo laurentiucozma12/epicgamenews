@@ -2,18 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Tag;
 
 use App\Models\Post;
-use App\Models\Tag;
-use App\Models\Category;
 use App\Models\Other;
+use App\Models\Category;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OtherController extends Controller
 {
     public function index()
-    {        
-        $others = Other::withCount('posts')->where('name', '!=', 'uncategorized')->deleted()->paginate(16);
+    {
+        $others = Other::withCount(['posts' => function ($query) {
+            // Count only the posts that are NOT 'deleted' or 'uncategorized'
+            $query->where('deleted', '=', 0)
+                ->where('name', '!=', 'uncategorized');
+        }])
+        ->whereHas('posts', function ($query) {
+            // Send only the posts where count is bigger than 0
+            $query->where('deleted', '=', 0)
+                ->where('name', '!=', 'uncategorized');
+        })
+        ->where('name', '!=', 'uncategorized')
+        ->deleted()
+        ->paginate(16);
 
         return view('others.index', [
             'others' => $others
