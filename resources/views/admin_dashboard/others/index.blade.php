@@ -64,7 +64,7 @@
                                     <td>{{ $other->name }}</td>
                                     <td>{{ $other->slug }}</td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.others.show', $other) }}">Related Posts</a>    
+                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.others.show', $other) }}">{{ count($other->posts) }} Related Posts</a>    
                                     </td>
                                     <td>{{ $other->created_at->diffForHumans() }}</td>
                                     <td>{{ $other->user->name }}</td>

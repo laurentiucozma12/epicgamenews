@@ -64,7 +64,7 @@
                                     <td>{{ $platform->name }}</td>
                                     <td>{{ $platform->slug }}</td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.platforms.show', $platform) }}">Related Posts</a>    
+                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.platforms.show', $platform) }}">{{ count($platform->posts) }} Related Posts</a>    
                                     </td>
                                     <td>{{ $platform->created_at->diffForHumans() }}</td>
                                     <td>{{ $platform->user->name }}</td>

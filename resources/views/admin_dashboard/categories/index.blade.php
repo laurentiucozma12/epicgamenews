@@ -64,7 +64,7 @@
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->slug }}</td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.categories.show', $category) }}">Related Posts</a>    
+                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.categories.show', $category) }}">{{ count($category->posts) }} Related Posts</a>    
                                     </td>
                                     <td>{{ $category->created_at->diffForHumans() }}</td>
                                     <td>{{ $category->user->name }}</td>

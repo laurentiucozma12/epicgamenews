@@ -64,7 +64,7 @@
                                     <td>{{ $video_game->name }}</td>
                                     <td>{{ $video_game->slug }}</td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.video_games.show', $video_game) }}">Related Posts</a>    
+                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.video_games.show', $video_game) }}">{{ count($video_game->posts) }} Related Posts</a>    
                                     </td>
                                     <td>{{ $video_game->created_at->diffForHumans() }}</td>
                                     <td>{{ $video_game->user->name }}</td>
