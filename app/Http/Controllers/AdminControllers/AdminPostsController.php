@@ -155,9 +155,10 @@ class AdminPostsController extends Controller
 
     public function destroy(Post $post)
     {
-        $post->tags()->delete();
-        $post->delete();
-        return redirect()->route('admin.posts.index')->with('success', 'Post has been deleted');
+        $post->status = 0; 
+        $post->save();
+
+        return redirect()->route('admin.posts.index')->with('danger', 'Post has been dezactivated');
     }
 
     private function validateArticleData(Request $request) {

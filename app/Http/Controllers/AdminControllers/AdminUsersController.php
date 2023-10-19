@@ -160,19 +160,6 @@ class AdminUsersController extends Controller
 
     public function destroy(User $user)
     {
-        // if($user->id === auth()->id())
-        //     return redirect()->back()->with('error', 'You can not delete yourself.');
-
-        // $adminUser = User::whereHas('role', function($query) {
-        //     $query->where('name', 'admin');
-        // })->first();
-
-        // When you delete an user, the author of posts is set to admin
-        // foreach ($user->posts as $post) {
-        //     $post->user_id = $adminUser->id;
-        //     $post->save();
-        // }
-
         $user->status = 0;
         $user->save();
 
