@@ -21,8 +21,7 @@ class PreprodAccess
             // home ip
             if ($clientIP === '83.103.225.235'
             // mobile hotspot
-            || $clientIP === '5.14.144.80'
-            || $clientIP === '5.14.131.53'
+            || $clientIP === '86.124.113.212'
             // localhost
             || $clientIP === '127.0.0.1')
             {
