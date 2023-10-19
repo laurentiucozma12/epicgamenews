@@ -55,7 +55,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        @if($post->status)
+                                        @if($post->deleted)
                                             <div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Approved</div>
                                         @else
                                             <div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Not Approved</div>
@@ -76,7 +76,6 @@
                                         @endforeach
                                     </td>                                    
                                     <td>
-                                        {{-- {{dd($post->platforms) }} --}}
                                         @foreach($post->platforms as $platform)
                                             {{ $platform->name }}
                                             @if (!$loop->last)
