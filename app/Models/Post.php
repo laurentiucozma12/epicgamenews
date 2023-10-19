@@ -17,7 +17,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title' , 'slug', 'excerpt', 'body', 'user_id', 'video_game_id', 'other_id', 'author_thumbnail', 'approved'];
+    protected $fillable = ['title' , 'slug', 'excerpt', 'body', 'user_id', 'video_game_id', 'other_id', 'author_thumbnail', 'status'];
 
     public function author()
     {
@@ -59,10 +59,10 @@ class Post extends Model
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    // Scope function
-    public function scopeApproved($query)
+    // Scope functions
+    public function scopeStatus($query)
     {
-        return $query->where('approved', 1); 
+        return $query->where('status', 1); 
     }
 
     public function scopeExcludeUncategorized($query)

@@ -123,7 +123,7 @@ class AdminPostsController extends Controller
             $updateRules['thumbnail'] = 'nullable|image|max:1920';
             $validated = $request->validate($updateRules);
 
-            $validated['approved'] = $request->input('approved') !== null;            
+            $validated['status'] = $request->input('status') !== null;            
             $post->update($validated);
 
             if ($request->hasFile('thumbnail')) {
