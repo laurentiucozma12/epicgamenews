@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreignId('other_id')->default(1);
 
             $table->integer('views')->default(0);
-            $table->boolean('status')->default(0);
+            $table->boolean('deleted')->default(0);
 
             $table->timestamps();
         });

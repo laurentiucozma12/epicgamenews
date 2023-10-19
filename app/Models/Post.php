@@ -17,7 +17,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title' , 'slug', 'excerpt', 'body', 'user_id', 'video_game_id', 'other_id', 'author_thumbnail', 'status'];
+    protected $fillable = ['title' , 'slug', 'excerpt', 'body', 'user_id', 'video_game_id', 'other_id', 'author_thumbnail', 'deleted'];
 
     public function author()
     {
@@ -62,7 +62,7 @@ class Post extends Model
     // Scope functions
     public function scopeStatus($query)
     {
-        return $query->where('status', 1); 
+        return $query->where('deleted', 1); 
     }
 
     public function scopeExcludeUncategorized($query)

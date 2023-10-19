@@ -12,7 +12,7 @@ class HomeController extends Controller
     {
         $posts = Post::excludeUncategorized()
             ->latest()
-            ->status()
+            ->deleted()
             ->paginate(10);
 
         return view('home', [

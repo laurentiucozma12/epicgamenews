@@ -123,7 +123,7 @@ class AdminPostsController extends Controller
             $updateRules['thumbnail'] = 'nullable|image|max:1920';
             $validated = $request->validate($updateRules);
 
-            $validated['status'] = $request->input('status') !== null;            
+            $validated['deleted'] = $request->input('deleted') !== null;            
             $post->update($validated);
 
             if ($request->hasFile('thumbnail')) {
@@ -155,7 +155,7 @@ class AdminPostsController extends Controller
 
     public function destroy(Post $post)
     {
-        $post->status = 0; 
+        $post->deleted = 0; 
         $post->save();
 
         return redirect()->route('admin.posts.index')->with('danger', 'Post has been dezactivated');
