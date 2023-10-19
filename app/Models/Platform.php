@@ -13,7 +13,7 @@ class Platform extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug', 'user_id'];
+    protected $fillable = ['name', 'slug', 'user_id', 'deleted'];
 
     public function posts()
     {
@@ -37,5 +37,11 @@ class Platform extends Model
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+    
+    // Scope functions
+    public function scopeDeleted($query)
+    {
+        return $query->where('deleted', 0); 
     }
 }

@@ -83,19 +83,17 @@ class AdminOthersController extends Controller
             $other->image()->update($imageData);          
         }
 
-        return redirect()->route('admin.others.edit', $other)->with('success', 'Video Game has been Updated');
+        return redirect()->route('admin.others.edit', $other)->with('success', 'Other has been Updated');
     }
 
     public function destroy(Other $other)
     {
-        $default_other_id = Other::where('name', 'uncategorized')->first()->id;
-
         if ($other->name === 'uncategorized')
-            abort('404');
+            return redirect()->route('admin.others.index')->with('danger', 'You can not delete uncategorized one');
 
-        $other->posts()->update(['other_id' => $default_other_id]);
-
-        $other->delete();
-        return redirect()->route('admin.others.index')->with('success', 'Video Game has been Deleted');
+        $other->deleted = 1;
+        $other->save();
+        
+        return redirect()->route('admin.others.index')->with('danger', 'Other has been Dezactivated');
     }
 }

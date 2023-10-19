@@ -12,7 +12,7 @@ class VideoGameController extends Controller
 {
     public function index()
     {
-        $video_games = VideoGame::withCount('posts')->where('name', '!=', 'uncategorized')->paginate(16);
+        $video_games = VideoGame::withCount('posts')->where('name', '!=', 'uncategorized')->deleted()->paginate(16);
         
         $video_games->each(function ($video_game) {
             $video_game->has_image = $video_game->image()->exists();
@@ -31,12 +31,12 @@ class VideoGameController extends Controller
         
         $posts = $video_game->posts()->excludeUncategorized()
             ->latest()
-            ->approved()
+            ->deleted()
             ->paginate(10);
 
         $recent_posts = Post::excludeUncategorized()
             ->latest()
-            ->approved()
+            ->deleted()
             ->paginate(5);
             
         $recent_postsArray = $recent_posts->items();

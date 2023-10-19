@@ -13,7 +13,7 @@ class PlatformController extends Controller
 {    
     public function index()
     {
-        $platforms = Platform::withCount('posts')->where('name', '!=', 'uncategorized')->paginate(16);
+        $platforms = Platform::withCount('posts')->where('name', '!=', 'uncategorized')->deleted()->paginate(16);
 
         return view('platforms.index', [
             'platforms' => $platforms
@@ -27,12 +27,12 @@ class PlatformController extends Controller
 
         $posts = $platform->posts()->excludeUncategorized()
             ->latest()
-            ->approved()
+            ->deleted()
             ->paginate(10);
 
         $recent_posts = Post::excludeUncategorized()
             ->latest()
-            ->approved()
+            ->deleted()
             ->paginate(5);
 
         $recent_postsArray = $recent_posts->items();

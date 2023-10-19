@@ -88,14 +88,12 @@ class AdminCategoriesController extends Controller
 
     public function destroy(Category $category)
     {
-        $default_category_id = Category::where('name', 'uncategorized')->first()->id;
-
         if ($category->name === 'uncategorized')
-            abort('404');
+            return redirect()->route('admin.categories.index')->with('danger', 'You can not delete uncategorized one');
 
-        $category->posts()->update(['category_id' => $default_category_id]);
-
-        $category->delete();
-        return redirect()->route('admin.categories.index')->with('success', 'Category has been Deleted');
+        $category->deleted = 1;
+        $category->save();
+        
+        return redirect()->route('admin.categories.index')->with('danger', 'Category has been Dezactivated');
     }
 }

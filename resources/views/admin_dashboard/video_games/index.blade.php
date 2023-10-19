@@ -31,6 +31,7 @@
                         <thead class="table-light">
                             <tr>
                                 <th>Id</th>
+                                <th>Status</th>
                                 <th>Thumbnail</th>
                                 <th>Name</th>
                                 <th>Slug</th>
@@ -49,6 +50,13 @@
                                                 <h6 class="mb-0 font-14">{{ $video_game->id }}</h6>
                                             </div>
                                         </div>
+                                    </td>
+                                    <td>
+                                        @if($video_game->deleted)
+                                            <div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Inactive</div>
+                                        @else
+                                            <div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Active</div>
+                                        @endif
                                     </td>
                                     <td>
                                         <img width='50' src="{{ $video_game->image ? asset('storage/' . $video_game->image->path) : asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="post thumbnail">    

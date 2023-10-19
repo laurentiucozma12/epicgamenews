@@ -89,14 +89,12 @@ class AdminVideoGamesController extends Controller
 
     public function destroy(VideoGame $video_game)
     {
-        $default_video_game_id = VideoGame::where('name', 'uncategorized')->first()->id;
-
         if ($video_game->name === 'uncategorized')
-            abort('404');
+            return redirect()->route('admin.video_games.index')->with('danger', 'You can not delete uncategorized one');
 
-        $video_game->posts()->update(['video_game_id' => $default_video_game_id]);
-
-        $video_game->delete();
-        return redirect()->route('admin.video_games.index')->with('success', 'Video Game has been Deleted');
+        $video_game->deleted = 1;
+        $video_game->save();
+        
+        return redirect()->route('admin.video_games.index')->with('danger', 'Video Game has been Dezactivated');
     }
 }

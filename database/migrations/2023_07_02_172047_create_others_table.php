@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->String('slug')->unique();
             $table->foreignId('user_id');
+            $table->boolean('deleted')->default(0);
             $table->timestamps();
         });
     }

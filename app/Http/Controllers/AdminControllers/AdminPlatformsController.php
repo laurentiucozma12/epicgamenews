@@ -87,15 +87,13 @@ class AdminPlatformsController extends Controller
     }
 
     public function destroy(Platform $platform)
-    {
-        $default_platform_id = Platform::where('name', 'uncategorized')->first()->id;
-
+    {        
         if ($platform->name === 'uncategorized')
-            abort('404');
+            return redirect()->route('admin.platforms.index')->with('danger', 'You can not delete uncategorized one');
 
-        $platform->posts()->update(['platform_id' => $default_platform_id]);
-
-        $platform->delete();
-        return redirect()->route('admin.platforms.index')->with('success', 'Platform has been Deleted');
+        $platform->deleted = 1;
+        $platform->save();
+        
+        return redirect()->route('admin.platforms.index')->with('danger', 'Platform has been Dezactivated');
     }
 }

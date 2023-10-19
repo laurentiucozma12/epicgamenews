@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {    
     public function index()
     {
-        $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->paginate(16);
+        $categories = Category::withCount('posts')->where('name', '!=', 'uncategorized')->deleted()->paginate(16);
 
         return view('categories.index', [
             'categories' => $categories
@@ -25,12 +25,12 @@ class CategoryController extends Controller
 
         $posts = $category->posts()->excludeUncategorized()
             ->latest()
-            ->approved()
+            ->deleted()
             ->paginate(10);
 
         $recent_posts = Post::excludeUncategorized()
             ->latest()
-            ->approved()
+            ->deleted()
             ->paginate(5);
 
         $recent_postsArray = $recent_posts->items();

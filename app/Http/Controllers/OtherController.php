@@ -13,7 +13,7 @@ class OtherController extends Controller
 {
     public function index()
     {        
-        $others = Other::withCount('posts')->where('name', '!=', 'uncategorized')->paginate(16);
+        $others = Other::withCount('posts')->where('name', '!=', 'uncategorized')->deleted()->paginate(16);
 
         return view('others.index', [
             'others' => $others
@@ -27,12 +27,12 @@ class OtherController extends Controller
 
         $posts = $other->posts()->excludeUncategorized()
             ->latest()
-            ->approved()
+            ->deleted()
             ->paginate(10);
 
         $recent_posts = Post::excludeUncategorized()
             ->latest()
-            ->approved()
+            ->deleted()
             ->paginate(5);
 
         $recent_postsArray = $recent_posts->items();
@@ -42,5 +42,11 @@ class OtherController extends Controller
             'posts' => $posts,
             'recent_posts' => $recent_postsArray,
         ]);    
+    }
+    
+    // Scope functions
+    public function scopeDeleted($query)
+    {
+        return $query->where('deleted', 0); 
     }
 }
