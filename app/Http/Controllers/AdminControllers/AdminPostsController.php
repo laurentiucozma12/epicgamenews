@@ -155,7 +155,7 @@ class AdminPostsController extends Controller
 
     public function destroy(Post $post)
     {
-        $post->deleted = 0; 
+        $post->deleted = 1; 
         $post->save();
 
         return redirect()->route('admin.posts.index')->with('danger', 'Post has been dezactivated');

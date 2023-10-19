@@ -160,7 +160,7 @@ class AdminUsersController extends Controller
 
     public function destroy(User $user)
     {
-        $user->deleted = 0;
+        $user->deleted = 1;
         $user->save();
 
         return redirect()->route('admin.users.index')->with('danger', 'User has been dezactivated.');

@@ -60,9 +60,9 @@ class Post extends Model
     }
 
     // Scope functions
-    public function scopeStatus($query)
+    public function scopeDeleted($query)
     {
-        return $query->where('deleted', 1); 
+        return $query->where('deleted', 0); 
     }
 
     public function scopeExcludeUncategorized($query)

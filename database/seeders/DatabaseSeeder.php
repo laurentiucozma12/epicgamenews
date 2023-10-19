@@ -124,7 +124,7 @@ class DatabaseSeeder extends Seeder
             $other->image()->save( \App\Models\Image::factory()->make() );
         }
 
-        $posts = \App\Models\Post::factory(10)->create(['deleted' => true]);;
+        $posts = \App\Models\Post::factory(10)->create(['deleted' => false]);;
 
         \App\Models\Tag::factory(1)->create();
 
