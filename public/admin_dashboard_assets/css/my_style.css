@@ -247,42 +247,6 @@ input.search-control-2::placeholder {
     background-color: #4586ff; }
 .global-message.error {
     background-color: #d81d1d; }
-/* Subscribe Container */
-#colorlib-subscribe {
-    display: flex;
-    justify-content: center;
-    align-items: center; }
-#colorlib-subscribe .first-container .container {
-    background-color: var(--dark-gray) !important;
-    border-radius: 15px;
-    padding: 3rem 0;
-    margin: 0;
-    width: 500px; }
-    @media screen and (max-width: 500px) {
-        #colorlib-subscribe .first-container .container {            
-            border-radius: 0;
-        } }
-#colorlib-subscribe .first-container .container .form-group {
-    margin-bottom: 0; }
-#colorlib-subscribe .first-container .container .form-group .btn {
-    margin: 0; }
-#subscribe-input {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%; }
-/* END - Components used in more pages */
-
-body {
-    font-family: 'Roboto', sans-serif;
-    color: var(--white); }
-a {
-    color: var(--white);
-}
-a:hover {
-    color: var(--light-blue-1);
-    transition: 1s;
-}
 .general-message {
     position: fixed;
     bottom: 100px;
@@ -319,6 +283,42 @@ a:hover {
 .alert-info {
     background-color: #ffc192;
     color: #b66c04;
+}
+/* Subscribe Container */
+#colorlib-subscribe {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+#colorlib-subscribe .first-container .container {
+    background-color: var(--dark-gray) !important;
+    border-radius: 15px;
+    padding: 3rem 0;
+    margin: 0;
+    width: 500px; }
+    @media screen and (max-width: 500px) {
+        #colorlib-subscribe .first-container .container {            
+            border-radius: 0;
+        } }
+#colorlib-subscribe .first-container .container .form-group {
+    margin-bottom: 0; }
+#colorlib-subscribe .first-container .container .form-group .btn {
+    margin: 0; }
+#subscribe-input {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%; }
+/* END - Components used in more pages */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: var(--white); }
+a {
+    color: var(--white);
+}
+a:hover {
+    color: var(--light-blue-1);
+    transition: 1s;
 }
 /* Crop Modal */
 .modal-dialog {
