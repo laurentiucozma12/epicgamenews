@@ -168,10 +168,7 @@
                 </div>
             </div>
         </div>
-    </div>
-	<!-- Bootstrap JS -->
-	<script src="{{ asset('admin_dashboard_assets/js/bootstrap.bundle.min.js') }}"></script>
-    
+    </div>    
 	<!-- Bootstrap JS -->
 	<script src="{{ asset('admin_dashboard_assets/js/bootstrap.bundle.min.js') }}"></script>
     
