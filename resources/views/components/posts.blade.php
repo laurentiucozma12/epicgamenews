@@ -5,7 +5,8 @@
     <a 
     href="{{ route('show', $post) }}" 
     class="link-img">
-        <img src="{{ $post->image ? asset('storage/' . $post->image->path) : asset('storage/placeholders/thumbnail_placeholder.jpg') }}" class="post-thumbnail" alt="post thumbnail">						
+        <img src="{{ $post->image ? asset('storage/' . $post->image->path) : asset('storage/placeholders/thumbnail_placeholder.jpg') }}" class="post-thumbnail" alt="{{ $post->image->name }}" title="title {{ $post->image->name }}" loading="lazy">	
+        {{-- added loading="lazy", but didnt test it yet, verify performance --}}
     </a>
     <div class="text">
         <div>

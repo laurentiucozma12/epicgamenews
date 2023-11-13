@@ -23,7 +23,8 @@
         <div class="row">
             <div class="col-12">
                 <figure class="animate-box thumbnail-container">			
-                    <img src="{{ $post->image ? asset('storage/' . $post->image->path) : asset('storage/placeholders/thumbnail_placeholder.jpg') }}" width="1800" height="900" alt="post thumbnail" />
+                    <img src="{{ $post->image ? asset('storage/' . $post->image->path) : asset('storage/placeholders/thumbnail_placeholder.jpg') }}" width="1800" height="900" alt="{{ $post->image->name }}" title="title {{ $post->image->name }}" loading="lazy"/> 
+                    {{-- added loading="lazy", but didnt test it yet, verify performance --}}
                     @if ($post->author_thumbnail) <figcaption class="author-credit">{{ $post->author_thumbnail }}</figcaption> @endif
                 </figure>
             </div>
