@@ -13,12 +13,12 @@ class CheckPermission
     public function handle(Request $request, Closure $next): Response
     {
         // Check if $role not empty & different than 'user' & $deleted active, give acces to admin panel
+        dd( auth()->user()->roles->isNotEmpty(), auth()->user()->roles->contains('name', 'user'), auth()->user()->deleted);
         if (auth()->user()->roles->isNotEmpty() 
         && !auth()->user()->roles->contains('name', 'user')
         && auth()->user()->deleted === 0) {
 
             // Testing
-            dd( auth()->user()->roles->isNotEmpty(), auth()->user()->roles->contains('name', 'user'), auth()->user()->deleted);
             
             // Get the route name
             $route_name = $request->route()->getName();
