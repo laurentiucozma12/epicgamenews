@@ -6,7 +6,6 @@ use Closure;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class CheckPermission
@@ -19,10 +18,7 @@ class CheckPermission
         && auth()->user()->deleted === 0) {
 
             // Testing
-            Log::channel('custom_testing')->info('auth()->user()->roles->isNotEmpty()', auth()->user()->roles->isNotEmpty());
-            Log::channel('custom_testing')->info('contains(name, user)', auth()->user()->roles->contains('name', 'user'));
-            Log::channel('custom_testing')->info('auth()->user()->deleted)', auth()->user()->deleted);
-            Log::channel('custom_testing')->info('image_saving_name', ['///////////////////////////////////////////////']);
+            dd( auth()->user()->roles->isNotEmpty(), auth()->user()->roles->contains('name', 'user'), auth()->user()->deleted);
             
             // Get the route name
             $route_name = $request->route()->getName();
