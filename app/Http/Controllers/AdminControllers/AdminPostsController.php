@@ -123,7 +123,7 @@ class AdminPostsController extends Controller
             $updateRules['thumbnail'] = 'nullable|image|max:1920';
             $validated = $request->validate($updateRules);
 
-            $validated['deleted'] = $request->input('deleted') !== null;            
+            $validated['deleted'] = $request->has('deleted') ? 0 : 1;
             $post->update($validated);
 
             if ($request->hasFile('thumbnail')) {
@@ -170,8 +170,8 @@ class AdminPostsController extends Controller
         // game name, categories of the game and plaforms that can be played on are required
         // or game name and other if the article is about something else related to a game (like an anime/movie/etc. based on a game)
         if (
-            ($selectedVideoGame !== "1" && $selectedCategories[0] !== "1" && $selectedPlatforms[0] !== '1' && $selectedOther === "1") ||
-            ($selectedVideoGame !== "1" && $selectedCategories[0] === "1" && $selectedPlatforms[0] === '1' && $selectedOther !== "1")
+            (intval($selectedVideoGame) !== 1 && intval($selectedCategories[0]) !== 1 && intval($selectedPlatforms[0]) !== 1 && intval($selectedOther) === 1) ||
+            (intval($selectedVideoGame) !== 1 && intval($selectedCategories[0]) === 1 && intval($selectedPlatforms[0]) === 1 && intval($selectedOther) !== 1)
         ) {
             return true;
         }
