@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('deleted');
-            $table->dropColumn('approved');
-        });  
+            // posts should be set on deleted default, because when a post is created, it should not be approved until an admin sees it.
+            $table->boolean('deleted')->default(1);     
+        }); 
     }
 
     /**
