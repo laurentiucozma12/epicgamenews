@@ -35,7 +35,7 @@
 <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900" rel="stylesheet">
 
 <!-- Epic Game News Icon Logo -->
-<link rel="icon" href="{{ asset('storage/logo/logo-epic-game-news-25x25.png') }}" type="image/x-icon"/>
+<link rel="icon" href="{{ asset('storage/logo/logo-epic-game-news-38x38.png') }}" type="image/x-icon"/>
 
 <!-- Animate.css -->
 <link rel="stylesheet" href="{{ asset('blog_template/css/animate.css') }}">
