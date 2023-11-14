@@ -131,7 +131,7 @@
 	{{-- END OF CONTENT OF THE PAGE --}}
 
 	{{-- SUBSCRIBE NEWSLETTER --}}
-	<div id="colorlib-subscribe" class="subs-img" style="background-image: url({{ asset('blog_template/images/img_bg_2.jpg') }});">
+	<div id="colorlib-subscribe" class="subs-img" style="background-image: url({{ asset('blog_template/images/img_bg_2.jpg') }});" loading="lazy">
 		<div class="overlay"></div>
 		<div class="first-container">
 
