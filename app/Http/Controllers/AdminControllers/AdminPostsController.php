@@ -23,7 +23,7 @@ class AdminPostsController extends Controller
     private $rules = [
         'title' => 'required|max:150',
         'slug' => 'required|max:150',
-        'excerpt' => 'required|max:150',
+        'excerpt' => 'required|max:400',
         'video_game_id' => 'required|numeric',
         'thumbnail' => 'required|image|max:1920',
         'author_thumbnail' => 'nullable|max:150',
