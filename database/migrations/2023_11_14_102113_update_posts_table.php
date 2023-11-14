@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             // posts should be set on deleted default, because when a post is created, it should not be approved until an admin sees it.
-            $table->boolean('deleted')->default(1);     
+            $table->boolean('deleted')->default(1);
         }); 
     }
 

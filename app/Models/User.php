@@ -64,6 +64,16 @@ class User extends Authenticatable
         return $this->hasMany(Category::class);
     }
 
+    public function platforms()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    public function others()
+    {
+        return $this->hasMany(Category::class);
+    }
+
     public function tags()
     {
         return $this->hasMany(Tag::class);
