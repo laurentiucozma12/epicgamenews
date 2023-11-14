@@ -52,10 +52,10 @@
                                         </div>
                                     </td>
                                     <td>
-                                        @if($other->deleted)
-                                            <div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Inactive</div>
-                                        @else
+                                        @if(intval($other->deleted) === 0)
                                             <div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Active</div>
+                                        @else
+                                            <div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Inactive</div>
                                         @endif
                                     </td>
                                     <td>
