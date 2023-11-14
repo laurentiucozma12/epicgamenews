@@ -24,12 +24,12 @@ class TagController extends Controller
 
         $posts = $tag->posts()->excludeUncategorized()
             ->latest()
-            ->approved()
+            ->deleted()
             ->paginate(10);
 
         $recent_posts = Post::excludeUncategorized()
             ->latest()
-            ->approved()
+            ->deleted()
             ->paginate(5);
 
         $recent_postsArray = $recent_posts->items();
