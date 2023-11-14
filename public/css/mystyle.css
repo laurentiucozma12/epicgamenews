@@ -36,7 +36,7 @@ body {
 hr {
     background-color: var(--light-gray-1); 
     height: 0.5px;
-    border: none;} 
+    border: none; } 
 /****** END OF ELEMENTS ******/
 
 /****** MESSAGE COLORS ******/
@@ -165,7 +165,10 @@ hr {
 
 /* Recent News: side-recent-posts.blade.php */
 .recent-news-big-title {
+    font-weight: 700;
     margin: 0 0 10px 0 !important; }
+.recent-news-title {
+    font-weight: 500; }
 .recent-news-container {
     margin-bottom: 30px !important;
     padding-left: 0px !important; }
@@ -177,7 +180,8 @@ hr {
 .recent-news-container .img-and-title-container-recent-news h4 {
     height: 50px !important;
     margin: 0 0 10px 0 !important; }
-.recent-news-container .desc p {
+.recent-news-container .desc p {    
+    font-weight: normal !important;
     margin: 0 !important; }
 
 /* Recent News: side-tags.blade.php */
@@ -426,6 +430,7 @@ hr {
         border-radius: 2px;
         font-size: 6px; } }
 .classes .desc2 {
+    font-weight: normal !important;
     padding-top: 0;}
 .comment-container {
     display: flex;

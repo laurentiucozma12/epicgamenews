@@ -11,7 +11,7 @@
                 class="blog-img recent-news-img" 
                 style="background-image: url({{ asset($recent_post->image ? 'storage/' . $recent_post->image->path : 'storage/placeholders/thumbnail_placeholder.jpg') }});">
                 </a>            
-                <h4>
+                <h4 class="fw-bold">
                     <a href="{{ route('show', $recent_post) }}" class="recent-news-title"> 
                         {{ \Str::limit($recent_post->title, 35) }}									
                     </a>
