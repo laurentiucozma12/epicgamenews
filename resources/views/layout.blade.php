@@ -79,7 +79,7 @@
 				<div class="nav-layout-container">
 
 						<a href="{{ route('home') }}" class="nav-layout-logo-container logo-route">
-							<img class="logo-new-game-news img-fluid" src="{{ asset('storage/logo/logo-epic-game-news-25x25.png') }}" alt="logo-new-gaming-news" title="logo-ngn" loading="lazy"> 
+							<img class="logo-new-game-news img-fluid" src="{{ asset('storage/logo/logo-epic-game-news-38x38.png') }}" alt="logo-new-gaming-news" title="logo-ngn" loading="lazy"> 
 							<h1 class="title-route"><b>Epic Game News</b></h1>
 						</a>
 
