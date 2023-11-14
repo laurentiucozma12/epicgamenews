@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
         
         // Assign the 'admin' role to your account for faster testing
         $adminUser = \App\Models\User::factory()->create([
-            'name' => 'Lau',
+            'name' => 'Hymerra',
             'email' => 'laurentiucozma12@gmail.com',
         ]);
 

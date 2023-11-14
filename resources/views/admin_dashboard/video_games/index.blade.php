@@ -67,7 +67,6 @@
                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.video_games.show', $video_game) }}">{{ count($video_game->posts) }} Related Posts</a>    
                                     </td>
                                     <td>{{ $video_game->created_at->diffForHumans() }}</td>
-                                    {{ dd($video_game->user->name) }}
                                     <td>{{ $video_game->user->name }}</td>
                                     <td>
                                         <div class="d-flex order-actions">
