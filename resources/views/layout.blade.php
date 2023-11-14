@@ -1,24 +1,35 @@
 <!DOCTYPE HTML>
-<html>
-<head>
+<html lang="en">
+<head>	
+{{-- Meta tags general --}}
 <meta charset="utf-8">
+<meta http-equiv="Content-Language" content="en">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>@yield('title')</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<meta name="author" content="" />
+<meta name="robots" content="index, follow">
 
-<!-- Facebook and Twitter integration -->
-<meta property="og:title" content=""/>
-<meta property="og:image" content=""/>
-<meta property="og:url" content=""/>
-<meta property="og:site_name" content=""/>
-<meta property="og:description" content=""/>
-<meta name="twitter:title" content="" />
-<meta name="twitter:image" content="" />
-<meta name="twitter:url" content="" />
-<meta name="twitter:card" content="" />
+{{-- Title --}}
+<title>@yield('title')</title>
+
+<link rel="canonical" href="https://epicgamenews.com/" />
+
+{{-- Meta tag google index verification --}}
+<meta name="google-site-verification" content="iEChGkx43f5nLfyry5G7KUeSc9ejTJFI-ed8A0it_UU" />
+
+{{-- Meta tags for the page --}}
+<meta name="description" content="Explore the latest and most exciting gaming news at EpicGameNews.com. Stay updated on the hottest releases, industry trends, and in-depth game reviews. Immerse yourself in a world of gaming insights, expert analyses, and exclusive content. Your ultimate destination for everything gaming awaits!">
+<meta name="keywords" content="gaming news, video game releases, industry trends, game reviews, esports updates, gaming community, gaming culture, latest game announcements, game analysis, Epic Game News, gaming updates, console news, PC gaming, multiplayer games, gaming events">
+<meta name="author" content="Laurențiu Cozma" />
+
+<!-- Facebook -->
+<meta property="og:title" content="Gaming News Now - Epic Game News">
+<meta property="og:description" content="Stay updated with the latest gaming news, releases, reviews, and industry trends at Epic Game News. Your ultimate source for everything gaming-related.">
+<meta property="og:image" content="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}">
+<meta property="og:url" content="https://epicgamenews.com/">
+<meta property="og:site_name" content="Epic Game News">
+<meta property="og:type" content="website">
+{{-- <meta property="og:profile_id" content=""> --}}
+{{-- <meta property="article:author" content=""> --}}
 
 <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900" rel="stylesheet">
 
