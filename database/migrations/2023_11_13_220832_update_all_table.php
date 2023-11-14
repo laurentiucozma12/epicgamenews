@@ -14,12 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('status');
             $table->boolean('deleted')->default(0);
-        });
-
-        Schema::table('posts', function (Blueprint $table) {            
-            $table->dropColumn('approved');
-            $table->boolean('deleted')->default(0);
-        });        
+        });      
 
         Schema::table('video_games', function (Blueprint $table) {
             $table->boolean('deleted')->default(0);
