@@ -27,18 +27,8 @@ class AdminTagsController extends Controller
 
     public function destroy(Tag $tag)
     {
-        $posts = $tag->posts;
         $tag->posts()->detach();
         $tag->delete();
-
-        // If a post has only 1 tag, and that tag gets deleted the post changes to "Not approved"
-        foreach ($posts as $post) {
-            // Check if the post has any other tags left
-            if ($post->tags->isEmpty()) {
-                // Update the post's status to "not approved"
-                $post->update(['approved' => false]);
-            }
-        }
 
         return redirect()->route('admin.tags.index')->with('success', 'Tag has been Deleted');
     }

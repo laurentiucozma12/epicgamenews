@@ -156,7 +156,7 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 Route::get('/tag/uncategorized', function () {
     abort(404);
 });
-Route::get('/tag/{tag:name}', [TagController::class, 'show'])->name('tags.show');
+Route::get('/tag/{tag:slug}', [TagController::class, 'show'])->name('tags.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -49,7 +49,7 @@
 										</td>
 										<td>{{ $tag->name }} </td>
                                         <td>
-                                            <a class='btn btn-primary btn-sm' href="{{ route('admin.tags.show', $tag) }}">Related Posts</a>
+                                            <a class='btn btn-primary btn-sm' href="{{ route('admin.tags.show', $tag) }}">{{ count($tag->posts) }} Related Posts</a>
                                         </td>
                                         <td>{{ $tag->created_at->diffForHumans() }}</td>
 										<td>{{ $tag->user->name }} </td>
