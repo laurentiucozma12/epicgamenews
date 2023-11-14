@@ -20,6 +20,7 @@
 <meta name="description" content="Explore the latest and most exciting gaming news at EpicGameNews.com. Stay updated on the hottest releases, industry trends, and in-depth game reviews. Immerse yourself in a world of gaming insights, expert analyses, and exclusive content. Your ultimate destination for everything gaming awaits!">
 <meta name="keywords" content="gaming news, video game releases, industry trends, game reviews, esports updates, gaming community, gaming culture, latest game announcements, game analysis, Epic Game News, gaming updates, console news, PC gaming, multiplayer games, gaming events">
 <meta name="author" content="Laurențiu Cozma" />
+<meta name="theme-color" content="#ffffff">
 
 <!-- Facebook -->
 <meta property="og:title" content="Gaming News Now - Epic Game News">
@@ -78,7 +79,7 @@
 				<div class="nav-layout-container">
 
 						<a href="{{ route('home') }}" class="nav-layout-logo-container logo-route">
-							<img class="logo-new-game-news" src="{{ asset('storage/logo/logo-epic-game-news-25x25.png') }}"> 
+							<img class="logo-new-game-news img-fluid" src="{{ asset('storage/logo/logo-epic-game-news-25x25.png') }}" alt="logo-new-gaming-news" title="logo-ngn" loading="lazy"> 
 							<h1 class="title-route"><b>Epic Game News</b></h1>
 						</a>
 
@@ -93,13 +94,9 @@
 							{{-- <a href="{{ route('contact.create') }}"><li class="font-changed">Contact</li></a> --}}
 							<a href="{{ route('others.index') }}"><li class="font-changed">Others</li></a>
 
-							@guest
-								{{-- <li class="btn-cta"><a href="{{ route('login') }}"><span class="login-page-btn">Login</span></a></li> --}}
-							@endguest
-
 							@auth
 								<li class="has-dropdown">
-									<a class="cursor-pointer font-changed">{{ auth()->user()->name }}<span class="caret"></span></a>
+									<span class="cursor-pointer font-changed">{{ auth()->user()->name }}<span class="caret"></span></span>
 									<ul class="dropdown">										
 										<a 
 										onclick="event.preventDefault();

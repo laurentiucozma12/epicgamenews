@@ -81,6 +81,8 @@ hr {
         font-size: 15px; } }
 .nav-layout-container .nav-layout-btns-container {
     min-width: fit-content; }
+.font-changed {
+    color: var(--white); }
 #colorlib-logo .logo-route,
 .admin-sidebar-header .admin-logo-container {
     display: flex; 
