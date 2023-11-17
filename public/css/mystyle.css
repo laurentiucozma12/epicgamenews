@@ -30,14 +30,20 @@
 }
 /****** END OF MY COLORS ******/
 
-/****** ELEMENTS ******/
+/****** GENERAL ******/
+body {
+    min-height: 100dvh;
+    display: flex; 
+    flex-direction: column; }
+main {
+    flex: 1 1 0%; }
 body {
     font-family: 'Rubik', sans-serif; }
 hr {
     background-color: var(--light-gray-1); 
     height: 0.5px;
     border: none; } 
-/****** END OF ELEMENTS ******/
+/****** GENERAL OF ELEMENTS ******/
 
 /****** MESSAGE COLORS ******/
 .global-message {
@@ -152,6 +158,8 @@ hr {
             justify-content: center; }
         #subscribe-input #email {
             margin-bottom: 20px; } }
+#colorlib-footer {
+    padding-top: 0; }
 /****** END OF LAYOUTS (all the things that apear on every page) ******/
 
 /****** START OF COMPONENTS ******/ 

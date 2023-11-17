@@ -8,8 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
 
-{{-- Title --}}
-<title>@yield('title')</title>
 
 <link rel="canonical" href="https://epicgamenews.com/" />
 
@@ -17,6 +15,7 @@
 <meta name="google-site-verification" content="iEChGkx43f5nLfyry5G7KUeSc9ejTJFI-ed8A0it_UU" />
 
 {{-- Meta tags for the page --}}
+<title>@yield('title')</title>
 <meta name="description" content="Explore the latest and most exciting gaming news at EpicGameNews.com. Stay updated on the hottest releases, industry trends, and in-depth game reviews. Immerse yourself in a world of gaming insights, expert analyses, and exclusive content. Your ultimate destination for everything gaming awaits!">
 <meta name="keywords" content="gaming news, video game releases, industry trends, game reviews, esports updates, gaming community, gaming culture, latest game announcements, game analysis, Epic Game News, gaming updates, console news, PC gaming, multiplayer games, gaming events">
 <meta name="author" content="Laurențiu Cozma" />
@@ -70,7 +69,7 @@
 <body>	
 	
 {{-- PAGE --}}
-<div id="page">
+<main id="page">
 
 	{{-- NAVBAR --}}
 	<nav class="colorlib-nav" role="navigation">
@@ -162,103 +161,103 @@
 	</div>
 	{{-- END OF SUBSCRIBE NEWSLETTER --}}
 	
-	{{-- FOOTER AND COPYRIGHT --}}
-	<footer id="colorlib-footer">
-		{{-- <div class="container">
-			<div class="row row-pb-md">
-				<div class="col-md-3 colorlib-widget">
-					<h4>Contact Info</h4>
-					<ul class="colorlib-footer-links">
-						<li>291 South 21th Street, <br> Suite 721 New York NY 10016</li>
-						<li><a href="tel://1234567920"><i class="icon-phone"></i> + 1235 2355 98</a></li>
-						<li><a href="mailto:info@yoursite.com"><i class="icon-envelope"></i> info@yoursite.com</a></li>
-						<li><a href="http://luxehotel.com"><i class="icon-location4"></i> yourwebsite.com</a></li>
-					</ul>
-				</div>
-				<div class="col-md-2 colorlib-widget">
-					<h4>Programs</h4>
-					<p>
-						<ul class="colorlib-footer-links">
-							<li><a href="#"><i class="icon-check"></i> Diploma Degree</a></li>
-							<li><a href="#"><i class="icon-check"></i> BS Degree</a></li>
-							<li><a href="#"><i class="icon-check"></i> Beginner</a></li>
-							<li><a href="#"><i class="icon-check"></i> Intermediate</a></li>
-							<li><a href="#"><i class="icon-check"></i> Advance</a></li>
-							<li><a href="#"><i class="icon-check"></i> Difficulty</a></li>
-						</ul>
-					</p>
-				</div>
-				<div class="col-md-2 colorlib-widget">
-					<h4>Useful Links</h4>
-					<p>
-						<ul class="colorlib-footer-links">
-							<li><a href="#"><i class="icon-check"></i> About Us</a></li>
-							<li><a href="#"><i class="icon-check"></i> Testimonials</a></li>
-							<li><a href="#"><i class="icon-check"></i> Courses</a></li>
-							<li><a href="#"><i class="icon-check"></i> Event</a></li>
-							<li><a href="#"><i class="icon-check"></i> News</a></li>
-							<li><a href="#"><i class="icon-check"></i> Contact</a></li>
-						</ul>
-					</p>
-				</div>
+</main>
+{{-- END OF PAGE --}}
 
-				<div class="col-md-2 colorlib-widget">
-					<h4>Support</h4>
-					<p>
-						<ul class="colorlib-footer-links">
-							<li><a href="#"><i class="icon-check"></i> Documentation</a></li>
-							<li><a href="#"><i class="icon-check"></i> Forums</a></li>
-							<li><a href="#"><i class="icon-check"></i> Help &amp; Support</a></li>
-							<li><a href="#"><i class="icon-check"></i> Scholarship</a></li>
-							<li><a href="#"><i class="icon-check"></i> Student Transport</a></li>
-							<li><a href="#"><i class="icon-check"></i> Release Status</a></li>
-						</ul>
-					</p>
-				</div>
-
-				<div class="col-md-3 colorlib-widget">
-					<h4>Recent Post</h4>
-					<div class="f-blog">
-						<a href="blog.html" class="blog-img" style="background-image: url({{ asset('blog_template/images/blog-1.jpg') }});">
-						</a>
-						<div class="desc">
-							<h2><a href="blog.html">Creating Mobile Apps</a></h2>
-							<p class="admin"><span>18 April 2018</span></p>
-						</div>
-					</div>
-					<div class="f-blog">
-						<a href="blog.html" class="blog-img" style="background-image: url({{ asset('blog_template/images/blog-2.jpg') }});">
-						</a>
-						<div class="desc">
-							<h2><a href="blog.html">Creating Mobile Apps</a></h2>
-							<p class="admin"><span>18 April 2018</span></p>
-						</div>
-					</div>
-				</div>
+{{-- FOOTER AND COPYRIGHT --}}
+<footer id="colorlib-footer">
+	{{-- <div class="container">
+		<div class="row row-pb-md">
+			<div class="col-md-3 colorlib-widget">
+				<h4>Contact Info</h4>
+				<ul class="colorlib-footer-links">
+					<li>291 South 21th Street, <br> Suite 721 New York NY 10016</li>
+					<li><a href="tel://1234567920"><i class="icon-phone"></i> + 1235 2355 98</a></li>
+					<li><a href="mailto:info@yoursite.com"><i class="icon-envelope"></i> info@yoursite.com</a></li>
+					<li><a href="http://luxehotel.com"><i class="icon-location4"></i> yourwebsite.com</a></li>
+				</ul>
 			</div>
-		</div> --}}
-		
-		<div class="copy">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 text-center">
-						<p>
-							<small class="block">
-								&copy; Copyright 
-								<script>document.write(new Date().getFullYear());</script> 
-								All rights reserved | This website is made by <a href="{{ route('home') }}">Epic Game News</a>
-							</small>
-							<br> 
-						</p>
+			<div class="col-md-2 colorlib-widget">
+				<h4>Programs</h4>
+				<p>
+					<ul class="colorlib-footer-links">
+						<li><a href="#"><i class="icon-check"></i> Diploma Degree</a></li>
+						<li><a href="#"><i class="icon-check"></i> BS Degree</a></li>
+						<li><a href="#"><i class="icon-check"></i> Beginner</a></li>
+						<li><a href="#"><i class="icon-check"></i> Intermediate</a></li>
+						<li><a href="#"><i class="icon-check"></i> Advance</a></li>
+						<li><a href="#"><i class="icon-check"></i> Difficulty</a></li>
+					</ul>
+				</p>
+			</div>
+			<div class="col-md-2 colorlib-widget">
+				<h4>Useful Links</h4>
+				<p>
+					<ul class="colorlib-footer-links">
+						<li><a href="#"><i class="icon-check"></i> About Us</a></li>
+						<li><a href="#"><i class="icon-check"></i> Testimonials</a></li>
+						<li><a href="#"><i class="icon-check"></i> Courses</a></li>
+						<li><a href="#"><i class="icon-check"></i> Event</a></li>
+						<li><a href="#"><i class="icon-check"></i> News</a></li>
+						<li><a href="#"><i class="icon-check"></i> Contact</a></li>
+					</ul>
+				</p>
+			</div>
+
+			<div class="col-md-2 colorlib-widget">
+				<h4>Support</h4>
+				<p>
+					<ul class="colorlib-footer-links">
+						<li><a href="#"><i class="icon-check"></i> Documentation</a></li>
+						<li><a href="#"><i class="icon-check"></i> Forums</a></li>
+						<li><a href="#"><i class="icon-check"></i> Help &amp; Support</a></li>
+						<li><a href="#"><i class="icon-check"></i> Scholarship</a></li>
+						<li><a href="#"><i class="icon-check"></i> Student Transport</a></li>
+						<li><a href="#"><i class="icon-check"></i> Release Status</a></li>
+					</ul>
+				</p>
+			</div>
+
+			<div class="col-md-3 colorlib-widget">
+				<h4>Recent Post</h4>
+				<div class="f-blog">
+					<a href="blog.html" class="blog-img" style="background-image: url({{ asset('blog_template/images/blog-1.jpg') }});">
+					</a>
+					<div class="desc">
+						<h2><a href="blog.html">Creating Mobile Apps</a></h2>
+						<p class="admin"><span>18 April 2018</span></p>
+					</div>
+				</div>
+				<div class="f-blog">
+					<a href="blog.html" class="blog-img" style="background-image: url({{ asset('blog_template/images/blog-2.jpg') }});">
+					</a>
+					<div class="desc">
+						<h2><a href="blog.html">Creating Mobile Apps</a></h2>
+						<p class="admin"><span>18 April 2018</span></p>
 					</div>
 				</div>
 			</div>
 		</div>
-	</footer>
-	{{-- END OF FOOTER AND COPYRIGHT --}}
+	</div> --}}
 	
-</div>
-{{-- END OF PAGE --}}
+	<div class="copy">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<p>
+						<small class="block">
+							&copy; Copyright 
+							<script>document.write(new Date().getFullYear());</script> 
+							All rights reserved | This website is made by <a href="{{ route('home') }}">Epic Game News</a>
+						</small>
+						<br> 
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+{{-- END OF FOOTER AND COPYRIGHT --}}
 
 <div class="gototop js-top">
 	<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>

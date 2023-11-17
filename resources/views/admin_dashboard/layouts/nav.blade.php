@@ -3,7 +3,7 @@
     <div class="sidebar-header admin-sidebar-header">
         <div>
             <a class="admin-logo-container" href="{{ route('home') }}" target="_blank">
-                <img class="logo-new-game-news" src="{{ asset('storage/logo/logo-epic-game-news-25x25.png') }}">                
+                <img class="logo-new-game-news" src="{{ asset('storage/logo/logo-epic-game-news-38x38.png') }}">                
                 <h4 class="title-route">EGN</h4>
             </a>
         </div>

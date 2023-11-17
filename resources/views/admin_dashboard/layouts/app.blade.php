@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Epic Game News Icon Logo -->
-	<link href="{{ asset('storage/logo/logo-epic-game-news-25x25.png') }}" rel="icon" type="image/x-icon"/>
+	<link href="{{ asset('storage/logo/logo-epic-game-news-38x38.png') }}" rel="icon" type="image/x-icon"/>
 
 	<!--plugins-->
 	@yield("style")
