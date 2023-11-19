@@ -40,6 +40,43 @@
 
                         <div class="row form-group">
                             <div class="col-md-12">
+                                <x-blog.form.textarea value='{{ old("message") }}' placeholder='Tell us something...' name="message" />
+                                <small class='error text-danger message'></small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Send Message" class="btn btn-primary send-message-btn">
+                        </div>
+                    </form>
+
+                    <x-blog.message :status="'success'" />
+
+                    {{-- <form onsubmit="return false;" autocomplete="off" method="POST">
+                        @csrf
+
+                        <div class="row form-group">
+                            <div class="col-md-12 ">
+                                <x-blog.form.input value='{{ old("first_name") }}' placeholder='Firstname' name="first_name" />
+                                <small class='error text-danger first_name'></small>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-12 ">
+                                <x-blog.form.input value='{{ old("last_name") }}' placeholder='Lastname' name="last_name" />
+                                <small class='error text-danger last_name'></small>
+                            </div>                            
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <x-blog.form.input value='{{ old("email") }}' placeholder='Email' type='email' name="email" />
+                                <small class='error text-danger email'></small>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
                                 <x-blog.form.input value='{{ old("subject") }}' required='false' name="subject" placeholder='Subject' />
                                 <small class='error text-danger subject'></small>
                             </div>
@@ -56,7 +93,7 @@
                         </div>
                     </form>
 
-                    <x-blog.message :status="'success'" />
+                    <x-blog.message :status="'success'" /> --}}
                     
                 </div>
                 <div class="col-md-6">
@@ -69,7 +106,7 @@
 @endsection
 
 
-@section('custom_js')
+{{-- @section('custom_js')
 
     <script>
 
@@ -127,4 +164,4 @@
 
     </script>
 
-@endsection
+@endsection --}}
