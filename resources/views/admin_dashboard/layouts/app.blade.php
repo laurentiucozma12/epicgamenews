@@ -193,7 +193,7 @@
 <script src="{{ asset('admin_dashboard_assets/js/app.js') }}"></script>
 
 {{-- Custom Scripts --}}
-<script src="{{ asset('js/functions.js') }}"></script>
+<script src="{{ asset('admin_dashboard_assets/js/functions.js') }}"></script>
 
 @yield("script")
 </body>

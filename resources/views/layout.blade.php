@@ -31,7 +31,8 @@
 {{-- <meta property="og:profile_id" content=""> --}}
 {{-- <meta property="article:author" content=""> --}}
 
-<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900" rel="stylesheet">
+{{-- Font --}}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900&display=swap">
 
 <!-- Epic Game News Icon Logo -->
 <link rel="icon" href="{{ asset('storage/logo/logo-epic-game-news-38x38.png') }}" type="image/x-icon"/>
@@ -39,7 +40,7 @@
 <!-- Animate.css -->
 <link rel="stylesheet" href="{{ asset('blog_template/css/animate.css') }}">
 <!-- Icomoon Icon Fonts-->
-<link rel="stylesheet" href="{{ asset('blog_template/css/icomoon.css') }}">
+{{-- <link rel="stylesheet" href="{{ asset('blog_template/css/icomoon.css') }}"> --}}
 <!-- Bootstrap  -->
 <link rel="stylesheet" href="{{ asset('blog_template/css/bootstrap.css') }}">    
 <!-- Magnific Popup -->
@@ -50,7 +51,7 @@
 <link rel="stylesheet" href="{{ asset('blog_template/css/owl.carousel.min.css') }}">
 <link rel="stylesheet" href="{{ asset('blog_template/css/owl.theme.default.min.css') }}">
 <!-- Flaticons  -->
-<link rel="stylesheet" href="{{ asset('blog_template/fonts/flaticon/font/flaticon.css') }}">
+{{-- <link rel="stylesheet" href="{{ asset('blog_template/fonts/flaticon/font/flaticon.css') }}"> --}}
 <!-- Theme style  -->
 <link rel="stylesheet" href="{{ asset('blog_template/css/style.css') }}">
 {{-- Epic Game News - My Style --}}
@@ -83,44 +84,15 @@
 						</a>
 
 					<div class="nav-layout-btns-container text-right menu-1">
-
-						<div class="navigation">
-							<div><a href="{{ route('home') }}" class="font-changed">Home</a></div>
-							<div><a href="{{ route('video_games.index') }}" class="font-changed">Video Games</a></div>
-							<div><a href="{{ route('categories.index') }}" class="font-changed">Categories</a></div>
-							<div><a href="{{ route('platforms.index') }}" class="font-changed">Platforms</a></div>
-							<div><a href="{{ route('about') }}" class="font-changed">About</a></div>
-							{{-- <div><a href="{{ route('contact.create') }}" class="font-changed">Contact</a></div> --}}
-							<div><a href="{{ route('others.index') }}" class="font-changed">Others</a></div>
 						
-							@auth
-								<div class="has-dropdown">
-									<span class="cursor-pointer font-changed no-right-margin">{{ auth()->user()->name }}<span class="caret"></span></span>
-									<div class="dropdown">
-										<a href="#" onclick="event.preventDefault(); document.getElementById('nav-logout-form').submit()" class="font-changed-btn first-btn">Logout</a>
-						
-										<form id="nav-logout-form" action="{{ route('logout') }}" method="POST">
-											@csrf
-										</form>
-						
-										@foreach (auth()->user()->roles as $role)
-											@if ($role->name !== "user")
-												<a href="{{ route('admin.index') }}" target="_blank" class="font-changed-btn"><span>Admin Dasboard</a>
-											@endif
-										@endforeach
-									</div>
-								</div>
-							@endauth
-						</div>
-						
-						{{-- <ul>
+						<ul>
 							<a href="{{ route('home') }}"><li class="font-changed">Home</li></a>
 							<a href="{{ route('video_games.index') }}"><li class="font-changed">Video Games</li></a>
 							<a href="{{ route('categories.index') }}"><li class="font-changed">Categories</li></a>
 							<a href="{{ route('platforms.index') }}"><li class="font-changed">Platforms</li></a>
-							<a href="{{ route('about') }}"><li class="font-changed">About</li></a> --}}
-							{{-- <a href="{{ route('contact.create') }}"><li class="font-changed">Contact</li></a> --}}
-							{{-- <a href="{{ route('others.index') }}"><li class="font-changed">Others</li></a>
+							<a href="{{ route('about') }}"><li class="font-changed">About</li></a>
+							<a href="{{ route('contact.create') }}"><li class="font-changed">Contact</li></a>
+							<a href="{{ route('others.index') }}"><li class="font-changed">Others</li></a>
 
 							@auth
 								<li class="has-dropdown">
@@ -145,7 +117,7 @@
 									</ul>
 								</li>
 							@endauth								
-						</ul> --}}
+						</ul>
 
 					</div>
 				</div>
@@ -274,11 +246,7 @@
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<p>
-						<small class="block">
-							&copy; Copyright 
-							<script>document.write(new Date().getFullYear());</script> 
-							All rights reserved | This website is made by <a href="{{ route('home') }}">Epic Game News</a>
-						</small>
+						<small class="block" id="copyrightYear">&copy; Copyright <span id="currentYear"></span> All rights reserved | This website is made by <a href="{{ route('home') }}">Epic Game News</a></small>
 						<br> 
 					</p>
 				</div>

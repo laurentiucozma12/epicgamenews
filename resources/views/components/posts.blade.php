@@ -9,7 +9,7 @@
     </a>
     <div class="text">
         <div>
-            <h3 class="heading"><a href="{{ route('show', $post) }}"><b> {{ ucfirst($post->title) }} </b></a></h3>
+            <h2 class="heading"><a href="{{ route('show', $post) }}"><b> {{ ucfirst($post->title) }} </b></a></h2>
             <p class="excerpt"> {{ ucfirst(\Str::limit($post->excerpt, 150)) }} </p>
         </div>
         <div class="container-meta">

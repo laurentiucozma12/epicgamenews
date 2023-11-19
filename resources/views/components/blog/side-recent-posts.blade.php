@@ -1,7 +1,7 @@
 @props(['recent_posts'])
 
 <div class="side">
-    <h3 class="sidebar-heading recent-news-big-title">Recent News</h3>
+    <h2 class="sidebar-heading recent-news-big-title">Recent News</h2>
 
     @foreach($recent_posts as $recent_post)
         <div class="f-blog recent-news-container">
@@ -13,11 +13,11 @@
                     <img src="{{ $recent_post->image ? asset('storage/' . $recent_post->image->path) : asset('storage/placeholders/thumbnail_placeholder.jpg') }}" width="80" height="50" alt="{{ $recent_post->image->name }}" title="title {{ $recent_post->image->name }}" /> 
 
                 </a>            
-                <h4 class="fw-bold">
+                <h3 class="fw-bold">
                     <a href="{{ route('show', $recent_post) }}" class="recent-news-title"> 
                         {{ \Str::limit($recent_post->title, 35) }}									
                     </a>
-                </h4>                    
+                </h3>                    
             </div>  
             <div class="desc">
                 <p> {{ \Str::limit($recent_post->excerpt, 66) }} </p>
