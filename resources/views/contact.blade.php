@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <form onsubmit="return false;" autocomplete="off" method="POST">
+                    <form action="https://formsubmit.co/contact@epicgamenews.com" method="POST">
                         @csrf
 
                         <div class="row form-group">
