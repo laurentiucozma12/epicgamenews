@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\AdminControllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-
+use App\Models\Image;
 use App\Models\Category;
+use Illuminate\Http\Request;
+
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class AdminCategoriesController extends Controller
 {
@@ -37,11 +39,14 @@ class AdminCategoriesController extends Controller
         $category = Category::create($validated);
 
         if ($request->hasFile('thumbnail')) {
-            $adminCropResizeImage = new AdminCropResizeImage();
-            $store = 'categories';
+            // Store is the folder name where images will be saved
+            $store = 'images';
             $maxWidth = 720;
             $maxHeight = 405;
-            $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight, $store);
+            
+            // Upload and save the new image
+            $adminCropResizeImage = new AdminCropResizeImage();
+            $imageData = $adminCropResizeImage->optimizeImage($request, $maxWidth, $maxHeight, $store);
             $category->image()->create($imageData);
         }
 
@@ -70,17 +75,27 @@ class AdminCategoriesController extends Controller
         $updateRules['thumbnail'] = 'nullable|image|max:1920';
         $this->rules['slug'] = ['required', Rule::unique('categories')->ignore($category)];
         $validated = $request->validate($this->rules);
+
+        // Update the category details
         $category->update($validated);
 
+        // Check if a new image has been uploaded
         if ($request->hasFile('thumbnail')) {
-            $store = 'categories';
+            // Store is the folder name where images will be saved
+            $store = 'images';
             $maxWidth = 720;
             $maxHeight = 405;
-            
+
             // Upload and save the new image
             $adminCropResizeImage = new AdminCropResizeImage();
-            $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight, $store);
-            $category->image()->update($imageData);          
+            $imageData = $adminCropResizeImage->optimizeImage($request, $maxWidth, $maxHeight, $store);
+            $newImage = $category->image()->create($imageData);
+
+            // Get the ID of the newly associated image
+            $newImageId = $newImage->id;
+
+            // Delete the old img
+            $adminCropResizeImage->deleteOldImage($category);
         }
 
         return redirect()->route('admin.categories.edit', $category)->with('success', 'Category has been Updated');

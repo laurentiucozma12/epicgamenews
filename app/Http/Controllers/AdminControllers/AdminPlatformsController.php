@@ -37,11 +37,14 @@ class AdminPlatformsController extends Controller
         $platform = Platform::create($validated);
 
         if ($request->hasFile('thumbnail')) {
-            $adminCropResizeImage = new AdminCropResizeImage();
-            $store = 'platforms';
+            // Store is the folder name where images will be saved
+            $store = 'images';
             $maxWidth = 720;
             $maxHeight = 405;
-            $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight, $store);
+            
+            // Upload and save the new image
+            $adminCropResizeImage = new AdminCropResizeImage();
+            $imageData = $adminCropResizeImage->optimizeImage($request, $maxWidth, $maxHeight, $store);
             $platform->image()->create($imageData);
         }
 
@@ -67,20 +70,27 @@ class AdminPlatformsController extends Controller
 
     public function update(Request $request, Platform $platform)
     {
-        $updateRules['thumbnail'] = 'nullable|image|max:1920';
+        $this->rules['thumbnail'] = 'nullable|image|max:1920';
         $this->rules['slug'] = ['required', Rule::unique('platforms')->ignore($platform)];
         $validated = $request->validate($this->rules);
         $platform->update($validated);
 
         if ($request->hasFile('thumbnail')) {
-            $store = 'platforms';
+            // Store is the folder name where images will be saved
+            $store = 'images';
             $maxWidth = 720;
             $maxHeight = 405;
             
             // Upload and save the new image
             $adminCropResizeImage = new AdminCropResizeImage();
-            $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight, $store);
-            $platform->image()->update($imageData);          
+            $imageData = $adminCropResizeImage->optimizeImage($request, $maxWidth, $maxHeight, $store);
+            $newImage = $platform->image()->create($imageData);
+
+            // Get the ID of the newly associated image
+            $newImageId = $newImage->id;
+
+            // Delete the old img
+            $adminCropResizeImage->deleteOldImage($platform);   
         }
 
         return redirect()->route('admin.platforms.edit', $platform)->with('success', 'Platform has been Updated');

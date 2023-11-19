@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,32 +14,29 @@ use Illuminate\Support\Facades\Route;
 | 
 */ 
 
-use App\Http\Controllers\AdminControllers\AdminHomeController;
-use App\Http\Controllers\AdminControllers\AdminDashboardController;
-use App\Http\Controllers\AdminControllers\AdminPostsController;
-use App\Http\Controllers\AdminControllers\TinyMCEController;
-use App\Http\Controllers\AdminControllers\AdminVideoGamesController;
-use App\Http\Controllers\AdminControllers\AdminCategoriesController;
-use App\Http\Controllers\AdminControllers\AdminPlatformsController;
-use App\Http\Controllers\AdminControllers\AdminOthersController;
-use App\Http\Controllers\AdminControllers\AdminTagsController;
-use App\Http\Controllers\AdminControllers\AdminRolesController;
-use App\Http\Controllers\AdminControllers\AdminUsersController;
-use App\Http\Controllers\AdminControllers\AdminContactsController;
-use App\Http\Controllers\AdminControllers\AdminAboutController;
-use App\Http\Controllers\AdminControllers\AdminStorageLinkController;
-use App\Http\Controllers\AdminControllers\AdminImagesController; 
-
-
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PostsController;
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\VideoGameController;
+use App\Http\Controllers\OtherController;
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PlatformController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\OtherController;
-use App\Http\Controllers\TagController;
+use App\Http\Controllers\VideoGameController;
+use App\Http\Controllers\AdminControllers\TinyMCEController;
+use App\Http\Controllers\AdminControllers\AdminHomeController;
+use App\Http\Controllers\AdminControllers\AdminTagsController;
+use App\Http\Controllers\AdminControllers\AdminAboutController;
+
+use App\Http\Controllers\AdminControllers\AdminPostsController;
+use App\Http\Controllers\AdminControllers\AdminRolesController;
+use App\Http\Controllers\AdminControllers\AdminUsersController;
+use App\Http\Controllers\AdminControllers\AdminOthersController;
+use App\Http\Controllers\AdminControllers\AdminContactsController;
+use App\Http\Controllers\AdminControllers\AdminDashboardController;
+use App\Http\Controllers\AdminControllers\AdminPlatformsController;
+use App\Http\Controllers\AdminControllers\AdminCategoriesController;
+use App\Http\Controllers\AdminControllers\AdminVideoGamesController;
 
 // Admin Dashboard Routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions'])->group(function(){
@@ -94,7 +91,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
         Route::delete('/{other}', [AdminOthersController::class, 'destroy'])->name('others.destroy');
         Route::get('/{other}', [AdminOthersController::class, 'show'])->name('others.show');
     });
-
+    
     Route::resource('tags', AdminTagsController::class)->only(['index', 'show', 'destroy']);
 
     Route::resource('roles', AdminRolesController::class)->except('show');

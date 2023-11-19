@@ -15,5 +15,11 @@ class Image extends Model
     {
         return $this->morphTo();
     }
+    
+    // Accessor for the is_associated attribute
+    public function getIsAssociatedAttribute()
+    {
+        return $this->imageable !== null;
+    }
 }
  

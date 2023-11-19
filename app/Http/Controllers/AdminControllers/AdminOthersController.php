@@ -37,11 +37,14 @@ class AdminOthersController extends Controller
         $other = Other::create($validated);
 
         if ($request->hasFile('thumbnail')) {
-            $adminCropResizeImage = new AdminCropResizeImage();
-            $store = 'others';
+            // Store is the folder name where images will be saved
+            $store = 'images';
             $maxWidth = 720;
             $maxHeight = 405;
-            $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight, $store);
+
+            // Upload and save the new image
+            $adminCropResizeImage = new AdminCropResizeImage();
+            $imageData = $adminCropResizeImage->optimizeImage($request, $maxWidth, $maxHeight, $store);
             $other->image()->create($imageData);
         }
 
@@ -67,20 +70,27 @@ class AdminOthersController extends Controller
 
     public function update(Request $request, Other $other)
     {
-        $updateRules['thumbnail'] = 'nullable|image|max:1920';
+        $this->rules['thumbnail'] = 'nullable|image|max:1920';
         $this->rules['slug'] = ['required', Rule::unique('others')->ignore($other)];
         $validated = $request->validate($this->rules);
         $other->update($validated);
         
         if ($request->hasFile('thumbnail')) {
-            $store = 'others';
+            // Store is the folder name where images will be saved
+            $store = 'images';
             $maxWidth = 720;
             $maxHeight = 405;
             
             // Upload and save the new image
             $adminCropResizeImage = new AdminCropResizeImage();
-            $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight, $store);
-            $other->image()->update($imageData);          
+            $imageData = $adminCropResizeImage->optimizeImage($request, $maxWidth, $maxHeight, $store);
+            $newImage = $other->image()->create($imageData);
+
+            // Get the ID of the newly associated image
+            $newImageId = $newImage->id;
+
+            // Delete the old img
+            $adminCropResizeImage->deleteOldImage($other);
         }
 
         return redirect()->route('admin.others.edit', $other)->with('success', 'Other has been Updated');

@@ -56,12 +56,15 @@ class AdminPostsController extends Controller
             $post = Post::create($validated);
 
             if ($request->hasFile('thumbnail')) {
-                $adminCropResizeImage = new AdminCropResizeImage();
+                // Store is the folder name where images will be saved
                 $store = 'images';
                 $maxWidth = 1280;
                 $maxHeight = 720;
-                $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight, $store);
-                $post->image()->create($imageData);                
+                
+                // Upload and save the new image
+                $adminCropResizeImage = new AdminCropResizeImage();
+                $imageData = $adminCropResizeImage->optimizeImage($request, $maxWidth, $maxHeight, $store);
+                $post->image()->create($imageData);
             }
 
             // Attach categories and platforms IDs to the post
@@ -119,21 +122,27 @@ class AdminPostsController extends Controller
     {
         if ($this->validateArticleData($request)) {
 
-            $updateRules = $this->rules;
-            $updateRules['thumbnail'] = 'nullable|image|max:1920';
-            $validated = $request->validate($updateRules);
-
+            $this->rules['thumbnail'] = 'nullable|image|max:1920';
+            $validated = $request->validate($this->rules);
             $validated['deleted'] = $request->has('deleted') ? 0 : 1;
             $post->update($validated);
 
             if ($request->hasFile('thumbnail')) {
+                // Store is the folder name where images will be save
                 $store = 'images';
                 $maxWidth = 1280;
                 $maxHeight = 720;
+                
                 // Upload and save the new image
                 $adminCropResizeImage = new AdminCropResizeImage();
-                $imageData = $adminCropResizeImage->cropResizeImage($request, $maxWidth, $maxHeight, $store);
-                $post->image()->update($imageData);          
+                $imageData = $adminCropResizeImage->optimizeImage($request, $maxWidth, $maxHeight, $store);
+                $newImage = $post->image()->create($imageData);
+
+                // Get the ID of the newly associated image
+                $newImageId = $newImage->id;
+    
+                // Delete the old img
+                $adminCropResizeImage->deleteOldImage($post);
             }
             
             $this->syncTags($request, $post);

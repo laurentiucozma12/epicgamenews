@@ -139,11 +139,6 @@
             placeholder: $(this).data('placeholder'),
             allowClear: Boolean($(this).data('allow-clear')),
         });
-
-        setTimeout(() => {
-            $(".general-message").fadeOut();
-        }, 5000);
-
     });
 
 </script>

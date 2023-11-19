@@ -76,6 +76,11 @@
 @endsection
 
 @section("script")
+
+{{-- Custom Scripts --}}
+{{-- <script src="{{ asset('js/functions.js') }}"></script> --}}
+
+{{-- Plugins --}}
 <script src="{{ asset('admin_dashboard_assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('admin_dashboard_assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
 <script>
@@ -86,12 +91,7 @@
         } );
         
         table.buttons().container()
-            .appendTo( '#example2_wrapper .col-md-6:eq(0)' );
-    
-        setTimeout(() => {
-            $(".general-message").fadeOut();
-        }, 5000);
-    
+            .appendTo( '#example2_wrapper .col-md-6:eq(0)' );    
     });
 </script>
 @endsection
