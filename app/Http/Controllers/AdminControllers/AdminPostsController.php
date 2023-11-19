@@ -58,8 +58,8 @@ class AdminPostsController extends Controller
             if ($request->hasFile('thumbnail')) {
                 // Store is the folder name where images will be saved
                 $store = 'images';
-                $maxWidth = 480;
-                $maxHeight = 270;
+                $maxWidth = 1280;
+                $maxHeight = 720;
                 
                 // Upload and save the new image
                 $adminCropResizeImage = new AdminCropResizeImage();

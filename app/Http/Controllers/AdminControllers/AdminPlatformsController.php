@@ -39,8 +39,8 @@ class AdminPlatformsController extends Controller
         if ($request->hasFile('thumbnail')) {
             // Store is the folder name where images will be saved
             $store = 'images';
-            $maxWidth = 720;
-            $maxHeight = 405;
+            $maxWidth = 480;
+            $maxHeight = 270;
             
             // Upload and save the new image
             $adminCropResizeImage = new AdminCropResizeImage();
@@ -78,8 +78,8 @@ class AdminPlatformsController extends Controller
         if ($request->hasFile('thumbnail')) {
             // Store is the folder name where images will be saved
             $store = 'images';
-            $maxWidth = 720;
-            $maxHeight = 405;
+            $maxWidth = 480;
+            $maxHeight = 270;
             
             // Upload and save the new image
             $adminCropResizeImage = new AdminCropResizeImage();

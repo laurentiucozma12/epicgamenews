@@ -8,8 +8,10 @@
             <div class="img-and-title-container-recent-news">
                 <a 
                 href="{{ route('show', $recent_post) }}" 
-                class="blog-img recent-news-img" 
-                style="background-image: url({{ asset($recent_post->image ? 'storage/' . $recent_post->image->path : 'storage/placeholders/thumbnail_placeholder.jpg') }});">
+                class="blog-img recent-news-img">
+
+                    <img src="{{ $recent_post->image ? asset('storage/' . $recent_post->image->path) : asset('storage/placeholders/thumbnail_placeholder.jpg') }}" width="80" height="50" alt="{{ $post->image->name }}" title="title {{ $post->image->name }}" /> 
+
                 </a>            
                 <h4 class="fw-bold">
                     <a href="{{ route('show', $recent_post) }}" class="recent-news-title"> 

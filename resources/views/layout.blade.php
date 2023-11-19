@@ -84,14 +84,43 @@
 
 					<div class="nav-layout-btns-container text-right menu-1">
 
-						<ul>
+						<div class="navigation">
+							<div><a href="{{ route('home') }}" class="font-changed">Home</a></div>
+							<div><a href="{{ route('video_games.index') }}" class="font-changed">Video Games</a></div>
+							<div><a href="{{ route('categories.index') }}" class="font-changed">Categories</a></div>
+							<div><a href="{{ route('platforms.index') }}" class="font-changed">Platforms</a></div>
+							<div><a href="{{ route('about') }}" class="font-changed">About</a></div>
+							{{-- <div><a href="{{ route('contact.create') }}" class="font-changed">Contact</a></div> --}}
+							<div><a href="{{ route('others.index') }}" class="font-changed">Others</a></div>
+						
+							@auth
+								<div class="has-dropdown">
+									<span class="cursor-pointer font-changed no-right-margin">{{ auth()->user()->name }}<span class="caret"></span></span>
+									<div class="dropdown">
+										<a href="#" onclick="event.preventDefault(); document.getElementById('nav-logout-form').submit()" class="font-changed-btn first-btn">Logout</a>
+						
+										<form id="nav-logout-form" action="{{ route('logout') }}" method="POST">
+											@csrf
+										</form>
+						
+										@foreach (auth()->user()->roles as $role)
+											@if ($role->name !== "user")
+												<a href="{{ route('admin.index') }}" target="_blank" class="font-changed-btn"><span>Admin Dasboard</a>
+											@endif
+										@endforeach
+									</div>
+								</div>
+							@endauth
+						</div>
+						
+						{{-- <ul>
 							<a href="{{ route('home') }}"><li class="font-changed">Home</li></a>
 							<a href="{{ route('video_games.index') }}"><li class="font-changed">Video Games</li></a>
 							<a href="{{ route('categories.index') }}"><li class="font-changed">Categories</li></a>
 							<a href="{{ route('platforms.index') }}"><li class="font-changed">Platforms</li></a>
-							<a href="{{ route('about') }}"><li class="font-changed">About</li></a>
+							<a href="{{ route('about') }}"><li class="font-changed">About</li></a> --}}
 							{{-- <a href="{{ route('contact.create') }}"><li class="font-changed">Contact</li></a> --}}
-							<a href="{{ route('others.index') }}"><li class="font-changed">Others</li></a>
+							{{-- <a href="{{ route('others.index') }}"><li class="font-changed">Others</li></a>
 
 							@auth
 								<li class="has-dropdown">
@@ -116,7 +145,7 @@
 									</ul>
 								</li>
 							@endauth								
-						</ul>
+						</ul> --}}
 
 					</div>
 				</div>
