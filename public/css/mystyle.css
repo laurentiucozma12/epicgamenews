@@ -220,7 +220,8 @@ hr {
     margin: 0 10px 0 0;
     width: 80px !important; 
     height: 50px !important; }
-.recent-news-container .img-and-title-container-recent-news h4 {
+.recent-news-container .img-and-title-container-recent-news h3 {
+    font-size: 14pt;
     height: fit-content !important;
     margin: 0 0 10px 0 !important; }
 .recent-news-container .desc p {    
@@ -347,6 +348,7 @@ hr {
     @media (min-width: 1400px) {
         .container {
             width: 1400px; } }
+    
 /* Categories Page */
 .categories-col .block-21 .text {
     width: 100%; }
@@ -385,7 +387,10 @@ hr {
     margin: 0; }
 .story-container {
     padding: 0 15px 0 15px }
-/* Contact Page */
+/* START - Contact Page */
+.colorlib-contact {
+padding: 0 0 2.5em 0; }
+/* END - Contact Page */
 
 /* Index.blade.php for Video Games/Categories/Platforms/Others */
 .category-container {
@@ -474,7 +479,7 @@ hr {
         font-size: 6px; } }
 .classes .desc2 {
     font-weight: normal !important;
-    padding-top: 0;}
+    padding: 0; }
 .comment-container {
     display: flex;
     margin-bottom: 2rem; }
@@ -498,6 +503,6 @@ hr {
 /************ END OF ADMIN SIDE ************/
 
 
-.class-single .desc img {
-    width: 100%;
+.class-single .desc {
+    padding: 2rem;
 }

@@ -5,21 +5,25 @@
 @section('content')
 
     <div class="container single-post-container">
+
         <div class="row">
             <div class="col-12">
                 <h1><b>{{ ucfirst($post->title) }}<b></h1>
             </div>
-        </div>
+        </div> {{-- End of row --}}
+
         <div class="row">
             <div class="col-12">
                 <p>{{ ucfirst($post->excerpt) }}</p>
             </div>
-        </div>
+        </div> {{-- End of row --}}
+
         <div class="row">
             <div class="col-12">
                 <span class="single-post-author-time">BY {{ strtoupper($post->author->name) }}, PUBLISHED {{ strtoupper($post->created_at->diffForHumans()) }}</span>
             </div>
-        </div>
+        </div> {{-- End of row --}}
+
         <div class="row">
             <div class="col-12">
                 <figure class="animate-box thumbnail-container">			
@@ -27,8 +31,8 @@
                     @if ($post->author_thumbnail) <figcaption class="author-credit">{{ $post->author_thumbnail }}</figcaption> @endif
                 </figure>
             </div>
-
-        </div>
+        </div> {{-- End of row --}}
+        
         <div class="row">
             
             <div class="col-md-8">
@@ -41,11 +45,26 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> {{-- End of row --}}
 
             <!-- SIDEBAR: start -->
             <div class="col-md-4 animate-box">
-                <div class="sidebar">                    
+                <div class="sidebar">
+
+                    <div class="d-none d-lg-block">
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7545576639006325" crossorigin="anonymous"></script>
+                        <!-- Responsive Square Ad -->
+                        <ins class="adsbygoogle"
+                            style="display:block"
+                            data-ad-client="ca-pub-7545576639006325"
+                            data-ad-slot="7659623891"
+                            data-ad-format="auto"
+                            data-full-width-responsive="true">
+                        </ins>
+                        <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>                   
+                    </div>
 
 					<x-blog.side-recent-posts :recent_posts="$recent_posts"/>
 
@@ -53,8 +72,25 @@
 					
                 </div>
             </div>
-        </div>
-    </div>	
+        </div> {{-- End of row --}}
+
+        <div class="row">           
+            <div class="col-12">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7545576639006325" crossorigin="anonymous"></script>
+                <!-- In Article Ad -->
+                <ins class="adsbygoogle"
+                style="display:block; text-align:center;"
+                data-ad-layout="in-article"
+                data-ad-format="fluid"
+                data-ad-client="ca-pub-7545576639006325"
+                data-ad-slot="8944785409"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div> {{-- End of row --}}
+
+    </div>
     
 @endsection
 
