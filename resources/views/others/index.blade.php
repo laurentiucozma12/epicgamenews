@@ -37,6 +37,8 @@
                     @endforelse
                     
                 </div>
+
+				{{ $others->onEachSide(1)->links('pagination::bootstrap-4') }}
                 
                 <div class="row">
                     <div class="col-12">  
@@ -50,8 +52,6 @@
                         </div>
                     </div>
                 </div>
-
-				{{ $others->onEachSide(1)->links('pagination::bootstrap-4') }}
 
 			</div>
 		</div>

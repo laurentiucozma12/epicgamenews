@@ -38,6 +38,8 @@
                     @endforelse
                     
                 </div>
+                
+				{{ $video_games->onEachSide(1)->links('pagination::bootstrap-4') }}
 
                 <div class="row">
                     <div class="col-12">  
@@ -51,8 +53,6 @@
                         </div>
                     </div>
                 </div>
-
-				{{ $video_games->onEachSide(1)->links('pagination::bootstrap-4') }}
 
 			</div>
 		</div>

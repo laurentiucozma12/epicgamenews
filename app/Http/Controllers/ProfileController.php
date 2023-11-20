@@ -50,8 +50,11 @@ class ProfileController extends Controller
 
         Auth::logout();
 
-        $user->delete();
+        // Set the 'deleted' field to 1 and save the user
+        $user->deleted = 1;
+        $user->save();
 
+        // $user->delete() OLD CODE, I DONT WANT TO DELETE AN USER;
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 

@@ -40,7 +40,7 @@ class VideoGameController extends Controller
         $posts = $video_game->posts()->excludeUncategorized()
             ->latest()
             ->deleted()
-            ->paginate(10);
+            ->paginate(20);
 
         $recent_posts = Post::excludeUncategorized()
             ->latest()

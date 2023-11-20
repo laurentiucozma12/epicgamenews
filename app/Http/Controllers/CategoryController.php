@@ -23,7 +23,7 @@ class CategoryController extends Controller
         })
         ->where('name', '!=', 'uncategorized')
         ->deleted()
-        ->paginate(16);
+        ->paginate(1);
 
         return view('categories.index', [
             'categories' => $categories
@@ -38,7 +38,7 @@ class CategoryController extends Controller
         $posts = $category->posts()->excludeUncategorized()
             ->latest()
             ->deleted()
-            ->paginate(10);
+            ->paginate(20);
 
         $recent_posts = Post::excludeUncategorized()
             ->latest()

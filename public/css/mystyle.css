@@ -89,6 +89,8 @@ hr {
     min-width: fit-content; }
 .navigation {
     display: flex; }
+.colorlib-nav ul .first-btn {
+    margin-bottom: 0 !important; }
 .has-dropdown {
     position: relative;
     margin-right: 2em; }

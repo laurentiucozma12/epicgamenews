@@ -101,6 +101,19 @@
 								<li class="has-dropdown">
 									<span class="cursor-pointer font-changed">{{ auth()->user()->name }}<span class="caret"></span></span>
 									<ul class="dropdown">										
+										
+										@foreach (auth()->user()->roles as $role)
+											@if ( $role->name !== "user" )
+												<a href="{{ route('admin.index') }}" target="_blank">
+													<li class="font-changed-btn">Admin Dasboard</li>
+												</a>
+											@endif
+										@endforeach
+										
+										<a href="{{ route('profile.edit') }}">
+											<li class="font-changed-btn">Profile</li>
+										</a>
+
 										<a 
 										onclick="event.preventDefault();
 										document.getElementById('nav-logout-form').submit()"
@@ -109,14 +122,6 @@
 										<form id="nav-logout-form" action="{{ route('logout') }}" method="POST">
 											@csrf
 										</form>
-									
-										@foreach (auth()->user()->roles as $role)
-											@if ( $role->name !== "user" )
-												<a href="{{ route('admin.index') }}" target="_blank">
-													<li class="font-changed-btn">Admin Dasboard</li>
-												</a>
-											@endif
-										@endforeach
 									</ul>
 								</li>
 							@endauth								

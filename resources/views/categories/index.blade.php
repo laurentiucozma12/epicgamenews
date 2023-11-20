@@ -36,8 +36,10 @@
                     @empty
                         <p class="lead">There are no categories to show.</p>
                     @endforelse
-                    
+
                 </div>
+
+                {{ $categories->onEachSide(1)->links('pagination::bootstrap-4') }}
                 
                 <div class="row">
                     <div class="col-12">  
@@ -51,8 +53,6 @@
                         </div>
                     </div>
                 </div>
-
-				{{ $categories->onEachSide(1)->links('pagination::bootstrap-4') }}
 
 			</div>
 		</div>

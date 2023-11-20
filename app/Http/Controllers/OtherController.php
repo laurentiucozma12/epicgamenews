@@ -41,7 +41,7 @@ class OtherController extends Controller
         $posts = $other->posts()->excludeUncategorized()
             ->latest()
             ->deleted()
-            ->paginate(10);
+            ->paginate(20);
 
         $recent_posts = Post::excludeUncategorized()
             ->latest()
