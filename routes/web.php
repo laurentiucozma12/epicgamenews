@@ -23,11 +23,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\VideoGameController;
+use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\AdminControllers\TinyMCEController;
 use App\Http\Controllers\AdminControllers\AdminHomeController;
 use App\Http\Controllers\AdminControllers\AdminTagsController;
-use App\Http\Controllers\AdminControllers\AdminAboutController;
 
+use App\Http\Controllers\AdminControllers\AdminAboutController;
 use App\Http\Controllers\AdminControllers\AdminPostsController;
 use App\Http\Controllers\AdminControllers\AdminRolesController;
 use App\Http\Controllers\AdminControllers\AdminUsersController;
@@ -160,6 +161,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/privacy-policy', [PrivacyPolicyController::class, 'index'])->name('privacy_policy.index');
 
 require __DIR__.'/auth.php';
 

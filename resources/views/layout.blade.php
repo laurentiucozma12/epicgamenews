@@ -249,13 +249,15 @@
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<p>
-						<small class="block" id="copyrightYear">&copy; Copyright <span id="currentYear"></span> All rights reserved | This website is made by <a href="{{ route('home') }}">Epic Game News</a></small>
+						<small class="block" id="copyrightYear">&copy; Copyright <span id="currentYear"></span> | All rights reserved | This website was made by <a href="{{ route('home') }}" class="link-to-website">Epic Game News</a></small> | <a href="{{ route('privacy_policy.index') }}"> Privact Policy </a>
 						<br> 
 					</p>
+
 				</div>
 			</div>
 		</div>
 	</div>
+
 </footer>
 {{-- END OF FOOTER AND COPYRIGHT --}}
 

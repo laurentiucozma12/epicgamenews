@@ -193,6 +193,10 @@ hr {
             margin-bottom: 20px; } }
 #colorlib-footer {
     padding-top: 0; }
+#colorlib-footer .link-to-website {
+    color: var(--white) !important; }
+#colorlib-footer .link-to-website:hover {
+    color: var(--light-blue-1) !important; }
 /****** END OF LAYOUTS (all the things that apear on every page) ******/
 
 /****** START OF COMPONENTS ******/ 
