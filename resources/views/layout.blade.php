@@ -14,6 +14,9 @@
 {{-- Meta tag google index verification --}}
 <meta name="google-site-verification" content="iEChGkx43f5nLfyry5G7KUeSc9ejTJFI-ed8A0it_UU" />
 
+{{-- Google Ads --}}
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7545576639006325" crossorigin="anonymous"></script>
+
 {{-- Meta tags for the page --}}
 <title>@yield('title')</title>
 <meta name="description" content="Explore the latest and most exciting gaming news at EpicGameNews.com. Stay updated on the hottest releases, industry trends, and in-depth game reviews. Immerse yourself in a world of gaming insights, expert analyses, and exclusive content. Your ultimate destination for everything gaming awaits!">
