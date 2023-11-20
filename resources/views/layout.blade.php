@@ -169,7 +169,7 @@
 {{-- END OF PAGE --}}
 
 {{-- FOOTER AND COPYRIGHT --}}
-<footer id="colorlib-footer">
+<footer>
 	{{-- <div class="container">
 		<div class="row row-pb-md">
 			<div class="col-md-3 colorlib-widget">
@@ -249,7 +249,7 @@
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<p>
-						<small class="block" id="copyrightYear">&copy; Copyright <span id="currentYear"></span> | All rights reserved | This website was made by <a href="{{ route('home') }}" class="link-to-website">Epic Game News</a></small> | <a href="{{ route('privacy_policy.index') }}"> Privact Policy </a>
+						<small class="block" id="copyrightYear">&copy; Copyright <span id="currentYear"></span> | All rights reserved | This website was made by <a href="{{ route('home') }}" class="link-to-website">Epic Game News</a> | <a href="{{ route('privacy_policy.index') }}" class="link-to-website"> Privact Policy </a></small>
 						<br> 
 					</p>
 

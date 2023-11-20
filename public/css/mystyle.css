@@ -191,11 +191,14 @@ hr {
             justify-content: center; }
         #subscribe-input #email {
             margin-bottom: 20px; } }
-#colorlib-footer {
-    padding-top: 0; }
-#colorlib-footer .link-to-website {
+footer {
+    padding: 2rem 0; }
+footer p {
+    margin: 0;
+    padding: 0;}
+footer .link-to-website {
     color: var(--white) !important; }
-#colorlib-footer .link-to-website:hover {
+footer .link-to-website:hover {
     color: var(--light-blue-1) !important; }
 /****** END OF LAYOUTS (all the things that apear on every page) ******/
 
