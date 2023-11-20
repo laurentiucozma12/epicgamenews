@@ -197,6 +197,10 @@ hr {
 
 /****** START OF COMPONENTS ******/ 
 /* Recent News: side-categories.blade.php */
+@media screen and (max-width: 1200px) {
+.side {
+    display: flex !important; 
+    justify-content: center !important; } }
 .sidebar {    
     padding-left: 0px; }
 .categories-big-title {
@@ -288,6 +292,10 @@ hr {
             display: block; } }
 .ads-container {
     margin-bottom: 30px; }
+    @media (max-width: 1200px) {
+        .ads-container {
+            display: flex;
+            justify-content: center; } }
 .ads-container img {
     width: 100%; }
 .post-container .link-img {

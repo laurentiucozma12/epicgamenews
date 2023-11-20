@@ -40,7 +40,7 @@
 <!-- Animate.css -->
 <link rel="stylesheet" href="{{ asset('blog_template/css/animate.css') }}">
 <!-- Icomoon Icon Fonts-->
-{{-- <link rel="stylesheet" href="{{ asset('blog_template/css/icomoon.css') }}"> --}}
+<link rel="stylesheet" href="{{ asset('blog_template/css/icomoon.css') }}">
 <!-- Bootstrap  -->
 <link rel="stylesheet" href="{{ asset('blog_template/css/bootstrap.css') }}">    
 <!-- Magnific Popup -->
@@ -51,7 +51,7 @@
 <link rel="stylesheet" href="{{ asset('blog_template/css/owl.carousel.min.css') }}">
 <link rel="stylesheet" href="{{ asset('blog_template/css/owl.theme.default.min.css') }}">
 <!-- Flaticons  -->
-{{-- <link rel="stylesheet" href="{{ asset('blog_template/fonts/flaticon/font/flaticon.css') }}"> --}}
+<link rel="stylesheet" href="{{ asset('blog_template/fonts/flaticon/font/flaticon.css') }}">
 <!-- Theme style  -->
 <link rel="stylesheet" href="{{ asset('blog_template/css/style.css') }}">
 {{-- Epic Game News - My Style --}}

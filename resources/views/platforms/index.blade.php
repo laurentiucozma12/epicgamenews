@@ -38,6 +38,19 @@
                     
                 </div>
 
+                <div class="row">
+                    <div class="col-12">  
+                        <div class="d-none d-md-block">
+                            <x-google-ads.responsive-horizontal-ad/>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-block d-md-none">
+                            <x-google-ads.in-article-ad/>
+                        </div>
+                    </div>
+                </div>
+
 				{{ $platforms->onEachSide(1)->links('pagination::bootstrap-4') }}
 
 			</div>

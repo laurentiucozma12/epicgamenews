@@ -51,19 +51,8 @@
             <div class="col-md-4 animate-box">
                 <div class="sidebar">
 
-                    <div class="d-none d-lg-block">
-                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7545576639006325" crossorigin="anonymous"></script>
-                        <!-- Responsive Square Ad -->
-                        <ins class="adsbygoogle"
-                            style="display:block"
-                            data-ad-client="ca-pub-7545576639006325"
-                            data-ad-slot="7659623891"
-                            data-ad-format="auto"
-                            data-full-width-responsive="true">
-                        </ins>
-                        <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>                   
+                    <div class="d-none d-lg-block">                        
+                        <x-google-ads.responsive-square-ad/>                 
                     </div>
 
 					<x-blog.side-recent-posts :recent_posts="$recent_posts"/>
@@ -75,18 +64,8 @@
         </div> {{-- End of row --}}
 
         <div class="row">           
-            <div class="col-12">
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7545576639006325" crossorigin="anonymous"></script>
-                <!-- In Article Ad -->
-                <ins class="adsbygoogle"
-                style="display:block; text-align:center;"
-                data-ad-layout="in-article"
-                data-ad-format="fluid"
-                data-ad-client="ca-pub-7545576639006325"
-                data-ad-slot="8944785409"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+            <div class="col-12">                
+                <x-google-ads.in-vertical-ad/>
             </div>
         </div> {{-- End of row --}}
 

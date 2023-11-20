@@ -96,48 +96,19 @@
                 </div>
                 
                 <div class="col-md-6 d-none d-lg-block">
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7545576639006325" crossorigin="anonymous"></script>
-                    <!-- Responsive Vertical Ad -->
-                    <ins class="adsbygoogle"
-                        style="display:block"
-                        data-ad-client="ca-pub-7545576639006325"
-                        data-ad-slot="2107365573"
-                        data-ad-format="auto"
-                        data-full-width-responsive="true"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
+					<x-google-ads.responsive-vertical-ad/>
                 </div>
 
                 <div class="col-12 d-block d-lg-none">
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7545576639006325" crossorigin="anonymous"></script>
-                    {{-- In Article Ad --}}
-                    <ins class="adsbygoogle"
-                        style="display:block; text-align:center;"
-                        data-ad-layout="in-article"
-                        data-ad-format="fluid"
-                        data-ad-client="ca-pub-7545576639006325"
-                        data-ad-slot="8944785409"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
+					<x-google-ads.in-vertical-ad/>
                 </div>
 
             </div> {{-- End of the row --}}
 
             <div class="row">
                 <div class="col-12">
-                    <div class="">
-                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7545576639006325" crossorigin="anonymous"></script>
-                        {{-- Multiplex Ad --}}
-                        <ins class="adsbygoogle"
-                            style="display:block"
-                            data-ad-format="autorelaxed"
-                            data-ad-client="ca-pub-7545576639006325"
-                            data-ad-slot="1920212050"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
+                    <div class="d-block">
+                        <x-google-ads.multiplex-ad/>                        
                     </div>
                 </div>
             </div> {{-- End of the row --}}
