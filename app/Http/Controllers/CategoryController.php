@@ -23,7 +23,7 @@ class CategoryController extends Controller
         })
         ->where('name', '!=', 'uncategorized')
         ->deleted()
-        ->paginate(1);
+        ->paginate(16);
 
         return view('categories.index', [
             'categories' => $categories

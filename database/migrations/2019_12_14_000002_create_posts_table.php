@@ -22,8 +22,7 @@ return new class extends Migration
             $table->foreignId('user_id')->default(1);
             $table->foreignId('video_game_id')->default(1);
             $table->foreignId('other_id')->default(1);
-            $table->boolean('approved')->default(1);
-            $table->boolean('deleted')->default(0);
+            $table->boolean('deleted')->default(1);
 
             $table->integer('views')->default(0);
 

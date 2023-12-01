@@ -59,7 +59,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <img width='50' src="{{ $platform->image ? asset('storage/' . $platform->image->path) : asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="post thumbnail">    
+                                        <img width='50' src="{{ asset($platform->image ? 'storage/' . $platform->image->path : 'storage/placeholders/thumbnail_placeholder.jpg') }}" alt="post thumbnail">    
                                     </td>
                                     <td>{{ $platform->name }}</td>
                                     <td>{{ $platform->slug }}</td>

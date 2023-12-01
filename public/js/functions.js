@@ -6,6 +6,12 @@ let clearData = (parent, elements) => {
     });
 }
   
+//// START lazy loading for ad meme
+if (window.matchMedia('(max-width: 1200px)').matches) {
+    document.getElementsByClassName('ad-meme-lazy').loading = 'lazy';
+}
+//// END lazy load
+
 //// START Current Year
     var currentYear = new Date().getFullYear();
 

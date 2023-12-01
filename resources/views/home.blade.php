@@ -4,10 +4,10 @@
 
 @section('content')
 
-<div class="colorlib-blog">
+<div>
 	<div class="container">
 		<div class="row">
-			<div class="col-12 col-lg-8 posts-col">
+			<div class="col-12 col-lg-8">
 
 				<x-posts :posts="$posts" />
 
@@ -15,13 +15,13 @@
 					<x-google-ads.in-feed-ad/>
 				</div>
 
-			</div>			
+			</div>
 			<div class="col-12 col-lg-4">
 				
 				<div class="d-none d-lg-block">
 					<x-google-ads.responsive-square-ad/>					
 				</div>
-				
+
 				<x-blog.side-ads-meme/>
 				
 			</div>

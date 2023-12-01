@@ -58,13 +58,27 @@ class AdminPostsController extends Controller
             if ($request->hasFile('thumbnail')) {
                 // Store is the folder name where images will be saved
                 $store = 'images';
-                $maxWidth = 1280;
-                $maxHeight = 720;
+                // $maxWidth = 1280;
+                // $maxHeight = 720;
                 
                 // Upload and save the new image
-                $adminCropResizeImage = new AdminCropResizeImage();
-                $imageData = $adminCropResizeImage->optimizeImage($request, $maxWidth, $maxHeight, $store);
-                $post->image()->create($imageData);
+                // $adminCropResizeImage = new AdminCropResizeImage();
+                // $imageData = $adminCropResizeImage->optimizeImage($request, $maxWidth, $maxHeight, $store);
+                // $post->image()->create($imageData);
+                
+                $maxDimensions = [
+                    ['width' => 1280, 'height' => 720],
+                    ['width' => 800, 'height' => 600],
+                    ['width' => 400, 'height' => 300],
+                    // Add more dimensions as needed
+                ];
+
+                // Upload and save the new images
+                foreach ($maxDimensions as $dimensions) {
+                    $adminCropResizeImage = new AdminCropResizeImage();
+                    $imageData = $adminCropResizeImage->optimizeImage($request, $dimensions['width'], $dimensions['height'], $store);
+                    $post->image()->create($imageData);
+                }
             }
 
             // Attach categories and platforms IDs to the post

@@ -22,7 +22,7 @@
 <link href="{{ asset('admin_dashboard_assets/css/pace.min.css') }}" rel="stylesheet" />
 <script src=" {{ asset('admin_dashboard_assets/js/pace.min.js') }}"></script>
 
-<!-- Bootstrap CSS -->
+<!-- Bootstrap CSS V5.0.0 -->
 <link href="{{ asset('admin_dashboard_assets/css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 <link href="{{ asset('admin_dashboard_assets/css/app.css') }}" rel="stylesheet">
@@ -43,7 +43,7 @@
 {{-- My Style --}}    
 <link href="{{ asset('admin_dashboard_assets/css/app.css') }}" rel="stylesheet">
 <link href="{{ asset('admin_dashboard_assets/css/my_style.css') }}" rel="stylesheet" />
-<link href="{{ asset('css/mystyle.css') }}" rel="stylesheet" />
+{{-- <link href="{{ asset('css/mystyle.css') }}" rel="stylesheet" /> --}}
 
 <title>Admin Dashboard - New Game News </title>
 </head>

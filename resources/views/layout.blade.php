@@ -8,7 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
 
-
 <link rel="canonical" href="https://epicgamenews.com/" />
 
 {{-- Meta tag google index verification --}}
@@ -40,41 +39,47 @@
 <!-- Epic Game News Icon Logo -->
 <link rel="icon" href="{{ asset('storage/logo/logo-epic-game-news-38x38.png') }}" type="image/x-icon"/>
 
-<!-- Animate.css -->
-<link rel="stylesheet" href="{{ asset('blog_template/css/animate.css') }}">
-<!-- Icomoon Icon Fonts-->
-<link rel="stylesheet" href="{{ asset('blog_template/css/icomoon.css') }}">
-<!-- Bootstrap  -->
-<link rel="stylesheet" href="{{ asset('blog_template/css/bootstrap.css') }}">    
-<!-- Magnific Popup -->
-<link rel="stylesheet" href="{{ asset('blog_template/css/magnific-popup.css') }}">
-<!-- Flexslider  -->
-<link rel="stylesheet" href="{{ asset('blog_template/css/flexslider.css') }}">
-<!-- Owl Carousel -->
-<link rel="stylesheet" href="{{ asset('blog_template/css/owl.carousel.min.css') }}">
-<link rel="stylesheet" href="{{ asset('blog_template/css/owl.theme.default.min.css') }}">
-<!-- Flaticons  -->
-<link rel="stylesheet" href="{{ asset('blog_template/fonts/flaticon/font/flaticon.css') }}">
-<!-- Theme style  -->
-<link rel="stylesheet" href="{{ asset('blog_template/css/style.css') }}">
+
+{{-- ////// START - BLOG TEMPLATE ////// --}}
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{{ asset('blog_template/css/animate.css') }}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{{ asset('blog_template/css/icomoon.css') }}">
+	<!-- Bootstrap v3.3.5  -->
+	<link rel="stylesheet" href="{{ asset('blog_template/css/bootstrap.css') }}">    
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="{{ asset('blog_template/css/magnific-popup.css') }}">
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="{{ asset('blog_template/css/flexslider.css') }}">
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="{{ asset('blog_template/css/owl.carousel.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('blog_template/css/owl.theme.default.min.css') }}">
+	<!-- Flaticons  -->
+	<link rel="stylesheet" href="{{ asset('blog_template/fonts/flaticon/font/flaticon.css') }}">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="{{ asset('blog_template/css/style.css') }}">
+{{-- ////// END - BLOG TEMPLATE ////// --}}
+
+
 {{-- Epic Game News - My Style --}}
 <link rel="stylesheet" href="{{ asset('css/mystyle.css') }}">
 
-<!-- Modernizr JS -->
-<script src="{{ asset('blog_template/js/modernizr-2.6.2.min.js') }}"></script>
-<!-- FOR IE9 below -->
-<!--[if lt IE 9]>
-<script src="js/respond.min.js"></script>
-<![endif]-->
 
+{{-- ////// START - BLOG TEMPLATE ////// --}}
+	<!-- Modernizr JS -->
+	<script src="{{ asset('blog_template/js/modernizr-2.6.2.min.js') }}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
 @yield('custom_css')
+{{-- ////// END - BLOG TEMPLATE ////// --}}
 
 </head>
 <body>	
 	
 {{-- PAGE --}}
 <main id="page">
-
 	{{-- NAVBAR --}}
 	<nav class="colorlib-nav" role="navigation">
 		<div class="top-menu">
@@ -95,11 +100,11 @@
 							<a href="{{ route('platforms.index') }}"><li class="font-changed">Platforms</li></a>
 							<a href="{{ route('about') }}"><li class="font-changed">About</li></a>
 							<a href="{{ route('contact.create') }}"><li class="font-changed">Contact</li></a>
-							<a href="{{ route('others.index') }}"><li class="font-changed">Others</li></a>
+							<a href="{{ route('others.index') }}"><li class="font-changed other-btn">Others</li></a>
 
 							@auth
 								<li class="has-dropdown">
-									<span class="cursor-pointer font-changed">{{ auth()->user()->name }}<span class="caret"></span></span>
+									<span class="cursor-pointer font-changed author-btn">{{ auth()->user()->name }}<span class="caret"></span></span>
 									<ul class="dropdown">										
 										
 										@foreach (auth()->user()->roles as $role)
@@ -279,7 +284,7 @@
 
 <!-- jQuery Easing -->
 <script src="{{ asset('blog_template/js/jquery.easing.1.3.js') }}"></script>
-<!-- Bootstrap -->
+<!-- Bootstrap v5.0.0 -->
 <script src="{{ asset('blog_template/js/bootstrap.min.js') }}"></script>
 <!-- Waypoints -->
 <script src="{{ asset('blog_template/js/jquery.waypoints.min.js') }}"></script>

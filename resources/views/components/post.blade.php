@@ -8,34 +8,40 @@
 
         <div class="row">
             <div class="col-12">
-                <h1><b>{{ ucfirst($post->title) }}<b></h1>
+                <h1 class="post-title"><b>{{ ucfirst($post->title) }}<b></h1>
             </div>
         </div> {{-- End of row --}}
 
         <div class="row">
             <div class="col-12">
-                <p>{{ ucfirst($post->excerpt) }}</p>
+                <p class="post-excerpt">{{ ucfirst($post->excerpt) }}</p>
             </div>
         </div> {{-- End of row --}}
 
         <div class="row">
             <div class="col-12">
-                <span class="single-post-author-time">BY {{ strtoupper($post->author->name) }}, PUBLISHED {{ strtoupper($post->created_at->diffForHumans()) }}</span>
+                <span class="post-author-date">By {{ $post->author->name }}, Published {{ $post->created_at->diffForHumans() }}</span>
             </div>
         </div> {{-- End of row --}}
 
         <div class="row">
             <div class="col-12">
-                <figure class="animate-box thumbnail-container">			
-                    <img src="{{ $post->image ? asset('storage/' . $post->image->path) : asset('storage/placeholders/thumbnail_placeholder.jpg') }}" width="1800" height="900" alt="{{ $post->image->name }}" title="title {{ $post->image->name }}" /> 
-                    @if ($post->author_thumbnail) <figcaption class="author-credit">{{ $post->author_thumbnail }}</figcaption> @endif
+                <figure class="animate-box thumbnail-container">
+                    <picture>
+                        <source media="(min-width: 1024px)" sizes="1140px" srcset="{{ asset('storage/' . $post->image->path5) }}">
+                        <source media="(min-width: 768px)" sizes="943px" srcset="{{ asset('storage/' . $post->image->path6) }}">
+                        <source media="(min-width: 481px)" sizes="767px" srcset="{{ asset('storage/' . $post->image->path7) }}">
+                        <source media="(min-width: 0px)" sizes="480px" srcset="{{ asset('storage/' . $post->image->path8) }}">
+                        <img src="{{ asset($post->image ? 'storage/' . $post->image->path : 'storage/placeholders/thumbnail_placeholder.jpg') }}" width="1800" height="900" alt="{{ $post->image->name }}">
+                        @if ($post->author_thumbnail) <figcaption class="author-credit">{{ $post->author_thumbnail }}</figcaption> @endif
+                    </picture>
                 </figure>
             </div>
         </div> {{-- End of row --}}
         
         <div class="row">
             
-            <div class="col-md-8">
+            <div class="col-12 col-lg-8">
                 <div class="row row-pb-lg">
                     <div class="col-12 animate-box">
                         <div class="classes class-single">
@@ -48,7 +54,7 @@
             </div> {{-- End of row --}}
 
             <!-- SIDEBAR: start -->
-            <div class="col-md-4 animate-box">
+            <div class="col-12 col-lg-4 animate-box">
                 <div class="sidebar">
 
                     <div class="d-none d-lg-block">                        
