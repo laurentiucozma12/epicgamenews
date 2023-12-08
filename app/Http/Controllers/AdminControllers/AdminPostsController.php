@@ -56,29 +56,21 @@ class AdminPostsController extends Controller
             $post = Post::create($validated);
 
             if ($request->hasFile('thumbnail')) {
-                // Store is the folder name where images will be saved
-                $store = 'images';
-                // $maxWidth = 1280;
-                // $maxHeight = 720;
-                
-                // Upload and save the new image
-                // $adminCropResizeImage = new AdminCropResizeImage();
-                // $imageData = $adminCropResizeImage->optimizeImage($request, $maxWidth, $maxHeight, $store);
-                // $post->image()->create($imageData);
-                
-                $maxDimensions = [
-                    ['width' => 1280, 'height' => 720],
-                    ['width' => 800, 'height' => 600],
-                    ['width' => 400, 'height' => 300],
-                    // Add more dimensions as needed
+                $sizes = [
+                    [1140, 641],
+                    [943, 530],
+                    [764, 431],
+                    [480, 270],
+                    [342, 192],
+                    [400, 225],
+                    [300, 169],
+                    [146, 82],
                 ];
 
                 // Upload and save the new images
-                foreach ($maxDimensions as $dimensions) {
-                    $adminCropResizeImage = new AdminCropResizeImage();
-                    $imageData = $adminCropResizeImage->optimizeImage($request, $dimensions['width'], $dimensions['height'], $store);
-                    $post->image()->create($imageData);
-                }
+                $adminCropResizeImage = new AdminCropResizeImage();
+                $image_data = $adminCropResizeImage->optimizeImage($request, $sizes);
+                $post->image()->create($image_data);
             }
 
             // Attach categories and platforms IDs to the post
@@ -97,7 +89,7 @@ class AdminPostsController extends Controller
         } else {
             return redirect()->back()->withInput()->withErrors($this->buildValidationErrorMessage());
         }
-        
+
     }
 
     public function edit(Post $post)
@@ -141,24 +133,40 @@ class AdminPostsController extends Controller
             $validated['deleted'] = $request->has('deleted') ? 0 : 1;
             $post->update($validated);
 
-            if ($request->hasFile('thumbnail')) {
-                // Store is the folder name where images will be save
-                $store = 'images';
-                $maxWidth = 1280;
-                $maxHeight = 720;
-                
-                // Upload and save the new image
+            if ($request->hasFile('thumbnail')) {                
+                $sizes = [
+                    [1140, 641],
+                    [943, 530],
+                    [764, 431],
+                    [480, 270],
+                    [342, 192],
+                    [400, 225],
+                    [300, 169],
+                    [146, 82],
+                ];
+
+                // Upload and save the new images
                 $adminCropResizeImage = new AdminCropResizeImage();
-                $imageData = $adminCropResizeImage->optimizeImage($request, $maxWidth, $maxHeight, $store);
+                $imageData = $adminCropResizeImage->optimizeImage($request, $sizes);
                 $newImage = $post->image()->create($imageData);
 
                 // Get the ID of the newly associated image
                 $newImageId = $newImage->id;
     
-                // Delete the old img
-                $adminCropResizeImage->deleteOldImage($post);
+                $folders = [
+                    'images/1140x641',
+                    'images/943x530',
+                    'images/764x431',
+                    'images/480X270',
+                    'images/342x192',
+                    'images/400x225',
+                    'images/300x169',
+                    'images/146x82',                    
+                ];
+                
+                $adminCropResizeImage->deleteOldImages($post, $folders);
             }
-            
+
             $this->syncTags($request, $post);
             
             // Sync the new categories and platforms

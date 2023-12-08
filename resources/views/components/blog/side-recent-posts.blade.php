@@ -11,7 +11,7 @@
                     href="{{ route('show', $recent_post) }}" 
                     class="blog-img recent-news-img">
 
-                        <img src="{{ $recent_post->image ? asset('storage/' . $recent_post->image->path) : asset('storage/placeholders/thumbnail_placeholder.jpg') }}" width="80" height="50" alt="{{ $recent_post->image->name }}" title="title {{ $recent_post->image->name }}" /> 
+                        <img src="{{ asset($recent_post->image ? 'storage/images/146x82/' . $recent_post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" width="80" height="50" alt="{{ $recent_post->image->name }}" title="title {{ $recent_post->image->name }}" loading="lazy" /> 
 
                     </a>            
                     <h3 class="fw-bold">

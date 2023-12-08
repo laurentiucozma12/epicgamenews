@@ -25,7 +25,7 @@ class PlatformController extends Controller
         })
         ->where('name', '!=', 'uncategorized')
         ->deleted()
-        ->paginate(16);
+        ->paginate(20);
 
         return view('platforms.index', [
             'platforms' => $platforms

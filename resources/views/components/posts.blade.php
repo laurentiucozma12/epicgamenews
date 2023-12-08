@@ -6,12 +6,12 @@
     <div class="col-sm-4">
         <a href="{{ route('show', $post) }}">
             <picture>
-                <source media="(min-width: 1024px)" sizes="342px" srcset="{{ asset('storage/' . $post->image->path) }}">
-                <source media="(min-width: 768px)" sizes="400px" srcset="{{ asset('storage/' . $post->image->path2) }}">
-                <source media="(min-width: 481px)" sizes="300px" srcset="{{ asset('storage/' . $post->image->path3) }}">
-                <source media="(min-width: 0px)" sizes="146px" srcset="{{ asset('storage/' . $post->image->path4) }}">
-                <img src="{{ asset($post->image ? 'storage/' . $post->image->path : 'storage/placeholders/thumbnail_placeholder.jpg') }}" class="posts-img" alt="{{ $post->image->name }}" loading="{{ ($loop->index > 5) ? 'lazy' : '' }}">
-            </picture>
+                <source media="(min-width: 1024px)" sizes="342px" srcset="{{ asset($post->image ? 'storage/images/342x192/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 3) ? 'lazy' : '' }}">
+                <source media="(min-width: 768px)" sizes="400px" srcset="{{ asset($post->image ? 'storage/images/400x225/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 4) ? 'lazy' : '' }}">
+                <source media="(min-width: 481px)" sizes="300px" srcset="{{ asset($post->image ? 'storage/images/300x169/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 5) ? 'lazy' : '' }}">
+                <source media="(min-width: 0px)" sizes="146px" srcset="{{ asset($post->image ? 'storage/images/146x82/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 5) ? 'lazy' : '' }}">
+                <img src="{{ asset($post->image ? 'storage/images/342x192/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" class="posts-img">
+            </picture>            
         </a>
     </div>
     <div class="col-sm-8 posts-text-container">

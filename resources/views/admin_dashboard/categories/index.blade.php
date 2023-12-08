@@ -59,7 +59,11 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <img width='50' src="{{ asset($category->image ? 'storage/' . $category->image->path : 'storage/placeholders/thumbnail_placeholder.jpg') }}" alt="post thumbnail">    
+                                        @if ($category->image)
+                                            <img src="{{ asset('storage/images/300x169/' . $category->image->name) }}" width='50' alt="{{ $category->image->name }}">
+                                        @else
+                                            <img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" width='50' alt="Placeholder">
+                                        @endif
                                     </td>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->slug }}</td>

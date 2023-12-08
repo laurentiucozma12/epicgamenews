@@ -122,11 +122,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
 // Front User Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/video_games/uncategorized', function () {
+Route::get('/video-games/uncategorized', function () {
     abort(404);
 });
-Route::get('/video_games', [VideoGameController::class, 'index'])->name('video_games.index');
-Route::get('/video_games/{video_game:slug}', [VideoGameController::class, 'show'])->name('video_games.show');
+Route::get('/video-games', [VideoGameController::class, 'index'])->name('video_games.index');
+Route::get('/video-games/{video_game:slug}', [VideoGameController::class, 'show'])->name('video_games.show');
 
 Route::get('/categories/uncategorized', function () {
     abort(404);

@@ -28,13 +28,13 @@
             <div class="col-12">
                 <figure class="animate-box thumbnail-container">
                     <picture>
-                        <source media="(min-width: 1024px)" sizes="1140px" srcset="{{ asset('storage/' . $post->image->path5) }}">
-                        <source media="(min-width: 768px)" sizes="943px" srcset="{{ asset('storage/' . $post->image->path6) }}">
-                        <source media="(min-width: 481px)" sizes="767px" srcset="{{ asset('storage/' . $post->image->path7) }}">
-                        <source media="(min-width: 0px)" sizes="480px" srcset="{{ asset('storage/' . $post->image->path8) }}">
-                        <img src="{{ asset($post->image ? 'storage/' . $post->image->path : 'storage/placeholders/thumbnail_placeholder.jpg') }}" width="1800" height="900" alt="{{ $post->image->name }}">
+                        <source media="(min-width: 1024px)" sizes="1140px" srcset="{{ asset($post->image ? 'storage/images/1140x641/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}">
+                        <source media="(min-width: 768px)" sizes="943px" srcset="{{ asset($post->image ? 'storage/images/943x530/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}">
+                        <source media="(min-width: 481px)" sizes="767px" srcset="{{ asset($post->image ? 'storage/images/764x431/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}">
+                        <source media="(min-width: 0px)" sizes="480px" srcset="{{ asset($post->image ? 'storage/images/480X270/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}">
+                        <img src="{{ asset($post->image ? 'storage/images/1140x641/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" width="1800" height="900" alt="{{ $post->image->name }}">
                         @if ($post->author_thumbnail) <figcaption class="author-credit">{{ $post->author_thumbnail }}</figcaption> @endif
-                    </picture>
+                    </picture>      
                 </figure>
             </div>
         </div> {{-- End of row --}}

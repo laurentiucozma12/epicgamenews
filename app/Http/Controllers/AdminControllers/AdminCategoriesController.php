@@ -39,15 +39,17 @@ class AdminCategoriesController extends Controller
         $category = Category::create($validated);
 
         if ($request->hasFile('thumbnail')) {
-            // Store is the folder name where images will be saved
-            $store = 'images';
-            $maxWidth = 480;
-            $maxHeight = 270;
-            
-            // Upload and save the new image
+            $sizes = [
+                [764, 431],
+                [342, 192],
+                [400, 225],
+                [300, 169],
+            ];
+
+            // Upload and save the new images
             $adminCropResizeImage = new AdminCropResizeImage();
-            $imageData = $adminCropResizeImage->optimizeImage($request, $maxWidth, $maxHeight, $store);
-            $category->image()->create($imageData);
+            $image_data = $adminCropResizeImage->optimizeImage($request, $sizes);
+            $category->image()->create($image_data);
         }
 
         return redirect()->route('admin.categories.create')->with('success', 'Category has been Created');
@@ -80,22 +82,30 @@ class AdminCategoriesController extends Controller
         $category->update($validated);
 
         // Check if a new image has been uploaded
-        if ($request->hasFile('thumbnail')) {
-            // Store is the folder name where images will be saved
-            $store = 'images';
-            $maxWidth = 480;
-            $maxHeight = 270;
+        if ($request->hasFile('thumbnail')) {                
+            $sizes = [
+                [764, 431],
+                [342, 192],
+                [400, 225],
+                [300, 169],
+            ];
 
-            // Upload and save the new image
+            // Upload and save the new images
             $adminCropResizeImage = new AdminCropResizeImage();
-            $imageData = $adminCropResizeImage->optimizeImage($request, $maxWidth, $maxHeight, $store);
+            $imageData = $adminCropResizeImage->optimizeImage($request, $sizes);
             $newImage = $category->image()->create($imageData);
 
             // Get the ID of the newly associated image
             $newImageId = $newImage->id;
 
-            // Delete the old img
-            $adminCropResizeImage->deleteOldImage($category);
+            $folders = [
+                'images/764x431',
+                'images/342x192',
+                'images/400x225',
+                'images/300x169',                  
+            ];
+            
+            $adminCropResizeImage->deleteOldImages($category, $folders);
         }
 
         return redirect()->route('admin.categories.edit', $category)->with('success', 'Category has been Updated');

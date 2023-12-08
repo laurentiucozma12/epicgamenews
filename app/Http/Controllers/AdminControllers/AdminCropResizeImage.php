@@ -12,49 +12,48 @@ use Intervention\Image\ImageManagerStatic as ImageManager;
 
 class AdminCropResizeImage extends Controller
 {
-
-    public function optimizeImage(Request $request, $maxWidth, $maxHeight, $store)
+    public function optimizeImage(Request $request, array $sizes)
     {        
         // Convert the cropped JPG/PNG image to a WebP image
         list($convertedImage, $filename) = $this->convertToWebp($request);
 
-        // Resize the WebP image
-        $this->resizeImage($convertedImage, $maxWidth, $maxHeight);       
+        foreach ($sizes as [$maxWidth, $maxHeight]) {
+            // Clone the image to avoid modifying the same instance
+            $resizedImage = clone $convertedImage;
 
-        // Save the WebP image using Laravel's Storage facade
-        Storage::disk('public')->put($store . '/' . $filename . '.webp', $convertedImage->stream());
+            // Resize the WebP image
+            $this->resizeImage($resizedImage, $maxWidth, $maxHeight);
 
-        // Return the image data
-        $imageData = [
-            'name' => $filename,
+            $path = 'images/' . $maxWidth . 'x' . $maxHeight . '/';
+            Storage::disk('public')->put($path . '/' . $filename . '.webp', $resizedImage->stream());
+        }
+
+        return [
+            'name' => $filename . '.webp',
             'extension' => 'webp',
-            'path' => $store . '/' . $filename . '.webp',
         ];
-
-        return $imageData;
     }
 
-    public function deleteOldImage($object)
+    public function deleteOldImages($object, array $folders)
     {
         // Retrieve the old image ID
         $oldImageId = $object->image->id ?? null;
-
-        // Declare $oldImage variable
-        $oldImage = null;
-
+    
         // Check if there is an old image associated
         if ($oldImageId) {
-            // Find the old image record from the database
-            $oldImage = Image::find($oldImageId);
-
-            // Delete the old image record from the database
+            // Find the old image records from the database
+            $oldImages = Image::find($oldImageId);
+    
+            // Delete the old image records from the database
             Image::destroy($oldImageId);
-
-            // Delete the old image file from storage
-            // Note: Ensure to adjust the path based on your storage configuration
-            Storage::delete("public/{$oldImage->path}");
+    
+            // Loop through each folder and delete the old image files from storage
+            foreach ($folders as $folder) {
+                // Note: Adjust the path based on your storage configuration
+                Storage::delete("public/{$folder}/{$oldImages->name}");
+            }
         }
-    }
+    }    
 
     private function convertToWebp($request)
     {

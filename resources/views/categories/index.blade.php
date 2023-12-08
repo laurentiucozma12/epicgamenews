@@ -18,7 +18,13 @@
                                 <div class="category-container">
                                     <a href="{{ route('categories.show', $category) }}">
                                         <div class="image-container">
-                                            <img src="{{ asset($category->image ? 'storage/' . $category->image->path : 'storage/placeholders/thumbnail_placeholder.jpg') }}">
+                                            <picture>
+                                                <source media="(min-width: 1024px)" sizes="342px" srcset="{{ asset($category->image ? 'storage/images/342x192/' . $category->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}">
+                                                <source media="(min-width: 400px)" sizes="764px" srcset="{{ asset($category->image ? 'storage/images/764x431/' . $category->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 2) ? 'lazy' : '' }}">
+                                                <source media="(min-width: 300px)" sizes="400px" srcset="{{ asset($category->image ? 'storage/images/400x225/' . $category->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 3) ? 'lazy' : '' }}">
+                                                <source media="(min-width: 0px)" sizes="300px" srcset="{{ asset($category->image ? 'storage/images/300x169/' . $category->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 4) ? 'lazy' : '' }}">
+                                                <img src="{{ asset($category->image ? 'storage/images/342x192/' . $category->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" alt="{{ $category->image->name }}">
+                                            </picture>
                                         </div>
                                         <div class="text-container">
                                             <h3 class="heading">{{ $category->name }}</h3>

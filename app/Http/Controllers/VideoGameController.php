@@ -24,7 +24,7 @@ class VideoGameController extends Controller
         })
         ->where('name', '!=', 'uncategorized')
         ->deleted()
-        ->paginate(16);
+        ->paginate(20);
 
         return view('video_games.index', [
             'video_games' => $video_games
@@ -34,8 +34,7 @@ class VideoGameController extends Controller
     public function show(VideoGame $video_game)
     {
         if ($video_game->name === 'uncategorized') {
-            abort(404);
-        }
+            abort(404); }
         
         $posts = $video_game->posts()->excludeUncategorized()
             ->latest()

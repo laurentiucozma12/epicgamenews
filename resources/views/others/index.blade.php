@@ -8,7 +8,6 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 categories-col">
-
                 <div class="row">
                     @forelse ($others as $other)
                         <div class='col-md-3'>
@@ -17,7 +16,13 @@
                                 <div class="category-container">
                                     <a href="{{ route('others.show', $other) }}">
                                         <div class="image-container">
-                                            <img src="{{ asset($other->image ? 'storage/' . $other->image->path : 'storage/placeholders/thumbnail_placeholder.jpg') }}">
+                                            <picture>
+                                                <source media="(min-width: 1024px)" sizes="342px" srcset="{{ asset($other->image ? 'storage/images/342x192/' . $other->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}">
+                                                <source media="(min-width: 400px)" sizes="764px" srcset="{{ asset($other->image ? 'storage/images/764x431/' . $other->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 2) ? 'lazy' : '' }}">
+                                                <source media="(min-width: 300px)" sizes="400px" srcset="{{ asset($other->image ? 'storage/images/400x225/' . $other->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 3) ? 'lazy' : '' }}">
+                                                <source media="(min-width: 0px)" sizes="300px" srcset="{{ asset($other->image ? 'storage/images/300x169/' . $other->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 4) ? 'lazy' : '' }}">
+                                                <img src="{{ asset($other->image ? 'storage/images/342x192/' . $other->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" alt="{{ $other->image->name }}">
+                                            </picture>
                                         </div>
                                         <div class="text-container">
                                             <h3 class="heading">{{ $other->name }}</h3>

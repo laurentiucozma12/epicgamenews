@@ -67,7 +67,8 @@
                                                         <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
                                                         
                                                         <h5>Cropped Image</h5>
-                                                        <img id="croppedImage" src="/storage/{{ $category->image ? $category->image->path : 'placeholders/thumbnail_placeholder.jpg' }}" class="cropped-thumbnail-edit" alt="Cropped image">
+                                                        <img id="croppedImage" src="{{ asset($category->image ? 'storage/images/400x225/' . $category->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" class="cropped-thumbnail-edit" alt="Cropped image">
+                                                    
                                                     </div>
                                                 </div>
                                             </div>

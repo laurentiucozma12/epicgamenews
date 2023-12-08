@@ -66,7 +66,7 @@
                                                         <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
 
                                                         <h5>Cropped Image</h5>
-                                                        <img id="croppedImage" src="/storage/{{ $video_game->image ? $video_game->image->path : 'placeholders/thumbnail_placeholder.jpg' }}" class="cropped-thumbnail-edit" alt="Cropped image">
+                                                        <img id="croppedImage" src="{{ asset($video_game->image ? 'storage/images/400x225/' . $video_game->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" class="cropped-thumbnail-edit" alt="Cropped image">
 
                                                     </div>
                                                 </div>

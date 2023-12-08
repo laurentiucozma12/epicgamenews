@@ -259,7 +259,7 @@
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<p>
-						<small class="block" id="copyrightYear">&copy; Copyright <span id="currentYear"></span> | All rights reserved | This website was made by <a href="{{ route('home') }}" class="link-to-website">Epic Game News</a> | <a href="{{ route('privacy_policy.index') }}" class="link-to-website"> Privact Policy </a></small>
+						<small class="block" id="copyrightYear">&copy; Copyright <span id="currentYear"></span> | All rights reserved | This website was made by <a href="{{ route('home') }}" class="link-to-website">Epic Game News</a> | <a href="{{ route('privacy_policy.index') }}" class="link-to-website"> Privacy Policy </a></small>
 						<br> 
 					</p>
 

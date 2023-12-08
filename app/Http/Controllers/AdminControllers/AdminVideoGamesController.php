@@ -38,15 +38,17 @@ class AdminVideoGamesController extends Controller
         $video_game = VideoGame::create($validated);
 
         if ($request->hasFile('thumbnail')) {
-            // Store is the folder name where images will be saved
-            $store = 'images';
-            $maxWidth = 480;
-            $maxHeight = 270;
-            
-            // Upload and save the new image
+            $sizes = [
+                [764, 431],
+                [342, 192],
+                [400, 225],
+                [300, 169],
+            ];
+
+            // Upload and save the new images
             $adminCropResizeImage = new AdminCropResizeImage();
-            $imageData = $adminCropResizeImage->optimizeImage($request, $maxWidth, $maxHeight, $store);
-            $video_game->image()->create($imageData);
+            $image_data = $adminCropResizeImage->optimizeImage($request, $sizes);
+            $video_game->image()->create($image_data);
         }
 
         return redirect()->route('admin.video_games.create')->with('success', 'Video Game has been Created');
@@ -76,22 +78,30 @@ class AdminVideoGamesController extends Controller
         $validated = $request->validate($this->rules);
         $video_game->update($validated);
 
-        if ($request->hasFile('thumbnail')) {
-            // Store is the folder name where images will be saved
-            $store = 'images';
-            $maxWidth = 480;
-            $maxHeight = 270;
-            
-            // Upload and save the new image
+        if ($request->hasFile('thumbnail')) {                
+            $sizes = [
+                [764, 431],
+                [342, 192],
+                [400, 225],
+                [300, 169],
+            ];
+
+            // Upload and save the new images
             $adminCropResizeImage = new AdminCropResizeImage();
-            $imageData = $adminCropResizeImage->optimizeImage($request, $maxWidth, $maxHeight, $store);
+            $imageData = $adminCropResizeImage->optimizeImage($request, $sizes);
             $newImage = $video_game->image()->create($imageData);
 
             // Get the ID of the newly associated image
             $newImageId = $newImage->id;
 
-            // Delete the old img
-            $adminCropResizeImage->deleteOldImage($video_game);
+            $folders = [
+                'images/764x431',
+                'images/342x192',
+                'images/400x225',
+                'images/300x169',                  
+            ];
+            
+            $adminCropResizeImage->deleteOldImages($video_game, $folders);
         }
 
         return redirect()->route('admin.video_games.edit', $video_game)->with('success', 'Video Game has been Updated');

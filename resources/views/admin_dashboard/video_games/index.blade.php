@@ -59,8 +59,12 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <img width='50' src="{{ asset($video_game->image ? 'storage/' . $video_game->image->path : 'storage/placeholders/thumbnail_placeholder.jpg') }}" alt="post thumbnail">    
-                                    </td>
+                                        @if ($video_game->image)
+                                            <img src="{{ asset('storage/images/300x169/' . $video_game->image->name) }}" width='50' alt="{{ $video_game->image->name }}">
+                                        @else
+                                            <img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" width='50' alt="Placeholder">
+                                        @endif
+                                    </td>                                                                      
                                     <td>{{ $video_game->name }}</td>
                                     <td>{{ $video_game->slug }}</td>
                                     <td>
