@@ -35,9 +35,6 @@
                                 <th>Post Title</th>
                                 <th>Post Excerpt</th>
                                 <th>Video Game</th>
-                                <th>Category</th>
-                                <th>Platform</th>
-                                <th>Other</th>
                                 <th>Created At</th>
                                 <th>Created By</th>
                                 <th>Views</th>
@@ -55,35 +52,22 @@
                                         </div>
                                     </td>
                                     <td>
-                                        @if(intval($post->deleted) === 0)                                        
+                                        @if(intval($post->deleted) === 0)
                                             <div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Approved</div>
                                         @else
                                             <div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Not Approved</div>
                                         @endif
                                     </td>
                                     <td>
-                                        <img src="{{ asset($post->image ? 'storage/images/146x82/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" width='50' alt="{{ $post->image->name }}">
+                                        @if ($post->image)
+                                            <img src="{{ asset('storage/images/300x169/' . $post->image->name) }}" width='50' alt="{{ $post->image->name }}">
+                                        @else
+                                            <img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" width='50' alt="Placeholder">
+                                        @endif
                                     </td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->excerpt }}</td>
                                     <td>{{ $post->video_game->name }}</td>
-                                    <td>
-                                        @foreach($post->categories as $category)
-                                            {{ $category->name }}
-                                            @if (!$loop->last)
-                                                , 
-                                            @endif
-                                        @endforeach
-                                    </td>                                    
-                                    <td>
-                                        @foreach($post->platforms as $platform)
-                                            {{ $platform->name }}
-                                            @if (!$loop->last)
-                                                , 
-                                            @endif
-                                        @endforeach
-                                    </td>                                    
-                                    <td>{{ $post->other->name }}</td>                                    
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
                                     <td>{{ $post->author->name }}</td>
                                     <td>{{ $post->views }}</td>

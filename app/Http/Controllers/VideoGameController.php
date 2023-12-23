@@ -12,19 +12,15 @@ class VideoGameController extends Controller
 {
     public function index()
     {
-        $video_games = VideoGame::withCount(['posts' => function ($query) {
-            // Count only the posts that are NOT 'deleted' or 'uncategorized'
-            $query->where('deleted', '=', 0)
-                ->where('name', '!=', 'uncategorized');
-        }])
-        ->whereHas('posts', function ($query) {
-            // Send only the posts where count is bigger than 0
-            $query->where('deleted', '=', 0)
-                ->where('name', '!=', 'uncategorized');
-        })
-        ->where('name', '!=', 'uncategorized')
-        ->deleted()
-        ->paginate(20);
+        $video_games = VideoGame::where('deleted', 0)
+            ->whereHas('posts', function ($query) {
+                // A video game is attached to a post. 
+                // If the video game has 0 posts (Not 'deleted' posts),
+                // the video game should not be visible.
+                $query->where('deleted', 0);
+            })
+            ->has('posts')
+            ->paginate(20);
 
         return view('video_games.index', [
             'video_games' => $video_games
@@ -32,26 +28,22 @@ class VideoGameController extends Controller
     }
 
     public function show(VideoGame $video_game)
-    {
-        if ($video_game->name === 'uncategorized') {
-            abort(404); }
-        
-        $posts = $video_game->posts()->excludeUncategorized()
+    {        
+        $posts = $video_game->posts()
             ->latest()
-            ->deleted()
+            ->where('deleted', 0)
             ->paginate(20);
 
-        $recent_posts = Post::excludeUncategorized()
-            ->latest()
-            ->deleted()
+        $recent_posts = Post::latest()
+            ->where('deleted', 0)
             ->paginate(5);
             
-        $recent_postsArray = $recent_posts->items();
+        $recent_posts = $recent_posts->items();
 
         return view('video_games.show', [
             'video_game' => $video_game,
             'posts' => $posts,
-            'recent_posts' => $recent_postsArray,
+            'recent_posts' => $recent_posts,
         ]);
     }
 }

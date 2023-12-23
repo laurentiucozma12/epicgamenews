@@ -1,4 +1,3 @@
-
 @extends("admin_dashboard.layouts.app")
     
 @section("wrapper")
@@ -19,6 +18,7 @@
             </div>
         </div>
         <!--end breadcrumb-->
+
         <div class="card">
             <div class="card-body p-4">
                 <h5 class="card-title">Edit Video Game: {{ $video_game->name }}</h5>
@@ -48,6 +48,56 @@
                                         @error('slug')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Post Category</label>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="rounded">
+                                                    <div class="mb-3">
+                                                        <select id="categories_ids" name="categories_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose categories" required>
+                                                            @foreach ($categories as $key => $category)
+                                                                <option value="{{ $key }}" {{ in_array($key, $selectedCategFormIds) ? 'selected' : '' }}>{{ $category }}</option>
+                                                            @endforeach
+                                                        </select>
+                                    
+                                                        @error('categories_ids')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                    
+                                                        @if($errors->has('all_fields'))          
+                                                            <p class="text-danger">{{ $errors->first('all_fields') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>          
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Post Platform</label>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="rounded">
+                                                    <div class="mb-3">
+                                                        <select id="platforms_ids" name="platforms_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
+                                                            @foreach ($platforms as $key => $platform)
+                                                                <option value="{{ $key }}" {{ in_array($key, $selectedPlatFormIds) ? 'selected' : '' }}>{{ $platform }}</option>
+                                                            @endforeach
+                                                        </select>
+                                    
+                                                        @error('platforms_ids')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+
+                                                        @if($errors->has('all_fields'))          
+                                                            <p class="text-danger">{{ $errors->first('all_fields') }}</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="mb-3">
@@ -103,5 +153,23 @@
 {{-- Crop Modal --}}
 <x-crop-modal />
 
-<!--end page wrapper -->
+@section("script")
+<script>
+$(document).ready(function(){
+    ////// Select //////
+    $('.single-select').select2({
+        theme: 'bootstrap4',
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+        allowClear: Boolean($(this).data('allow-clear')),
+    });
+    $('.multiple-select').select2({
+        theme: 'bootstrap4',
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+        allowClear: Boolean($(this).data('allow-clear')),
+    });
+    ////// End of Select //////
+});
+</script>
 @endsection

@@ -10,9 +10,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $posts = Post::excludeUncategorized()
-            ->latest()
-            ->deleted()
+        $posts = Post::latest()
+            ->where('deleted', 0)
             ->paginate(20);
 
         return view('home', [

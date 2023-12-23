@@ -20,8 +20,7 @@ return new class extends Migration
             $table->text('body');
 
             $table->foreignId('user_id')->default(1);
-            $table->foreignId('video_game_id')->default(1);
-            $table->foreignId('other_id')->default(1);
+            $table->foreignId('video_game_id')->nullable();
             $table->boolean('deleted')->default(1);
 
             $table->integer('views')->default(0);

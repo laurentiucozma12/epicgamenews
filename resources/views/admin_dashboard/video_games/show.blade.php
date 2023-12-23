@@ -36,8 +36,6 @@
                                 <th>Title</th>
                                 <th>Excerpt</th>
                                 <th>Video Game</th>
-                                <th>Categories</th>
-                                <th>Platforms</th>
                                 <th>Other</th>
                                 <th>Created at</th>
                                 <th>Views</th>
@@ -64,22 +62,6 @@
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->excerpt }}</td>
                                     <td>{{ $post->video_game->name }}</td>
-                                    <td>
-                                        @foreach($post->categories as $category)
-                                            {{ $category->name }}
-                                            @if (!$loop->last)
-                                                , 
-                                            @endif
-                                        @endforeach    
-                                    </td>
-                                    <td>                                        
-                                        @foreach($post->platforms as $platform)
-                                            {{ $platform->name }}
-                                            @if (!$loop->last)
-                                                , 
-                                            @endif
-                                        @endforeach      
-                                    </td>
                                     <td>{{ $post->other->name }}</td>
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
                                     <td>{{ $post->views }}</td>

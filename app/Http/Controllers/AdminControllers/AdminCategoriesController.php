@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers\AdminControllers;
 
-use App\Models\Image;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 
 class AdminCategoriesController extends Controller
 {
     private $rules = [
         'name' => 'required|min:2|max:30',
-        'slug' => 'required|unique:others,slug',
+        'slug' => 'required|unique:categories,slug|max:150',
         'thumbnail' => 'required|image|max:1920',
     ];
     
@@ -23,7 +21,7 @@ class AdminCategoriesController extends Controller
         $categories = Category::with('user')->orderBy('id', 'DESC')->paginate(100);
         
         return view('admin_dashboard.categories.index', [
-            'categories' => $categories
+            'categories' => $categories,
         ]);
     }
 
@@ -40,10 +38,14 @@ class AdminCategoriesController extends Controller
 
         if ($request->hasFile('thumbnail')) {
             $sizes = [
+                [1140, 641],
+                [943, 530],
                 [764, 431],
+                [480, 270],
                 [342, 192],
                 [400, 225],
                 [300, 169],
+                [146, 82],
             ];
 
             // Upload and save the new images
@@ -57,11 +59,11 @@ class AdminCategoriesController extends Controller
 
     public function show(Category $category)
     {
-        $posts = $category->posts()->latest()->paginate(100);
+        $video_games = $category->videoGames()->latest()->paginate(100);
         
         return view('admin_dashboard.categories.show', [
             'category' => $category,
-            'posts' => $posts,
+            'video_games' => $video_games,
         ]);
     }
 
@@ -74,7 +76,7 @@ class AdminCategoriesController extends Controller
 
     public function update(Request $request, Category $category)
     {
-        $updateRules['thumbnail'] = 'nullable|image|max:1920';
+        $this->rules['thumbnail'] = 'nullable|image|max:1920';
         $this->rules['slug'] = ['required', Rule::unique('categories')->ignore($category)];
         $validated = $request->validate($this->rules);
 
@@ -84,10 +86,14 @@ class AdminCategoriesController extends Controller
         // Check if a new image has been uploaded
         if ($request->hasFile('thumbnail')) {                
             $sizes = [
+                [1140, 641],
+                [943, 530],
                 [764, 431],
+                [480, 270],
                 [342, 192],
                 [400, 225],
                 [300, 169],
+                [146, 82],
             ];
 
             // Upload and save the new images
@@ -99,10 +105,14 @@ class AdminCategoriesController extends Controller
             $newImageId = $newImage->id;
 
             $folders = [
+                'images/1140x641',
+                'images/943x530',
                 'images/764x431',
+                'images/480X270',
                 'images/342x192',
                 'images/400x225',
-                'images/300x169',                  
+                'images/300x169',
+                'images/146x82',
             ];
             
             $adminCropResizeImage->deleteOldImages($category, $folders);
@@ -113,9 +123,6 @@ class AdminCategoriesController extends Controller
 
     public function destroy(Category $category)
     {
-        if ($category->name === 'uncategorized')
-            return redirect()->route('admin.categories.index')->with('danger', 'You can not delete uncategorized one');
-
         $category->deleted = 1;
         $category->save();
         

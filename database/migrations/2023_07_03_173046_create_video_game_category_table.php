@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('post_category', function (Blueprint $table) {
+        Schema::create('video_game_category', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('post_id');
-            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->unsignedBigInteger('video_game_id');
+            $table->foreign('video_game_id')->references('id')->on('video_games')->onDelete('cascade');
 
             $table->unsignedBigInteger('category_id');            
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('post_category');
+        Schema::dropIfExists('video_game_category');
     }
 };

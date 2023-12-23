@@ -100,7 +100,6 @@
 							<a href="{{ route('platforms.index') }}"><li class="font-changed">Platforms</li></a>
 							<a href="{{ route('about') }}"><li class="font-changed">About</li></a>
 							<a href="{{ route('contact.create') }}"><li class="font-changed">Contact</li></a>
-							<a href="{{ route('others.index') }}"><li class="font-changed other-btn">Others</li></a>
 
 							@auth
 								<li class="has-dropdown">

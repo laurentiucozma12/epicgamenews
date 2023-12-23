@@ -23,16 +23,15 @@
                                                 <source media="(min-width: 400px)" sizes="764px" srcset="{{ asset($category->image ? 'storage/images/764x431/' . $category->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 2) ? 'lazy' : '' }}">
                                                 <source media="(min-width: 300px)" sizes="400px" srcset="{{ asset($category->image ? 'storage/images/400x225/' . $category->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 3) ? 'lazy' : '' }}">
                                                 <source media="(min-width: 0px)" sizes="300px" srcset="{{ asset($category->image ? 'storage/images/300x169/' . $category->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 4) ? 'lazy' : '' }}">
-                                                <img src="{{ asset($category->image ? 'storage/images/342x192/' . $category->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" alt="{{ $category->image->name }}">
+                                                @if ($category->image)
+                                                    <img src="{{ asset('storage/images/342x192/' . $category->image->name) }}" alt="{{ $category->image->name }}">
+                                                @else
+                                                    <img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="Thumbnail Placeholder">
+                                                @endif
                                             </picture>
                                         </div>
                                         <div class="text-container">
-                                            <h3 class="heading">{{ $category->name }}</h3>
-                                            <div class="meta">
-                                                <div class="posts-count">
-                                                    <span class="icon-tag"></span> {{ $category->posts_count . (($category->posts_count === 1) ? ' Article' : ' Articles') }}
-                                                </div>
-                                            </div>
+                                            <h3 class="heading">{{ $category->name }}</h3>                                           
                                         </div>
                                     </a>
                                 </div>

@@ -35,7 +35,7 @@
                                 <th>Thumbnail</th>
                                 <th>Name</th>
                                 <th>Slug</th>
-                                <th>Related Posts</th>
+                                <th>Related Games</th>
                                 <th>Created At</th>
                                 <th>Created By</th>
                                 <th>Actions</th>
@@ -68,7 +68,7 @@
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->slug }}</td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.categories.show', $category) }}">{{ count($category->posts) }} Related Posts</a>    
+                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.categories.show', $category) }}">{{ count($category->videoGames) }} Related Video Games</a>
                                     </td>
                                     <td>{{ $category->created_at->diffForHumans() }}</td>
                                     <td>{{ $category->user->name }}</td>

@@ -5,8 +5,6 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 use App\Models\User;
-use App\Models\Category;
-use App\Models\Other;
 use App\Models\VideoGame;
 
 class PostFactory extends Factory
@@ -20,7 +18,6 @@ class PostFactory extends Factory
             'body' => $this->faker->paragraph(), 
             'user_id' => User::all()->random()->id, 
             'video_game_id' => VideoGame::all()->random()->id,
-            'other_id' => Other::all()->random()->id,
             'author_thumbnail' => $this->faker->sentence(), 
         ];
     }

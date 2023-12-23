@@ -35,7 +35,7 @@
                                 <th>Thumbnail</th>
                                 <th>Name</th>
                                 <th>Slug</th>
-                                <th>Related Posts</th>
+                                <th>Related Video Games</th>
                                 <th>Created at</th>
                                 <th>Created By</th>
                                 <th>Actions</th>
@@ -68,7 +68,7 @@
                                     <td>{{ $platform->name }}</td>
                                     <td>{{ $platform->slug }}</td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.platforms.show', $platform) }}">{{ count($platform->posts) }} Related Posts</a>    
+                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.platforms.show', $platform) }}">{{ count($platform->videoGames) }} Related Video Games</a>
                                     </td>
                                     <td>{{ $platform->created_at->diffForHumans() }}</td>
                                     <td>{{ $platform->user->name }}</td>

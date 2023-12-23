@@ -23,16 +23,15 @@
                                                 <source media="(min-width: 400px)" sizes="764px" srcset="{{ asset($video_game->image ? 'storage/images/764x431/' . $video_game->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 2) ? 'lazy' : '' }}">
                                                 <source media="(min-width: 300px)" sizes="400px" srcset="{{ asset($video_game->image ? 'storage/images/400x225/' . $video_game->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 3) ? 'lazy' : '' }}">
                                                 <source media="(min-width: 0px)" sizes="300px" srcset="{{ asset($video_game->image ? 'storage/images/300x169/' . $video_game->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 4) ? 'lazy' : '' }}">
-                                                <img src="{{ asset($video_game->image ? 'storage/images/342x192/' . $video_game->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" alt="{{ $video_game->image->name }}">
+                                                @if ($video_game->image)
+                                                    <img src="{{ asset('storage/images/342x192/' . $video_game->image->name) }}" alt="{{ $video_game->image->name }}">
+                                                @else
+                                                    <img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="Thumbnail Placeholder">
+                                                @endif
                                             </picture>
                                         </div>
                                         <div class="text-container">
                                             <h3 class="heading">{{ $video_game->name }}</h3>
-                                            <div class="meta">
-                                                <div class="posts-count">
-                                                    <span class="icon-tag"></span> {{ $video_game->posts_count . (($video_game->posts_count === 1) ? ' Article' : ' Articles') }}
-                                                </div>
-                                            </div>
                                         </div>
                                     </a>
                                 </div>

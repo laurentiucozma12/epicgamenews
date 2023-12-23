@@ -7,7 +7,7 @@
 <link href="{{ asset('admin_dashboard_assets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
 
 @endsection
-    
+
     @section("wrapper")
     <!--start page wrapper -->
     <div class="page-wrapper">
@@ -37,7 +37,7 @@
     
                         <div class="form-body mt-4">
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-12">
                                     <div class="rounded">
 
                                         <div class="mb-3">
@@ -68,15 +68,6 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="image" class="form-label">Image (1920 x 1080)</label>
-                                            <input name='image' type='file' class="form-control" id="image">
-                                        
-                                            @error('image')
-                                                <p class='text-danger'>{{ $message }}</p>
-                                            @enderror
-                                        </div>
-
-                                        <div class="mb-3">
                                             <label class="form-label">User Role</label>                                        
                                             <div class="card shadow-none">
                                                 <div class="card-body p-0">
@@ -93,7 +84,7 @@
                                                             @error('roles')
                                                                 <p class="text-danger">{{ $message }}</p>
                                                             @enderror
-    
+
                                                             @if($errors->has('all_fields'))
                                                                 <p class="text-danger">{{ $errors->first('all_fields') }}</p>
                                                             @endif
@@ -118,8 +109,9 @@
 
         </div>
     </div>
-    <!--end page wrapper -->
-    @endsection
+
+<!--end page wrapper -->
+@endsection
 
 @section("script")
 <script src="{{ asset('admin_dashboard_assets/plugins/select2/js/select2.min.js') }}"></script>

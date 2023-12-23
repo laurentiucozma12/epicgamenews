@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Http\Controllers\AdminControllers\AdminCropResizeImage;
 
 class AdminUsersController extends Controller
 {
@@ -40,19 +41,15 @@ class AdminUsersController extends Controller
         $validated['password'] = Hash::make($request->input('password'));
         $user = User::create($validated);
 
-        if($request->has('image'))
-        {
-            $image = $request->file('image');
-            
-            $filename = $image->getClientOriginalName();
-            $file_extension = $image->getClientOriginalExtension();
-            $path = $image->store('users', 'public');
+        if ($request->hasFile('thumbnail')) {
+            $sizes = [
+                [400, 400],
+            ];
 
-            $user->image()->create([
-                'name' => $filename,
-                'extension' => $file_extension,
-                'path' => $path
-            ]);
+            // Upload and save the new images
+            $adminCropResizeImage = new AdminCropResizeImage();
+            $image_data = $adminCropResizeImage->optimizeImage($request, $sizes);
+            $user->image()->create($image_data);
         }
 
         $user->roles()->attach($selectedRole);
@@ -123,37 +120,13 @@ class AdminUsersController extends Controller
         $validated = $request->validate([
             'name' => 'required|min:3',
             'email' => ['required', 'email', Rule::unique('users')->ignore($user)],
-            'password' => 'nullable|min:3|max:20',
-            'image' => 'nullable|image|dimensions:max_width=1920,max_height=1080',
         ]);
-
-        // Hash the password if provided and not null
-        if ($request->filled('password')) {
-            $validated['password'] = Hash::make($request->input('password'));
-        } else {
-            // Remove the password from the validated data to avoid updating it
-            unset($validated['password']);
-        }
 
         // Update the user with the validated data
         $user->update($validated);
 
         // Sync the roles without detaching
         $user->roles()->sync($roleIds);
-
-        // Handle image upload if provided
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $filename = $image->getClientOriginalName();
-            $file_extension = $image->getClientOriginalExtension();
-            $path = $image->store('users', 'public');
-
-            $user->image()->create([
-                'name' => $filename,
-                'extension' => $file_extension,
-                'path' => $path,
-            ]);
-        }
 
         return redirect()->route('admin.users.edit', $user)->with('success', 'User has been updated.');
     }

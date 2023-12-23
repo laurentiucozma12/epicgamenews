@@ -16,7 +16,6 @@ use App\Http\Controllers\TagController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\OtherController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
@@ -32,7 +31,6 @@ use App\Http\Controllers\AdminControllers\AdminAboutController;
 use App\Http\Controllers\AdminControllers\AdminPostsController;
 use App\Http\Controllers\AdminControllers\AdminRolesController;
 use App\Http\Controllers\AdminControllers\AdminUsersController;
-use App\Http\Controllers\AdminControllers\AdminOthersController;
 use App\Http\Controllers\AdminControllers\AdminContactsController;
 use App\Http\Controllers\AdminControllers\AdminDashboardController;
 use App\Http\Controllers\AdminControllers\AdminPlatformsController;
@@ -49,48 +47,37 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     Route::resource('posts', AdminPostsController::class)->except('show');
     Route::post('upload_tinymce_image', [TinyMCEController::class, 'upload_tinymce_image'])->name('upload_tinymce_image');
 
-    Route::prefix('video_games')->group(function () {
+    Route::prefix('video-games')->group(function () {
         Route::get('/', [AdminVideoGamesController::class, 'index'])->name('video_games.index');
         Route::get('/create', [AdminVideoGamesController::class, 'create'])->name('video_games.create');
         Route::post('/', [AdminVideoGamesController::class, 'store'])->name('video_games.store');
-        Route::get('/{video_game}/edit', [AdminVideoGamesController::class, 'edit'])->name('video_games.edit');
-        Route::put('/{video_game}', [AdminVideoGamesController::class, 'update'])->name('video_games.update');
-        Route::patch('/{video_game}', [AdminVideoGamesController::class, 'update']);
-        Route::delete('/{video_game}', [AdminVideoGamesController::class, 'destroy'])->name('video_games.destroy');
-        Route::get('/{video_game}', [AdminVideoGamesController::class, 'show'])->name('video_games.show');
+        Route::get('/{video_game:slug}/edit', [AdminVideoGamesController::class, 'edit'])->name('video_games.edit');
+        Route::put('/{video_game:slug}', [AdminVideoGamesController::class, 'update'])->name('video_games.update');
+        Route::patch('/{video_game:slug}', [AdminVideoGamesController::class, 'update']);
+        Route::delete('/{video_game:slug}', [AdminVideoGamesController::class, 'destroy'])->name('video_games.destroy');
+        Route::get('/{video_game:slug}', [AdminVideoGamesController::class, 'show'])->name('video_games.show');
     });
 
     Route::prefix('categories')->group(function () {
         Route::get('/', [AdminCategoriesController::class, 'index'])->name('categories.index');
         Route::get('/create', [AdminCategoriesController::class, 'create'])->name('categories.create');
         Route::post('/', [AdminCategoriesController::class, 'store'])->name('categories.store');
-        Route::get('/{category}/edit', [AdminCategoriesController::class, 'edit'])->name('categories.edit');
-        Route::put('/{category}', [AdminCategoriesController::class, 'update'])->name('categories.update');
-        Route::patch('/{category}', [AdminCategoriesController::class, 'update']);
-        Route::delete('/{category}', [AdminCategoriesController::class, 'destroy'])->name('categories.destroy');
-        Route::get('/{category}', [AdminCategoriesController::class, 'show'])->name('categories.show');
+        Route::get('/{category:slug}/edit', [AdminCategoriesController::class, 'edit'])->name('categories.edit');
+        Route::put('/{category:slug}', [AdminCategoriesController::class, 'update'])->name('categories.update');
+        Route::patch('/{category:slug}', [AdminCategoriesController::class, 'update']);
+        Route::delete('/{category:slug}', [AdminCategoriesController::class, 'destroy'])->name('categories.destroy');
+        Route::get('/{category:slug}', [AdminCategoriesController::class, 'show'])->name('categories.show');
     });
 
     Route::prefix('platforms')->group(function () {
         Route::get('/', [AdminPlatformsController::class, 'index'])->name('platforms.index');
         Route::get('/create', [AdminPlatformsController::class, 'create'])->name('platforms.create');
         Route::post('/', [AdminPlatformsController::class, 'store'])->name('platforms.store');
-        Route::get('/{platform}/edit', [AdminPlatformsController::class, 'edit'])->name('platforms.edit');
-        Route::put('/{platform}', [AdminPlatformsController::class, 'update'])->name('platforms.update');
-        Route::patch('/{platform}', [AdminPlatformsController::class, 'update']);
-        Route::delete('/{platform}', [AdminPlatformsController::class, 'destroy'])->name('platforms.destroy');
-        Route::get('/{platform}', [AdminPlatformsController::class, 'show'])->name('platforms.show');
-    });
-
-    Route::prefix('others')->group(function () {
-        Route::get('/', [AdminOthersController::class, 'index'])->name('others.index');
-        Route::get('/create', [AdminOthersController::class, 'create'])->name('others.create');
-        Route::post('/', [AdminOthersController::class, 'store'])->name('others.store');
-        Route::get('/{other}/edit', [AdminOthersController::class, 'edit'])->name('others.edit');
-        Route::put('/{other}', [AdminOthersController::class, 'update'])->name('others.update');
-        Route::patch('/{other}', [AdminOthersController::class, 'update']);
-        Route::delete('/{other}', [AdminOthersController::class, 'destroy'])->name('others.destroy');
-        Route::get('/{other}', [AdminOthersController::class, 'show'])->name('others.show');
+        Route::get('/{platform:slug}/edit', [AdminPlatformsController::class, 'edit'])->name('platforms.edit');
+        Route::put('/{platform:slug}', [AdminPlatformsController::class, 'update'])->name('platforms.update');
+        Route::patch('/{platform:slug}', [AdminPlatformsController::class, 'update']);
+        Route::delete('/{platform:slug}', [AdminPlatformsController::class, 'destroy'])->name('platforms.destroy');
+        Route::get('/{platform:slug}', [AdminPlatformsController::class, 'show'])->name('platforms.show');
     });
     
     Route::resource('tags', AdminTagsController::class)->only(['index', 'show', 'destroy']);
@@ -101,14 +88,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
         Route::get('/', [AdminUsersController::class, 'index'])->name('users.index');
         Route::get('/create', [AdminUsersController::class, 'create'])->name('users.create');
         Route::post('/', [AdminUsersController::class, 'store'])->name('users.store');
-        Route::get('/{user}/edit', [AdminUsersController::class, 'edit'])->name('users.edit');
-        Route::put('/{user}', [AdminUsersController::class, 'update'])->name('users.update');
-        Route::patch('/{user}', [AdminUsersController::class, 'update']);
-        Route::delete('/{user}', [AdminUsersController::class, 'destroy'])->name('users.destroy');
-        Route::get('/users', [AdminUsersController::class, 'showUsers'])->name('users.showUsers');
-        Route::get('/{user}/related-posts', [AdminUsersController::class, 'showPosts'])->name('users.showPosts');
-        Route::get('/{user}/related-video-games', [AdminUsersController::class, 'showVideoGames'])->name('users.showVideoGames');
-        Route::get('/{user}/related-categories', [AdminUsersController::class, 'showCategories'])->name('users.showCategories');
+        Route::get('/{user:name}/edit', [AdminUsersController::class, 'edit'])->name('users.edit');
+        Route::put('/{user:name}', [AdminUsersController::class, 'update'])->name('users.update');
+        Route::patch('/{user:name}', [AdminUsersController::class, 'update']);
+        Route::delete('/{user:name}', [AdminUsersController::class, 'destroy'])->name('users.destroy');
+        Route::get('/user:name', [AdminUsersController::class, 'showUsers'])->name('users.showUsers');
+        Route::get('/{user:name}/related-posts', [AdminUsersController::class, 'showPosts'])->name('users.showPosts');
+        Route::get('/{user:name}/related-video-games', [AdminUsersController::class, 'showVideoGames'])->name('users.showVideoGames');
+        Route::get('/{user:name}/related-categories', [AdminUsersController::class, 'showCategories'])->name('users.showCategories');
     });
     
     Route::get('contacts', [AdminContactsController::class, 'index'])->name('contacts');
@@ -122,38 +109,20 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
 // Front User Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/video-games/uncategorized', function () {
-    abort(404);
-});
 Route::get('/video-games', [VideoGameController::class, 'index'])->name('video_games.index');
 Route::get('/video-games/{video_game:slug}', [VideoGameController::class, 'show'])->name('video_games.show');
 
-Route::get('/categories/uncategorized', function () {
-    abort(404);
-});
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
 
-Route::get('/platforms/uncategorized', function () {
-    abort(404);
-});
 Route::get('/platforms', [PlatformController::class, 'index'])->name('platforms.index');
 Route::get('/platforms/{platform:slug}', [PlatformController::class, 'show'])->name('platforms.show');
-
-Route::get('/other/uncategorized', function () {
-    abort(404);
-});
-Route::get('/other', [OtherController::class, 'index'])->name('others.index');
-Route::get('/other/{other:slug}', [OtherController::class, 'show'])->name('others.show');
 
 Route::get('/about', AboutController::class)->name('about');
 
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-Route::get('/tag/uncategorized', function () {
-    abort(404);
-});
 Route::get('/tag/{tag:slug}', [TagController::class, 'show'])->name('tags.show');
 
 Route::middleware('auth')->group(function () {

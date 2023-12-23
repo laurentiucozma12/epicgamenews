@@ -37,9 +37,6 @@
 										<th>Title</th>
 										<th>Excerpt</th>
 										<th>Video Game</th>
-										<th>Categories</th>
-										<th>Platforms</th>
-										<th>Other</th>
 										<th>Created at</th>
 										<th>Views</th>
 										<th>Actions</th>
@@ -54,37 +51,24 @@
 													<h6 class="mb-0 font-14">{{ $post->id }}</h6>
 												</div>
 											</div>
-										</td>										
+										</td>
 										<td>
-											@if($post->status)
+											@if(intval($post->deleted) === 0)
 												<div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Approved</div>
 											@else
 												<div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Not Approved</div>
 											@endif
 										</td>
 										<td>
-											<img width='50' src="{{ $post->image ? asset('storage/' . $post->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="post thumbnail">    
+											@if ($post->image)
+												<img src="{{ asset('storage/images/300x169/' . $post->image->name) }}" width='50' alt="{{ $post->image->name }}">
+											@else
+												<img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" width='50' alt="Img Placeholder">
+											@endif
 										</td>
 										<td>{{ $post->title }} </td>
 										<td>{{ $post->excerpt }}</td>
 										<td>{{ $post->video_game->name }}</td>
-										<td>
-											@foreach($post->categories as $category)
-												{{ $category->name }}
-												@if (!$loop->last)
-													, 
-												@endif
-											@endforeach    
-										</td>
-										<td>                                        
-											@foreach($post->platforms as $platform)
-												{{ $platform->name }}
-												@if (!$loop->last)
-													, 
-												@endif
-											@endforeach      
-										</td>
-										<td>{{ $post->other->name }}</td>
                                         <td>{{ $post->created_at->diffForHumans() }}</td>                                        
                                         <td>{{ $post->views }}</td>                                        
                                         <td>

@@ -19,6 +19,16 @@ class VideoGame extends Model
     {
         return $this->hasMany(Post::class);
     }
+    
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'video_game_category', 'video_game_id', 'category_id');
+    }
+    
+    public function platforms()
+    {        
+        return $this->belongsToMany(Platform::class, 'video_game_platform', 'video_game_id', 'platform_id');
+    }
 
     public function user()
     {
@@ -28,11 +38,5 @@ class VideoGame extends Model
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
-    }
-    
-    // Scope functions
-    public function scopeDeleted($query)
-    {
-        return $query->where('deleted', 0); 
     }
 }

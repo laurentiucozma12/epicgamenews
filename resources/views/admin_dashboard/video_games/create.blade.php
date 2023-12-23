@@ -48,7 +48,61 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-                                
+
+                                <div class="mb-3">
+                                    <label class="form-label">Video Game Category</label>                                        
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="rounded">
+                                                <div class="mb-3">
+                                                    <select id="categories_ids" name="categories_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose categories" required>
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->id }}" {{ $category->name === 'uncategorized' ? 'selected' : '' }}>
+                                                                {{ $category->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+
+                                                    @error('categories_ids')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+
+                                                    @if($errors->has('all_fields'))
+                                                        <p class="text-danger">{{ $errors->first('all_fields') }}</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Video Game Platform</label>                                        
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="rounded">
+                                                <div class="mb-3">
+                                                    <select id="platforms_ids" name="platforms_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
+                                                        @foreach ($platforms as $platform)
+                                                            <option value="{{ $platform->id }}" {{ $platform->name === 'uncategorized' ? 'selected' : '' }}>
+                                                                {{ $platform->name }}
+                                                            </option>     
+                                                        @endforeach
+                                                    </select>
+
+                                                    @error('platforms_ids')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+
+                                                    @if($errors->has('all_fields'))
+                                                        <p class="text-danger">{{ $errors->first('all_fields') }}</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="mb-3">
                                     <label for="thumbnail" class="form-label">Post Thumbnail (Max 1920)</label>
                                     <div class="card">
@@ -82,5 +136,23 @@
 {{-- Crop Modal --}}
 <x-crop-modal />
 
-<!--end page wrapper -->
+@section("script")
+<script>
+$(document).ready(function() {
+    ////// Select //////
+    $('.single-select').select2({
+        theme: 'bootstrap4',
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+        allowClear: Boolean($(this).data('allow-clear')),
+    });
+    $('.multiple-select').select2({
+        theme: 'bootstrap4',
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+        allowClear: Boolean($(this).data('allow-clear')),
+    });
+    ////// End of Select //////
+});
+</script>
 @endsection

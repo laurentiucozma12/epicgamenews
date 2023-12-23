@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Str;
-use App\Models\Post;
+use App\Models\VideoGame;
 use App\Models\Image;
 
 class Platform extends Model
@@ -15,9 +15,9 @@ class Platform extends Model
 
     protected $fillable = ['name', 'slug', 'user_id', 'deleted'];
 
-    public function posts()
+    public function videoGames()
     {
-        return $this->belongsToMany(Post::class, 'post_platform', 'platform_id', 'post_id');
+        return $this->belongsToMany(VideoGame::class, 'video_game_platform');
     }
     
     protected static function boot()
@@ -37,11 +37,5 @@ class Platform extends Model
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
-    }
-    
-    // Scope functions
-    public function scopeDeleted($query)
-    {
-        return $query->where('deleted', 0); 
     }
 }

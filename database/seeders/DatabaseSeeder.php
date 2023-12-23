@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\VideoGame::truncate();
         \App\Models\Category::truncate();
         \App\Models\Platform::truncate();
-        \App\Models\Other::truncate();
         \App\Models\Post::truncate();
         \App\Models\Tag::truncate();
         \App\Models\Image::truncate();
@@ -71,7 +70,6 @@ class DatabaseSeeder extends Seeder
             $user->roles()->attach($user_role->id);
         });
 
-        \App\Models\VideoGame::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
         $video_games = \App\Models\VideoGame::factory(10)->create();
 
         foreach ($video_games as $video_game)
@@ -79,7 +77,6 @@ class DatabaseSeeder extends Seeder
             $video_game->image()->save( \App\Models\Image::factory()->make() );
         }
 
-        \App\Models\Category::factory(1)->create(['name' => 'uncategorized', 'slug' => 'uncategorized']);
         $categories = \App\Models\Category::factory(10)->create();
 
         foreach ($categories as $category)
@@ -88,7 +85,6 @@ class DatabaseSeeder extends Seeder
         }
         
         $platformsData = [
-            (object)['name' => 'uncategorized', 'slug' => 'uncategorized'],
             (object)['name' => 'PC', 'slug' => 'pc'],
             (object)['name' => 'PlayStation', 'slug' => 'playstation'],
             (object)['name' => 'Xbox', 'slug' => 'xbox'],
@@ -104,52 +100,33 @@ class DatabaseSeeder extends Seeder
 
             $platform->image()->save( \App\Models\Image::factory()->make() );
         }
-        
-        $othersData = [
-            (object)['name' => 'uncategorized', 'slug' => 'uncategorized'],
-            (object)['name' => 'Game Trailers', 'slug' => 'game-trailers'],
-            (object)['name' => 'Anime', 'slug' => 'anime'],
-            (object)['name' => 'Cartoons', 'slug' => 'cartoons'],
-            (object)['name' => 'Movies', 'slug' => 'movies'],
-            (object)['name' => 'Series', 'slug' => 'series'],
-            (object)['name' => 'Lists', 'slug' => 'lists'],
-        ];
-        
-        foreach ($othersData as $other) {
-            $other = \App\Models\Other::factory()->create([
-                'name' => $other->name,
-                'slug' => $other->slug,
-            ]);
-
-            $other->image()->save( \App\Models\Image::factory()->make() );
-        }
 
         $posts = \App\Models\Post::factory(10)->create(['deleted' => 0]);;
 
         \App\Models\Tag::factory(1)->create();
-
-        foreach($posts as $post) 
-        {
+        
+        foreach ($posts as $post) {
             $categories_ids = [];
-            $categories_ids[] = \App\Models\Platform::all()->random()->id;
-            $categories_ids[] = \App\Models\Platform::all()->random()->id;
-            $categories_ids[] = \App\Models\Platform::all()->random()->id;
-            $post->categories()->sync( $categories_ids );
-
+            $categories_ids[] = \App\Models\Category::all()->random()->id;
+            $categories_ids[] = \App\Models\Category::all()->random()->id;
+            $categories_ids[] = \App\Models\Category::all()->random()->id;
+            $post->video_game->categories()->sync($categories_ids);
+        
             $platforms_ids = [];
             $platforms_ids[] = \App\Models\Platform::all()->random()->id;
             $platforms_ids[] = \App\Models\Platform::all()->random()->id;
             $platforms_ids[] = \App\Models\Platform::all()->random()->id;
-            $post->platforms()->sync( $platforms_ids );
-
-            $platforms_ids = [];
+            $post->video_game->platforms()->sync($platforms_ids);
+        
+            $tags_ids = [];
             $tags_ids[] = \App\Models\Tag::all()->random()->id;
             $tags_ids[] = \App\Models\Tag::all()->random()->id;
             $tags_ids[] = \App\Models\Tag::all()->random()->id;
-            $post->tags()->sync( $tags_ids );
-
-            $post->image()->save( \App\Models\Image::factory()->make() );
+            $post->tags()->sync($tags_ids);
+        
+            $post->image()->save(\App\Models\Image::factory()->make());
         }
+        
 
         \App\Models\About::factory(1)->create();
     }

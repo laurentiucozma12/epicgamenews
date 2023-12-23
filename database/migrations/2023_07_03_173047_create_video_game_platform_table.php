@@ -4,15 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostPlatformTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
-        Schema::create('post_platform', function (Blueprint $table) {
+        Schema::create('video_game_platform', function (Blueprint $table) {
             $table->id();
             
-            $table->unsignedBigInteger('post_id');
-            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->unsignedBigInteger('video_game_id');
+            $table->foreign('video_game_id')->references('id')->on('video_games')->onDelete('cascade');
 
             $table->unsignedBigInteger('platform_id'); 
             $table->foreign('platform_id')->references('id')->on('platforms')->onDelete('cascade');
@@ -23,6 +23,6 @@ class CreatePostPlatformTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('post_platform');
+        Schema::dropIfExists('video_game_platform');
     }
-}
+};

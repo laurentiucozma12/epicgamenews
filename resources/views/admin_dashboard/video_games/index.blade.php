@@ -35,6 +35,8 @@
                                 <th>Thumbnail</th>
                                 <th>Name</th>
                                 <th>Slug</th>
+                                <th>Categories</th>
+                                <th>Platforms</th>
                                 <th>Related Posts</th>
                                 <th>Created At</th>
                                 <th>Created By</th>
@@ -67,6 +69,16 @@
                                     </td>                                                                      
                                     <td>{{ $video_game->name }}</td>
                                     <td>{{ $video_game->slug }}</td>
+                                    <td>
+                                        @foreach ($video_game->categories as $category)
+                                            {{ $category->name }}@if (!$loop->last),@endif
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach ($video_game->platforms as $platform)
+                                            {{ $platform->name }}@if (!$loop->last),@endif
+                                        @endforeach
+                                    </td>
                                     <td>
                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.video_games.show', $video_game) }}">{{ count($video_game->posts) }} Related Posts</a>    
                                     </td>

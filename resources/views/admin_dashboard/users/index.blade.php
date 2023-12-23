@@ -31,7 +31,6 @@
 									<tr>
 										<th>Id</th>
 										<th>Status</th>
-										<th>Image</th>
 										<th>Name</th>
 										<th>Email</th>
 										<th>Role</th>
@@ -59,9 +58,6 @@
 												<div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Active</div>
 											@endif
 										</td>
-										<td>
-                                            <img width='50' src="{{ $user->image ? asset('storage/' . $user->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="post thumbnail">    
-                                        </td>
                                         <td>{{ $user->name }} </td>
                                         <td>{{ $user->email }} </td>
                                         <td>

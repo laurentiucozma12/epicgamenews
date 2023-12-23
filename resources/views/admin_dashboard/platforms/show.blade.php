@@ -12,7 +12,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.platforms.index') }}">All Platforms</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.platforms.show', $platform) }}">Related Posts to this Platform {{ $platform->name }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.platforms.show', $platform) }}">Related Video Games to this Platform {{ $platform->name }}</a></li>
                     </ol>
                 </nav>
             </div>
@@ -34,39 +34,34 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Status</th>
-                                <th>Title</th>
-                                <th>Excerpt</th>
-                                <th>Video Game</th>
+                                <th>Name</th>
                                 <th>Categories</th>
                                 <th>Platforms</th>
-                                <th>Other</th>
                                 <th>Created at</th>
                                 <th>Views</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($posts as $post)
+                            @foreach ($video_games as $video_game)
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="ms-2">
-                                                <h6 class="mb-0 font-14">{{ $post->id }}</h6>
+                                                <h6 class="mb-0 font-14">{{ $video_game->id }}</h6>
                                             </div>
                                         </div>
                                     </td>
-                                    <td>                                        
-                                        @if(intval($post->deleted) === 0)
-                                            <div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Approved</div>
+                                    <td>
+                                        @if(intval($video_game->deleted) === 0)
+                                            <div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Active</div>
                                         @else
-                                            <div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Not Approved</div>
+                                            <div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Inactive</div>
                                         @endif
                                     </td>
-                                    <td>{{ $post->title }}</td>
-                                    <td>{{ $post->excerpt }}</td>
-                                    <td>{{ $post->video_game->name }}</td>
+                                    <td>{{ $video_game->name }}</td>
                                     <td>
-                                        @foreach($post->categories as $category)
+                                        @foreach($video_game->categories as $category)
                                             {{ $category->name }}
                                             @if (!$loop->last)
                                                 , 
@@ -74,22 +69,21 @@
                                         @endforeach    
                                     </td>
                                     <td>                                        
-                                        @foreach($post->platforms as $platform)
+                                        @foreach($video_game->platforms as $platform)
                                             {{ $platform->name }}
                                             @if (!$loop->last)
                                                 , 
                                             @endif
                                         @endforeach      
                                     </td>
-                                    <td>{{ $post->other->name }}</td>
-                                    <td>{{ $post->created_at->diffForHumans() }}</td>
-                                    <td>{{ $post->views }}</td>
+                                    <td>{{ $video_game->created_at->diffForHumans() }}</td>
+                                    <td>{{ $video_game->views }}</td>
                                     <td>
                                         <div class="d-flex order-actions">
-                                            <a href="{{ route('admin.posts.edit', $post) }}" class=""><i class='bx bxs-edit'></i></a>
-                                            <a href="#" onclick="event.preventDefault(); document.getElementById('delete_form_{{ $post->id }}').submit()" class="ms-3"><i class='bx bxs-trash'></i></a>
+                                            <a href="{{ route('admin.video_games.edit', $video_game) }}" class=""><i class='bx bxs-edit'></i></a>
+                                            <a href="#" onclick="event.preventDefault(); document.getElementById('delete_form_{{ $video_game->id }}').submit()" class="ms-3"><i class='bx bxs-trash'></i></a>
                                         
-                                            <form method="POST" action="{{ route('admin.posts.destroy', $post) }}" id="delete_form_{{ $post->id }}">
+                                            <form method="POST" action="{{ route('admin.video_games.destroy', $video_game) }}" id="delete_form_{{ $video_game->id }}">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
@@ -102,7 +96,7 @@
                 </div>
                 
                 <div class='mt-4'>
-                    {{ $posts->onEachSide(0)->links('pagination::bootstrap-4') }}
+                    {{ $video_games->onEachSide(0)->links('pagination::bootstrap-4') }}
                 </div>
 
             </div>

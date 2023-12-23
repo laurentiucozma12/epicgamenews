@@ -32,6 +32,7 @@
 								<thead class="table-light">
 									<tr>
 										<th>Id</th>
+										<th>Status</th>
 										<th>Thumbnail</th>
 										<th>Name</th>
 										<th>Created at</th>
@@ -50,7 +51,18 @@
 											</div>
 										</td>
 										<td>
-											<img width='50' src="{{ $category->image ? asset('storage/' . $category->image->path) : asset('storage/placeholders/user_placeholder.jpg') }}" alt="post thumbnail">    
+											@if(intval($category->deleted) === 0)
+												<div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Approved</div>
+											@else
+												<div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Not Approved</div>
+											@endif
+										</td>
+										<td>
+											@if ($category->image)
+												<img src="{{ asset('storage/images/300x169/' . $category->image->name) }}" width='50' alt="{{ $category->image->name }}">
+											@else
+												<img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" width='50' alt="Img Placeholder">
+											@endif
 										</td>
 										<td>{{ $category->name }}</td>
                                         <td>{{ $category->created_at->diffForHumans() }}</td>                                        

@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Platform;
-use App\Models\Other;
 use App\Models\Tag;
 
 class TagController extends Controller

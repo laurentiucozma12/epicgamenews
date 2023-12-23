@@ -62,13 +62,12 @@ class AdminCropResizeImage extends Controller
         
         // Remove the original extension from the filename
         $filename = $this->imageName($filename);
-
         // Get the base64-encoded image data from the request and decode it into binary format and save it using Laravel's Storage facade
         $croppedImageData = $request->input('croppedImageData');
         
         // Decode the Base64-encoded data
         $croppedImageBinary = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $croppedImageData));
-
+        
         // Create an Intervention Image instance from the binary data
         $croppedImage = ImageManager::make($croppedImageBinary);
 

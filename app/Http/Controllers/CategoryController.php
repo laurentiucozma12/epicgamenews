@@ -8,22 +8,21 @@ use App\Models\Post;
 use App\Models\Category;
 
 class CategoryController extends Controller
-{    
+{
     public function index()
     {
-        $categories = Category::withCount(['posts' => function ($query) {
-            // Count only the posts that are NOT 'deleted' or 'uncategorized'
-            $query->where('deleted', '=', 0)
-                ->where('name', '!=', 'uncategorized');
-        }])
-        ->whereHas('posts', function ($query) {
-            // Send only the posts where count is bigger than 0
-            $query->where('deleted', '=', 0)
-                ->where('name', '!=', 'uncategorized');
-        })
-        ->where('name', '!=', 'uncategorized')
-        ->deleted()
-        ->paginate(20);
+        $categories = Category::where('deleted', 0)
+            ->whereHas('videoGames', function ($query) {
+                $query->where('deleted', 0);
+            })
+            ->whereHas('videoGames', function ($query) {
+                // A platform is attached to a video game. A video game is attached to a post.
+                // Even if a video game has a platform, if the same video game has 0 posts (Not 'deleted' posts),
+                // the platform should not be visible.
+                $query->where('deleted', 0)
+                    ->whereHas('posts');
+            })
+            ->paginate(20);
 
         return view('categories.index', [
             'categories' => $categories
@@ -32,25 +31,23 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        if ($category->name === 'uncategorized') {
-            abort(404); }    
+        $videoGameIds = $category->videoGames()->pluck('video_game_id');
 
-        $posts = $category->posts()->excludeUncategorized()
+        $posts = Post::whereIn('video_game_id', $videoGameIds)
             ->latest()
-            ->deleted()
+            ->where('deleted', 0)
             ->paginate(20);
 
-        $recent_posts = Post::excludeUncategorized()
-            ->latest()
-            ->deleted()
+        $recent_posts = Post::latest()
+            ->where('deleted', 0)
             ->paginate(5);
 
-        $recent_postsArray = $recent_posts->items();
-            
+        $recent_posts = $recent_posts->items();
+
         return view('categories.show', [
             'category' => $category,
             'posts' => $posts,
-            'recent_posts' => $recent_postsArray,
+            'recent_posts' => $recent_posts,
         ]);
     }
 }
