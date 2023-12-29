@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 class AdminVideoGamesController extends Controller
 {
     private $rules = [
-        'name' => 'required|min:2|max:30',
+        'name' => 'required|min:2|max:250',
         'slug' => 'required|unique:video_games,slug|max:150',
         'thumbnail' => 'required|image|max:1920',
     ];
@@ -25,6 +25,48 @@ class AdminVideoGamesController extends Controller
         return view('admin_dashboard.video_games.index', [
             'video_games' => $video_games
         ]);
+    }
+
+    public function createApi()
+    {
+        return view('admin_dashboard.video_games.create_api');
+    }
+
+    public function storeApi(Request $request)
+    {
+        $validated = $request->validate($this->rules);
+        $validated['user_id'] = auth()->id();
+        $video_game = VideoGame::create($validated);
+
+        // Attach categories to the video game
+        if ($request->has('categories_ids') && is_array($request->categories_ids)) {
+            $video_game->categories()->attach($request->categories_ids);
+        }
+
+        // Attach platforms to the video game
+        if ($request->has('platforms_ids') && is_array($request->platforms_ids)) {
+            $video_game->platforms()->attach($request->platforms_ids);
+        }
+
+        if ($request->hasFile('thumbnail')) {
+            $sizes = [
+                [1140, 641],
+                [943, 530],
+                [764, 431],
+                [480, 270],
+                [342, 192],
+                [400, 225],
+                [300, 169],
+                [146, 82],
+            ];
+
+            // Upload and save the new images
+            $adminCropResizeImage = new AdminCropResizeImage();
+            $image_data = $adminCropResizeImage->optimizeImage($request, $sizes);
+            $video_game->image()->create($image_data);
+        }
+
+        return redirect()->route('admin.video_games.create')->with('success', 'Video Game has been Created');
     }
 
     public function create()

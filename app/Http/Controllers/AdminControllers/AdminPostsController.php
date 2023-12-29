@@ -38,10 +38,11 @@ class AdminPostsController extends Controller
 
     public function create()
     {
+        $video_games = VideoGame::all()
+            ->where('deleted', 0);
+        
         return view('admin_dashboard.posts.create', [
-            'video_games' => VideoGame::all(),            
-            'categories' => Category::all(),
-            'platforms' => Platform::all(),
+            'video_games' => $video_games
         ]);
     }
 

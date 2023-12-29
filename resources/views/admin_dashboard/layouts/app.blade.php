@@ -172,7 +172,7 @@
 <!-- Bootstrap JS -->
 <script src="{{ asset('admin_dashboard_assets/js/bootstrap.bundle.min.js') }}"></script>
 
-<!--jQuery-->
+<!--jQuery v2.1.4-->
 <script src="{{ asset('admin_dashboard_assets/js/jquery.min.js') }}"></script>
 
 {{-- Ajax Lazy Loading --}}
@@ -192,8 +192,11 @@
 <!--app JS-->
 <script src="{{ asset('admin_dashboard_assets/js/app.js') }}"></script>
 
+{{-- API Keys --}}
+<script src="{{ asset('admin_dashboard_assets/js/api-keys.js') }}"></script>
+
 {{-- Custom Scripts --}}
-<script src="{{ asset('admin_dashboard_assets/js/functions.js') }}"></script>
+<script src="{{ asset('admin_dashboard_assets/js/functions-admin.js') }}"></script>
 
 @yield("script")
 </body>

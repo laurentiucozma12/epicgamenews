@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 class AdminCategoriesController extends Controller
 {
     private $rules = [
-        'name' => 'required|min:2|max:30',
+        'name' => 'required|min:2|max:250',
         'slug' => 'required|unique:categories,slug|max:150',
         'thumbnail' => 'required|image|max:1920',
     ];

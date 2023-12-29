@@ -77,9 +77,6 @@
 
 @section("script")
 
-{{-- Custom Scripts --}}
-{{-- <script src="{{ asset('js/functions.js') }}"></script> --}}
-
 {{-- Plugins --}}
 <script src="{{ asset('admin_dashboard_assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('admin_dashboard_assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>

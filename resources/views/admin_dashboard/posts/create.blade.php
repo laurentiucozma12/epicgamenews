@@ -67,7 +67,7 @@
                                                     <select name="video_game_id" required class="single-select">
                                                         @foreach ($video_games as $video_game)
                                                             <option value="{{ intval($video_game->id) }}">{{ $video_game->name }}</option>                                                                
-                                                        @endforeach 
+                                                        @endforeach
                                                     </select>
 
                                                     @error('video_game_id')

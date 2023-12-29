@@ -11,7 +11,7 @@ use App\Models\Platform;
 class AdminPlatformsController extends Controller
 { 
     private $rules = [
-        'name' => 'required|min:2|max:30',
+        'name' => 'required|min:2|max:250',
         'slug' => 'required|unique:platforms,slug|max:150',
         'thumbnail' => 'required|image|max:1920',
     ];
