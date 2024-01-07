@@ -179,6 +179,13 @@ $(document).ready(function() {
     
 
     ////// START - GAMES API //////
+    $(document).keyup(function(event) {
+        // Check if the pressed key is Enter (key code 13)
+        if (event.keyCode === 13) {
+          // Trigger the click event for the button with the specified ID
+          $("#searchGameButton").click();
+        }
+    });
     $('#searchGameButton').on('click', function () {
         // Get the value from the input
         const searchVideoGame = $('#gameName').val();
@@ -203,13 +210,8 @@ $(document).ready(function() {
                     gameGenres.empty();
                     gamePlatforms.empty();
     
-                    data.results.forEach(fetchedVideoGame => {
-                        gameName.append(`${fetchedVideoGame.background_image}`);
-                        gameName.append(`${fetchedVideoGame.name}`);
-                        gameSlug.append(`${fetchedVideoGame.slug}`);
-    
-                        // Update the input with the fetched video game name
-                        if (data.results.length > 0) {
+                    data.results.forEach((fetchedVideoGame) => {
+                        if (fetchedVideoGame.genres.length > 0 && fetchedVideoGame.platforms.length) {
                             // Create new row
                             const newRow = $('<tr></tr>');
 
@@ -279,11 +281,7 @@ $(document).ready(function() {
 
                             // Append the new form to the tbody
                             $('#table-game-api').append(newRow);
-                        } else {
-                            // Handle the case when no matching video game is found
-                            alert('Video game not found in the API.');
                         }
-
                     });
                 } else {
                     // Handle the case when no matching video game is found
