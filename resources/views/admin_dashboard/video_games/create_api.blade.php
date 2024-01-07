@@ -12,7 +12,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.index') }}">All Video Games</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.create') }}">Add New Video Game</a></li>    
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.create') }}">Add API Games</a></li>    
                     </ol>
                 </nav>
             </div>
@@ -21,11 +21,8 @@
         
         <div class="card">
             <div class="card-body p-4">
-                <h5 class="card-title">Add New Video Game</h5>
+                <h5 class="card-title">Add API Games</h5>
                 <hr/>
-
-                <form action="{{ route('admin.video_games.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
 
                     <div class="form-body mt-4">
                         <div class="row">
@@ -51,6 +48,7 @@
                                     <table class="table mb-0">
                                         <thead class="table-light">
                                             <tr>
+                                                <th>Thumbnail</th>
                                                 <th>Name</th>
                                                 <th>Slug</th>
                                                 <th>Categories</th>
@@ -58,7 +56,7 @@
                                                 <th>Add Game</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="table-game-api">
                                         </tbody>
                                     </table>
                                 </div>
@@ -66,7 +64,7 @@
                             </div>                            
                         </div><!--end row-->
                     </div>                        
-                </form><!--end form-->
+
             </div>
         </div>
     </div>
@@ -76,7 +74,13 @@
 <x-crop-modal />
 
 @section("script")
+
 <script>
+    // Sending data to functions-admin.js file
+    window.csrf_token = "{{ csrf_token() }}";    
+</script>
+
+<script>    
 $(document).ready(function() {
     ////// Select //////
     $('.single-select').select2({

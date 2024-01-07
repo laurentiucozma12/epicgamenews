@@ -34,39 +34,93 @@ class AdminVideoGamesController extends Controller
 
     public function storeApi(Request $request)
     {
-        $validated = $request->validate($this->rules);
-        $validated['user_id'] = auth()->id();
-        $video_game = VideoGame::create($validated);
+        // Find video game by slug
+        $game_exists = VideoGame::where('slug', $request->game_slug)->first();
 
-        // Attach categories to the video game
-        if ($request->has('categories_ids') && is_array($request->categories_ids)) {
-            $video_game->categories()->attach($request->categories_ids);
+        if (!$game_exists) {
+            $validated['name'] = $request->game_name;
+            $validated['slug'] = $request->game_slug;
+            $validated['user_id'] = auth()->id();
+            $video_game = VideoGame::create($validated);
+            
+            // Attach genres to the video game
+            $genres_names = explode(',', $request->genres_names);
+            $genres_slugs = explode(',', $request->genres_slugs);
+
+            foreach ($genres_names as $index => $genre_name) {
+                // Find category by slug
+                $category = Category::where('slug', $genres_slugs[$index])->first();
+            
+                // If category doesn't exist, create it
+                if (!$category) {
+                    try {
+                        $category = Category::create([
+                            'name' => $genre_name,
+                            'slug' => $genres_slugs[$index],
+                            'user_id' => auth()->id(),
+                        ]);
+                    } catch (\Exception $e) {
+                        // Handle the exception, log an error, or return an appropriate response
+                        return redirect()->back()->with('danger', 'Error creating category.');
+                    }
+                }
+            
+                // Attach the categories to video game
+                if ($category) {
+                    $video_game->categories()->attach($category->id);
+                }
+            }
+
+            // Attach platforms to the video game
+            $platforms_names = explode(',', $request->platforms_names);
+            $platforms_slugs = explode(',', $request->platforms_slugs);
+
+            foreach ($platforms_names as $index => $platform_name) {
+                // Find platform by slug
+                $platform = Platform::where('slug', $platforms_slugs[$index])->first();
+            
+                // If platform doesn't exist, create it
+                if (!$platform) {
+                    try {
+                        $platform = Platform::create([
+                            'name' => $platform_name,
+                            'slug' => $platforms_slugs[$index],
+                            'user_id' => auth()->id(),
+                        ]);
+                    } catch (\Exception $e) {
+                        // Handle the exception, log an error, or return an appropriate response
+                        return redirect()->back()->with('danger', 'Error creating platform.');
+                    }
+                }
+            
+                // Attach the platforms to video game
+                if ($platform) {
+                    $video_game->platforms()->attach($platform->id);
+                }
+            }
+
+            if ($request->hasFile('thumbnail')) {
+                $sizes = [
+                    [1140, 641],
+                    [943, 530],
+                    [764, 431],
+                    [480, 270],
+                    [342, 192],
+                    [400, 225],
+                    [300, 169],
+                    [146, 82],
+                ];
+
+                // Upload and save the new images
+                $adminCropResizeImage = new AdminCropResizeImage();
+                $image_data = $adminCropResizeImage->optimizeImage($request, $sizes);
+                $video_game->image()->create($image_data);
+            }
+
+            return redirect()->route('admin.video_games.index')->with('success', 'Video Game has been Created');            
+        } else {
+            return redirect()->back()->with('danger', 'Video Game already exists in Database');          
         }
-
-        // Attach platforms to the video game
-        if ($request->has('platforms_ids') && is_array($request->platforms_ids)) {
-            $video_game->platforms()->attach($request->platforms_ids);
-        }
-
-        if ($request->hasFile('thumbnail')) {
-            $sizes = [
-                [1140, 641],
-                [943, 530],
-                [764, 431],
-                [480, 270],
-                [342, 192],
-                [400, 225],
-                [300, 169],
-                [146, 82],
-            ];
-
-            // Upload and save the new images
-            $adminCropResizeImage = new AdminCropResizeImage();
-            $image_data = $adminCropResizeImage->optimizeImage($request, $sizes);
-            $video_game->image()->create($image_data);
-        }
-
-        return redirect()->route('admin.video_games.create')->with('success', 'Video Game has been Created');
     }
 
     public function create()

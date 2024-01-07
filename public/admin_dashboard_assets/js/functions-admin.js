@@ -178,7 +178,7 @@ $(document).ready(function() {
     ////// END - Tiny MCE //////
     
 
-    ////// START - SEARCH FOR GAMES in video_games/post_api.blade.php //////
+    ////// START - GAMES API //////
     $('#searchGameButton').on('click', function () {
         // Get the value from the input
         const searchVideoGame = $('#gameName').val();
@@ -187,25 +187,24 @@ $(document).ready(function() {
         fetch(`https://api.rawg.io/api/games?key=${GAMES_API}&search=${searchVideoGame}`)
             .then(response => response.json())
             .then(data => {
-                // Handle the API response
-                console.log(data);
     
                 // Update the input with the fetched video game name
                 if (data.results.length > 0) {
                     // Display other information
+                    const gameThumbnail = $('#fetchedGameThumbnail');
                     const gameName = $('#fetchedGameName');
                     const gameSlug = $('#fetchedGameSlug');
                     const gameGenres = $('#fetchedGameGenres');
                     const gamePlatforms = $('#fetchedGamePlatforms');
-                    
+
+                    gameThumbnail.empty();
                     gameName.empty();
                     gameSlug.empty();
                     gameGenres.empty();
                     gamePlatforms.empty();
     
                     data.results.forEach(fetchedVideoGame => {
-                        $('#inputProductTitle').val(fetchedVideoGame.name);
-    
+                        gameName.append(`${fetchedVideoGame.background_image}`);
                         gameName.append(`${fetchedVideoGame.name}`);
                         gameSlug.append(`${fetchedVideoGame.slug}`);
     
@@ -215,49 +214,71 @@ $(document).ready(function() {
                             const newRow = $('<tr></tr>');
 
                             // Append each piece of information to its respective <td>
+                            newRow.append($(`<td><img src="${fetchedVideoGame.background_image}" width="50"></td>`));
                             newRow.append($('<td>').text(fetchedVideoGame.name));
                             newRow.append($('<td>').text(fetchedVideoGame.slug));
 
                             // Display genres
+                            let genresNames = "";
+                            let genresSlugs = "";
                             if (fetchedVideoGame.genres && fetchedVideoGame.genres.length > 0) {
-                                let genresString = "";
-
+                                
                                 fetchedVideoGame.genres.forEach((genre, index) => {
-                                    genresString += genre.name;
-
+                                    genresNames += genre.name;
+                                    genresSlugs += genre.slug;
+                                    
                                     // Add a comma if it's not the last genre
                                     if (index < fetchedVideoGame.genres.length - 1) {
-                                        genresString += ", ";
+                                        genresNames += ", ";
+                                        genresSlugs += ", ";
                                     }
                                 });
-
-                                newRow.append($('<td>').text(genresString));
+                                
+                                newRow.append($('<td>').text(genresNames));
                             } else {
-                                newRow.append($('<td>').text('No genres'));
+                                newRow.append($('<td>'));
                             }
 
                             // Display platforms
+                            let platformsNames = "";
+                            let platformsSlugs = "";
                             if (fetchedVideoGame.platforms && fetchedVideoGame.platforms.length > 0) {
-                                let platformsString = "";
 
                                 fetchedVideoGame.platforms.forEach((platform, index) => {
-                                    platformsString += platform.platform.name;
+                                    platformsNames += platform.platform.name;
+                                    platformsSlugs += platform.platform.slug;
 
                                     // Add a comma if it's not the last platform
                                     if (index < fetchedVideoGame.platforms.length - 1) {
-                                        platformsString += ", ";
+                                        platformsNames += ", ";
+                                        platformsSlugs += ", ";
                                     }
                                 });
 
-                                newRow.append($('<td>').text(platformsString));
+                                newRow.append($('<td>').text(platformsNames));
                             } else {
-                                newRow.append($('<td>').text('No platforms'));
+                                newRow.append($('<td>'));
                             }
 
-                            newRow.append($('<td class="d-flex order-actions"><button type="button" class="btn btn-primary" id="searchGameButton">Add</button></td>'));
+                            var form = $(`
+                                <th>
+                                    <form action="/admin/video-games/store_api" method="POST" enctype="multipart/form-data" class="mb-0">
+                                        <input type="hidden" name="_token" value="${window.csrf_token}">
+                                        <input type="hidden" name="game_background_image" value="${fetchedVideoGame.background_image}">
+                                        <input type="hidden" name="game_name" value="${fetchedVideoGame.name}">
+                                        <input type="hidden" name="game_slug" value="${fetchedVideoGame.slug}">
+                                        <input type="hidden" name="genres_names" value="${genresNames}">
+                                        <input type="hidden" name="genres_slugs" value="${genresSlugs}">
+                                        <input type="hidden" name="platforms_names" value="${platformsNames}">
+                                        <input type="hidden" name="platforms_slugs" value="${platformsSlugs}">
+                                        <button type="submit" class="btn btn-primary">Add</button>
+                                    </form>
+                                </th>
+                            `);
+                            newRow.append(form);
 
-                            // Append the new row to the tbody
-                            $('tbody').append(newRow);
+                            // Append the new form to the tbody
+                            $('#table-game-api').append(newRow);
                         } else {
                             // Handle the case when no matching video game is found
                             alert('Video game not found in the API.');
@@ -273,82 +294,6 @@ $(document).ready(function() {
                 console.error(error);
             });
     });
-    ////// END - SEARCH FOR GAMES in video_games/post_api.blade.php //////
-
-
-    ////// START - GAMES_API //////
-    // const gameList = document.querySelector(".gameList");
-    // const loadMoreGamesBtn = document.querySelector(".main-button");
-    // let nextGameListUrl = null;
-
-    // const gamesURL = `https://api.rawg.io/api/games?key=${GAMES_API}&date=2023-12-01,2023-12-12&ordering=-added`;
-
-    // const getPlatformsStr = (platforms) => {
-    //     const platformsStr = platforms.map(each => each.platform.name).join(", ")
-
-    //     if (platformsStr.length > 30) {
-    //         return platformsStr.subtring(0, 30) + "...";
-    //     }
-
-    //     return platformsStr;
-    // };
-
-    // const getGenresStr = (genres) => {
-    //     const genresStr = genres.map(each => each.genre.name).join(", ")
-
-    //     if (genresStr.length > 30) {
-    //         return genresStr.subtring(0, 30) + "...";
-    //     }
-
-    //     return genresStr;
-    // };
-
-    // console.log(gamesURL, "check");
-
-    // function loadGames(gamesURL) {
-
-    //     fetch(gamesURL)
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             console.log(data);
-    //             nextGameListUrl = data.next ? data.next : null;
-    //             const games = data.results;
-
-    //             games.forEach(game => {
-    //                 const gameItemEl = `
-    //                     <div class="col-lg-4 col-md-6 col-sm-12">
-    //                         <div class="item">
-    //                             <img src="${game.background_image}" alt="${game.name} image"/>
-    //                             <h4 class="game-name">${game.name}</br>
-    //                                 <span class="platforms">${getPlatformsStr(game.parent_platforms)}</span></br>
-    //                                 <span class="categories">${getGenresStr(game.parent_genres)}</span>
-    //                             </h4>
-    //                         </div>
-    //                     </div>
-    //                 `
-    //                 gameList.insertAdjacentElement("beforeend", gameItemEl);
-    //             });
-
-    //             if (nextGameListUrl) {
-    //                 loadMoreGamesBtn.classList.remove("hidden");
-    //             } else {
-    //                 loadMoreGamesBtn.classList.add("hidden");                
-    //             }
-    //         })
-    //         .catch(error => {
-    //             console.log("An error occured: ", error)
-    //         })
-
-    // }
-
-    // loadGames(gamesURL);
-
-    // loadMoreGamesBtn.addEventListener('click', () => {
-    //     if(nextGameListUrl) {
-    //         loadGames(nextGameListUrl);
-    //     }
-    // })
-    ////// END - GAMES_API //////
-
+    ////// END - SEARCH FOR GAMES API //////
     
 }); // End document ready
