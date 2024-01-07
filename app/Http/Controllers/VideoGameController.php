@@ -19,7 +19,6 @@ class VideoGameController extends Controller
                 // the video game should not be visible.
                 $query->where('deleted', 0);
             })
-            ->has('posts')
             ->paginate(20);
 
         return view('video_games.index', [

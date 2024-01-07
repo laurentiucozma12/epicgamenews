@@ -99,7 +99,8 @@ class AdminVideoGamesController extends Controller
                 }
             }
 
-            if ($request->hasFile('thumbnail')) {
+            if ($request->exists('game_background_image') && $request->filled('game_background_image')) {
+                dd("game_background_image: " . $request->game_background_image);
                 $sizes = [
                     [1140, 641],
                     [943, 530],

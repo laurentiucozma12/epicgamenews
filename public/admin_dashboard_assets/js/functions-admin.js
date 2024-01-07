@@ -191,106 +191,111 @@ $(document).ready(function() {
         const searchVideoGame = $('#gameName').val();
     
         // Make an API request to fetch the video game data
-        fetch(`https://api.rawg.io/api/games?key=${GAMES_API}&search=${searchVideoGame}`)
-            .then(response => response.json())
-            .then(data => {
-    
-                // Update the input with the fetched video game name
-                if (data.results.length > 0) {
-                    // Display other information
-                    const gameThumbnail = $('#fetchedGameThumbnail');
-                    const gameName = $('#fetchedGameName');
-                    const gameSlug = $('#fetchedGameSlug');
-                    const gameGenres = $('#fetchedGameGenres');
-                    const gamePlatforms = $('#fetchedGamePlatforms');
+        if (searchVideoGame.length > 0) {
+            fetch(`https://api.rawg.io/api/games?key=${GAMES_API}&search=${searchVideoGame}`)
+                .then(response => response.json())
+                .then(data => {
+        
+                    // Update the input with the fetched video game name
+                    if (data.results.length > 0) {
+                        // Display other information
+                        const gameThumbnail = $('#fetchedGameThumbnail');
+                        const gameName = $('#fetchedGameName');
+                        const gameSlug = $('#fetchedGameSlug');
+                        const gameGenres = $('#fetchedGameGenres');
+                        const gamePlatforms = $('#fetchedGamePlatforms');
 
-                    gameThumbnail.empty();
-                    gameName.empty();
-                    gameSlug.empty();
-                    gameGenres.empty();
-                    gamePlatforms.empty();
-    
-                    data.results.forEach((fetchedVideoGame) => {
-                        if (fetchedVideoGame.genres.length > 0 && fetchedVideoGame.platforms.length) {
-                            // Create new row
-                            const newRow = $('<tr></tr>');
+                        gameThumbnail.empty();
+                        gameName.empty();
+                        gameSlug.empty();
+                        gameGenres.empty();
+                        gamePlatforms.empty();
+        
+                        data.results.forEach((fetchedVideoGame) => {
+                            if (fetchedVideoGame.genres.length > 0 && fetchedVideoGame.platforms.length) {
+                                // Create new row
+                                const newRow = $('<tr></tr>');
 
-                            // Append each piece of information to its respective <td>
-                            newRow.append($(`<td><img src="${fetchedVideoGame.background_image}" width="50"></td>`));
-                            newRow.append($('<td>').text(fetchedVideoGame.name));
-                            newRow.append($('<td>').text(fetchedVideoGame.slug));
+                                // Append each piece of information to its respective <td>
+                                newRow.append($(`<td><img src="${fetchedVideoGame.background_image}" width="50"></td>`));
+                                newRow.append($('<td>').text(fetchedVideoGame.name));
+                                newRow.append($('<td>').text(fetchedVideoGame.slug));
 
-                            // Display genres
-                            let genresNames = "";
-                            let genresSlugs = "";
-                            if (fetchedVideoGame.genres && fetchedVideoGame.genres.length > 0) {
-                                
-                                fetchedVideoGame.genres.forEach((genre, index) => {
-                                    genresNames += genre.name;
-                                    genresSlugs += genre.slug;
+                                // Display genres
+                                let genresNames = "";
+                                let genresSlugs = "";
+                                if (fetchedVideoGame.genres && fetchedVideoGame.genres.length > 0) {
                                     
-                                    // Add a comma if it's not the last genre
-                                    if (index < fetchedVideoGame.genres.length - 1) {
-                                        genresNames += ", ";
-                                        genresSlugs += ", ";
-                                    }
-                                });
-                                
-                                newRow.append($('<td>').text(genresNames));
-                            } else {
-                                newRow.append($('<td>'));
+                                    fetchedVideoGame.genres.forEach((genre, index) => {
+                                        genresNames += genre.name;
+                                        genresSlugs += genre.slug;
+                                        
+                                        // Add a comma if it's not the last genre
+                                        if (index < fetchedVideoGame.genres.length - 1) {
+                                            genresNames += ", ";
+                                            genresSlugs += ", ";
+                                        }
+                                    });
+                                    
+                                    newRow.append($('<td>').text(genresNames));
+                                } else {
+                                    newRow.append($('<td>'));
+                                }
+
+                                // Display platforms
+                                let platformsNames = "";
+                                let platformsSlugs = "";
+                                if (fetchedVideoGame.platforms && fetchedVideoGame.platforms.length > 0) {
+
+                                    fetchedVideoGame.platforms.forEach((platform, index) => {
+                                        platformsNames += platform.platform.name;
+                                        platformsSlugs += platform.platform.slug;
+
+                                        // Add a comma if it's not the last platform
+                                        if (index < fetchedVideoGame.platforms.length - 1) {
+                                            platformsNames += ", ";
+                                            platformsSlugs += ", ";
+                                        }
+                                    });
+
+                                    newRow.append($('<td>').text(platformsNames));
+                                } else {
+                                    newRow.append($('<td>'));
+                                }
+
+                                var form = $(`
+                                    <th>
+                                        <form action="/admin/video-games/store_api" method="POST" enctype="multipart/form-data" class="mb-0">
+                                            <input type="hidden" name="_token" value="${window.csrf_token}">
+                                            <input type="hidden" name="game_background_image" value="${fetchedVideoGame.background_image}">
+                                            <input type="hidden" name="game_name" value="${fetchedVideoGame.name}">
+                                            <input type="hidden" name="game_slug" value="${fetchedVideoGame.slug}">
+                                            <input type="hidden" name="genres_names" value="${genresNames}">
+                                            <input type="hidden" name="genres_slugs" value="${genresSlugs}">
+                                            <input type="hidden" name="platforms_names" value="${platformsNames}">
+                                            <input type="hidden" name="platforms_slugs" value="${platformsSlugs}">
+                                            <button type="submit" class="btn btn-primary">Add</button>
+                                        </form>
+                                    </th>
+                                `);
+                                newRow.append(form);
+
+                                // Append the new form to the tbody
+                                $('#table-game-api').append(newRow);
                             }
-
-                            // Display platforms
-                            let platformsNames = "";
-                            let platformsSlugs = "";
-                            if (fetchedVideoGame.platforms && fetchedVideoGame.platforms.length > 0) {
-
-                                fetchedVideoGame.platforms.forEach((platform, index) => {
-                                    platformsNames += platform.platform.name;
-                                    platformsSlugs += platform.platform.slug;
-
-                                    // Add a comma if it's not the last platform
-                                    if (index < fetchedVideoGame.platforms.length - 1) {
-                                        platformsNames += ", ";
-                                        platformsSlugs += ", ";
-                                    }
-                                });
-
-                                newRow.append($('<td>').text(platformsNames));
-                            } else {
-                                newRow.append($('<td>'));
-                            }
-
-                            var form = $(`
-                                <th>
-                                    <form action="/admin/video-games/store_api" method="POST" enctype="multipart/form-data" class="mb-0">
-                                        <input type="hidden" name="_token" value="${window.csrf_token}">
-                                        <input type="hidden" name="game_background_image" value="${fetchedVideoGame.background_image}">
-                                        <input type="hidden" name="game_name" value="${fetchedVideoGame.name}">
-                                        <input type="hidden" name="game_slug" value="${fetchedVideoGame.slug}">
-                                        <input type="hidden" name="genres_names" value="${genresNames}">
-                                        <input type="hidden" name="genres_slugs" value="${genresSlugs}">
-                                        <input type="hidden" name="platforms_names" value="${platformsNames}">
-                                        <input type="hidden" name="platforms_slugs" value="${platformsSlugs}">
-                                        <button type="submit" class="btn btn-primary">Add</button>
-                                    </form>
-                                </th>
-                            `);
-                            newRow.append(form);
-
-                            // Append the new form to the tbody
-                            $('#table-game-api').append(newRow);
-                        }
-                    });
-                } else {
-                    // Handle the case when no matching video game is found
-                    alert('Video game not found in the API.');
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            });
+                        });
+                    } else {
+                        // Handle the case when no matching video game is found
+                        alert('Video game not found in the API.');
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+            // end fetching the API
+        } else {
+            alert('You must write something before searching!');
+        }
     });
     ////// END - SEARCH FOR GAMES API //////
     
