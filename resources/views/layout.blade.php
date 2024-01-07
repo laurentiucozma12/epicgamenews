@@ -261,7 +261,9 @@
 						<small class="block" id="copyrightYear">&copy; Copyright <span id="currentYear"></span> | All rights reserved | This website was made by <a href="{{ route('home') }}" class="link-to-website">Epic Game News</a> | <a href="{{ route('privacy_policy.index') }}" class="link-to-website"> Privacy Policy </a></small>
 						<br> 
 					</p>
-
+					<p>
+						<small>Some of the data and/or images you see on this website are provided by <a href="https://rawg.io/" target="_blank">RAWG</a></small>	
+					</p>
 				</div>
 			</div>
 		</div>
