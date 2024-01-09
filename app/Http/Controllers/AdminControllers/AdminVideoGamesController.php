@@ -99,24 +99,6 @@ class AdminVideoGamesController extends Controller
                 }
             }
 
-            if ($request->exists('game_background_image') && $request->filled('game_background_image')) {
-                $sizes = [
-                    [1140, 641],
-                    [943, 530],
-                    [764, 431],
-                    [480, 270],
-                    [342, 192],
-                    [400, 225],
-                    [300, 169],
-                    [146, 82],
-                ];
-
-                // Upload and save the new images
-                $adminCropResizeImage = new AdminCropResizeImage();
-                $image_data = $adminCropResizeImage->optimizeImage($request->game_background_image, $sizes);
-                $video_game->image()->create($image_data);
-            }
-
             return redirect()->route('admin.video_games.index')->with('success', 'Video Game has been Created');            
         } else {
             return redirect()->back()->with('danger', 'Video Game already exists in Database');          
