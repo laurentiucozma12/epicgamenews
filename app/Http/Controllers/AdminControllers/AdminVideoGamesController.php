@@ -100,7 +100,6 @@ class AdminVideoGamesController extends Controller
             }
 
             if ($request->exists('game_background_image') && $request->filled('game_background_image')) {
-                dd("game_background_image: " . $request->game_background_image);
                 $sizes = [
                     [1140, 641],
                     [943, 530],
@@ -114,7 +113,7 @@ class AdminVideoGamesController extends Controller
 
                 // Upload and save the new images
                 $adminCropResizeImage = new AdminCropResizeImage();
-                $image_data = $adminCropResizeImage->optimizeImage($request, $sizes);
+                $image_data = $adminCropResizeImage->optimizeImage($request->game_background_image, $sizes);
                 $video_game->image()->create($image_data);
             }
 
