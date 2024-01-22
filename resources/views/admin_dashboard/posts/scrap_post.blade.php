@@ -11,7 +11,7 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a></li>
                         <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.posts.index') }}">All Posts</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.posts.create') }}">Add New Posts</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.posts.scrap_post') }}">Scrap Post</a></li>
                     </ol>
                 </nav>
             </div>
@@ -20,15 +20,63 @@
         
         <div class="card">
             <div class="card-body p-4">
-                <h5 class="card-title">Add New Post</h5>
+                <h5 class="card-title">Scrap Post</h5>
                 <hr/>
 
-                <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button type='button' class='btn btn-primary' id="scrapPostButton">Scrap Post</button>
 
-                    <div class="form-body mt-4">
-                        <div class="row">
-                            <div class="col-lg-12">
+                        {{-- <form action="" method="POST" enctype="multipart/form-data"> --}}
+                            @csrf
+
+                            <div class="form-body mt-4">
+
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Scraped Title</label>
+                                    <input type="text" value='{{ old("title") }}' name="title" required class="form-control" id="title">
+
+                                    @error('title')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="slug" class="form-label">Scraped Slug</label>
+                                    <input type="text" value='{{ old("slug") }}' name="slug" required class="form-control" id="slug">
+
+                                    @error('slug')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="excerpt" class="form-label">Scraped Excerpt</label>
+                                    <textarea class="form-control" required name='excerpt' id="excerpt" rows="3">{{ old("excerpt") }}</textarea>
+                                
+                                    @error('excerpt')
+                                        <p class='text-danger'>{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="body" class="form-label">Scraped Content</label>
+                                    <textarea id="body" name="body" class="form-control" rows="3">{{ old("body") }}</textarea>   
+                                
+                                    @error('body')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                            </div>
+                        {{-- </form><!--end form--> --}}
+                    </div>
+
+                    <div class="col-lg-6">
+                        <button class='btn btn-primary' type='submit'>Reformulate</button>
+                        <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-body mt-4">
 
                                 <div class="mb-3">
                                     <label for="title" class="form-label">Post Title</label>
@@ -54,6 +102,15 @@
                                 
                                     @error('excerpt')
                                         <p class='text-danger'>{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="body" class="form-label">Post Content</label>
+                                    <textarea id="body" name="body" class="form-control" rows="3">{{ old("body") }}</textarea>   
+                                
+                                    @error('body')
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
 
@@ -118,25 +175,17 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-
-                                <div class="mb-3">
-                                    <label for="body" class="form-label">Post Content</label>
-                                    <textarea id="body" name="body" class="form-control" rows="3">{{ old("body") }}</textarea>   
-                                
-                                    @error('body')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
                                 
                                 <button class='btn btn-primary' type='submit'>Add Post</button>
 
                             </div>
-                                            
-                        </div><!--end row-->
-                    </div>                        
-                </form><!--end form-->
+                        </form><!--end form-->
+                    </div>
+                </div>
+
             </div>
         </div>
+
     </div>
 </div>
 
@@ -147,8 +196,13 @@
 @endsection
 
 @section("script")
+
+{{-- Scraper --}}
+<script src="{{ asset('admin_dashboard_assets/js/scraper-puppeteer.js') }}"></script>
+
 <script>
 $(document).ready(function() {
+
     images_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {  
         const formData = new FormData();
         let _token = $("input[name='token']").val();

@@ -46,6 +46,16 @@ class AdminPostsController extends Controller
         ]);
     }
 
+    public function scrapPost()
+    {        
+        $video_games = VideoGame::all()
+            ->where('deleted', 0);
+
+        return view('admin_dashboard.posts.scrap_post', [
+            'video_games' => $video_games
+        ]);
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate($this->rules);        

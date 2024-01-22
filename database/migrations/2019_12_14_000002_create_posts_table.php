@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
+            $table->string('scraped_slug')->unique()->nullable();
             $table->string('excerpt');
             $table->string('author_thumbnail')->nullable();
             $table->text('body');
