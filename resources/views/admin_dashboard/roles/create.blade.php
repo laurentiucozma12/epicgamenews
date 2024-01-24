@@ -1,7 +1,7 @@
 @extends("admin_dashboard.layouts.app")
 
 @section('style')
-<style>
+{{-- <style>
     .permission {
         background-color: white;
         padding: 5px 10px;
@@ -11,7 +11,7 @@
         cursor: pointer;    
         width: 100%;
     }
-</style>
+</style> --}}
 @endsection
 
 @section("wrapper")

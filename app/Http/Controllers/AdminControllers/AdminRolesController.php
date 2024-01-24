@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\AdminControllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use Illuminate\Validation\Rule;
-use App\Models\Permission;
 use App\Models\Role;
+use App\Models\Permission;
+
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Route;
 
 class AdminRolesController extends Controller
 {
@@ -24,6 +25,9 @@ class AdminRolesController extends Controller
     
     public function create()
     {
+        // Create Permissions if new Controllers were added
+        $this->Permissions();
+        
         return view('admin_dashboard.roles.create', [
             'permissions' => Permission::all(),
         ]);
@@ -42,6 +46,9 @@ class AdminRolesController extends Controller
 
     public function edit(Role $role)
     {
+        // Create Permissions if new Controllers were added
+        $this->Permissions();
+
         return view('admin_dashboard.roles.edit', [
             'role' => $role,
             'permissions' => Permission::all(),
@@ -73,4 +80,25 @@ class AdminRolesController extends Controller
         $role->delete();
         return redirect()->route('admin.roles.index', $role)->with('success', 'Role has been deleted');
     }
+
+    private function Permissions() {
+        $blog_routes = Route::getRoutes();
+        $permissions_ids = [];
+
+        foreach ($blog_routes as $route) {
+            if (strpos($route->getName(), 'admin') !== false) {
+                $permissionName = $route->getName();
+
+                // Check if the permission already exists
+                $existingPermission = \App\Models\Permission::where('name', $permissionName)->first();
+
+                if (!$existingPermission) {
+                    // Permission doesn't exist, create it
+                    $permission = \App\Models\Permission::create(['name' => $permissionName]);
+                    $permissions_ids[] = $permission->id;
+                }
+            }
+        }
+    }
+
 }
