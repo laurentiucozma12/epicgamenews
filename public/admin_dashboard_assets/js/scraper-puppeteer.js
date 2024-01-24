@@ -1,15 +1,15 @@
 console.log('test1');
 
-const puppeteer = require('puppeteer-extra');
-const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+import { use, launch, executablePath as _executablePath } from 'puppeteer-extra';
+import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 
-puppeteer.use(StealthPlugin());
+use(StealthPlugin());
 
 const url = 'https://bot.sannysoft.com/';
 console.log('test2');
 
 async function run() {
-    const browser = await puppeteer.launch({ headless: "new", executablePath: puppeteer.executablePath() });
+    const browser = await launch({ headless: "new", executablePath: _executablePath() });
     const page = await browser.newPage();
     await page.goto(url);
     await page.screenshot({ path: 'public/admin_dashboard_assets/js/bot.png', fullPage: true });
