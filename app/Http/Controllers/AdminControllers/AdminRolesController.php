@@ -25,8 +25,8 @@ class AdminRolesController extends Controller
     
     public function create()
     {
-        // Create Permissions if new Controllers were added
-        $this->Permissions();
+        // Create permissions if new Controllers were added
+        $this->permissions();
         
         return view('admin_dashboard.roles.create', [
             'permissions' => Permission::all(),
@@ -46,8 +46,8 @@ class AdminRolesController extends Controller
 
     public function edit(Role $role)
     {
-        // Create Permissions if new Controllers were added
-        $this->Permissions();
+        // Create permissions if new Controllers were added
+        $this->permissions();
 
         return view('admin_dashboard.roles.edit', [
             'role' => $role,
@@ -56,9 +56,9 @@ class AdminRolesController extends Controller
     }
 
     public function update(Request $request, Role $role)
-    {
-        if ($role->name === 'admin') {
-            return redirect()->route('admin.roles.index')->with('error', 'You cannot update the admin role.');
+    {        
+        if ($role->name === 'admin' || $role->name === 'user') {
+            return redirect()->back()->with('danger', 'You cannot update the ' . $role->name . ' role');
         }
 
         $this->rules['name'] = ['required', Rule::unique('roles')->ignore($role)];
@@ -73,15 +73,16 @@ class AdminRolesController extends Controller
 
     public function destroy(Role $role)
     {
-        if ($role->name === 'admin') {
-            return redirect()->route('admin.roles.index')->with('error', 'You cannot delete the admin role.');
+        if ($role->name === 'admin' || $role->name === 'user') {
+            return redirect()->back()->with('danger', 'You cannot delete the ' . $role->name . ' role');
         }
 
         $role->delete();
         return redirect()->route('admin.roles.index', $role)->with('success', 'Role has been deleted');
     }
 
-    private function Permissions() {
+    private function permissions()
+    {
         $blog_routes = Route::getRoutes();
         $permissions_ids = [];
 
@@ -90,15 +91,27 @@ class AdminRolesController extends Controller
                 $permissionName = $route->getName();
 
                 // Check if the permission already exists
-                $existingPermission = \App\Models\Permission::where('name', $permissionName)->first();
+                $existingPermission = Permission::where('name', $permissionName)->first();
 
                 if (!$existingPermission) {
                     // Permission doesn't exist, create it
-                    $permission = \App\Models\Permission::create(['name' => $permissionName]);
+                    $permission = Permission::create(['name' => $permissionName]);
                     $permissions_ids[] = $permission->id;
+                } else {
+                    // Permission already exists, add it to the list
+                    $permissions_ids[] = $existingPermission->id;
                 }
             }
         }
+
+        // Update the "admin" role with the new permissions
+        $adminRole = Role::where('name', 'admin')->first();
+
+        if ($adminRole) {
+            // Sync the permissions without detaching existing ones
+            $adminRole->permissions()->syncWithoutDetaching($permissions_ids);
+        }
     }
 
+    
 }

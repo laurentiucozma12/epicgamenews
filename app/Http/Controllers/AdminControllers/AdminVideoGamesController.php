@@ -27,84 +27,6 @@ class AdminVideoGamesController extends Controller
         ]);
     }
 
-    public function createApi()
-    {
-        return view('admin_dashboard.video_games.create_api');
-    }
-
-    public function storeApi(Request $request)
-    {
-        // Find video game by slug
-        $game_exists = VideoGame::where('slug', $request->game_slug)->first();
-
-        if (!$game_exists) {
-            $validated['name'] = $request->game_name;
-            $validated['slug'] = $request->game_slug;
-            $validated['user_id'] = auth()->id();
-            $video_game = VideoGame::create($validated);
-            
-            // Attach genres to the video game
-            $genres_names = explode(',', $request->genres_names);
-            $genres_slugs = explode(',', $request->genres_slugs);
-
-            foreach ($genres_names as $index => $genre_name) {
-                // Find category by slug
-                $category = Category::where('slug', $genres_slugs[$index])->first();
-            
-                // If category doesn't exist, create it
-                if (!$category) {
-                    try {
-                        $category = Category::create([
-                            'name' => $genre_name,
-                            'slug' => $genres_slugs[$index],
-                            'user_id' => auth()->id(),
-                        ]);
-                    } catch (\Exception $e) {
-                        // Handle the exception, log an error, or return an appropriate response
-                        return redirect()->back()->with('danger', 'Error creating category.');
-                    }
-                }
-            
-                // Attach the categories to video game
-                if ($category) {
-                    $video_game->categories()->attach($category->id);
-                }
-            }
-
-            // Attach platforms to the video game
-            $platforms_names = explode(',', $request->platforms_names);
-            $platforms_slugs = explode(',', $request->platforms_slugs);
-
-            foreach ($platforms_names as $index => $platform_name) {
-                // Find platform by slug
-                $platform = Platform::where('slug', $platforms_slugs[$index])->first();
-            
-                // If platform doesn't exist, create it
-                if (!$platform) {
-                    try {
-                        $platform = Platform::create([
-                            'name' => $platform_name,
-                            'slug' => $platforms_slugs[$index],
-                            'user_id' => auth()->id(),
-                        ]);
-                    } catch (\Exception $e) {
-                        // Handle the exception, log an error, or return an appropriate response
-                        return redirect()->back()->with('danger', 'Error creating platform.');
-                    }
-                }
-            
-                // Attach the platforms to video game
-                if ($platform) {
-                    $video_game->platforms()->attach($platform->id);
-                }
-            }
-
-            return redirect()->route('admin.video_games.index')->with('success', 'Video Game has been Created');            
-        } else {
-            return redirect()->back()->with('danger', 'Video Game already exists in Database');          
-        }
-    }
-
     public function create()
     {
         return view('admin_dashboard.video_games.create', [
@@ -243,4 +165,83 @@ class AdminVideoGamesController extends Controller
         
         return redirect()->route('admin.video_games.index')->with('danger', 'Video Game has been Dezactivated');
     }
+
+    public function createApi()
+    {
+        return view('admin_dashboard.video_games.create_api');
+    }
+
+    public function storeApi(Request $request)
+    {
+        // Find video game by slug
+        $game_exists = VideoGame::where('slug', $request->game_slug)->first();
+
+        if (!$game_exists) {
+            $validated['name'] = $request->game_name;
+            $validated['slug'] = $request->game_slug;
+            $validated['user_id'] = auth()->id();
+            $video_game = VideoGame::create($validated);
+            
+            // Attach genres to the video game
+            $genres_names = explode(',', $request->genres_names);
+            $genres_slugs = explode(',', $request->genres_slugs);
+
+            foreach ($genres_names as $index => $genre_name) {
+                // Find category by slug
+                $category = Category::where('slug', $genres_slugs[$index])->first();
+            
+                // If category doesn't exist, create it
+                if (!$category) {
+                    try {
+                        $category = Category::create([
+                            'name' => $genre_name,
+                            'slug' => $genres_slugs[$index],
+                            'user_id' => auth()->id(),
+                        ]);
+                    } catch (\Exception $e) {
+                        // Handle the exception, log an error, or return an appropriate response
+                        return redirect()->back()->with('danger', 'Error creating category.');
+                    }
+                }
+            
+                // Attach the categories to video game
+                if ($category) {
+                    $video_game->categories()->attach($category->id);
+                }
+            }
+
+            // Attach platforms to the video game
+            $platforms_names = explode(',', $request->platforms_names);
+            $platforms_slugs = explode(',', $request->platforms_slugs);
+
+            foreach ($platforms_names as $index => $platform_name) {
+                // Find platform by slug
+                $platform = Platform::where('slug', $platforms_slugs[$index])->first();
+            
+                // If platform doesn't exist, create it
+                if (!$platform) {
+                    try {
+                        $platform = Platform::create([
+                            'name' => $platform_name,
+                            'slug' => $platforms_slugs[$index],
+                            'user_id' => auth()->id(),
+                        ]);
+                    } catch (\Exception $e) {
+                        // Handle the exception, log an error, or return an appropriate response
+                        return redirect()->back()->with('danger', 'Error creating platform.');
+                    }
+                }
+            
+                // Attach the platforms to video game
+                if ($platform) {
+                    $video_game->platforms()->attach($platform->id);
+                }
+            }
+
+            return redirect()->route('admin.video_games.index')->with('success', 'Video Game has been Created');            
+        } else {
+            return redirect()->back()->with('danger', 'Video Game already exists in Database');          
+        }
+    }
+    
 }

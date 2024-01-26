@@ -32,9 +32,15 @@
             </a>
 
             <ul>
-                <li> <a href="{{ route('admin.posts.index') }}"><i class="bx bx-right-arrow-alt"></i>All Posts</a></li>
-                <li> <a href="{{ route('admin.posts.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Posts</a></li>                          
-                <li> <a href="{{ route('admin.posts.scrap_post') }}"><i class="bx bx-right-arrow-alt"></i>Scrap Posts</a></li>                          
+                <li><a href="{{ route('admin.posts.index') }}"><i class="bx bx-right-arrow-alt"></i>All Posts</a></li>
+                <li><a href="{{ route('admin.posts.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Posts</a></li>                          
+                {{-- <li><a href="{{ route('admin.posts.create_api') }}"><i class="bx bx-right-arrow-alt"></i>Add API Posts</a></li>                           --}}
+                <li> 
+                    <a href="{{ route('admin.posts.scrap_post') }}">
+                        <i class="bx bx-right-arrow-alt"></i>Scrap Posts
+                        <b class="text-danger">(IN DEVELOPMENT)</b>
+                    </a>
+                </li>                          
             </ul>
         </li>
 
@@ -45,9 +51,9 @@
             </a>
 
             <ul>
-                <li> <a href="{{ route('admin.video_games.index') }}"><i class="bx bx-right-arrow-alt"></i>All Video Games</a></li>
-                <li> <a href="{{ route('admin.video_games.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Games</a></li>                          
-                <li> <a href="{{ route('admin.video_games.create_api') }}"><i class="bx bx-right-arrow-alt"></i>Add API Games</a></li>
+                <li><a href="{{ route('admin.video_games.index') }}"><i class="bx bx-right-arrow-alt"></i>All Video Games</a></li>
+                <li><a href="{{ route('admin.video_games.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Games</a></li>                          
+                <li><a href="{{ route('admin.video_games.create_api') }}"><i class="bx bx-right-arrow-alt"></i>Add API Games</a></li>
             </ul>
         </li>
 
@@ -58,8 +64,8 @@
             </a>
 
             <ul>
-                <li> <a href="{{ route('admin.categories.index') }}"><i class="bx bx-right-arrow-alt"></i>All Categories</a></li>
-                <li> <a href="{{ route('admin.categories.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Category</a></li>                          
+                <li><a href="{{ route('admin.categories.index') }}"><i class="bx bx-right-arrow-alt"></i>All Categories</a></li>
+                <li><a href="{{ route('admin.categories.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Category</a></li>                          
             </ul>
         </li>
 
@@ -70,8 +76,8 @@
             </a>
 
             <ul>
-                <li> <a href="{{ route('admin.platforms.index') }}"><i class="bx bx-right-arrow-alt"></i>All Platforms</a></li>
-                <li> <a href="{{ route('admin.platforms.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Platform</a></li>                          
+                <li><a href="{{ route('admin.platforms.index') }}"><i class="bx bx-right-arrow-alt"></i>All Platforms</a></li>
+                <li><a href="{{ route('admin.platforms.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Platform</a></li>                          
             </ul>
         </li>
 
@@ -98,8 +104,8 @@
             </a>
 
             <ul>
-                <li> <a href="{{ route('admin.roles.index') }}"><i class="bx bx-right-arrow-alt"></i>All Roles</a></li>
-                <li> <a href="{{ route('admin.roles.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Role</a></li>
+                <li><a href="{{ route('admin.roles.index') }}"><i class="bx bx-right-arrow-alt"></i>All Roles</a></li>
+                <li><a href="{{ route('admin.roles.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Role</a></li>
             </ul>
         </li>
 
@@ -110,8 +116,8 @@
             </a>
 
             <ul>
-                <li> <a href="{{ route('admin.users.index') }}"><i class="bx bx-right-arrow-alt"></i>All Users</a></li>
-                <li> <a href="{{ route('admin.users.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New User</a></li>
+                <li><a href="{{ route('admin.users.index') }}"><i class="bx bx-right-arrow-alt"></i>All Users</a></li>
+                <li><a href="{{ route('admin.users.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New User</a></li>
             </ul>
         </li>
 

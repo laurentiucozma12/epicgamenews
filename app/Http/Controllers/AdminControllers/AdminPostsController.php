@@ -46,16 +46,6 @@ class AdminPostsController extends Controller
         ]);
     }
 
-    public function scrapPost()
-    {        
-        $video_games = VideoGame::all()
-            ->where('deleted', 0);
-
-        return view('admin_dashboard.posts.scrap_post', [
-            'video_games' => $video_games
-        ]);
-    }
-
     public function store(Request $request)
     {
         $validated = $request->validate($this->rules);        
@@ -167,6 +157,26 @@ class AdminPostsController extends Controller
         $post->save();
 
         return redirect()->route('admin.posts.index')->with('danger', 'Post has been dezactivated');
+    }
+
+    public function createApi()
+    {
+        return view('admin_dashboard.posts.create_api');
+    }
+
+    public function storeApi(Request $request)
+    {
+        //
+    }
+
+    public function scrapPost()
+    {        
+        $video_games = VideoGame::all()
+            ->where('deleted', 0);
+
+        return view('admin_dashboard.posts.scrap_post', [
+            'video_games' => $video_games
+        ]);
     }
 
     private function syncTags($request, $post)
