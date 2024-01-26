@@ -11,8 +11,8 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.index') }}">All Video Games</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.create') }}">Add API Games</a></li>    
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.posts.index') }}">All Posts</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.posts.create') }}">Add API Posts</a></li>    
                     </ol>
                 </nav>
             </div>
@@ -21,7 +21,7 @@
         
         <div class="card">
             <div class="card-body p-4">
-                <h5 class="card-title">Add API Games</h5>
+                <h5 class="card-title">Add API Posts</h5>
                 <hr/>
 
                     <div class="form-body mt-4">
@@ -29,13 +29,13 @@
                             <div class="col-lg-12">
 
                                 <div class="mb-3">
-                                    <label for="gameName" class="form-label">Video Game Name</label>
+                                    <label for="postName" class="form-label">Post Title</label>
                                     <div class="input-group row">
                                         <div class="col-4">
-                                            <input type="text" value='{{ old("name") }}' name="name" required class="form-control" id="gameName">
+                                            <input type="text" value='{{ old("name") }}' name="name" required class="form-control" id="postName">
                                         </div>
                                         <div class="col-2">
-                                            <button type="button" class="btn btn-primary" id="searchGameButton">Search Game</button>
+                                            <button type="button" class="btn btn-primary" id="searchPostButton">Search Post</button>
                                         </div>
                                     </div>
                                 
@@ -49,14 +49,14 @@
                                         <thead class="table-light">
                                             <tr>
                                                 <th>Thumbnail</th>
-                                                <th>Name</th>
+                                                <th>Title</th>
+                                                <th>Excerpt</th>
                                                 <th>Slug</th>
-                                                <th>Categories</th>
-                                                <th>Platforms</th>
-                                                <th>Add Game</th>
+                                                <th>Description</th>
+                                                <th>Add Post</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="table-game-api">
+                                        <tbody id="table-post-api">
                                         </tbody>
                                     </table>
                                 </div>

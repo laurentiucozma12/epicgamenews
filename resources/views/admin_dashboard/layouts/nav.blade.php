@@ -34,7 +34,7 @@
             <ul>
                 <li><a href="{{ route('admin.posts.index') }}"><i class="bx bx-right-arrow-alt"></i>All Posts</a></li>
                 <li><a href="{{ route('admin.posts.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Posts</a></li>                          
-                {{-- <li><a href="{{ route('admin.posts.create_api') }}"><i class="bx bx-right-arrow-alt"></i>Add API Posts</a></li>                           --}}
+                <li><a href="{{ route('admin.posts.create_api') }}"><i class="bx bx-right-arrow-alt"></i>Add API Posts</a></li>                          
                 <li> 
                     <a href="{{ route('admin.posts.scrap_post') }}">
                         <i class="bx bx-right-arrow-alt"></i>Scrap Posts
