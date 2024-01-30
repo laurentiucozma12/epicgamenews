@@ -81,8 +81,8 @@ img {
     align-items: center;
     min-width: fit-content; }
 .nav-layout-container .nav-layout-logo-container img {
-    width: 25px;
-    height: 25px; }
+    width: 40px;
+    height: 40px; }
 .nav-layout-container .nav-layout-logo-container h1 {
     margin: 0 0 0 10px;
     font-size: 28px; }    
@@ -139,6 +139,22 @@ img {
     font-size: 12px; }
 .no-right-margin {
     margin: 0; }
+.display-large {
+    display: block; }
+    @media screen and (max-width: 776px) {
+        .display-large {
+            display: none; } }
+.display-medium {
+    display: none; }
+    @media screen and (max-width: 776px) and (min-width: 550px) {
+        .display-medium {
+            display: block; } }
+.display-small {
+    display: none; }
+    @media screen and (max-width: 550px) {
+        .display-small {
+            display: block; } }
+
 
 /* Menu - PC Screen */
 .colorlib-nav {
@@ -475,24 +491,18 @@ padding: 0 0 2.5em 0; }
     font-size: 3rem;
     font-weight: 700; 
     margin: 0; }
-.text-container .meta {
-    color: #ccc;
-    text-align: end; }
     @media (max-width: 1200px) { 
     .text-container h3 {
-        font-size: 2rem; }
-    .text-container .meta {
-        font-size: 1.5rem; } }
+        font-size: 2rem; } }
     @media (max-width: 992px) {
         .text-container h3 {
-            font-size: 4rem; }
-        .text-container .meta {
             font-size: 2.5rem; } }
+    @media (max-width: 768px) {
+        .text-container h3 {
+            font-size: 4rem; } }
     @media (max-width: 350px) {
         .text-container h3 {
-            font-size: 2.5rem; } 
-        .text-container .meta {
-            font-size: 1.75rem;} }
+            font-size: 2.5rem; } }
 
 /* Post Page */
 .single-post-container {

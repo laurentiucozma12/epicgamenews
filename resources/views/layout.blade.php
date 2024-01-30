@@ -1,79 +1,83 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>	
-{{-- Meta tags general --}}
-<meta charset="utf-8">
-<meta http-equiv="Content-Language" content="en">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="index, follow">
 
-<link rel="canonical" href="https://epicgamenews.com/" />
+	{{-- Meta tags general --}}
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Language" content="en">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="index, follow">
+		
+	{{-- Title --}}
+	<title>@yield('title')</title>
 
-{{-- Meta tag google index verification --}}
-<meta name="google-site-verification" content="iEChGkx43f5nLfyry5G7KUeSc9ejTJFI-ed8A0it_UU" />
+	<!-- Epic Game News Icon Logo -->
+	<link rel="icon" href="{{ asset('storage/logo/logo-epic-game-news-38x38.png') }}" type="image/x-icon"/>
 
-{{-- Google Ads --}}
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7545576639006325" crossorigin="anonymous"></script>
+	<!-- Apple Touch Icon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}">
 
-{{-- Meta tags for the page --}}
-<title>@yield('title')</title>
-<meta name="description" content="Explore the latest and most exciting gaming news at EpicGameNews.com. Stay updated on the hottest releases, industry trends, and in-depth game reviews. Immerse yourself in a world of gaming insights, expert analyses, and exclusive content. Your ultimate destination for everything gaming awaits!">
-<meta name="keywords" content="gaming news, video game releases, industry trends, game reviews, esports updates, gaming community, gaming culture, latest game announcements, game analysis, Epic Game News, gaming updates, console news, PC gaming, multiplayer games, gaming events">
-<meta name="author" content="Laurențiu Cozma" />
-<meta name="theme-color" content="#ffffff">
+	{{-- Canonical --}}
+	<link rel="canonical" href="https://epicgamenews.com/" />
 
-<!-- Facebook -->
-<meta property="og:title" content="Gaming News Now - Epic Game News">
-<meta property="og:description" content="Stay updated with the latest gaming news, releases, reviews, and industry trends at Epic Game News. Your ultimate source for everything gaming-related.">
-<meta property="og:image" content="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}">
-<meta property="og:url" content="https://epicgamenews.com/">
-<meta property="og:site_name" content="Epic Game News">
-<meta property="og:type" content="website">
-{{-- <meta property="og:profile_id" content=""> --}}
-{{-- <meta property="article:author" content=""> --}}
+	{{-- Meta tag google index verification --}}
+	<meta name="google-site-verification" content="iEChGkx43f5nLfyry5G7KUeSc9ejTJFI-ed8A0it_UU" />
 
-{{-- Font --}}
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900&display=swap">
+	{{-- Google Ads --}}
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7545576639006325" crossorigin="anonymous"></script>
 
-<!-- Epic Game News Icon Logo -->
-<link rel="icon" href="{{ asset('storage/logo/logo-epic-game-news-38x38.png') }}" type="image/x-icon"/>
+	{{-- Meta tags for the page --}}
+	<meta name="description" content="Explore the latest and most exciting gaming news at EpicGameNews.com. Stay updated on the hottest releases, industry trends, and in-depth game reviews. Immerse yourself in a world of gaming insights, expert analyses, and exclusive content. Your ultimate destination for everything gaming awaits!">
+	<meta name="keywords" content="gaming news, video game releases, industry trends, game reviews, esports updates, gaming community, gaming culture, latest game announcements, game analysis, Epic Game News, gaming updates, console news, PC gaming, multiplayer games, gaming events">
+	<meta name="author" content="Epic Game News" />
 
+	{{-- <meta property="og:description" content="Stay updated with the latest gaming news, releases, reviews, and industry trends at Epic Game News. Your ultimate source for everything gaming-related."> --}}
+	{{-- <meta property="og:image" content="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}"> --}}
+	{{-- <meta property="og:url" content="{{ url()->current() }}"> --}}
+	{{-- <meta property="og:site_name" content="Epic Game News"> --}}
+	{{-- <meta property="og:type" content="website"> --}}
+	{{-- <meta property="og:profile_id" content=""> --}}
+	{{-- <meta property="article:author" content=""> --}}
 
-{{-- ////// START - BLOG TEMPLATE ////// --}}
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="{{ asset('blog_template/css/animate.css') }}">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="{{ asset('blog_template/css/icomoon.css') }}">
-	<!-- Bootstrap v3.3.5  -->
-	<link rel="stylesheet" href="{{ asset('blog_template/css/bootstrap.css') }}">    
-	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="{{ asset('blog_template/css/magnific-popup.css') }}">
-	<!-- Flexslider  -->
-	<link rel="stylesheet" href="{{ asset('blog_template/css/flexslider.css') }}">
-	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="{{ asset('blog_template/css/owl.carousel.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('blog_template/css/owl.theme.default.min.css') }}">
-	<!-- Flaticons  -->
-	<link rel="stylesheet" href="{{ asset('blog_template/fonts/flaticon/font/flaticon.css') }}">
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="{{ asset('blog_template/css/style.css') }}">
-{{-- ////// END - BLOG TEMPLATE ////// --}}
+	{{-- Font --}}
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900&display=swap">
 
+	<!-- Epic Game News Icon Logo -->
+	<link rel="icon" href="{{ asset('storage/logo/logo-epic-game-news-38x38.png') }}" type="image/x-icon"/>
 
-{{-- Epic Game News - My Style --}}
-<link rel="stylesheet" href="{{ asset('css/mystyle.css') }}">
+	{{-- ////// START - BLOG TEMPLATE ////// --}}
+		<!-- Animate.css -->
+		<link rel="stylesheet" href="{{ asset('blog_template/css/animate.css') }}">
+		<!-- Icomoon Icon Fonts-->
+		<link rel="stylesheet" href="{{ asset('blog_template/css/icomoon.css') }}">
+		<!-- Bootstrap v3.3.5  -->
+		<link rel="stylesheet" href="{{ asset('blog_template/css/bootstrap.css') }}">    
+		<!-- Magnific Popup -->
+		<link rel="stylesheet" href="{{ asset('blog_template/css/magnific-popup.css') }}">
+		<!-- Flexslider  -->
+		<link rel="stylesheet" href="{{ asset('blog_template/css/flexslider.css') }}">
+		<!-- Owl Carousel -->
+		<link rel="stylesheet" href="{{ asset('blog_template/css/owl.carousel.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('blog_template/css/owl.theme.default.min.css') }}">
+		<!-- Flaticons  -->
+		<link rel="stylesheet" href="{{ asset('blog_template/fonts/flaticon/font/flaticon.css') }}">
+		<!-- Theme style  -->
+		<link rel="stylesheet" href="{{ asset('blog_template/css/style.css') }}">
+	{{-- ////// END - BLOG TEMPLATE ////// --}}
 
+	{{-- Epic Game News - My Style --}}
+	<link rel="stylesheet" href="{{ asset('css/mystyle.css') }}">
 
-{{-- ////// START - BLOG TEMPLATE ////// --}}
-	<!-- Modernizr JS -->
-	<script src="{{ asset('blog_template/js/modernizr-2.6.2.min.js') }}"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
-@yield('custom_css')
-{{-- ////// END - BLOG TEMPLATE ////// --}}
+	{{-- ////// START - BLOG TEMPLATE ////// --}}
+		<!-- Modernizr JS -->
+		<script src="{{ asset('blog_template/js/modernizr-2.6.2.min.js') }}"></script>
+		<!-- FOR IE9 below -->
+		<!--[if lt IE 9]>
+		<script src="js/respond.min.js"></script>
+		<![endif]-->
+	@yield('custom_css')
+	{{-- ////// END - BLOG TEMPLATE ////// --}}
 
 </head>
 <body>	
