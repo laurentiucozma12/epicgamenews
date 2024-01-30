@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use App\Models\VideoGame;
 use App\Models\Post;
+use App\Models\VideoGame;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Services\RecentPostsService;
 
 class VideoGameController extends Controller
 {
@@ -26,18 +27,14 @@ class VideoGameController extends Controller
         ]);
     }
 
-    public function show(VideoGame $video_game)
-    {        
+    public function show(VideoGame $video_game, RecentPostsService $recentPostsService)
+    {
+        $recent_posts = $recentPostsService->getRecentPosts();
+        
         $posts = $video_game->posts()
             ->latest()
             ->where('deleted', 0)
             ->paginate(20);
-
-        $recent_posts = Post::latest()
-            ->where('deleted', 0)
-            ->paginate(5);
-            
-        $recent_posts = $recent_posts->items();
 
         return view('video_games.show', [
             'video_game' => $video_game,

@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Tag;
 
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Platform;
-use App\Models\Tag;
+use Illuminate\Http\Request;
+use App\Services\RecentPostsService;
 
 class TagController extends Controller
-{  
-    public function index()
+{
+    public function show(Tag $tag, RecentPostsService $recentPostsService)
     {
-        // view all tags in the blog
-    }
-
-    public function show(Tag $tag)
-    {        
+        $recent_posts = $recentPostsService->getRecentPosts();
+        
         if ($tag->name === 'uncategorized') {
             abort(404); }
 
@@ -26,17 +24,10 @@ class TagController extends Controller
             ->deleted()
             ->paginate(20);
 
-        $recent_posts = Post::excludeUncategorized()
-            ->latest()
-            ->deleted()
-            ->paginate(5);
-
-        $recent_postsArray = $recent_posts->items();
-
         return view('tags.show', [
             'tag' => $tag,
             'posts' => $posts,
-            'recent_posts' => $recent_postsArray,
+            'recent_posts' => $recent_posts,
         ]);
     }
 }

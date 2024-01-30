@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Models\Post;
+
 use App\Models\Platform;
+use App\Services\RecentPostsService;
 
 class PlatformController extends Controller
 {
@@ -26,20 +26,16 @@ class PlatformController extends Controller
         ]);
     }
 
-    public function show(Platform $platform)
+    public function show(Platform $platform, RecentPostsService $recentPostsService)
     {
+        $recent_posts = $recentPostsService->getRecentPosts();
+
         $videoGameIds = $platform->videoGames()->pluck('video_game_id');
 
         $posts = Post::whereIn('video_game_id', $videoGameIds)
             ->latest()
             ->where('deleted', 0)
             ->paginate(20);
-
-        $recent_posts = Post::latest()
-            ->where('deleted', 0)
-            ->paginate(5);
-
-        $recent_posts = $recent_posts->items();
 
         return view('platforms.show', [
             'platform' => $platform,

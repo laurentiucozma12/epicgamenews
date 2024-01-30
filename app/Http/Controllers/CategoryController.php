@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Models\Post;
+
 use App\Models\Category;
+use Illuminate\Http\Request;
+use App\Services\RecentPostsService;
 
 class CategoryController extends Controller
 {
@@ -26,20 +27,16 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function show(Category $category)
+    public function show(Category $category, RecentPostsService $recentPostsService)
     {
+        $recent_posts = $recentPostsService->getRecentPosts();
+        
         $videoGameIds = $category->videoGames()->pluck('video_game_id');
 
         $posts = Post::whereIn('video_game_id', $videoGameIds)
             ->latest()
             ->where('deleted', 0)
             ->paginate(20);
-
-        $recent_posts = Post::latest()
-            ->where('deleted', 0)
-            ->paginate(5);
-
-        $recent_posts = $recent_posts->items();
 
         return view('categories.show', [
             'category' => $category,

@@ -5,17 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Post;
-use App\Models\Category;
+use App\Services\RecentPostsService;
+
 
 class PostsController extends Controller
 { 
-    public function show(Post $post)
+    public function show(Post $post, RecentPostsService $recentPostsService)
     {
-        $recent_posts = Post::latest()
-            ->where('deleted', 0)
-            ->paginate(5);
-
-        $recent_posts = $recent_posts->items();
+        $recent_posts = $recentPostsService->getRecentPosts();
 
         $tags = $post->tags;
 
