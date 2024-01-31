@@ -26,32 +26,16 @@
 
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-message-square-edit'></i></div>
+                <div class="parent-icon"><i class='bx bx-search-alt'></i></div>
                 <div class="menu-title">SEO</div>
             </a>
 
             <ul>
-                <li><a href="{{ route('admin.seo_home') }}"><i class="bx bx-right-arrow-alt"></i>SEO Home</a></li>                                         
+                <li><a href="{{ route('admin.seo.index_page') }}"><i class="bx bx-right-arrow-alt"></i>SEO Pages</a></li>                                         
             </ul>
 
             <ul>
-                <li><a href="{{ route('admin.seo_video_games') }}"><i class="bx bx-right-arrow-alt"></i>SEO Video Games</a></li>                                         
-            </ul>
-
-            <ul>
-                <li><a href="{{ route('admin.seo_categories') }}"><i class="bx bx-right-arrow-alt"></i>SEO Categories</a></li>                                         
-            </ul>
-
-            <ul>
-                <li><a href="{{ route('admin.seo_platforms') }}"><i class="bx bx-right-arrow-alt"></i>SEO Platforms</a></li>                                         
-            </ul>
-
-            <ul>
-                <li><a href="{{ route('admin.seo_about') }}"><i class="bx bx-right-arrow-alt"></i>SEO About</a></li>                                         
-            </ul>
-
-            <ul>
-                <li><a href="{{ route('admin.seo_contact') }}"><i class="bx bx-right-arrow-alt"></i>SEO Contact</a></li>                                         
+                <li><a href="{{ route('admin.seo.index_post') }}"><i class="bx bx-right-arrow-alt"></i>SEO Posts</a></li>                                         
             </ul>
         </li>
 

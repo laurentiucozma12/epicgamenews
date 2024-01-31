@@ -4,10 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 
-use App\Models\Post;
-use App\Models\Category;
-use App\Models\Platform;
-use Illuminate\Http\Request;
 use App\Services\RecentPostsService;
 
 class TagController extends Controller

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Seo;
 
+use App\Models\Post;
 use App\Models\Platform;
 use App\Services\RecentPostsService;
 
@@ -11,6 +12,8 @@ class PlatformController extends Controller
 {
     public function index()
     {
+        $seo = Seo::where('page_name', '=', 'Platform')->first();
+        
         $platforms = Platform::where('deleted', 0)
             ->whereHas('videoGames', function ($query) {
                 // A platform is attached to a video game. A video game is attached to a post.
@@ -22,6 +25,7 @@ class PlatformController extends Controller
             ->paginate(20);
 
         return view('platforms.index', [
+            'seo' => $seo,
             'platforms' => $platforms
         ]);
     }

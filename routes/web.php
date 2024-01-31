@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TagController;
+use App\Http\Controllers\SeoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +14,7 @@ use App\Http\Controllers\TagController;
 | 
 */ 
 
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PostsController;
@@ -24,8 +25,9 @@ use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\VideoGameController;
 use App\Http\Controllers\RecentPostsController;
 use App\Http\Controllers\PrivacyPolicyController;
-use App\Http\Controllers\AdminControllers\TinyMCEController;
 
+use App\Http\Controllers\AdminControllers\TinyMCEController;
+use App\Http\Controllers\AdminControllers\AdminSeoController;
 use App\Http\Controllers\AdminControllers\AdminHomeController;
 use App\Http\Controllers\AdminControllers\AdminTagsController;
 use App\Http\Controllers\AdminControllers\AdminAboutController;
@@ -37,7 +39,6 @@ use App\Http\Controllers\AdminControllers\AdminDashboardController;
 use App\Http\Controllers\AdminControllers\AdminPlatformsController;
 use App\Http\Controllers\AdminControllers\AdminCategoriesController;
 use App\Http\Controllers\AdminControllers\AdminVideoGamesController;
-use App\Http\Controllers\AdminControllers\AdminSeoController;
 
 // Admin Dashboard Routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions'])->group(function(){
@@ -47,29 +48,15 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
 
     Route::prefix('seo')->group(function () {
-        Route::get('/seo-home/edit', [AdminSeoController::class, 'editSeoHome'])->name('seo_home');
-        // Route::put('/{seo_home:slug}', [AdminSeoController::class, 'update'])->name('seo.update');
-        // Route::patch('/{seo_home:slug}', [AdminSeoController::class, 'update']);
-        
-        Route::get('/seo-video-games/edit', [AdminSeoController::class, 'editSeoVideoGames'])->name('seo_video_games');
-        // Route::put('/{seo_home:slug}', [AdminSeoController::class, 'update'])->name('seo.update');
-        // Route::patch('/{seo_home:slug}', [AdminSeoController::class, 'update']);
+        Route::get('/', [AdminSeoController::class, 'indexSeoPage'])->name('seo.index_page');
+        Route::get('/{seo}/edit', [AdminSeoController::class, 'editSeoPage'])->name('seo.edit_page');
+        Route::put('/{seo}', [AdminSeoController::class, 'updateSeoPage'])->name('seo.update_page');
+        Route::patch('/{seo}', [AdminSeoController::class, 'updateSeoPage']);
 
-        Route::get('/seo-categories/edit', [AdminSeoController::class, 'editSeoCategories'])->name('seo_categories');
-        // Route::put('/{seo_home:slug}', [AdminSeoController::class, 'update'])->name('seo.update');
-        // Route::patch('/{seo_home:slug}', [AdminSeoController::class, 'update']);
 
-        Route::get('/seo-platforms/edit', [AdminSeoController::class, 'editSeoPlatforms'])->name('seo_platforms');
-        // Route::put('/{seo_home:slug}', [AdminSeoController::class, 'update'])->name('seo.update');
-        // Route::patch('/{seo_home:slug}', [AdminSeoController::class, 'update']);
 
-        Route::get('/seo-about/edit', [AdminSeoController::class, 'editSeoAbout'])->name('seo_about');
-        // Route::put('/{seo_home:slug}', [AdminSeoController::class, 'update'])->name('seo.update');
-        // Route::patch('/{seo_home:slug}', [AdminSeoController::class, 'update']);
+        Route::get('/post', [AdminSeoController::class, 'indexPost'])->name('seo.index_post');
 
-        Route::get('/seo-contact/edit', [AdminSeoController::class, 'editSeoContact'])->name('seo_contact');
-        // Route::put('/{seo_home:slug}', [AdminSeoController::class, 'update'])->name('seo.update');
-        // Route::patch('/{seo_home:slug}', [AdminSeoController::class, 'update']);
     });
 
     Route::prefix('posts')->group(function () {

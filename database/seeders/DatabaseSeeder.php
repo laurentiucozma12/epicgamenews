@@ -101,7 +101,7 @@ class DatabaseSeeder extends Seeder
             $platform->image()->save( \App\Models\Image::factory()->make() );
         }
 
-        $posts = \App\Models\Post::factory(10)->create(['deleted' => 0]);;
+        $posts = \App\Models\Post::factory(10)->create(['deleted' => 0]);
 
         \App\Models\Tag::factory(1)->create();
         
@@ -126,8 +126,62 @@ class DatabaseSeeder extends Seeder
         
             $post->image()->save(\App\Models\Image::factory()->make());
         }
-        
 
         \App\Models\About::factory(1)->create();
+
+        $seo_home = \App\Models\Seo::factory()->create([
+            'page_name' => 'Home',
+            'title' => 'Latest News in Gaming - Epic Game News',
+            'description' => 'Explore the latest and most exciting gaming news at EpicGameNews.com. Stay updated on the hottest releases, industry trends, and in-depth game reviews. Immerse yourself in a world of gaming insights, expert analyses, and exclusive content. Your ultimate destination for everything gaming awaits!',
+            'keywords' => 'gaming news, video game releases, industry trends, game reviews, esports updates, gaming community, gaming culture, latest game announcements, game analysis, Epic Game News, gaming updates, console news, PC gaming, multiplayer games, gaming events',
+        ]);
+
+        // Video Game Page
+        $seo_video_game = \App\Models\Seo::factory()->create([
+            'page_name' => 'Video Game',
+            'title' => 'Explore the Latest Video Games: News, Reviews, and Updates only at EpicGameNews.com',
+            'description' => 'Stay in the loop with EpicGameNews.com! Discover the latest video games, read insightful reviews, and stay updated with gaming news and trends. Your ultimate destination for gaming enthusiasts.',
+            'keywords' => 'epicgamenews.com, popular video games, video games news, latest game releases, gaming reviews',
+        ]);
+
+        // Category Page
+        $seo_category = \App\Models\Seo::factory()->create([
+            'page_name' => 'Category',
+            'title' => 'Dive into Exciting Gaming Categories at EpicGameNews.com',
+            'description' => 'Explore diverse gaming categories at EpicGameNews.com. From action-packed adventures to strategic challenges, find your favorite video game genres and discover new gaming worlds.',
+            'keywords' => 'video game genres, gaming categories, explore gaming types, epicgamenews.com categories, popular game genres, gaming variety',
+        ]);
+
+        // Platform Page
+        $seo_platform = \App\Models\Seo::factory()->create([
+            'page_name' => 'Platform',
+            'title' => 'Discover Gaming Excellence on Leading Platforms at EpicGameNews.com',
+            'description' => 'Explore the best gaming experiences on various platforms at EpicGameNews.com. From top-notch console exclusives to PC gaming insights, find the perfect platform for your gaming adventures.',
+            'keywords' => 'gaming platforms, video game consoles, pc, playstation, xbox, mobile, gaming devices',
+        ]);
+
+        // About Page
+        $seo_about = \App\Models\Seo::factory()->create([
+            'page_name' => 'About',
+            'title' => 'About us - Epic Game News',
+            'description' => 'Wanna know more about us? Checkout About page.',
+            'keywords' => 'about us, epicgamenews.com, epic game news, epicgamenews, about',
+        ]);
+
+        // Contact Page
+        $seo_contact = \App\Models\Seo::factory()->create([
+            'page_name' => 'Contact',
+            'title' => 'Contact us - Epic Game News',
+            'description' => 'Wanna contact us? Complete a form on Contact page.',
+            'keywords' => 'contact us, epicgamenews.com, epic game news, epicgamenews, contact',
+        ]);
+
+        // Privacy Policy Page
+        $seo_privacy_policy = \App\Models\Seo::factory()->create([
+            'page_name' => 'Privacy',
+            'title' => '',
+            'description' => '',
+            'keywords' => '',
+        ]);
     }
 }

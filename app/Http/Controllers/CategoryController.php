@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Seo;
 
+use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Services\RecentPostsService;
@@ -12,6 +13,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
+        $seo = Seo::where('page_name', '=', 'Category')->first();
+        
         $categories = Category::where('deleted', 0)
             ->whereHas('videoGames', function ($query) {
                 // A platform is attached to a video game. A video game is attached to a post.
@@ -23,6 +26,7 @@ class CategoryController extends Controller
             ->paginate(20);
 
         return view('categories.index', [
+            'seo' => $seo,
             'categories' => $categories
         ]);
     }

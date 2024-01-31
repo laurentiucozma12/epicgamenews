@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use App\Models\Seo;
 use App\Models\Contact;
 use App\Mail\ContactMail;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -13,7 +14,10 @@ class ContactController extends Controller
 {    
     public function create()
     {
-        return view('contact');
+        $seo = Seo::where('page_name', '=', 'Contact')->first();
+        return view('contact', [
+            'seo' => $seo,
+        ]);
     }
 
     public function store()

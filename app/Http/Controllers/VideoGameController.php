@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Seo;
 use App\Models\VideoGame;
-
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\RecentPostsService;
 
@@ -13,6 +11,8 @@ class VideoGameController extends Controller
 {
     public function index()
     {
+        $seo = Seo::where('page_name', '=', 'Video Game')->first();
+        
         $video_games = VideoGame::where('deleted', 0)
             ->whereHas('posts', function ($query) {
                 // A video game is attached to a post. 
@@ -23,6 +23,7 @@ class VideoGameController extends Controller
             ->paginate(20);
 
         return view('video_games.index', [
+            'seo' => $seo,
             'video_games' => $video_games
         ]);
     }

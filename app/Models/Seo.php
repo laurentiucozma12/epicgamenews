@@ -9,7 +9,7 @@ class Seo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'keywords', 'user_id'];
+    protected $fillable = ['page_name', 'title', 'description', 'keywords', 'user_id'];
 
     public function author()
     {

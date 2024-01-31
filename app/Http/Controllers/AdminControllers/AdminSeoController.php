@@ -2,86 +2,47 @@
 
 namespace App\Http\Controllers\AdminControllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Seo;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AdminSeoController extends Controller
 {
-    public function editSeoHome() {
-        
-        $title = 'title';
-        $description = 'description';
-        $keywords = 'keywords';
-        
-        return view('admin_dashboard.seo.seo_home', [
-            'title' => $title,
-            'description' => $description,
-            'keywords' => $keywords,
+    private $rules = [
+        'title' => 'required|min:5|max:100',
+        'description' => 'required|min:5|max:300',
+        'keywords' => 'required|min:5|max:255',
+    ];
+
+    public function indexSeoPage() {
+        return view('admin_dashboard.seo.index_page', [
+            'seos' => Seo::all(),   
         ]);
     }
 
-    public function editSeoVideoGames() {    
-        
-        $title = 'title';   
-        $description = 'description';
-        $keywords = 'keywords';
-        
-        return view('admin_dashboard.seo.seo_video_games', [
-            'title' => $title,
-            'description' => $description,
-            'keywords' => $keywords,
+    public function editSeoPage(Seo $seo) {
+        return view('admin_dashboard.seo.edit_page', [
+            'seo' => $seo,
         ]);
     }
 
-    public function editSeoCategories() {    
+    public function updateSeoPage(Request $request, Seo $seo) {
+        $validated = $request->validate($this->rules);
+        $validated['user_id'] = auth()->id();
+        $keywords = $validated['keywords'] = strtolower($validated['keywords']);
         
-        $title = 'title';   
-        $description = 'description';
-        $keywords = 'keywords';
+        $seo->update($validated);
         
-        return view('admin_dashboard.seo.seo_categories', [
-            'title' => $title,
-            'description' => $description,
+        $seo->update([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
             'keywords' => $keywords,
         ]);
+
+        return redirect()->route('admin.seo.edit_page', $seo)->with('success', 'SEO ' . $seo->page_name . ' updated successfully');
     }
 
-    public function editSeoPlatforms() {    
-        
-        $title = 'title';   
-        $description = 'description';
-        $keywords = 'keywords';
-        
-        return view('admin_dashboard.seo.seo_platforms', [
-            'title' => $title,
-            'description' => $description,
-            'keywords' => $keywords,
-        ]);
-    }
-
-    public function editSeoAbout() {    
-        
-        $title = 'title';   
-        $description = 'description';
-        $keywords = 'keywords';
-        
-        return view('admin_dashboard.seo.seo_about', [
-            'title' => $title,
-            'description' => $description,
-            'keywords' => $keywords,
-        ]);
-    }
-
-    public function editSeoContact() {    
-        
-        $title = 'title';   
-        $description = 'description';
-        $keywords = 'keywords';
-        
-        return view('admin_dashboard.seo.seo_contact', [
-            'title' => $title,
-            'description' => $description,
-            'keywords' => $keywords,
-        ]);
+    public function indexPost() {
+        return view('admin_dashboard.seo.index_posts');
     }
 }
