@@ -21,7 +21,38 @@
             <a href="{{ route('admin.dashboard.index') }}">
                 <div class="parent-icon"><i class='bx bx-line-chart'></i></div>
                 <div class="menu-title">Dashboard</div>
-            </a>            
+            </a>
+        </li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-message-square-edit'></i></div>
+                <div class="menu-title">SEO</div>
+            </a>
+
+            <ul>
+                <li><a href="{{ route('admin.seo_home') }}"><i class="bx bx-right-arrow-alt"></i>SEO Home</a></li>                                         
+            </ul>
+
+            <ul>
+                <li><a href="{{ route('admin.seo_video_games') }}"><i class="bx bx-right-arrow-alt"></i>SEO Video Games</a></li>                                         
+            </ul>
+
+            <ul>
+                <li><a href="{{ route('admin.seo_categories') }}"><i class="bx bx-right-arrow-alt"></i>SEO Categories</a></li>                                         
+            </ul>
+
+            <ul>
+                <li><a href="{{ route('admin.seo_platforms') }}"><i class="bx bx-right-arrow-alt"></i>SEO Platforms</a></li>                                         
+            </ul>
+
+            <ul>
+                <li><a href="{{ route('admin.seo_about') }}"><i class="bx bx-right-arrow-alt"></i>SEO About</a></li>                                         
+            </ul>
+
+            <ul>
+                <li><a href="{{ route('admin.seo_contact') }}"><i class="bx bx-right-arrow-alt"></i>SEO Contact</a></li>                                         
+            </ul>
         </li>
 
         <hr>   

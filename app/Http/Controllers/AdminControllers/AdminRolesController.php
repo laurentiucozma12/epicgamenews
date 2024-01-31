@@ -16,6 +16,9 @@ class AdminRolesController extends Controller
 
     public function index()
     { 
+        // Create permissions if new Controllers were added
+        $this->permissions();
+
         $roles = Role::with('createdByUser')->orderBy('id', 'DESC')->paginate(100);
 
         return view('admin_dashboard.roles.index', [
@@ -85,6 +88,7 @@ class AdminRolesController extends Controller
     {
         $blog_routes = Route::getRoutes();
         $permissions_ids = [];
+        $permissions_names = [];
 
         foreach ($blog_routes as $route) {
             if (strpos($route->getName(), 'admin') !== false) {
@@ -97,21 +101,55 @@ class AdminRolesController extends Controller
                     // Permission doesn't exist, create it
                     $permission = Permission::create(['name' => $permissionName]);
                     $permissions_ids[] = $permission->id;
+                    $permissions_names[] = $permission->name;
                 } else {
                     // Permission already exists, add it to the list
                     $permissions_ids[] = $existingPermission->id;
+                    $permissions_names[] = $existingPermission->name;
                 }
             }
         }
-
+        
         // Update the "admin" role with the new permissions
         $adminRole = Role::where('name', 'admin')->first();
-
+        
         if ($adminRole) {
             // Sync the permissions without detaching existing ones
             $adminRole->permissions()->syncWithoutDetaching($permissions_ids);
         }
+        
+        // 1. Get all admin routes
+        $adminPermissions = Permission::all()->filter(function ($permission) {
+            return strpos($permission->name, 'admin') !== false;
+        })->toArray();
+        
+        // Extract strings from permission names
+        $permissionsNames = array_map(function ($permission) {
+            return $permission['name'];
+        }, $adminPermissions);
+        
+        // Remove duplicates from the $permissionsNames array
+        $uniquePermissionsNames = array_unique($permissionsNames);     
+
+        // 2.Get all unique admin permissions from DB
+        $permissions_names = array_unique($permissions_names);
+
+        // Remove extra permissions from $uniquePermissionsNames
+        $finalPermission = array_diff($uniquePermissionsNames, $permissions_names);
+
+        // If count($adminPermissions) !== count($permissions_names)
+        // it means, the code was updated, and some routes were added or removed
+        // so we have to automatically update the database, removing the extra permissions
+        if (count($adminPermissions) !== count($permissions_names)) {
+            $permission = Permission::where('name', $finalPermission)->first();
+        
+            if ($permission) {
+                $permission->delete();
+            }        
+        }        
+
+
     }
 
-    
+
 }

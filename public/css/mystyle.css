@@ -107,6 +107,7 @@ img {
 .colorlib-nav ul .first-btn {
     margin-bottom: 0 !important; }
 .has-dropdown {
+    cursor: pointer;
     position: relative;
     margin-right: 2em; }
 .dropdown {

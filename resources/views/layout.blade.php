@@ -28,15 +28,16 @@
 	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7545576639006325" crossorigin="anonymous"></script>
 
 	{{-- Meta tags for the page --}}
+	<meta property="og:title" content="Latest News in Gaming - Epic Game News">
 	<meta name="description" content="Explore the latest and most exciting gaming news at EpicGameNews.com. Stay updated on the hottest releases, industry trends, and in-depth game reviews. Immerse yourself in a world of gaming insights, expert analyses, and exclusive content. Your ultimate destination for everything gaming awaits!">
 	<meta name="keywords" content="gaming news, video game releases, industry trends, game reviews, esports updates, gaming community, gaming culture, latest game announcements, game analysis, Epic Game News, gaming updates, console news, PC gaming, multiplayer games, gaming events">
 	<meta name="author" content="Epic Game News" />
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="{{ url()->current() }}">
 
 	{{-- <meta property="og:description" content="Stay updated with the latest gaming news, releases, reviews, and industry trends at Epic Game News. Your ultimate source for everything gaming-related."> --}}
 	{{-- <meta property="og:image" content="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}"> --}}
-	{{-- <meta property="og:url" content="{{ url()->current() }}"> --}}
 	{{-- <meta property="og:site_name" content="Epic Game News"> --}}
-	{{-- <meta property="og:type" content="website"> --}}
 	{{-- <meta property="og:profile_id" content=""> --}}
 	{{-- <meta property="article:author" content=""> --}}
 

@@ -25,8 +25,8 @@ use App\Http\Controllers\VideoGameController;
 use App\Http\Controllers\RecentPostsController;
 use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\AdminControllers\TinyMCEController;
-use App\Http\Controllers\AdminControllers\AdminHomeController;
 
+use App\Http\Controllers\AdminControllers\AdminHomeController;
 use App\Http\Controllers\AdminControllers\AdminTagsController;
 use App\Http\Controllers\AdminControllers\AdminAboutController;
 use App\Http\Controllers\AdminControllers\AdminPostsController;
@@ -37,6 +37,7 @@ use App\Http\Controllers\AdminControllers\AdminDashboardController;
 use App\Http\Controllers\AdminControllers\AdminPlatformsController;
 use App\Http\Controllers\AdminControllers\AdminCategoriesController;
 use App\Http\Controllers\AdminControllers\AdminVideoGamesController;
+use App\Http\Controllers\AdminControllers\AdminSeoController;
 
 // Admin Dashboard Routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions'])->group(function(){
@@ -45,7 +46,32 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
 
-    // Route::resource('posts', AdminPostsController::class)->except('show');
+    Route::prefix('seo')->group(function () {
+        Route::get('/seo-home/edit', [AdminSeoController::class, 'editSeoHome'])->name('seo_home');
+        // Route::put('/{seo_home:slug}', [AdminSeoController::class, 'update'])->name('seo.update');
+        // Route::patch('/{seo_home:slug}', [AdminSeoController::class, 'update']);
+        
+        Route::get('/seo-video-games/edit', [AdminSeoController::class, 'editSeoVideoGames'])->name('seo_video_games');
+        // Route::put('/{seo_home:slug}', [AdminSeoController::class, 'update'])->name('seo.update');
+        // Route::patch('/{seo_home:slug}', [AdminSeoController::class, 'update']);
+
+        Route::get('/seo-categories/edit', [AdminSeoController::class, 'editSeoCategories'])->name('seo_categories');
+        // Route::put('/{seo_home:slug}', [AdminSeoController::class, 'update'])->name('seo.update');
+        // Route::patch('/{seo_home:slug}', [AdminSeoController::class, 'update']);
+
+        Route::get('/seo-platforms/edit', [AdminSeoController::class, 'editSeoPlatforms'])->name('seo_platforms');
+        // Route::put('/{seo_home:slug}', [AdminSeoController::class, 'update'])->name('seo.update');
+        // Route::patch('/{seo_home:slug}', [AdminSeoController::class, 'update']);
+
+        Route::get('/seo-about/edit', [AdminSeoController::class, 'editSeoAbout'])->name('seo_about');
+        // Route::put('/{seo_home:slug}', [AdminSeoController::class, 'update'])->name('seo.update');
+        // Route::patch('/{seo_home:slug}', [AdminSeoController::class, 'update']);
+
+        Route::get('/seo-contact/edit', [AdminSeoController::class, 'editSeoContact'])->name('seo_contact');
+        // Route::put('/{seo_home:slug}', [AdminSeoController::class, 'update'])->name('seo.update');
+        // Route::patch('/{seo_home:slug}', [AdminSeoController::class, 'update']);
+    });
+
     Route::prefix('posts')->group(function () {
         Route::get('/', [AdminPostsController::class, 'index'])->name('posts.index');
         Route::get('/create', [AdminPostsController::class, 'create'])->name('posts.create');
@@ -59,7 +85,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
         Route::post('/store_api', [AdminPostsController::class, 'storeApi'])->name('posts.store_api');
 
         Route::get('/scrap-post', [AdminPostsController::class, 'scrapPost'])->name('posts.scrap_post');
-        // Route::post('/store_api', [AdminPostsController::class, 'storeApi'])->name('posts.store_api');
     });
 
     Route::post('upload_tinymce_image', [TinyMCEController::class, 'upload_tinymce_image'])->name('upload_tinymce_image');
