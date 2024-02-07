@@ -19,6 +19,7 @@
     --light-blue-2: #c2fcff;
     --light-green: #32AC1E;
     --light-green-hover: #3ac924;
+    --youtube-red: #FE0100;
     --red-1: red;
     --red-2: #d9534f;
     --red-3: #d43f3a ;
@@ -240,11 +241,49 @@ footer .link-to-website:hover {
     margin: 0 0 10px 0 !important; }
 
 /* side-ads.blade.php */
+.check-youtube-channel {
+    margin-bottom: 0;
+    font-size: 2.5rem;
+    font-weight: 700; }
+.check-youtube-channel:hover {
+    cursor: pointer;
+    transition: 0.8s;
+    color: var(--youtube-red); }
+.check-youtube-channel .icon-youtube2 {
+    font-size: 3rem;
+    vertical-align: -3.5px; }
+
+.youtube-color:hover {
+    transition: 0.8s;
+    color: var(--youtube-red); }
 .ads-container {
-    padding: 2rem 0 2rem 0;
     display: flex;
-    justify-content: center;
-    align-items: center; }
+    justify-content: center; }
+.ads-container .hymerra-title span {
+    font-size: 2.4rem; }
+.ads-container .hymerra-title {
+    font-size: 2.9rem;
+    margin-top: 2rem; }
+.ads-container .subscribe {
+    margin-bottom: 0;
+    font-size: 3rem; 
+    text-align: center; }
+.ads-container .youtube .icon-youtube {
+    font-size: 14.5rem; }
+
+.ads-container h4 {
+    line-height: normal;
+    font-weight: 600;
+    margin-bottom: 1rem; }
+.ads-container figure {
+    margin: 0; }
+.ads-container figure figcaption {
+    line-height: normal;
+    text-align: center; }
+.ads-container .hymerra-youtube {
+    padding: 0 !important; }
+.artstation-link:hover {
+    color: var(--light-blue-1); }
 
 /* Recent News: side-recent-posts.blade.php */
 .recent-news-big-title {

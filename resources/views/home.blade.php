@@ -22,7 +22,8 @@
 					<x-google-ads.responsive-square-ad/>					
 				</div>
 
-				<x-blog.side-ads-meme/>
+				{{-- <x-blog.side-ads-meme/> --}}
+				<x-blog.side-youtube/>
 				
 			</div>
 		</div>
