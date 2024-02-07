@@ -8,9 +8,8 @@ class RecentPostsService
 {
     public function getRecentPosts($limit = 5)
     {
-        return Post::excludeUncategorized()
-            ->where('deleted', 0)
-            ->latest()
+        return Post::latest()
+            ->where('deleted', 0)            
             ->limit($limit)
             ->get();
     }

@@ -183,5 +183,21 @@ class DatabaseSeeder extends Seeder
             'description' => '',
             'keywords' => '',
         ]);
+
+        // Login Page
+        $seo_login = \App\Models\Seo::factory()->create([
+            'page_name' => 'Login',
+            'title' => '',
+            'description' => '',
+            'keywords' => '',
+        ]);
+
+        // Register Page
+        $seo_register = \App\Models\Seo::factory()->create([
+            'page_name' => 'Register',
+            'title' => '',
+            'description' => '',
+            'keywords' => '',
+        ]);
     }
 }

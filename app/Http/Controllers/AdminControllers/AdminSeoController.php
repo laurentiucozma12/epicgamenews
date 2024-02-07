@@ -20,13 +20,21 @@ class AdminSeoController extends Controller
         ]);
     }
 
-    public function editSeoPage(Seo $seo) {
+    public function editSeoPage(Seo $seo) {        
+        $page_name = strtolower($seo->page_name);
+        $restrictedPages = ['privacy', 'login', 'register'];
+
+        if (in_array($page_name, $restrictedPages)) {
+            return redirect()->back()->with('danger', "You cannot update $seo->page_name!");
+        }
+        
         return view('admin_dashboard.seo.edit_page', [
             'seo' => $seo,
         ]);
     }
 
     public function updateSeoPage(Request $request, Seo $seo) {
+        $description = strtolower($request->input('description'));
         $validated = $request->validate($this->rules);
         $validated['user_id'] = auth()->id();
         $keywords = $validated['keywords'] = strtolower($validated['keywords']);
@@ -35,7 +43,7 @@ class AdminSeoController extends Controller
         
         $seo->update([
             'title' => $request->input('title'),
-            'description' => $request->input('description'),
+            'description' => $description,
             'keywords' => $keywords,
         ]);
 

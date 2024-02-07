@@ -75,7 +75,7 @@
                         </div>
                                 
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-12">
                                 <div class="mb-3">
                                     <h5 class="mb-0"><label for="seoDescription" class="form-label">SEO {{ $seo->page_name }} Description (around 50-60 characters)</label></h5>
                                     <div class="d-flex">

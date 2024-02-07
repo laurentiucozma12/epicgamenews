@@ -12,73 +12,79 @@
 	{{-- Title --}}
 	<title>@yield('title')</title>
 
-	<!-- Epic Game News Icon Logo -->
+	{{-- Epic Game News Icon Logo -->
 	<link rel="icon" href="{{ asset('storage/logo/logo-epic-game-news-38x38.png') }}" type="image/x-icon"/>
 
-	<!-- Apple Touch Icon -->
+	{{-- Apple Touch Icon -->
 	<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}">
-
-	{{-- Canonical --}}
-	<link rel="canonical" href="https://epicgamenews.com/" />
 
 	{{-- Meta tag google index verification --}}
 	<meta name="google-site-verification" content="iEChGkx43f5nLfyry5G7KUeSc9ejTJFI-ed8A0it_UU" />
-
+	
 	{{-- Google Ads --}}
 	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7545576639006325" crossorigin="anonymous"></script>
+	
+	{{------------------------------------ SEO - START ------------------------------------}}
+	{{-- Canonical --}}
+	<link rel="canonical" href="{{ url()->current() }}" />
 
 	{{-- Meta tags for the page --}}
-	<meta property="og:title" content="{{ $seo->title }}">
+	{{-- <meta property="og:title" content="{{ $seo->title }}">
 	<meta name="description" content="{{ $seo->description }}">
-	<meta name="keywords" content="{{ $seo->keywords }}">
+	<meta name="keywords" content="{{ $seo->keywords }}"> --}}
 	<meta name="author" content="Epic Game News" />
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="{{ url()->current() }}">
 
+	{{-- Meta tags for facebook --}}
 	{{-- <meta property="og:description" content="Stay updated with the latest gaming news, releases, reviews, and industry trends at Epic Game News. Your ultimate source for everything gaming-related."> --}}
 	{{-- <meta property="og:image" content="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}"> --}}
 	{{-- <meta property="og:site_name" content="Epic Game News"> --}}
 	{{-- <meta property="og:profile_id" content=""> --}}
 	{{-- <meta property="article:author" content=""> --}}
+	{{------------------------------------ SEO - END ------------------------------------}}
 
+
+	{{------------------------------------ STYLES - START ------------------------------------}}	
 	{{-- Font --}}
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900&display=swap">
+	
+	{{-- Animate.css --}}
+	<link rel="stylesheet" href="{{ asset('blog_template/css/animate.css') }}">
 
-	<!-- Epic Game News Icon Logo -->
-	<link rel="icon" href="{{ asset('storage/logo/logo-epic-game-news-38x38.png') }}" type="image/x-icon"/>
+	{{-- Icomoon Icon Fonts--}}
+	<link rel="stylesheet" href="{{ asset('blog_template/css/icomoon.css') }}">
 
-	{{-- ////// START - BLOG TEMPLATE ////// --}}
-		<!-- Animate.css -->
-		<link rel="stylesheet" href="{{ asset('blog_template/css/animate.css') }}">
-		<!-- Icomoon Icon Fonts-->
-		<link rel="stylesheet" href="{{ asset('blog_template/css/icomoon.css') }}">
-		<!-- Bootstrap v3.3.5  -->
-		<link rel="stylesheet" href="{{ asset('blog_template/css/bootstrap.css') }}">    
-		<!-- Magnific Popup -->
-		<link rel="stylesheet" href="{{ asset('blog_template/css/magnific-popup.css') }}">
-		<!-- Flexslider  -->
-		<link rel="stylesheet" href="{{ asset('blog_template/css/flexslider.css') }}">
-		<!-- Owl Carousel -->
-		<link rel="stylesheet" href="{{ asset('blog_template/css/owl.carousel.min.css') }}">
-		<link rel="stylesheet" href="{{ asset('blog_template/css/owl.theme.default.min.css') }}">
-		<!-- Flaticons  -->
-		<link rel="stylesheet" href="{{ asset('blog_template/fonts/flaticon/font/flaticon.css') }}">
-		<!-- Theme style  -->
-		<link rel="stylesheet" href="{{ asset('blog_template/css/style.css') }}">
-	{{-- ////// END - BLOG TEMPLATE ////// --}}
+	{{-- Bootstrap v3.3.5  --}}
+	<link rel="stylesheet" href="{{ asset('blog_template/css/bootstrap.css') }}">
 
+	{{-- Magnific Popup --}}
+	<link rel="stylesheet" href="{{ asset('blog_template/css/magnific-popup.css') }}">
+
+	{{-- Flexslider  --}}
+	<link rel="stylesheet" href="{{ asset('blog_template/css/flexslider.css') }}">
+
+	{{-- Owl Carousel --}}
+	<link rel="stylesheet" href="{{ asset('blog_template/css/owl.carousel.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('blog_template/css/owl.theme.default.min.css') }}">
+
+	{{-- Flaticons  --}}
+	<link rel="stylesheet" href="{{ asset('blog_template/fonts/flaticon/font/flaticon.css') }}">
+
+	{{-- Theme style  --}}
+	<link rel="stylesheet" href="{{ asset('blog_template/css/style.css') }}">
+	
 	{{-- Epic Game News - My Style --}}
 	<link rel="stylesheet" href="{{ asset('css/mystyle.css') }}">
 
-	{{-- ////// START - BLOG TEMPLATE ////// --}}
-		<!-- Modernizr JS -->
-		<script src="{{ asset('blog_template/js/modernizr-2.6.2.min.js') }}"></script>
-		<!-- FOR IE9 below -->
-		<!--[if lt IE 9]>
-		<script src="js/respond.min.js"></script>
-		<![endif]-->
+	{{-- Modernizr JS --}}
+	<script src="{{ asset('blog_template/js/modernizr-2.6.2.min.js') }}"></script>
+	{{-- FOR IE9 below --}}
+	{{--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	{{--[endif]--}}
 	@yield('custom_css')
-	{{-- ////// END - BLOG TEMPLATE ////// --}}
+	{{------------------------------------ STYLES - END ------------------------------------}}
 
 </head>
 <body>	
@@ -92,7 +98,7 @@
 				<div class="nav-layout-container">
 
 						<a href="{{ route('home') }}" class="nav-layout-logo-container logo-route">
-							<img class="logo-new-game-news img-fluid" src="{{ asset('storage/logo/logo-epic-game-news-38x38.png') }}" alt="logo-new-gaming-news" title="logo-ngn" loading="lazy"> 
+							<img class="logo-new-game-news img-fluid" src="{{ asset('storage/logo/logo-epic-game-news-64x64.png') }}" alt="logo-new-gaming-news" title="logo-ngn" loading="lazy"> 
 							<h1 class="title-route"><b>Epic Game News</b></h1>
 						</a>
 
