@@ -21,6 +21,11 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
     
+    public function seo()
+    {
+        return $this->hasOne(Seo::class);
+    }
+    
     public function video_game()
     {
         return $this->belongsTo(VideoGame::class);

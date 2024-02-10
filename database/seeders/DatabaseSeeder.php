@@ -149,6 +149,20 @@ class DatabaseSeeder extends Seeder
             $post->tags()->sync($tags_ids);
         
             $post->image()->save(\App\Models\Image::factory()->make());
+                        
+            // Get the tag names associated with the post
+            $tagNames = $post->tags->pluck('name')->toArray();
+
+            // Convert the array of tag names into a comma-separated string
+            $keywordsString = implode(', ', $tagNames);
+
+            // Attach SEO title, description, and keywords
+            $post->seo()->create([
+                'page_type' => 'Post',
+                'title' => $post->title,
+                'description' => $post->excerpt,
+                'keywords' => $keywordsString, // String of comma-separated tag names
+            ]);
         }
 
         \App\Models\About::factory()->create([

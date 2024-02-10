@@ -16,6 +16,7 @@ public function up()
             $table->text('description');
             $table->text('keywords');
             $table->foreignId('user_id')->default(1);
+            $table->foreignId('post_id')->nullable();
             $table->foreignId('video_game_id')->nullable();
             $table->foreignId('platform_id')->nullable();
             $table->foreignId('category_id')->nullable();

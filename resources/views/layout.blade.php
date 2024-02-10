@@ -27,11 +27,11 @@
 	{{------------------------------------ SEO - START ------------------------------------}}
 	{{-- Canonical --}}
 	<link rel="canonical" href="{{ url()->current() }}" />
-	{{-- {{dd($seo)}} --}}
+
 	{{-- Meta tags for the page --}}
-	{{-- <meta property="og:title" content="{{ $seo->title }}">
+	<meta property="og:title" content="{{ $seo->title }}">
 	<meta name="description" content="{{ $seo->description }}">
-	<meta name="keywords" content="{{ $seo->keywords }}"> --}}
+	<meta name="keywords" content="{{ $seo->keywords }}">
 	<meta name="author" content="Epic Game News" />
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="{{ url()->current() }}">
