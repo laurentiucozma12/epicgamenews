@@ -133,7 +133,7 @@ class DatabaseSeeder extends Seeder
 
         $posts = \App\Models\Post::factory(10)->create(['deleted' => 0]);
 
-            $tags = \App\Models\Tag::factory(10)->create();
+            $tags = \App\Models\Tag::factory(1)->create();
 
             foreach ($tags as $tag) {
                 // Attach SEO title, description, and keywords
