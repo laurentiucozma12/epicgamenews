@@ -128,53 +128,65 @@ $(document).ready(function() {
     ////// END - Cropping //////
     
     ////// START - Tiny MCE //////
-        images_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {  
-            const formData = new FormData();
-            let _token = $("input[name='token']").val();
+    images_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {  
+        const formData = new FormData();
+        let _token = $("input[name='token']").val();
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', "{{ route('admin.upload_tinymce_image') }}");
+
+        xhr.onload = () => {
+            if (xhr.status === 403) {
+                reject({ message: 'HTTP Error: ' + xhr.status, remove: true });
+                return;
+            }
+
+            if (xhr.status < 200 || xhr.status >= 300) {
+                reject('HTTP Error: ' + xhr.status);
+                return;
+            }
+
+            const json = JSON.parse(xhr.responseText);
+
+            if (!json || typeof json.location != 'string') {
+                reject('Invalid JSON: ' + xhr.responseText);
+                return;
+            }
+
+            resolve(json.location);
+        };
+
+        formData.append('_token', '{{ csrf_token() }}');
+        formData.append('file', blobInfo.blob(), blobInfo.filename());
+        xhr.send(formData);
+    });
+
+    tinymce.init({
+        selector: "#body, #description",
+        plugins:
+            "advlist  anchor autolink autosave charmap codesample directionality emoticons help image insertdatetime link linkchecker lists media nonbreaking pagebreak searchreplace table visualblocks visualchars wordcount",
+        toolbar:
+            "undo redo spellcheckdialog  | blocks fontfamily fontsizeinput | bold italic underline forecolor backcolor | link image | align lineheight checklist bullist numlist | indent outdent | removeformat typography",
+        height: "700px",
+
+        //HTML custom font options
+        font_size_formats:
+            "8pt 9pt 10pt 11pt 12pt 14pt 18pt 24pt 30pt 36pt 48pt 60pt 72pt 96pt",
+
+        toolbar_sticky: true,
+        autosave_restore_when_empty: true,
+        spellchecker_active: true,
+        spellchecker_language: "en_US",
+        spellchecker_languages:
+            "English (United States)=en_US,English (United Kingdom)=en_GB,Danish=da,French=fr,German=de,Italian=it,Polish=pl,Spanish=es,Swedish=sv",
+        typography_langs: ["en-US"],
+        typography_default_lang: "en-US",
     
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', "{{ route('admin.upload_tinymce_image') }}");
+        image_title: true,
+        automatic_uploads: true,
     
-            xhr.onload = () => {
-                if (xhr.status === 403) {
-                    reject({ message: 'HTTP Error: ' + xhr.status, remove: true });
-                    return;
-                }
-    
-                if (xhr.status < 200 || xhr.status >= 300) {
-                    reject('HTTP Error: ' + xhr.status);
-                    return;
-                }
-    
-                const json = JSON.parse(xhr.responseText);
-    
-                if (!json || typeof json.location != 'string') {
-                    reject('Invalid JSON: ' + xhr.responseText);
-                    return;
-                }
-    
-                resolve(json.location);
-            };
-    
-            formData.append('_token', '{{ csrf_token() }}');
-            formData.append('file', blobInfo.blob(), blobInfo.filename());
-            xhr.send(formData);
-        });
-    
-        tinymce.init({
-            selector: 'textarea#body',
-            plugins: 'advlist autolink lists link image media charmap print preview hr anchor pagebreak',
-            toolbar_mode: 'floating',
-            height: '500',
-    
-            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image code | rtl ltr',
-            toolbar_mode: 'floating',
-    
-            image_title: true,
-            automatic_uploads: true,
-    
-            images_upload_handler: images_upload_handler,
-        });
+        images_upload_handler: images_upload_handler,
+    });
     ////// END - Tiny MCE //////
 
     ////// START - GAMES API //////
