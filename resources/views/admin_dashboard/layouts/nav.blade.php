@@ -31,11 +31,7 @@
             </a>
 
             <ul>
-                <li><a href="{{ route('admin.seo.index_page') }}"><i class="bx bx-right-arrow-alt"></i>SEO Pages</a></li>                                         
-            </ul>
-
-            <ul>
-                <li><a href="{{ route('admin.seo.index_post') }}"><i class="bx bx-right-arrow-alt"></i>SEO Posts</a></li>                                         
+                <li><a href="{{ route('admin.seo.index') }}"><i class="bx bx-right-arrow-alt"></i>SEO Pages</a></li>                                         
             </ul>
         </li>
 

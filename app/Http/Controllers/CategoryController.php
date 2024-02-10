@@ -13,7 +13,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $seo = Seo::where('page_name', '=', 'Category')->first();
+        $seo = Seo::where('page_type', '=', 'Category')->first();
         
         $categories = Category::where('deleted', 0)
             ->whereHas('videoGames', function ($query) {
@@ -23,6 +23,7 @@ class CategoryController extends Controller
                 $query->where('deleted', 0)
                     ->whereHas('posts');
             })
+            ->orderBy('name', 'ASC')
             ->paginate(20);
 
         return view('categories.index', [
@@ -33,6 +34,7 @@ class CategoryController extends Controller
 
     public function show(Category $category, RecentPostsService $recentPostsService)
     {
+        $seo = Seo::where('title', $category->name)->first();
         $recent_posts = $recentPostsService->getRecentPosts();
         
         $videoGameIds = $category->videoGames()->pluck('video_game_id');
@@ -43,6 +45,7 @@ class CategoryController extends Controller
             ->paginate(20);
 
         return view('categories.show', [
+            'seo' => $seo,
             'category' => $category,
             'posts' => $posts,
             'recent_posts' => $recent_posts,

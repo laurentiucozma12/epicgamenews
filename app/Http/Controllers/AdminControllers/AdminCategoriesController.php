@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\AdminControllers;
 
+use App\Models\Seo;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 
 class AdminCategoriesController extends Controller
 {
     private $rules = [
+        'seo_description' => 'required|min:5|max:300',
+        'seo_keywords' => 'required|min:5|max:255',
         'name' => 'required|min:2|max:250',
         'slug' => 'required|unique:categories,slug|max:150',
         'thumbnail' => 'required|image|max:1920',
@@ -36,6 +39,18 @@ class AdminCategoriesController extends Controller
         $validated['user_id'] = auth()->id();
         $category = Category::create($validated);
 
+        // Create SEO entry
+        if ($request->has('name') && $request->has('seo_description') && $request->has('seo_keywords')) {
+            $seoData = [
+                'page_type' => 'Category',
+                'title' => $request->input('name'),
+                'description' => $request->input('seo_description'),
+                'keywords' => $request->input('seo_keywords'),
+            ];
+
+            $category->seo()->create($seoData);
+        }
+
         if ($request->hasFile('thumbnail')) {
             $sizes = [
                 [1140, 641],
@@ -60,7 +75,7 @@ class AdminCategoriesController extends Controller
     public function show(Category $category)
     {
         $video_games = $category->videoGames()->latest()->paginate(100);
-        
+
         return view('admin_dashboard.categories.show', [
             'category' => $category,
             'video_games' => $video_games,
@@ -69,7 +84,10 @@ class AdminCategoriesController extends Controller
 
     public function edit(Category $category)
     {
+        $seo = Seo::where('title', $category->name)->first();
+
         return view('admin_dashboard.categories.edit', [
+            'seo' => $seo,
             'category' => $category
         ]);
     }
@@ -82,6 +100,20 @@ class AdminCategoriesController extends Controller
 
         // Update the category details
         $category->update($validated);
+
+        // Update SEO entry
+        if ($request->has('name') && $request->has('seo_description') && $request->has('seo_keywords')) {
+            $seoData = [
+                'title' => $request->input('name'),
+                'description' => $request->input('seo_description'),
+                'keywords' => $request->input('seo_keywords'),
+            ];
+
+            // Check if SEO entry already exists
+            $seo = $category->seo;
+
+            $seo->update($seoData);
+        }
 
         // Check if a new image has been uploaded
         if ($request->hasFile('thumbnail')) {                

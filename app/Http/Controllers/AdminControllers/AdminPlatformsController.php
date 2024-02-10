@@ -7,10 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 use App\Models\Platform;
+use App\Models\Seo;
 
 class AdminPlatformsController extends Controller
 { 
     private $rules = [
+        'seo_description' => 'required|min:5|max:300',
+        'seo_keywords' => 'required|min:5|max:255',
         'name' => 'required|min:2|max:250',
         'slug' => 'required|unique:platforms,slug|max:150',
         'thumbnail' => 'required|image|max:1920',
@@ -35,6 +38,18 @@ class AdminPlatformsController extends Controller
         $validated = $request->validate($this->rules);
         $validated['user_id'] = auth()->id();
         $platform = Platform::create($validated);
+
+        // Create SEO entry
+        if ($request->has('name') && $request->has('seo_description') && $request->has('seo_keywords')) {
+            $seoData = [
+                'page_type' => 'Platform',
+                'title' => $request->input('name'),
+                'description' => $request->input('seo_description'),
+                'keywords' => $request->input('seo_keywords'),
+            ];
+
+            $platform->seo()->create($seoData);
+        }
 
         if ($request->hasFile('thumbnail')) {
             $sizes = [
@@ -69,7 +84,10 @@ class AdminPlatformsController extends Controller
 
     public function edit(Platform $platform)
     {
+        $seo = Seo::where('title', $platform->name)->first();
+
         return view('admin_dashboard.platforms.edit', [
+            'seo' => $seo,
             'platform' => $platform
         ]);
     }
@@ -82,6 +100,20 @@ class AdminPlatformsController extends Controller
 
         // Update the category details
         $platform->update($validated);
+
+        // Update SEO entry
+        if ($request->has('name') && $request->has('seo_description') && $request->has('seo_keywords')) {
+            $seoData = [
+                'title' => $request->input('name'),
+                'description' => $request->input('seo_description'),
+                'keywords' => $request->input('seo_keywords'),
+            ];
+
+            // Check if SEO entry already exists
+            $seo = $platform->seo;
+
+            $seo->update($seoData);
+        }
 
         // Check if a new image has been uploaded
         if ($request->hasFile('thumbnail')) {                

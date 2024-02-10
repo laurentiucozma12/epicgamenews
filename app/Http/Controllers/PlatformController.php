@@ -12,7 +12,7 @@ class PlatformController extends Controller
 {
     public function index()
     {
-        $seo = Seo::where('page_name', '=', 'Platform')->first();
+        $seo = Seo::where('page_type', '=', 'Platform')->first();
         
         $platforms = Platform::where('deleted', 0)
             ->whereHas('videoGames', function ($query) {
@@ -22,6 +22,7 @@ class PlatformController extends Controller
                 $query->where('deleted', 0)
                     ->whereHas('posts');
             })
+            ->orderBy('name', 'ASC')
             ->paginate(20);
 
         return view('platforms.index', [
@@ -32,8 +33,8 @@ class PlatformController extends Controller
 
     public function show(Platform $platform, RecentPostsService $recentPostsService)
     {
+        $seo = Seo::where('title', $platform->name)->first();
         $recent_posts = $recentPostsService->getRecentPosts();
-
         $videoGameIds = $platform->videoGames()->pluck('video_game_id');
 
         $posts = Post::whereIn('video_game_id', $videoGameIds)
@@ -42,6 +43,7 @@ class PlatformController extends Controller
             ->paginate(20);
 
         return view('platforms.show', [
+            'seo' => $seo,
             'platform' => $platform,
             'posts' => $posts,
             'recent_posts' => $recent_posts,

@@ -11,7 +11,7 @@ class VideoGameController extends Controller
 {
     public function index()
     {
-        $seo = Seo::where('page_name', '=', 'Video Game')->first();
+        $seo = Seo::where('page_type', 'Video Game')->first();
         
         $video_games = VideoGame::where('deleted', 0)
             ->whereHas('posts', function ($query) {
@@ -20,6 +20,7 @@ class VideoGameController extends Controller
                 // the video game should not be visible.
                 $query->where('deleted', 0);
             })
+            ->orderBy('name', 'ASC')
             ->paginate(20);
 
         return view('video_games.index', [
@@ -30,14 +31,17 @@ class VideoGameController extends Controller
 
     public function show(VideoGame $video_game, RecentPostsService $recentPostsService)
     {
+        $seo = Seo::where('title', $video_game->name)->first();
+
         $recent_posts = $recentPostsService->getRecentPosts();
-        
+
         $posts = $video_game->posts()
             ->latest()
             ->where('deleted', 0)
             ->paginate(20);
 
         return view('video_games.show', [
+            'seo' => $seo,
             'video_game' => $video_game,
             'posts' => $posts,
             'recent_posts' => $recent_posts,

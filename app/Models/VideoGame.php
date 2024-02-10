@@ -19,6 +19,11 @@ class VideoGame extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    public function seo()
+    {
+        return $this->hasOne(Seo::class);
+    }
     
     public function categories()
     {

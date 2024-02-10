@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\AdminControllers;
 
+use App\Models\Seo;
 use App\Models\Category;
 use App\Models\Platform;
-use App\Models\VideoGame;
 
+use App\Models\VideoGame;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -13,6 +14,8 @@ use App\Http\Controllers\Controller;
 class AdminVideoGamesController extends Controller
 {
     private $rules = [
+        'seo_description' => 'required|min:5|max:300',
+        'seo_keywords' => 'required|min:5|max:255',
         'name' => 'required|min:2|max:250',
         'slug' => 'required|unique:video_games,slug|max:150',
         'thumbnail' => 'required|image|max:1920',
@@ -41,6 +44,18 @@ class AdminVideoGamesController extends Controller
         $validated['user_id'] = auth()->id();
         $video_game = VideoGame::create($validated);
 
+        // Create SEO entry
+        if ($request->has('name') && $request->has('seo_description') && $request->has('seo_keywords')) {
+            $seoData = [
+                'page_type' => 'Video Game',
+                'title' => $request->input('name'),
+                'description' => $request->input('seo_description'),
+                'keywords' => $request->input('seo_keywords'),
+            ];
+
+            $video_game->seo()->create($seoData);
+        }
+        
         // Attach categories to the video game
         if ($request->has('categories_ids') && is_array($request->categories_ids)) {
             $video_game->categories()->attach($request->categories_ids);
@@ -84,6 +99,8 @@ class AdminVideoGamesController extends Controller
 
     public function edit(VideoGame $video_game)
     {
+        $seo = Seo::where('title', $video_game->name)->first();
+
         // Pass all the SELECTED video_game, categories, platforms
         $categories = Category::pluck('categories.name', 'categories.id');
         $platforms = Platform::pluck('platforms.name', 'platforms.id');
@@ -93,6 +110,7 @@ class AdminVideoGamesController extends Controller
         $selectedPlatFormIds = $video_game->platforms->pluck('id')->toArray();
 
         return view('admin_dashboard.video_games.edit', [
+            'seo' => $seo,
             'video_game' => $video_game,
             'categories' => $categories,
             'selectedCategFormIds' => $selectedCategFormIds,
@@ -110,6 +128,20 @@ class AdminVideoGamesController extends Controller
         // Update the video game details
         $video_game->update($validated);
 
+        // Update SEO entry
+        if ($request->has('name') && $request->has('seo_description') && $request->has('seo_keywords')) {
+            $seoData = [
+                'title' => $request->input('name'),
+                'description' => $request->input('seo_description'),
+                'keywords' => $request->input('seo_keywords'),
+            ];
+
+            // Check if SEO entry already exists
+            $seo = $video_game->seo;
+
+            $seo->update($seoData);
+        }
+        
         // Update the categories
         if ($request->has('categories_ids')) {
             $video_game->categories()->sync($request->input('categories_ids'));

@@ -32,6 +32,24 @@
                             <div class="col-lg-12">
 
                                 <div class="mb-3">
+                                    <label for="inputSeoDescription" class="form-label">Video Game Seo Description</label>
+                                    <textarea type="text" name="seo_description" required class="form-control" id="inputSeoDescription" rows="2">{{ old("seo_description") }}</textarea>
+
+                                    @error('seo_description')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputSeoKeywords" class="form-label">Video Game Seo Keywords</label>
+                                    <input type="text" value='{{ old("seo_keywords") }}' name="seo_keywords" required class="form-control" id="inputSeoKeywords">
+
+                                    @error('seo_keywords')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
                                     <label for="inputProductTitle" class="form-label">Platform Name</label>
                                     <input type="text" value='{{ old("name") }}' name="name" required class="form-control" id="inputProductTitle">
 

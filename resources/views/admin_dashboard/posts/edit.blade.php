@@ -128,7 +128,8 @@
                                     <div class="mb-3">
                                         <label for="body" class="form-label">Post Content</label>
                                         <textarea name="body" class="form-control" id="body" rows="3">
-                                            {{ old("body", str_replace('../../', '../../../', $post->body)) }}</textarea>   
+                                            {{ old("body", str_replace('../../', '../../../', $post->body)) }}
+                                        </textarea>   
                                     
                                         @error('body')
                                             <p class="text-danger">{{ $message }}</p>

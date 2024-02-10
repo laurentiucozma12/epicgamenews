@@ -48,15 +48,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
 
     Route::prefix('seo')->group(function () {
-        Route::get('/', [AdminSeoController::class, 'indexSeoPage'])->name('seo.index_page');
-        Route::get('/{seo}/edit', [AdminSeoController::class, 'editSeoPage'])->name('seo.edit_page');
-        Route::put('/{seo}', [AdminSeoController::class, 'updateSeoPage'])->name('seo.update_page');
-        Route::patch('/{seo}', [AdminSeoController::class, 'updateSeoPage']);
-
-
-
-        Route::get('/post', [AdminSeoController::class, 'indexPost'])->name('seo.index_post');
-
+        // Dynamic SEO for main pages home/video-games/categories/plaforms/about/contact
+        Route::get('/', [AdminSeoController::class, 'index'])->name('seo.index');
+        Route::get('/{seo}/edit', [AdminSeoController::class, 'edit'])->name('seo.edit');
+        Route::put('/{seo}', [AdminSeoController::class, 'update'])->name('seo.update');
+        Route::patch('/{seo}', [AdminSeoController::class, 'update']);
     });
 
     Route::prefix('posts')->group(function () {

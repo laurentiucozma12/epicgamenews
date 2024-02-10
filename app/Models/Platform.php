@@ -19,6 +19,11 @@ class Platform extends Model
     {
         return $this->belongsToMany(VideoGame::class, 'video_game_platform');
     }
+
+    public function seo()
+    {
+        return $this->hasOne(Seo::class);
+    }
     
     protected static function boot()
     {

@@ -12,10 +12,10 @@
 	{{-- Title --}}
 	<title>@yield('title')</title>
 
-	{{-- Epic Game News Icon Logo -->
+	{{-- Epic Game News Icon Logo --}}
 	<link rel="icon" href="{{ asset('storage/logo/logo-epic-game-news-38x38.png') }}" type="image/x-icon"/>
 
-	{{-- Apple Touch Icon -->
+	{{-- Apple Touch Icon --}}
 	<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('storage/logo/logo-epic-game-news-200x200.png') }}">
 
 	{{-- Meta tag google index verification --}}
@@ -27,11 +27,11 @@
 	{{------------------------------------ SEO - START ------------------------------------}}
 	{{-- Canonical --}}
 	<link rel="canonical" href="{{ url()->current() }}" />
-
+	{{-- {{dd($seo)}} --}}
 	{{-- Meta tags for the page --}}
-	{{-- <meta property="og:title" content="{{ $seo->title }}">
+	<meta property="og:title" content="{{ $seo->title }}">
 	<meta name="description" content="{{ $seo->description }}">
-	<meta name="keywords" content="{{ $seo->keywords }}"> --}}
+	<meta name="keywords" content="{{ $seo->keywords }}">
 	<meta name="author" content="Epic Game News" />
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="{{ url()->current() }}">

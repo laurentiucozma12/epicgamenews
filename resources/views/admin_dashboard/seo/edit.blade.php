@@ -10,8 +10,8 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.seo.index_page') }}">All Pages</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.seo.edit_page', $seo) }}">{{ $seo->page_name }} Page</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.seo.index') }}">All Pages</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.seo.edit', $seo) }}">{{ $seo->page_name }} Page</a></li>
                     </ol>
                 </nav>
             </div>
@@ -22,7 +22,7 @@
             <div class="card-body p-4">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <a href="{{ route('admin.seo.edit_page', $seo) }}"><h5 class="card-title mb-0">Edit SEO {{ $seo->page_name }}</h5></a>                
+                        <a href="{{ route('admin.seo.edit', $seo) }}"><h5 class="card-title mb-0">Edit SEO {{ $seo->page_name }}</h5></a>                
                     </div>
                     <div>
                         <div class="mb-0"><h5 class="card-title mb-0">Author: {{ old("author", $seo->author->name) }}</h5></div>
@@ -30,7 +30,7 @@
                 </div>
                 <hr/>
 
-                <form action="{{ route('admin.seo.update_page', $seo) }}" method="POST">
+                <form action="{{ route('admin.seo.update', $seo) }}" method="POST">
 
                     @csrf
                     @method('PATCH')

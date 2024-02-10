@@ -33,58 +33,76 @@
                         <div class="row">
                             <div class="col-lg-12">
 
-                                    <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Category Name</label>
-                                        <input type="text" value='{{ old("name", $category->name) }}' name="name" required class="form-control" id="inputProductTitle">
+                                <div class="mb-3">
+                                    <label for="inputSeoDescription" class="form-label">Category Seo Description</label>
+                                    <textarea type="text" name="seo_description" required class="form-control" id="inputSeoDescription" rows="2">{{ old("seo_description", $seo->description ) }}</textarea>
 
-                                        @error('name')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
+                                    @error('seo_description')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
 
-                                    <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Category Slug</label>
-                                        <input type="text" value='{{ old("slug", $category->slug) }}' name="slug" required class="form-control" id="inputProductTitle">
+                                <div class="mb-3">
+                                    <label for="inputSeoKeywords" class="form-label">Category Seo Keywords</label>
+                                    <input type="text" value='{{ old("seo_keywords", $seo->keywords) }}' name="seo_keywords" required class="form-control" id="inputSeoKeywords">
 
-                                        @error('slug')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <div class="row">
-                                            <div class="com-md-8">
-                                                <div class="card shadow-none border">
-                                                    <div class="card-body">
-                                                        <label for="file" class="form-label">Category Thumbnail (Max 1920)</label>
-                                                        <input id='thumbnail' name='thumbnail' id="file" accept="image/*" type="file" class="mb-3">
+                                    @error('seo_keywords')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
 
-                                                        @error('thumbnail')
-                                                            <p class='text-danger'>{{ $message }}</p>
-                                                        @enderror
+                                <div class="mb-3">
+                                    <label for="inputProductTitle" class="form-label">Category Name</label>
+                                    <input type="text" value='{{ old("name", $category->name) }}' name="name" required class="form-control" id="inputProductTitle">
 
-                                                        {{-- Store the url of the cropped image --}} 
-                                                        <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
-                                                        
-                                                        <h5>Cropped Image</h5>
-                                                        <img id="croppedImage" src="{{ asset($category->image ? 'storage/images/400x225/' . $category->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" class="cropped-thumbnail-edit" alt="Cropped image">
+                                    @error('name')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputProductTitle" class="form-label">Category Slug</label>
+                                    <input type="text" value='{{ old("slug", $category->slug) }}' name="slug" required class="form-control" id="inputProductTitle">
+
+                                    @error('slug')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="row">
+                                        <div class="com-md-8">
+                                            <div class="card shadow-none border">
+                                                <div class="card-body">
+                                                    <label for="file" class="form-label">Category Thumbnail (Max 1920)</label>
+                                                    <input id='thumbnail' name='thumbnail' id="file" accept="image/*" type="file" class="mb-3">
+
+                                                    @error('thumbnail')
+                                                        <p class='text-danger'>{{ $message }}</p>
+                                                    @enderror
+
+                                                    {{-- Store the url of the cropped image --}} 
+                                                    <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
                                                     
-                                                    </div>
+                                                    <h5>Cropped Image</h5>
+                                                    <img id="croppedImage" src="{{ asset($category->image ? 'storage/images/400x225/' . $category->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" class="cropped-thumbnail-edit" alt="Cropped image">
+                                                
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <div class="d-flex justify-content-between">
-                                        <button class='btn btn-primary' type='submit'>Update Category</button>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between">
+                                    <button class='btn btn-primary' type='submit'>Update Category</button>
 
-                                        <a 
-                                        class='btn btn-danger'
-                                        onclick="event.preventDefault();document.getElementById('delete_category_{{ $category->id }}').submit()"
-                                        href="#">
-                                            Delete Category
-                                        </a>
-                                    </div>
+                                    <a 
+                                    class='btn btn-danger'
+                                    onclick="event.preventDefault();document.getElementById('delete_category_{{ $category->id }}').submit()"
+                                    href="#">
+                                        Delete Category
+                                    </a>
+                                </div>
 
                             </div>
                         </div><!--end row-->

@@ -20,6 +20,11 @@ class Category extends Model
         return $this->belongsToMany(VideoGame::class, 'video_game_category');
     }
 
+    public function seo()
+    {
+        return $this->hasOne(Seo::class);
+    }
+
     protected static function boot()
     {
         parent::boot();

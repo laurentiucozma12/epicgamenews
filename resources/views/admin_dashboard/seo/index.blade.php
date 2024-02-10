@@ -10,7 +10,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.seo.index_page') }}">All Pages</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.seo.index') }}">All Pages</a></li>
                     </ol>
                 </nav>
             </div>
@@ -45,7 +45,7 @@
                                     <td>{{ $seo->author->name }}</td>
                                     <td>
                                         <div class="d-flex order-actions">
-                                            <a href="{{ route('admin.seo.edit_page', $seo) }}" class=""><i class='bx bxs-edit'></i></a> 
+                                            <a href="{{ route('admin.seo.edit', $seo) }}" class=""><i class='bx bxs-edit'></i></a> 
                                         </div>                                 
                                     </td>
                                 </tr>
