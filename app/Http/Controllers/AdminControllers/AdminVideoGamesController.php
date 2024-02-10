@@ -47,8 +47,8 @@ class AdminVideoGamesController extends Controller
         // Create SEO entry
         if ($request->has('name') && $request->has('seo_description')) {
             $seoData = [
-                'page_type' => 'Video Game',
-                'title' => $request->input('name'),
+                'page_type' => 'video_game',
+                'title' => $request->input('seo_title'),
                 'description' => $request->input('seo_description'),
                 'keywords' => $request->input('seo_keywords'),
             ];
@@ -99,7 +99,7 @@ class AdminVideoGamesController extends Controller
 
     public function edit(VideoGame $video_game)
     {
-        $seo = Seo::where('title', $video_game->name)->first();
+        $seo = Seo::where('video_game_id', $video_game->id)->first();
 
         // Pass all the SELECTED video_game, categories, platforms
         $categories = Category::pluck('categories.name', 'categories.id');
@@ -119,7 +119,7 @@ class AdminVideoGamesController extends Controller
         ]);
     }
 
-public function update(Request $request, VideoGame $video_game)
+    public function update(Request $request, VideoGame $video_game)
     {
         $this->rules['thumbnail'] = 'nullable|image|max:1920';
         $this->rules['slug'] = ['required', Rule::unique('video_games')->ignore($video_game)];
@@ -129,9 +129,9 @@ public function update(Request $request, VideoGame $video_game)
         $video_game->update($validated);
 
         // Update SEO entry
-        if ($request->has('name') && $request->has('seo_description')) {
+        if ($request->has('seo_title') && $request->has('seo_description')) {
             $seoData = [
-                'title' => $request->input('name'),
+                'title' => $request->input('seo_title'),
                 'description' => $request->input('seo_description'),
                 'keywords' => $request->input('seo_keywords'),
             ];

@@ -32,7 +32,16 @@
                             <div class="col-lg-12">
 
                                 <div class="mb-3">
-                                    <label for="inputSeoDescription" class="form-label">Video Game Seo Description</label>
+                                    <label for="inputSeoTitle" class="form-label">Category Seo Title</label>
+                                    <input type="text" value='{{ old("seo_title") }}' name="seo_title" required class="form-control" id="inputSeoTitle">
+
+                                    @error('seo_title')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="inputSeoDescription" class="form-label">Category Seo Description</label>
                                     <textarea type="text" name="seo_description" required class="form-control" id="inputSeoDescription" rows="2">{{ old("seo_description") }}</textarea>
 
                                     @error('seo_description')
@@ -41,7 +50,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="inputSeoKeywords" class="form-label">Video Game Seo Keywords</label>
+                                    <label for="inputSeoKeywords" class="form-label">Category Seo Keywords</label>
                                     <input type="text" value='{{ old("seo_keywords") }}' name="seo_keywords" required class="form-control" id="inputSeoKeywords">
 
                                     @error('seo_keywords')

@@ -42,8 +42,8 @@ class AdminCategoriesController extends Controller
         // Create SEO entry
         if ($request->has('name') && $request->has('seo_description')) {
             $seoData = [
-                'page_type' => 'Category',
-                'title' => $request->input('name'),
+                'page_type' => 'category',
+                'title' => $request->input('seo_title'),
                 'description' => $request->input('seo_description'),
                 'keywords' => $request->input('seo_keywords'),
             ];
@@ -84,7 +84,7 @@ class AdminCategoriesController extends Controller
 
     public function edit(Category $category)
     {
-        $seo = Seo::where('title', $category->name)->first();
+        $seo = Seo::where('category_id', $category->id)->first();
 
         return view('admin_dashboard.categories.edit', [
             'seo' => $seo,
@@ -104,7 +104,7 @@ class AdminCategoriesController extends Controller
         // Update SEO entry
         if ($request->has('name') && $request->has('seo_description')) {
             $seoData = [
-                'title' => $request->input('name'),
+                'title' => $request->input('seo_title'),
                 'description' => $request->input('seo_description'),
                 'keywords' => $request->input('seo_keywords'),
             ];

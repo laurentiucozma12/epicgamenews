@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\AdminControllers;
 
+use App\Models\Seo;
+
 use App\Models\Tag;
 
 use App\Models\Post; 
-
 use App\Models\Category;
 use App\Models\Platform;
-use App\Models\VideoGame;
 
+use App\Models\VideoGame;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\AdminControllers\AdminCropResizeImage;
 
 class AdminPostsController extends Controller
@@ -55,7 +56,7 @@ class AdminPostsController extends Controller
         // Create SEO entry
         if ($request->has('title') && $request->has('excerpt')) {
             $seoData = [
-                'page_type' => 'Post',
+                'page_type' => 'post',
                 'title' => $request->input('title'),
                 'description' => $request->input('excerpt'),
                 'keywords' => $request->input('tags'),
@@ -94,6 +95,7 @@ class AdminPostsController extends Controller
 
     public function edit(Post $post)
     {
+        $seo = Seo::where('post_id', $post->id)->first();
         $tags = '';
         foreach ($post->tags as $key => $tag)
         {
@@ -106,6 +108,7 @@ class AdminPostsController extends Controller
         $video_games = VideoGame::pluck('name', 'id');
         
         return view('admin_dashboard.posts.edit', [
+            'seo' => $seo,
             'post' => $post,
             'tags' => $tags,
             'video_games' => $video_games,
@@ -123,9 +126,9 @@ class AdminPostsController extends Controller
         // Update SEO entry
         if ($request->has('title') && $request->has('excerpt')) {
             $seoData = [
-                'title' => $request->input('name'),
-                'description' => $request->input('seo_description'),
-                'keywords' => $request->input('seo_keywords'),
+                'title' => $request->input('title'),
+                'description' => $request->input('excerpt'),
+                'keywords' => $request->input('tags'),
             ];
 
             // Check if SEO entry already exists

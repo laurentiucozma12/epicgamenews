@@ -40,10 +40,10 @@ class AdminPlatformsController extends Controller
         $platform = Platform::create($validated);
 
         // Create SEO entry
-    if ($request->has('name') && $request->has('seo_description')) {
+        if ($request->has('name') && $request->has('seo_description')) {
             $seoData = [
-                'page_type' => 'Platform',
-                'title' => $request->input('name'),
+                'page_type' => 'platform',
+                'title' => $request->input('seo_title'),
                 'description' => $request->input('seo_description'),
                 'keywords' => $request->input('seo_keywords'),
             ];
@@ -84,7 +84,7 @@ class AdminPlatformsController extends Controller
 
     public function edit(Platform $platform)
     {
-        $seo = Seo::where('title', $platform->name)->first();
+        $seo = Seo::where('platform_id', $platform->id)->first();
 
         return view('admin_dashboard.platforms.edit', [
             'seo' => $seo,
@@ -104,7 +104,7 @@ class AdminPlatformsController extends Controller
         // Update SEO entry
         if ($request->has('name') && $request->has('seo_description')) {
             $seoData = [
-                'title' => $request->input('name'),
+                'title' => $request->input('seo_title'),
                 'description' => $request->input('seo_description'),
                 'keywords' => $request->input('seo_keywords'),
             ];

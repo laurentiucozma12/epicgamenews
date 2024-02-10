@@ -34,7 +34,7 @@ class CategoryController extends Controller
 
     public function show(Category $category, RecentPostsService $recentPostsService)
     {
-        $seo = Seo::where('title', $category->name)->first();
+        $seo = Seo::where('seo_name', $category->name)->first();
         $recent_posts = $recentPostsService->getRecentPosts();
         
         $videoGameIds = $category->videoGames()->pluck('video_game_id');

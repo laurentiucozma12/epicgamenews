@@ -31,7 +31,7 @@ class VideoGameController extends Controller
 
     public function show(VideoGame $video_game, RecentPostsService $recentPostsService)
     {
-        $seo = Seo::where('title', $video_game->name)->first();
+        $seo = Seo::where('seo_name', $video_game->name)->first();
 
         $recent_posts = $recentPostsService->getRecentPosts();
 

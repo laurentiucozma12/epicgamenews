@@ -33,7 +33,7 @@ class PlatformController extends Controller
 
     public function show(Platform $platform, RecentPostsService $recentPostsService)
     {
-        $seo = Seo::where('title', $platform->name)->first();
+        $seo = Seo::where('seo_name', $platform->name)->first();
         $recent_posts = $recentPostsService->getRecentPosts();
         $videoGameIds = $platform->videoGames()->pluck('video_game_id');
 

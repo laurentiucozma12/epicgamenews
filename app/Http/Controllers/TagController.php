@@ -11,7 +11,7 @@ class TagController extends Controller
 {
     public function show(Tag $tag, RecentPostsService $recentPostsService)
     {
-        $seo = Seo::where('title', $tag->name)->first();
+        $seo = Seo::where('seo_name', $tag->name)->first();
         
         $recent_posts = $recentPostsService->getRecentPosts();
         

@@ -33,6 +33,15 @@
                             <div class="col-lg-12">
 
                                     <div class="mb-3">
+                                        <label for="inputSeoTitle" class="form-label">Video Game Seo title</label>
+                                        <input type="text" name="seo_title"  value='{{ old("seo_title", $seo->title) }}' id="inputSeoTitle" class="form-control" required>
+
+                                        @error('seo_title')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
                                         <label for="inputSeoDescription" class="form-label">Video Game Seo Description</label>
                                         <textarea type="text" name="seo_description" required class="form-control" id="inputSeoDescription" rows="2">{{ old("seo_description", $seo->description ) }}</textarea>
 

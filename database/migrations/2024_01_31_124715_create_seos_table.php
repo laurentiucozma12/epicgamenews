@@ -12,6 +12,7 @@ public function up()
             $table->id();
             $table->string('page_type')->nullable();
             $table->string('page_name')->nullable();
+            $table->string('seo_name')->nullable();
             $table->string('title');
             $table->text('description');
             $table->text('keywords')->nullable();

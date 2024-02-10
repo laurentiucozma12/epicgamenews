@@ -78,7 +78,9 @@ class DatabaseSeeder extends Seeder
 
             // Attach SEO title, description, and keywords
             $video_game->seo()->create([
-                'page_type' => 'Video Game',
+                'page_type' => 'video_game',
+                'page_name' => 'Related Video Game',
+                'seo_name' => $video_game->name,
                 'title' => 'News about ' . $video_game->name . ' Video Game | Epic Game News',                
                 'description' => 'Find gaming news filtered by the ' . $video_game->name . ' Video Game, only at Epic Game News',
                 'keywords' => $video_game->name,
@@ -93,7 +95,9 @@ class DatabaseSeeder extends Seeder
 
             // Attach SEO title, description, and keywords
             $category->seo()->create([
-                'page_type' => 'Category',
+                'page_type' => 'category',
+                'page_name' => 'Related Category',
+                'seo_name' => $category->name,
                 'title' => 'Gaming news related to ' . $category->name . ' category | Epic Game News',                
                 'description' => 'Find gaming news filtered by the ' . $category->name . 'category, only at Epic Game News',
                 'keywords' => $category->name,
@@ -118,7 +122,9 @@ class DatabaseSeeder extends Seeder
 
             // Attach SEO title, description, and keywords
             $platform->seo()->create([
-                'page_type' => 'Platform',
+                'page_type' => 'platform',
+                'page_name' => 'Related Platform',
+                'seo_name' => $platform->name,
                 'title' => 'Gaming news related to ' . $platform->name . ' platform | Epic Game News',                
                 'description' => 'Find gaming news filtered by the ' . $platform->name . ' platform, only at at Epic Game News',
                 'keywords' => $platform->name,
@@ -132,7 +138,9 @@ class DatabaseSeeder extends Seeder
             foreach ($tags as $tag) {
                 // Attach SEO title, description, and keywords
                 $tag->seo()->create([
-                    'page_type' => 'Tag',
+                    'page_type' => 'tag',
+                    'page_name' => 'Related Tag',
+                    'seo_name' => $tag->name,
                     'title' => 'Gaming news related to  ' . $tag->name . ' tag | Epic Game News',
                     'description' => 'Find gaming news filtered by the ' . $tag->name . ' tag, only at Epic Game News',
                     'keywords' => $tag->name,
@@ -168,10 +176,12 @@ class DatabaseSeeder extends Seeder
 
             // Attach SEO title, description, and keywords
             $post->seo()->create([
-                'page_type' => 'Post',
+                'page_type' => 'post',
+                'page_name' => 'Post',
+                'seo_name' => $post->title,
                 'title' => $post->title,
                 'description' => $post->excerpt,
-                'keywords' => $keywordsString, // String of comma-separated tag names
+                'keywords' => $keywordsString,
             ]);
         }
 
@@ -182,7 +192,7 @@ class DatabaseSeeder extends Seeder
         ]);               
 
         $seo_home = \App\Models\Seo::factory()->create([
-            'page_type' => 'Main',
+            'page_type' => 'main',
             'page_name' => 'Home',
             'title' => 'Latest News in Gaming - Epic Game News',
             'description' => 'Explore the latest and most exciting gaming news at EpicGameNews.com. Stay updated on the hottest releases, industry trends, and in-depth game reviews. Immerse yourself in a world of gaming insights, expert analyses, and exclusive content. Your ultimate destination for everything gaming awaits!',
@@ -191,7 +201,7 @@ class DatabaseSeeder extends Seeder
 
         // Video Game Page
         $seo_video_game = \App\Models\Seo::factory()->create([
-            'page_type' => 'Main',
+            'page_type' => 'main',
             'page_name' => 'Video Game',
             'title' => 'Explore the Latest Video Games: News, Reviews, and Updates only at EpicGameNews.com',
             'description' => 'Stay in the loop with EpicGameNews.com! Discover the latest video games, read insightful reviews, and stay updated with gaming news and trends. Your ultimate destination for gaming enthusiasts.',
@@ -200,7 +210,7 @@ class DatabaseSeeder extends Seeder
 
         // Category Page
         $seo_category = \App\Models\Seo::factory()->create([
-            'page_type' => 'Main',
+            'page_type' => 'main',
             'page_name' => 'Category',
             'title' => 'Dive into Exciting Gaming Categories at EpicGameNews.com',
             'description' => 'Explore diverse gaming categories at EpicGameNews.com. From action-packed adventures to strategic challenges, find your favorite video game genres and discover new gaming worlds.',
@@ -209,7 +219,7 @@ class DatabaseSeeder extends Seeder
 
         // Platform Page
         $seo_platform = \App\Models\Seo::factory()->create([
-            'page_type' => 'Main',
+            'page_type' => 'main',
             'page_name' => 'Platform',
             'title' => 'Discover Gaming Excellence on Leading Platforms at EpicGameNews.com',
             'description' => 'Explore the best gaming experiences on various platforms at EpicGameNews.com. From top-notch console exclusives to PC gaming insights, find the perfect platform for your gaming adventures.',
@@ -218,7 +228,7 @@ class DatabaseSeeder extends Seeder
 
         // About Page
         $seo_about = \App\Models\Seo::factory()->create([
-            'page_type' => 'Main',
+            'page_type' => 'main',
             'page_name' => 'About',
             'title' => 'About us - Epic Game News',
             'description' => 'Wanna know more about us? Checkout About page.',
@@ -227,7 +237,7 @@ class DatabaseSeeder extends Seeder
 
         // Contact Page
         $seo_contact = \App\Models\Seo::factory()->create([
-            'page_type' => 'Main',
+            'page_type' => 'main',
             'page_name' => 'Contact',
             'title' => 'Contact us - Epic Game News',
             'description' => 'Wanna contact us? Complete a form on Contact page.',
@@ -236,7 +246,7 @@ class DatabaseSeeder extends Seeder
 
         // Privacy Policy Page
         $seo_privacy_policy = \App\Models\Seo::factory()->create([
-            'page_type' => 'Main',
+            'page_type' => 'main',
             'page_name' => 'Privacy',
             'title' => '',
             'description' => '',
@@ -245,7 +255,7 @@ class DatabaseSeeder extends Seeder
 
         // Login Page
         $seo_login = \App\Models\Seo::factory()->create([
-            'page_type' => 'Main',
+            'page_type' => 'main',
             'page_name' => 'Login',
             'title' => '',
             'description' => '',
@@ -254,7 +264,7 @@ class DatabaseSeeder extends Seeder
 
         // Register Page
         $seo_register = \App\Models\Seo::factory()->create([
-            'page_type' => 'Main',
+            'page_type' => 'main',
             'page_name' => 'Register',
             'title' => '',
             'description' => '',

@@ -14,6 +14,8 @@ class SeoFactory extends Factory
     {
         return [
             'page_name' => $this->faker->sentence(),
+            'page_type' => $this->faker->sentence(),
+            'seo_name' => $this->faker->sentence(),
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
             'keywords' => $this->faker->words(5, true),
