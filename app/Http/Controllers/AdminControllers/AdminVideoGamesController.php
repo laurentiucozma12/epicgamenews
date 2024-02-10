@@ -119,7 +119,7 @@ class AdminVideoGamesController extends Controller
         ]);
     }
 
-    public function update(Request $request, VideoGame $video_game)
+public function update(Request $request, VideoGame $video_game)
     {
         $this->rules['thumbnail'] = 'nullable|image|max:1920';
         $this->rules['slug'] = ['required', Rule::unique('video_games')->ignore($video_game)];
