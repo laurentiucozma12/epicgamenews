@@ -40,7 +40,7 @@ class AdminPlatformsController extends Controller
         $platform = Platform::create($validated);
 
         // Create SEO entry
-        if ($request->has('name') && $request->has('seo_description')) {
+    if ($request->has('name') && $request->has('seo_description')) {
             $seoData = [
                 'page_type' => 'Platform',
                 'title' => $request->input('name'),

@@ -20,6 +20,7 @@ public function up()
             $table->foreignId('video_game_id')->nullable();
             $table->foreignId('platform_id')->nullable();
             $table->foreignId('category_id')->nullable();
+            $table->foreignId('tag_id')->nullable();
             $table->timestamps();
         });
     }

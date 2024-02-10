@@ -13,7 +13,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $seo = Seo::where('page_type', '=', 'Category')->first();
+        $seo = Seo::where('page_name', '=', 'Category')->first();
         
         $categories = Category::where('deleted', 0)
             ->whereHas('videoGames', function ($query) {

@@ -19,6 +19,11 @@ class Tag extends Model
         return $this->belongsToMany(Post::class);
     }
 
+    public function seo()
+    {
+        return $this->hasOne(Seo::class);
+    }
+    
     public function user()
     {
         return $this->belongsTo(User::class);

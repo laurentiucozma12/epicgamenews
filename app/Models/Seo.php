@@ -35,5 +35,9 @@ class Seo extends Model
     {
         return $this->belongsTo(Platform::class);
     }
-
+    
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class);
+    }
 }

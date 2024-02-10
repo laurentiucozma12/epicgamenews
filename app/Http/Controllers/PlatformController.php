@@ -12,7 +12,7 @@ class PlatformController extends Controller
 {
     public function index()
     {
-        $seo = Seo::where('page_type', '=', 'Platform')->first();
+        $seo = Seo::where('page_name', '=', 'Platform')->first();
         
         $platforms = Platform::where('deleted', 0)
             ->whereHas('videoGames', function ($query) {

@@ -79,8 +79,8 @@ class DatabaseSeeder extends Seeder
             // Attach SEO title, description, and keywords
             $video_game->seo()->create([
                 'page_type' => 'Video Game',
-                'title' => $video_game->name,
-                'description' => 'Find gaming news filtered by the video game ' . $video_game->name,
+                'title' => 'News about ' . $video_game->name . ' Video Game | Epic Game News',                
+                'description' => 'Find gaming news filtered by the ' . $video_game->name . ' Video Game, only at Epic Game News',
                 'keywords' => $video_game->name,
             ]);
         }
@@ -94,8 +94,8 @@ class DatabaseSeeder extends Seeder
             // Attach SEO title, description, and keywords
             $category->seo()->create([
                 'page_type' => 'Category',
-                'title' => $category->name,
-                'description' => 'Find gaming news filtered by the category ' . $category->name,
+                'title' => 'Gaming news related to ' . $category->name . ' category | Epic Game News',                
+                'description' => 'Find gaming news filtered by the ' . $category->name . 'category, only at Epic Game News',
                 'keywords' => $category->name,
             ]);
         }
@@ -119,15 +119,25 @@ class DatabaseSeeder extends Seeder
             // Attach SEO title, description, and keywords
             $platform->seo()->create([
                 'page_type' => 'Platform',
-                'title' => $platform->name,
-                'description' => 'Find gaming news filtered by the platform ' . $platform->name,
+                'title' => 'Gaming news related to ' . $platform->name . ' platform | Epic Game News',                
+                'description' => 'Find gaming news filtered by the ' . $platform->name . ' platform, only at at Epic Game News',
                 'keywords' => $platform->name,
             ]);
         }
 
         $posts = \App\Models\Post::factory(10)->create(['deleted' => 0]);
 
-        \App\Models\Tag::factory(1)->create();
+            $tags = \App\Models\Tag::factory(10)->create();
+
+            foreach ($tags as $tag) {
+                // Attach SEO title, description, and keywords
+                $tag->seo()->create([
+                    'page_type' => 'Tag',
+                    'title' => 'Gaming news related to  ' . $tag->name . ' tag | Epic Game News',
+                    'description' => 'Find gaming news filtered by the ' . $tag->name . ' tag, only at Epic Game News',
+                    'keywords' => $tag->name,
+                ]);
+            }
         
         foreach ($posts as $post) {
             $categories_ids = [];
