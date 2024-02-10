@@ -19,10 +19,10 @@
 			<div class="col-12 col-lg-4">
 				
 				<div class="d-none d-lg-block">
-					<x-google-ads.responsive-square-ad/>					
+					<x-google-ads.responsive-square-ad/>
 				</div>
 
-				{{-- <x-blog.side-ads-meme/> --}}
+				{{-- YouTube Channel - Hymerra the Barbarian --}}
 				<x-blog.side-youtube/>
 				
 			</div>

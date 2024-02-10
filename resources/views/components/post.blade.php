@@ -57,7 +57,7 @@
             <div class="col-12 col-lg-4 animate-box">
                 <div class="sidebar">
 
-                    <div class="d-none d-lg-block">                        
+                    <div class="d-none d-lg-block">
                         <x-google-ads.responsive-square-ad/>                 
                     </div>
 

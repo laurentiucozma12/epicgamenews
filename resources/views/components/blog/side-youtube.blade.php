@@ -1,4 +1,4 @@
-<h4 class="check-youtube-channel">Check out my <i class="icon-youtube2"></i> Channel</h4>
+<h4 class="check-youtube-channel text-center">Check out my <i class="icon-youtube2"></i> Channel</h4>
 <div class="ads-container d-flex justify-content-center">
     <figure>
         <picture>

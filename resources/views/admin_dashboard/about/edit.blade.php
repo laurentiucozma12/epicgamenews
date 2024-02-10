@@ -36,20 +36,11 @@
                             <div class="col-lg-12">
                                 <div class="border border-3 p-4 rounded">
 
-                                    <div class="mb-3">
+                                    {{-- <div class="mb-3">
                                         <label for="about_first_text" class="form-label">"Who are we" text</label>
                                         <textarea name='about_first_text' class="form-control" id="about_first_text">{{ old("about_first_text", $about->about_first_text) }}</textarea>
                                     
                                         @error('about_first_text')
-                                            <p class='text-danger'>{{ $message }}</p>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="about_second_text" class="form-label">Second text</label>
-                                        <textarea name='about_second_text' class="form-control" id="about_second_text">{{ old("about_second_text", $about->about_second_text) }}</textarea>
-                                    
-                                        @error('about_second_text')
                                             <p class='text-danger'>{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -100,13 +91,14 @@
                                         @error('about_our_vision')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
-                                    </div>
-                                    
+                                    </div> --}}
                                     <div class="mb-3">
-                                        <label for="about_services" class="form-label">Services</label>
-                                        <textarea id="about_services" name="about_services" class="form-control" rows="3">{{ old("about_services", $about->about_services) }}</textarea>   
+                                        <label for="description" class="form-label">About Description</label>
+                                        <textarea name="description" class="form-control" id="description" rows="3">
+                                            {{ old("description", str_replace('../../', '../../../', $about->description)) }}
+                                        </textarea>   
                                     
-                                        @error('about_services')
+                                        @error('description')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -130,31 +122,82 @@
 @endsection
 
 @section("script")
-
 <script>
 $(document).ready(function () {
 
     // Tiny MCE
-    let initTinyMCE = (id) => {
-        tinymce.init({
-            selector: 'textarea#' + id,
-            plugins: 'advlist autolink lists link charmap print preview hr anchor pagebreak',
-            toolbar_mode: 'floating',
-            height: '300',
+    images_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {  
+        const formData = new FormData();
+        let _token = $("input[name='token']").val();
 
-            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link code | rtl ltr',
-            toolbar_mode: 'floating',
-        });       
-    }
-    
-    initTinyMCE('about_our_mission');
-    initTinyMCE('about_our_vision');
-    initTinyMCE('about_services');
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', "{{ route('admin.upload_tinymce_image') }}");
 
-    setTimeout(() => {
-        $(".general-message").fadeOut();
-    }, 5000);
+        xhr.onload = () => {
+            if (xhr.status === 403) {
+                reject({ message: 'HTTP Error: ' + xhr.status, remove: true });
+                return;
+            }
 
+            if (xhr.status < 200 || xhr.status >= 300) {
+                reject('HTTP Error: ' + xhr.status);
+                return;
+            }
+
+            const json = JSON.parse(xhr.responseText);
+
+            if (!json || typeof json.location != 'string') {
+                reject('Invalid JSON: ' + xhr.responseText);
+                return;
+            }
+
+            resolve(json.location);
+        };
+
+        formData.append('_token', '{{ csrf_token() }}');
+        formData.append('file', blobInfo.blob(), blobInfo.filename());
+        xhr.send(formData);
+    });
+
+    tinymce.init({
+        selector: "#description",
+        plugins:
+            "advlist  anchor autolink autosave charmap codesample directionality emoticons help image insertdatetime link linkchecker lists media nonbreaking pagebreak searchreplace table visualblocks visualchars wordcount",
+        toolbar:
+            "undo redo spellcheckdialog  | blocks fontfamily fontsizeinput | bold italic underline forecolor backcolor | link image | align lineheight checklist bullist numlist | indent outdent | removeformat typography",
+        height: "700px",
+
+        //HTML custom font options
+        font_size_formats:
+            "8pt 9pt 10pt 11pt 12pt 14pt 18pt 24pt 30pt 36pt 48pt 60pt 72pt 96pt",
+
+        toolbar_sticky: true,
+        autosave_restore_when_empty: true,
+        spellchecker_active: true,
+        spellchecker_language: "en_US",
+        spellchecker_languages:
+            "English (United States)=en_US,English (United Kingdom)=en_GB,Danish=da,French=fr,German=de,Italian=it,Polish=pl,Spanish=es,Swedish=sv",
+        typography_langs: ["en-US"],
+        typography_default_lang: "en-US",
+        });
+
+
+
+
+    ////// Select //////
+    $('.single-select').select2({
+        theme: 'bootstrap4',
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+        allowClear: Boolean($(this).data('allow-clear')),
+    });
+    $('.multiple-select').select2({
+        theme: 'bootstrap4',
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+        allowClear: Boolean($(this).data('allow-clear')),
+    });
+    ////// End of Select //////
 });
 </script>
 @endsection

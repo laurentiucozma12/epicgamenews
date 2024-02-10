@@ -19,12 +19,14 @@
 					
 					<div class="d-none d-lg-block">
 						<x-google-ads.responsive-square-ad/>					
-					</div>					
+					</div>
+					
 					<div class="d-block d-lg-none">
 						<x-google-ads.in-feed-ad/>
 					</div>
 
-					<x-blog.side-ads-meme/>
+					{{-- YouTube Channel - Hymerra the Barbarian --}}
+					<x-blog.side-youtube/>
 
 					<div class="d-none d-lg-block">
 						<x-google-ads.responsive-square-ad/>					

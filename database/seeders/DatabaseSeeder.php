@@ -151,7 +151,11 @@ class DatabaseSeeder extends Seeder
             $post->image()->save(\App\Models\Image::factory()->make());
         }
 
-        \App\Models\About::factory(1)->create();
+        \App\Models\About::factory()->create([
+            'description' => '
+                <h2 style="line-height: 1;"><strong>Who are we?</strong></h2> <h4 style="line-height: 1;">Hello, fellow Gamers! I\'m a Gamer myself, with a passion for programming.</h4> <ul> <li>In November 2021 I started my journey as a "Self-Taught Programmer". Back then, I did not know if I will be good enough in this field or if I will like it. After being consistent for some time, I started liking it more and more.</li> <li>In June 2023 I decided I should learn more about Web Development, and I thought it\'s a good idea making something I like. So I decided to create this blog where I\'m writing about the games I play or about the news in the Gaming Community.</li> <li>In November 2023 I decided to start my Gaming Channel "Hymerra the Barbarian", where you can watch my GamePlays.</li> </ul> <h2 style="line-height: 1;"><strong>Our mission</strong></h2> <h4 style="line-height: 1;">My mission is to grow as a Gamer and Developer and I want to have a fun journey.</h4> <h2 style="line-height: 1;"><strong>Our Vission</strong></h2> <h4 style="line-height: 1;">I aspire one day to become a Game Developer and create funny video games.</h4>
+            ',
+        ]);               
 
         $seo_home = \App\Models\Seo::factory()->create([
             'page_type' => 'Main',
