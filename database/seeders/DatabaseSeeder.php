@@ -80,8 +80,8 @@ class DatabaseSeeder extends Seeder
             $video_game->seo()->create([
                 'page_type' => 'Video Game',
                 'title' => $video_game->name,
-                'description' => 'SEO Description',
-                'keywords' => 'SEO, Keywords'
+                'description' => 'Find gaming news filtered by video game ' . $video_game->name,
+                'keywords' => $video_game->name,
             ]);
         }
 
@@ -95,8 +95,8 @@ class DatabaseSeeder extends Seeder
             $category->seo()->create([
                 'page_type' => 'Category',
                 'title' => $category->name,
-                'description' => 'SEO Description',
-                'keywords' => 'SEO, Keywords'
+                'description' => 'Find gaming news filtered by category ' . $category->name,
+                'keywords' => $category->name,
             ]);
         }
         
@@ -120,8 +120,8 @@ class DatabaseSeeder extends Seeder
             $platform->seo()->create([
                 'page_type' => 'Platform',
                 'title' => $platform->name,
-                'description' => 'SEO Description',
-                'keywords' => 'SEO, Keywords'
+                'description' => 'Find gaming news filtered by platform ' . $platform->name,
+                'keywords' => $platform->name,
             ]);
         }
 

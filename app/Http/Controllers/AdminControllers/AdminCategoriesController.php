@@ -40,7 +40,7 @@ class AdminCategoriesController extends Controller
         $category = Category::create($validated);
 
         // Create SEO entry
-        if ($request->has('name') && $request->has('seo_description') && $request->has('seo_keywords')) {
+        if ($request->has('name') && $request->has('seo_description')) {
             $seoData = [
                 'page_type' => 'Category',
                 'title' => $request->input('name'),
@@ -102,7 +102,7 @@ class AdminCategoriesController extends Controller
         $category->update($validated);
 
         // Update SEO entry
-        if ($request->has('name') && $request->has('seo_description') && $request->has('seo_keywords')) {
+        if ($request->has('name') && $request->has('seo_description')) {
             $seoData = [
                 'title' => $request->input('name'),
                 'description' => $request->input('seo_description'),

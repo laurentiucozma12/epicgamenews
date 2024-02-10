@@ -12,7 +12,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.index') }}">All Video Games</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.create') }}">Add API Games</a></li>    
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.video_games.create_api') }}">Add API Games</a></li>    
                     </ol>
                 </nav>
             </div>

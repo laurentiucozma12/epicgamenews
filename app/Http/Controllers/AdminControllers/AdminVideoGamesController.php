@@ -45,7 +45,7 @@ class AdminVideoGamesController extends Controller
         $video_game = VideoGame::create($validated);
 
         // Create SEO entry
-        if ($request->has('name') && $request->has('seo_description') && $request->has('seo_keywords')) {
+        if ($request->has('name') && $request->has('seo_description')) {
             $seoData = [
                 'page_type' => 'Video Game',
                 'title' => $request->input('name'),
@@ -129,7 +129,7 @@ class AdminVideoGamesController extends Controller
         $video_game->update($validated);
 
         // Update SEO entry
-        if ($request->has('name') && $request->has('seo_description') && $request->has('seo_keywords')) {
+        if ($request->has('name') && $request->has('seo_description')) {
             $seoData = [
                 'title' => $request->input('name'),
                 'description' => $request->input('seo_description'),

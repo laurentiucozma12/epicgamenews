@@ -73,6 +73,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     Route::post('upload_tinymce_image', [TinyMCEController::class, 'upload_tinymce_image'])->name('upload_tinymce_image');
 
     Route::prefix('video-games')->group(function () {
+        Route::get('/games-api', [AdminVideoGamesController::class, 'createApi'])->name('video_games.create_api');
+        Route::post('/store_api', [AdminVideoGamesController::class, 'storeApi'])->name('video_games.store_api');
+
         Route::get('/', [AdminVideoGamesController::class, 'index'])->name('video_games.index');           
         Route::get('/create', [AdminVideoGamesController::class, 'create'])->name('video_games.create');
         Route::post('/', [AdminVideoGamesController::class, 'store'])->name('video_games.store');        
@@ -81,9 +84,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
         Route::patch('/{video_game:slug}', [AdminVideoGamesController::class, 'update']);
         Route::delete('/{video_game:slug}', [AdminVideoGamesController::class, 'destroy'])->name('video_games.destroy');
         Route::get('/{video_game:slug}', [AdminVideoGamesController::class, 'show'])->name('video_games.show');
-
-        Route::get('/games-api', [AdminVideoGamesController::class, 'createApi'])->name('video_games.create_api');
-        Route::post('/store_api', [AdminVideoGamesController::class, 'storeApi'])->name('video_games.store_api');
     });
 
     Route::prefix('categories')->group(function () {

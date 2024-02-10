@@ -52,6 +52,18 @@ class AdminPostsController extends Controller
         $validated['user_id'] = auth()->id();
         $post = Post::create($validated);
 
+        // Create SEO entry
+        if ($request->has('title') && $request->has('excerpt')) {
+            $seoData = [
+                'page_type' => 'Post',
+                'title' => $request->input('title'),
+                'description' => $request->input('excerpt'),
+                'keywords' => $request->input('tags'),
+            ];
+
+            $post->seo()->create($seoData);
+        }
+
         if ($request->hasFile('thumbnail')) {
             $sizes = [
                 [1140, 641],
@@ -107,6 +119,20 @@ class AdminPostsController extends Controller
         $validated = $request->validate($this->rules);
         $validated['deleted'] = $request->has('deleted') ? 0 : 1;
         $post->update($validated);
+
+        // Update SEO entry
+        if ($request->has('title') && $request->has('excerpt')) {
+            $seoData = [
+                'title' => $request->input('name'),
+                'description' => $request->input('seo_description'),
+                'keywords' => $request->input('seo_keywords'),
+            ];
+
+            // Check if SEO entry already exists
+            $seo = $post->seo;
+
+            $seo->update($seoData);
+        }
 
         if ($request->hasFile('thumbnail')) {                
             $sizes = [
