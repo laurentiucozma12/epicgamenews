@@ -11,7 +11,7 @@ class AdminSeoController extends Controller
     private $rules = [
         'title' => 'required|min:2|max:250',
         'description' => 'required|min:5|max:300',
-        'keywords' => 'required|min:5|max:255',
+        'keywords' => 'required|max:255',
     ];
     
     public function index() {

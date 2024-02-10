@@ -14,7 +14,7 @@ public function up()
             $table->string('page_name')->nullable();
             $table->string('title');
             $table->text('description');
-            $table->text('keywords');
+            $table->text('keywords')->nullable();
             $table->foreignId('user_id')->default(1);
             $table->foreignId('post_id')->nullable();
             $table->foreignId('video_game_id')->nullable();

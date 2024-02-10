@@ -84,7 +84,7 @@
 
                                 <div class="mb-3">
                                     <label for="tags" class="form-label">Post Tags</label>
-                                    <input type="text" value="{{ old("tags") }}" class="form-control" name="tags" id="tags" data-role="tagsinput" required>
+                                    <input type="text" value="{{ old("tags") }}" class="form-control" name="tags" id="tags" data-role="tagsinput">
 
                                     @error('tags')
                                         <p class="text-danger">{{ $message }}</p>
@@ -144,7 +144,4 @@
 <x-crop-modal />
 
 <!--end page wrapper -->
-@endsection
-
-@section("script")
 @endsection

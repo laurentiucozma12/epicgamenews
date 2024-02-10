@@ -20,9 +20,9 @@ use App\Http\Controllers\AdminControllers\AdminCropResizeImage;
 class AdminPostsController extends Controller
 {
     private $rules = [
-        'title' => 'required|max:150',
+        'title' => 'required|min:2|max:150',
         'slug' => 'required|unique:posts,slug|max:150',
-        'excerpt' => 'required|max:400',
+        'excerpt' => 'required|min:5|max:300',
         'video_game_id' => 'required|numeric',
         'thumbnail' => 'required|image|max:1920',
         'author_thumbnail' => 'nullable|max:150',
