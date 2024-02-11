@@ -130,7 +130,7 @@ return [
 
         'custom_testing' => [
             'driver' => 'single',
-            'path' => storage_path('logs/cant_login_to_admin.log'),
+            'path' => storage_path('logs/api_video_game.log'),
             'lever' => 'debug',
         ],
     ],

@@ -208,9 +208,9 @@ class AdminVideoGamesController extends Controller
 
     public function storeApi(Request $request)
     {
-        // Find video game by slug
+        // Find video game by slug, Returns the Instance of the Model OR null
         $game_exists = VideoGame::where('slug', $request->game_slug)->first();
-
+        
         if ($game_exists) {
             return redirect()->back()->with('danger', 'Video Game already exists in Database'); 
         }
@@ -238,22 +238,24 @@ class AdminVideoGamesController extends Controller
         $genres_names = explode(',', $request->genres_names);
         $genres_slugs = explode(',', $request->genres_slugs);
 
-        foreach ($genres_names as $index => $genre_name) {
-            // Find category by slug
-            $category = Category::where('slug', $genres_slugs[$index])->first();
+        // Remove spaces
+        $genres_names = array_map('trim', $genres_names);
+        $genres_slugs = array_map('trim', $genres_slugs);
         
-            // If category doesn't exist, create it
+        foreach ($genres_names as $index => $genre_name) {
+            // Find category by slug, Returns the Instance of the Model OR null
+            $category = Category::where('slug', $genres_slugs[$index])->first();
+
+            // If category is new, save it and attach to the video game
             if ($category === null) {
+
                 $category = Category::create([
                     'name' => $genre_name,
                     'slug' => $genres_slugs[$index],
                     'user_id' => auth()->id(),
                 ]);
-            }
-        
-            // Attach the categories to video game
-            if ($category) {
-                $video_game->categories()->attach($category->id);
+
+                // Create SEO entry for the category
                 $seoData = [
                     'page_type' => 'category',
                     'page_name' => 'Related Category',
@@ -262,31 +264,36 @@ class AdminVideoGamesController extends Controller
                     'seo_description' => 'Find gaming news filtered by the ' . $category->name . 'category, only at Epic Game News',
                     'seo_keywords' => $category->name,
                 ];
-    
+
                 $category->seo()->create($seoData);
+
             }
+
+            // Attach the category to the video game
+            $video_game->categories()->attach($category->id);
         }
 
         // Attach platforms to the video game
         $platforms_names = explode(',', $request->platforms_names);
         $platforms_slugs = explode(',', $request->platforms_slugs);
+            
+        // Remove spaces
+        $platforms_names = array_map('trim', $platforms_names);
+        $platforms_slugs = array_map('trim', $platforms_slugs);
 
         foreach ($platforms_names as $index => $platform_name) {
-            // Find platform by slug
+            // Find platform by slug, Returns the Instance of the Model OR null
             $platform = Platform::where('slug', $platforms_slugs[$index])->first();
-
+            
             // If platform doesn't exist, create it
             if ($platform === null) {
+                
                 $platform = Platform::create([
                     'name' => $platform_name,
                     'slug' => $platforms_slugs[$index],
                     'user_id' => auth()->id(),
                 ]);
-            }
-        
-            // Attach the platforms to video game
-            if ($platform) {
-                $video_game->platforms()->attach($platform->id);
+
                 $seoData = [
                     'page_type' => 'platform',
                     'page_name' => 'Related Platform',
@@ -297,7 +304,11 @@ class AdminVideoGamesController extends Controller
                 ];
                 
                 $platform->seo()->create($seoData);
+                
             }
+            
+            // Attach the platform to the video game
+            $video_game->platforms()->attach($platform->id);
         }
 
         return redirect()->route('admin.video_games.index')->with('success', 'Video Game has been Created');            
