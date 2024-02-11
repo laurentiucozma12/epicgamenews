@@ -77,7 +77,7 @@
 
 <script>
     // Sending data to functions-admin.js file
-    window.csrf_token = "{{ csrf_token() }}";    
+    window.csrf_token = "{{ csrf_token() }}";
 </script>
 
 @endsection

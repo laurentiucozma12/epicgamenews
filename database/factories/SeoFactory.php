@@ -16,9 +16,9 @@ class SeoFactory extends Factory
             'page_name' => $this->faker->sentence(),
             'page_type' => $this->faker->sentence(),
             'seo_name' => $this->faker->sentence(),
-            'title' => $this->faker->sentence(),
-            'description' => $this->faker->paragraph(),
-            'keywords' => $this->faker->words(5, true),
+            'seo_title' => $this->faker->sentence(),
+            'seo_description' => $this->faker->paragraph(),
+            'seo_keywords' => $this->faker->words(5, true),
             'user_id' => User::first(),
         ];
     }

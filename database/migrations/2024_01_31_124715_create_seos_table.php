@@ -13,9 +13,9 @@ public function up()
             $table->string('page_type')->nullable();
             $table->string('page_name')->nullable();
             $table->string('seo_name')->nullable();
-            $table->string('title');
-            $table->text('description');
-            $table->text('keywords')->nullable();
+            $table->string('seo_title');
+            $table->text('seo_description');
+            $table->text('seo_keywords')->nullable();
             $table->foreignId('user_id')->default(1);
             $table->foreignId('post_id')->nullable();
             $table->foreignId('video_game_id')->nullable();

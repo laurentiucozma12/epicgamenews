@@ -21,7 +21,7 @@ use App\Http\Controllers\AdminControllers\AdminCropResizeImage;
 class AdminPostsController extends Controller
 {
     private $rules = [
-        'title' => 'required|min:2|max:150',
+        'title' => 'required|min:2|max:250',
         'slug' => 'required|unique:posts,slug|max:150',
         'excerpt' => 'required|min:5|max:300',
         'video_game_id' => 'required|numeric',
@@ -52,14 +52,16 @@ class AdminPostsController extends Controller
         $validated = $request->validate($this->rules);        
         $validated['user_id'] = auth()->id();
         $post = Post::create($validated);
-
+        
         // Create SEO entry
         if ($request->has('title') && $request->has('excerpt')) {
             $seoData = [
                 'page_type' => 'post',
-                'title' => $request->input('title'),
-                'description' => $request->input('excerpt'),
-                'keywords' => $request->input('tags'),
+                'page_name' => 'Post',
+                'seo_name' => $post->video_game->name,
+                'seo_title' => $request->input('title'),
+                'seo_description' => $request->input('excerpt'),
+                'seo_keywords' => $request->input('tags'),
             ];
 
             $post->seo()->create($seoData);
@@ -88,7 +90,7 @@ class AdminPostsController extends Controller
             'video_game_id' => $request->input('video_game_id'),
         ]);
 
-        $this->syncTags($request, $post);            
+        $this->syncTags($request, $post);
 
         return redirect()->route('admin.posts.create')->with('success', 'Post has been created.');
     }
@@ -126,9 +128,9 @@ class AdminPostsController extends Controller
         // Update SEO entry
         if ($request->has('title') && $request->has('excerpt')) {
             $seoData = [
-                'title' => $request->input('title'),
-                'description' => $request->input('excerpt'),
-                'keywords' => $request->input('tags'),
+                'seo_title' => $request->input('title'),
+                'seo_description' => $request->input('excerpt'),
+                'seo_keywords' => $request->input('tags'),
             ];
 
             // Check if SEO entry already exists
@@ -222,7 +224,19 @@ class AdminPostsController extends Controller
                 $existingTag->user_id = auth()->id();
                 $existingTag->save();
             }
-            
+
+            // Create SEO entry for the tag
+            $seoData = [
+                'page_type' => 'tag',
+                'page_name' => 'Related Tag',
+                'seo_name' => $existingTag->name,
+                'seo_title' => 'Gaming news related to  ' . $existingTag->name . ' tag | Epic Game News',
+                'seo_description' => 'Find gaming news filtered by the ' . $existingTag->name . ' tag, only at Epic Game News',
+                'seo_keywords' => $existingTag->name,
+            ];
+
+            $existingTag->seo()->updateOrCreate([], $seoData);
+
             $tags_ids[] = $existingTag->id;
         }
         

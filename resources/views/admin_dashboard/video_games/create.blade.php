@@ -32,8 +32,8 @@
                             <div class="col-lg-12">
 
                                 <div class="mb-3">
-                                    <label for="inputSeoTitle" class="form-label">Video Game Seo Title</label>
-                                    <input type="text" value='{{ old("seo_title") }}' name="seo_title" required class="form-control" id="inputSeoTitle">
+                                    <label for="seo_title" class="form-label">Video Game Seo Title</label>
+                                    <input type="text" value='{{ old("seo_title") }}' name="seo_title" required class="form-control" id="seo_title">
 
                                     @error('seo_title')
                                         <p class="text-danger">{{ $message }}</p>
@@ -41,8 +41,8 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="inputSeoDescription" class="form-label">Video Game Seo Description</label>
-                                    <textarea type="text" name="seo_description" required class="form-control" id="inputSeoDescription" rows="2">{{ old("seo_description") }}</textarea>
+                                    <label for="seo_description" class="form-label">Video Game Seo Description</label>
+                                    <textarea type="text" name="seo_description" required class="form-control" id="seo_description" rows="2">{{ old("seo_description") }}</textarea>
 
                                     @error('seo_description')
                                         <p class="text-danger">{{ $message }}</p>
@@ -50,8 +50,8 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="inputSeoKeywords" class="form-label">Video Game Seo Keywords</label>
-                                    <input type="text" value='{{ old("seo_keywords") }}' name="seo_keywords" required class="form-control" id="inputSeoKeywords">
+                                    <label for="seo_keywords" class="form-label">Video Game Seo Keywords</label>
+                                    <input type="text" value='{{ old("seo_keywords") }}' name="seo_keywords" required class="form-control" id="seo_keywords">
 
                                     @error('seo_keywords')
                                         <p class="text-danger">{{ $message }}</p>

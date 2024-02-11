@@ -81,9 +81,9 @@ class DatabaseSeeder extends Seeder
                 'page_type' => 'video_game',
                 'page_name' => 'Related Video Game',
                 'seo_name' => $video_game->name,
-                'title' => 'News about ' . $video_game->name . ' Video Game | Epic Game News',                
-                'description' => 'Find gaming news filtered by the ' . $video_game->name . ' Video Game, only at Epic Game News',
-                'keywords' => $video_game->name,
+                'seo_title' => 'News about ' . $video_game->name . ' Video Game | Epic Game News',                
+                'seo_description' => 'Find gaming news filtered by the ' . $video_game->name . ' Video Game, only at Epic Game News',
+                'seo_keywords' => $video_game->name,
             ]);
         }
 
@@ -98,9 +98,9 @@ class DatabaseSeeder extends Seeder
                 'page_type' => 'category',
                 'page_name' => 'Related Category',
                 'seo_name' => $category->name,
-                'title' => 'Gaming news related to ' . $category->name . ' category | Epic Game News',                
-                'description' => 'Find gaming news filtered by the ' . $category->name . 'category, only at Epic Game News',
-                'keywords' => $category->name,
+                'seo_title' => 'Gaming news related to ' . $category->name . ' category | Epic Game News',                
+                'seo_description' => 'Find gaming news filtered by the ' . $category->name . 'category, only at Epic Game News',
+                'seo_keywords' => $category->name,
             ]);
         }
         
@@ -125,9 +125,9 @@ class DatabaseSeeder extends Seeder
                 'page_type' => 'platform',
                 'page_name' => 'Related Platform',
                 'seo_name' => $platform->name,
-                'title' => 'Gaming news related to ' . $platform->name . ' platform | Epic Game News',                
-                'description' => 'Find gaming news filtered by the ' . $platform->name . ' platform, only at at Epic Game News',
-                'keywords' => $platform->name,
+                'seo_title' => 'Gaming news related to ' . $platform->name . ' platform | Epic Game News',                
+                'seo_description' => 'Find gaming news filtered by the ' . $platform->name . ' platform, only at at Epic Game News',
+                'seo_keywords' => $platform->name,
             ]);
         }
 
@@ -141,9 +141,9 @@ class DatabaseSeeder extends Seeder
                     'page_type' => 'tag',
                     'page_name' => 'Related Tag',
                     'seo_name' => $tag->name,
-                    'title' => 'Gaming news related to  ' . $tag->name . ' tag | Epic Game News',
-                    'description' => 'Find gaming news filtered by the ' . $tag->name . ' tag, only at Epic Game News',
-                    'keywords' => $tag->name,
+                    'seo_title' => 'Gaming news related to  ' . $tag->name . ' tag | Epic Game News',
+                    'seo_description' => 'Find gaming news filtered by the ' . $tag->name . ' tag, only at Epic Game News',
+                    'seo_keywords' => $tag->name,
                 ]);
             }
         
@@ -179,9 +179,9 @@ class DatabaseSeeder extends Seeder
                 'page_type' => 'post',
                 'page_name' => 'Post',
                 'seo_name' => $post->title,
-                'title' => $post->title,
-                'description' => $post->excerpt,
-                'keywords' => $keywordsString,
+                'seo_title' => $post->title,
+                'seo_description' => $post->excerpt,
+                'seo_keywords' => $keywordsString,
             ]);
         }
 
@@ -194,81 +194,81 @@ class DatabaseSeeder extends Seeder
         $seo_home = \App\Models\Seo::factory()->create([
             'page_type' => 'main',
             'page_name' => 'Home',
-            'title' => 'Latest News in Gaming - Epic Game News',
-            'description' => 'Explore the latest and most exciting gaming news at EpicGameNews.com. Stay updated on the hottest releases, industry trends, and in-depth game reviews. Immerse yourself in a world of gaming insights, expert analyses, and exclusive content. Your ultimate destination for everything gaming awaits!',
-            'keywords' => 'gaming news, video game releases, industry trends, game reviews, esports updates, gaming community, gaming culture, latest game announcements, game analysis, Epic Game News, gaming updates, console news, PC gaming, multiplayer games, gaming events',
+            'seo_title' => 'Latest News in Gaming - Epic Game News',
+            'seo_description' => 'Explore the latest and most exciting gaming news at EpicGameNews.com. Stay updated on the hottest releases, industry trends, and in-depth game reviews. Immerse yourself in a world of gaming insights, expert analyses, and exclusive content. Your ultimate destination for everything gaming awaits!',
+            'seo_keywords' => 'gaming news, video game releases, industry trends, game reviews, esports updates, gaming community, gaming culture, latest game announcements, game analysis, Epic Game News, gaming updates, console news, PC gaming, multiplayer games, gaming events',
         ]);
 
         // Video Game Page
         $seo_video_game = \App\Models\Seo::factory()->create([
             'page_type' => 'main',
             'page_name' => 'Video Game',
-            'title' => 'Explore the Latest Video Games: News, Reviews, and Updates only at EpicGameNews.com',
-            'description' => 'Stay in the loop with EpicGameNews.com! Discover the latest video games, read insightful reviews, and stay updated with gaming news and trends. Your ultimate destination for gaming enthusiasts.',
-            'keywords' => 'epicgamenews.com, popular video games, video games news, latest game releases, gaming reviews',
+            'seo_title' => 'Explore the Latest Video Games: News, Reviews, and Updates only at EpicGameNews.com',
+            'seo_description' => 'Stay in the loop with EpicGameNews.com! Discover the latest video games, read insightful reviews, and stay updated with gaming news and trends. Your ultimate destination for gaming enthusiasts.',
+            'seo_keywords' => 'epicgamenews.com, popular video games, video games news, latest game releases, gaming reviews',
         ]);
 
         // Category Page
         $seo_category = \App\Models\Seo::factory()->create([
             'page_type' => 'main',
             'page_name' => 'Category',
-            'title' => 'Dive into Exciting Gaming Categories at EpicGameNews.com',
-            'description' => 'Explore diverse gaming categories at EpicGameNews.com. From action-packed adventures to strategic challenges, find your favorite video game genres and discover new gaming worlds.',
-            'keywords' => 'video game genres, gaming categories, explore gaming types, epicgamenews.com categories, popular game genres, gaming variety',
+            'seo_title' => 'Dive into Exciting Gaming Categories at EpicGameNews.com',
+            'seo_description' => 'Explore diverse gaming categories at EpicGameNews.com. From action-packed adventures to strategic challenges, find your favorite video game genres and discover new gaming worlds.',
+            'seo_keywords' => 'video game genres, gaming categories, explore gaming types, epicgamenews.com categories, popular game genres, gaming variety',
         ]);
 
         // Platform Page
         $seo_platform = \App\Models\Seo::factory()->create([
             'page_type' => 'main',
             'page_name' => 'Platform',
-            'title' => 'Discover Gaming Excellence on Leading Platforms at EpicGameNews.com',
-            'description' => 'Explore the best gaming experiences on various platforms at EpicGameNews.com. From top-notch console exclusives to PC gaming insights, find the perfect platform for your gaming adventures.',
-            'keywords' => 'gaming platforms, video game consoles, pc, playstation, xbox, mobile, gaming devices',
+            'seo_title' => 'Discover Gaming Excellence on Leading Platforms at EpicGameNews.com',
+            'seo_description' => 'Explore the best gaming experiences on various platforms at EpicGameNews.com. From top-notch console exclusives to PC gaming insights, find the perfect platform for your gaming adventures.',
+            'seo_keywords' => 'gaming platforms, video game consoles, pc, playstation, xbox, mobile, gaming devices',
         ]);
 
         // About Page
         $seo_about = \App\Models\Seo::factory()->create([
             'page_type' => 'main',
             'page_name' => 'About',
-            'title' => 'About us - Epic Game News',
-            'description' => 'Wanna know more about us? Checkout About page.',
-            'keywords' => 'about us, epicgamenews.com, epic game news, epicgamenews, about',
+            'seo_title' => 'About us - Epic Game News',
+            'seo_description' => 'Wanna know more about us? Checkout About page.',
+            'seo_keywords' => 'about us, epicgamenews.com, epic game news, epicgamenews, about',
         ]);
 
         // Contact Page
         $seo_contact = \App\Models\Seo::factory()->create([
             'page_type' => 'main',
             'page_name' => 'Contact',
-            'title' => 'Contact us - Epic Game News',
-            'description' => 'Wanna contact us? Complete a form on Contact page.',
-            'keywords' => 'contact us, epicgamenews.com, epic game news, epicgamenews, contact',
+            'seo_title' => 'Contact us - Epic Game News',
+            'seo_description' => 'Wanna contact us? Complete a form on Contact page.',
+            'seo_keywords' => 'contact us, epicgamenews.com, epic game news, epicgamenews, contact',
         ]);
 
         // Privacy Policy Page
         $seo_privacy_policy = \App\Models\Seo::factory()->create([
             'page_type' => 'main',
             'page_name' => 'Privacy',
-            'title' => '',
-            'description' => '',
-            'keywords' => '',
+            'seo_title' => '',
+            'seo_description' => '',
+            'seo_keywords' => '',
         ]);
 
         // Login Page
         $seo_login = \App\Models\Seo::factory()->create([
             'page_type' => 'main',
             'page_name' => 'Login',
-            'title' => '',
-            'description' => '',
-            'keywords' => '',
+            'seo_title' => '',
+            'seo_description' => '',
+            'seo_keywords' => '',
         ]);
 
         // Register Page
         $seo_register = \App\Models\Seo::factory()->create([
             'page_type' => 'main',
             'page_name' => 'Register',
-            'title' => '',
-            'description' => '',
-            'keywords' => '',
+            'seo_title' => '',
+            'seo_description' => '',
+            'seo_keywords' => '',
         ]);
     }
 }

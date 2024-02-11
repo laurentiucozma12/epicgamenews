@@ -12,6 +12,7 @@ use App\Models\Seo;
 class AdminPlatformsController extends Controller
 { 
     private $rules = [
+        'seo_title' => 'required|min:2|max:250',
         'seo_description' => 'required|min:5|max:300',
         'seo_keywords' => 'required|min:5|max:255',
         'name' => 'required|min:2|max:250',
@@ -40,12 +41,14 @@ class AdminPlatformsController extends Controller
         $platform = Platform::create($validated);
 
         // Create SEO entry
-        if ($request->has('name') && $request->has('seo_description')) {
+        if ($request->has('seo_title') && $request->has('seo_description')) {
             $seoData = [
+                'page_name' => 'Related Platform',
                 'page_type' => 'platform',
-                'title' => $request->input('seo_title'),
-                'description' => $request->input('seo_description'),
-                'keywords' => $request->input('seo_keywords'),
+                'seo_name' => $platform->name,
+                'seo_title' => $request->input('seo_title'),
+                'seo_description' => $request->input('seo_description'),
+                'seo_keywords' => $request->input('seo_keywords'),
             ];
 
             $platform->seo()->create($seoData);
@@ -102,11 +105,11 @@ class AdminPlatformsController extends Controller
         $platform->update($validated);
 
         // Update SEO entry
-        if ($request->has('name') && $request->has('seo_description')) {
+        if ($request->has('seo_title') && $request->has('seo_description')) {
             $seoData = [
-                'title' => $request->input('seo_title'),
-                'description' => $request->input('seo_description'),
-                'keywords' => $request->input('seo_keywords'),
+                'seo_title' => $request->input('seo_title'),
+                'seo_description' => $request->input('seo_description'),
+                'seo_keywords' => $request->input('seo_keywords'),
             ];
 
             // Check if SEO entry already exists

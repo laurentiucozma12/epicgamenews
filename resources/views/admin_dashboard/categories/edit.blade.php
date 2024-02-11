@@ -35,7 +35,7 @@
 
                                 <div class="mb-3">
                                     <label for="inputSeoTitle" class="form-label">Category Seo title</label>
-                                    <input type="text" name="seo_title"  value='{{ old("seo_title", $seo->title) }}' id="inputSeoTitle" class="form-control" required>
+                                    <input type="text" name="seo_title"  value='{{ old("seo_title", $seo->seo_title) }}' id="inputSeoTitle" class="form-control" required>
 
                                     @error('seo_title')
                                         <p class="text-danger">{{ $message }}</p>
@@ -44,7 +44,7 @@
 
                                 <div class="mb-3">
                                     <label for="inputSeoDescription" class="form-label">Category Seo Description</label>
-                                    <textarea type="text" name="seo_description" required class="form-control" id="inputSeoDescription" rows="2">{{ old("seo_description", $seo->description ) }}</textarea>
+                                    <textarea type="text" name="seo_description" required class="form-control" id="inputSeoDescription" rows="2">{{ old("seo_description", $seo->seo_description ) }}</textarea>
 
                                     @error('seo_description')
                                         <p class="text-danger">{{ $message }}</p>
@@ -53,7 +53,7 @@
 
                                 <div class="mb-3">
                                     <label for="inputSeoKeywords" class="form-label">Category Seo Keywords</label>
-                                    <input type="text" value='{{ old("seo_keywords", $seo->keywords) }}' name="seo_keywords" required class="form-control" id="inputSeoKeywords">
+                                    <input type="text" value='{{ old("seo_keywords", $seo->seo_keywords) }}' name="seo_keywords" required class="form-control" id="inputSeoKeywords">
 
                                     @error('seo_keywords')
                                         <p class="text-danger">{{ $message }}</p>

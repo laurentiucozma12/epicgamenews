@@ -34,8 +34,8 @@
                             <div class="col-lg-12">
 
                                 <div class="mb-3">
-                                    <label for="inputSeoTitle" class="form-label">Platform Seo title</label>
-                                    <input type="text" name="seo_title"  value='{{ old("seo_title", $seo->title) }}' id="inputSeoTitle" class="form-control" required>
+                                    <label for="seo_title" class="form-label">Platform Seo Title</label>
+                                    <input type="text" name="seo_title"  value='{{ old("seo_title", $seo->seo_title) }}' id="seo_title" class="form-control" required>
 
                                     @error('seo_title')
                                         <p class="text-danger">{{ $message }}</p>
@@ -43,8 +43,8 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="inputSeoDescription" class="form-label">Platform Seo Description</label>
-                                    <textarea type="text" name="seo_description" required class="form-control" id="inputSeoDescription" rows="2">{{ old("seo_description", $seo->description ) }}</textarea>
+                                    <label for="seo_description" class="form-label">Platform Seo Description</label>
+                                    <textarea type="text" name="seo_description" required class="form-control" id="seo_description" rows="2">{{ old("seo_description", $seo->seo_description ) }}</textarea>
 
                                     @error('seo_description')
                                         <p class="text-danger">{{ $message }}</p>
@@ -52,8 +52,8 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="inputSeoKeywords" class="form-label">Platform Seo Keywords</label>
-                                    <input type="text" value='{{ old("seo_keywords", $seo->keywords) }}' name="seo_keywords" required class="form-control" id="inputSeoKeywords">
+                                    <label for="seo_keywords" class="form-label">Platform Seo Keywords</label>
+                                    <input type="text" value='{{ old("seo_keywords", $seo->seo_keywords) }}' name="seo_keywords" required class="form-control" id="seo_keywords">
 
                                     @error('seo_keywords')
                                         <p class="text-danger">{{ $message }}</p>

@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 class AdminVideoGamesController extends Controller
 {
     private $rules = [
+        'seo_title' => 'required|min:2|max:250',
         'seo_description' => 'required|min:5|max:300',
         'seo_keywords' => 'required|min:5|max:255',
         'name' => 'required|min:2|max:250',
@@ -47,10 +48,12 @@ class AdminVideoGamesController extends Controller
         // Create SEO entry
         if ($request->has('name') && $request->has('seo_description')) {
             $seoData = [
+                'page_name' => 'Related Video Game',
                 'page_type' => 'video_game',
-                'title' => $request->input('seo_title'),
-                'description' => $request->input('seo_description'),
-                'keywords' => $request->input('seo_keywords'),
+                'seo_name' => $video_game->name,
+                'seo_title' => $request->input('seo_title'),
+                'seo_description' => $request->input('seo_description'),
+                'seo_keywords' => $request->input('seo_keywords'),
             ];
 
             $video_game->seo()->create($seoData);
@@ -131,9 +134,9 @@ class AdminVideoGamesController extends Controller
         // Update SEO entry
         if ($request->has('seo_title') && $request->has('seo_description')) {
             $seoData = [
-                'title' => $request->input('seo_title'),
-                'description' => $request->input('seo_description'),
-                'keywords' => $request->input('seo_keywords'),
+                'seo_title' => $request->input('seo_title'),
+                'seo_description' => $request->input('seo_description'),
+                'seo_keywords' => $request->input('seo_keywords'),
             ];
 
             // Check if SEO entry already exists
@@ -208,72 +211,95 @@ class AdminVideoGamesController extends Controller
         // Find video game by slug
         $game_exists = VideoGame::where('slug', $request->game_slug)->first();
 
-        if (!$game_exists) {
-            $validated['name'] = $request->game_name;
-            $validated['slug'] = $request->game_slug;
-            $validated['user_id'] = auth()->id();
-            $video_game = VideoGame::create($validated);
-            
-            // Attach genres to the video game
-            $genres_names = explode(',', $request->genres_names);
-            $genres_slugs = explode(',', $request->genres_slugs);
-
-            foreach ($genres_names as $index => $genre_name) {
-                // Find category by slug
-                $category = Category::where('slug', $genres_slugs[$index])->first();
-            
-                // If category doesn't exist, create it
-                if (!$category) {
-                    try {
-                        $category = Category::create([
-                            'name' => $genre_name,
-                            'slug' => $genres_slugs[$index],
-                            'user_id' => auth()->id(),
-                        ]);
-                    } catch (\Exception $e) {
-                        // Handle the exception, log an error, or return an appropriate response
-                        return redirect()->back()->with('danger', 'Error creating category.');
-                    }
-                }
-            
-                // Attach the categories to video game
-                if ($category) {
-                    $video_game->categories()->attach($category->id);
-                }
-            }
-
-            // Attach platforms to the video game
-            $platforms_names = explode(',', $request->platforms_names);
-            $platforms_slugs = explode(',', $request->platforms_slugs);
-
-            foreach ($platforms_names as $index => $platform_name) {
-                // Find platform by slug
-                $platform = Platform::where('slug', $platforms_slugs[$index])->first();
-            
-                // If platform doesn't exist, create it
-                if (!$platform) {
-                    try {
-                        $platform = Platform::create([
-                            'name' => $platform_name,
-                            'slug' => $platforms_slugs[$index],
-                            'user_id' => auth()->id(),
-                        ]);
-                    } catch (\Exception $e) {
-                        // Handle the exception, log an error, or return an appropriate response
-                        return redirect()->back()->with('danger', 'Error creating platform.');
-                    }
-                }
-            
-                // Attach the platforms to video game
-                if ($platform) {
-                    $video_game->platforms()->attach($platform->id);
-                }
-            }
-
-            return redirect()->route('admin.video_games.index')->with('success', 'Video Game has been Created');            
-        } else {
-            return redirect()->back()->with('danger', 'Video Game already exists in Database');          
+        if ($game_exists) {
+            return redirect()->back()->with('danger', 'Video Game already exists in Database'); 
         }
-    }
+
+        $validated['name'] = $request->game_name;
+        $validated['slug'] = $request->game_slug;
+        $validated['user_id'] = auth()->id();
+        $video_game = VideoGame::create($validated);
+
+        // Create SEO entry
+        if ($video_game) {
+            $seoData = [
+                'page_type' => 'video_game',
+                'page_name' => 'Related Video Game',
+                'seo_name' => $video_game->name,
+                'seo_title' => 'News about ' . $video_game->name . ' Video Game | Epic Game News',                
+                'seo_description' => 'Find gaming news filtered by the ' . $video_game->name . ' Video Game, only at Epic Game News',
+                'seo_keywords' => $video_game->name,
+            ];
+
+            $video_game->seo()->create($seoData);
+        }
+
+        // Attach genres to the video game
+        $genres_names = explode(',', $request->genres_names);
+        $genres_slugs = explode(',', $request->genres_slugs);
+
+        foreach ($genres_names as $index => $genre_name) {
+            // Find category by slug
+            $category = Category::where('slug', $genres_slugs[$index])->first();
+        
+            // If category doesn't exist, create it
+            if ($category === null) {
+                $category = Category::create([
+                    'name' => $genre_name,
+                    'slug' => $genres_slugs[$index],
+                    'user_id' => auth()->id(),
+                ]);
+            }
+        
+            // Attach the categories to video game
+            if ($category) {
+                $video_game->categories()->attach($category->id);
+                $seoData = [
+                    'page_type' => 'category',
+                    'page_name' => 'Related Category',
+                    'seo_name' => $category->name,
+                    'seo_title' => 'Gaming news related to ' . $category->name . ' category | Epic Game News',                
+                    'seo_description' => 'Find gaming news filtered by the ' . $category->name . 'category, only at Epic Game News',
+                    'seo_keywords' => $category->name,
+                ];
     
+                $category->seo()->create($seoData);
+            }
+        }
+
+        // Attach platforms to the video game
+        $platforms_names = explode(',', $request->platforms_names);
+        $platforms_slugs = explode(',', $request->platforms_slugs);
+
+        foreach ($platforms_names as $index => $platform_name) {
+            // Find platform by slug
+            $platform = Platform::where('slug', $platforms_slugs[$index])->first();
+
+            // If platform doesn't exist, create it
+            if ($platform === null) {
+                $platform = Platform::create([
+                    'name' => $platform_name,
+                    'slug' => $platforms_slugs[$index],
+                    'user_id' => auth()->id(),
+                ]);
+            }
+        
+            // Attach the platforms to video game
+            if ($platform) {
+                $video_game->platforms()->attach($platform->id);
+                $seoData = [
+                    'page_type' => 'platform',
+                    'page_name' => 'Related Platform',
+                    'seo_name' => $platform->name,
+                    'seo_title' => 'Gaming news related to ' . $platform->name . ' platform | Epic Game News',                
+                    'seo_description' => 'Find gaming news filtered by the ' . $platform->name . ' platform, only at at Epic Game News',
+                    'seo_keywords' => $platform->name,
+                ];
+                
+                $platform->seo()->create($seoData);
+            }
+        }
+
+        return redirect()->route('admin.video_games.index')->with('success', 'Video Game has been Created');            
+    }
 }
