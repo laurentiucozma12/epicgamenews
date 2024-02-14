@@ -34,7 +34,6 @@ use App\Http\Controllers\AdminControllers\AdminAboutController;
 use App\Http\Controllers\AdminControllers\AdminPostsController;
 use App\Http\Controllers\AdminControllers\AdminRolesController;
 use App\Http\Controllers\AdminControllers\AdminUsersController;
-use App\Http\Controllers\AdminControllers\AdminContactsController;
 use App\Http\Controllers\AdminControllers\AdminDashboardController;
 use App\Http\Controllers\AdminControllers\AdminPlatformsController;
 use App\Http\Controllers\AdminControllers\AdminCategoriesController;
@@ -152,9 +151,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
         Route::get('/{user:name}/related-video-games', [AdminUsersController::class, 'showVideoGames'])->name('users.show_video_games');
         Route::get('/{user:name}/related-categories', [AdminUsersController::class, 'showCategories'])->name('users.show_categories');
     });
-    
-    Route::get('contacts', [AdminContactsController::class, 'index'])->name('contacts');
-    Route::delete('contacts/{contact}', [AdminContactsController::class, 'destroy'])->name('contacts.destroy');
     
     Route::get('about', [AdminAboutController::class, 'edit'])->name('about.edit');
     Route::post('about', [AdminAboutController::class, 'update'])->name('about.update');

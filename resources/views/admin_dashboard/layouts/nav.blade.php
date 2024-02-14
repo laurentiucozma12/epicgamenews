@@ -137,18 +137,6 @@
                 <li><a href="{{ route('admin.users.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New User</a></li>
             </ul>
         </li>
-
-        @if ( auth()->user()->roles->isNotEmpty() 
-        && auth()->user()->roles->contains('name', 'admin') 
-        && !auth()->user()->roles->contains('name', 'user'))
-            <hr>
-            <li>
-                <a href="{{ route('admin.contacts') }}">
-                    <div class="parent-icon"><i class='bx bx-mail-send'></i></div>
-                    <div class="menu-title">Contacts</div>
-                </a>
-            </li>
-        @endif
         
         <hr>
         <li>
