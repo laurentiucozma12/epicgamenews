@@ -184,7 +184,7 @@
 						<form id="subscribe-input" class="form-inline">
 							<div class="">
 								<div class="form-group">
-									<input id="email" name="subscribe-email" type="text" class="form-control newsletter" placeholder="Enter your email">
+									<input id="email" name="subscribe-email" type="email" required class="form-control newsletter" placeholder="Enter your email">
 								</div>
 							</div>
 							<div class="">
@@ -336,10 +336,27 @@
 
 <script>
 	$(function() {
+		function isEmail(email) {
+			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			   return regex.test(email);
+		}
+
 		$(document).on("click", "#subscribe-btn", (e) => {
 			e.preventDefault();
 			let _this = $(e.target);
-			console.log(_this.text());
+			
+			let email = _this.parents("form").find("input[name='subscribe-email']").val();
+
+			if (!isEmail(email)) {
+				$("body").append("<div class='global-message error'>This email is not valid</div>");
+			} else {
+				// $("body").append("<div class='global-message info'>You subscribed to Newsletter</div>");
+			}
+
+			setTimeout(() => {
+				$(".global-message.error").remove();
+				$(".global-message.info").remove();
+			}, 5000);
 		})
 	});
 </script>
