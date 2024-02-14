@@ -162,7 +162,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search', [HomeController::class, 'search'])->name('home.search');
 
 Route::get('/video-games/search', [VideoGameController::class, 'searchVideoGame'])->name('video_games.search');
-Route::get('/video-games/{video_game:slug}/search', [VideoGameController::class, 'searchRelated'])->name('video_games.related.search');
 Route::get('/video-games', [VideoGameController::class, 'index'])->name('video_games.index');
 Route::get('/video-games/{video_game:slug}', [VideoGameController::class, 'show'])->name('video_games.show');
 
