@@ -374,6 +374,12 @@ footer .link-to-website:hover {
     border-radius: 10px;
     background-color: var(--dark-gray);
     max-height: 30px !important; }
+    @media (max-width: 1200px) {
+    .search {
+        max-width: 120px ; } }
+    @media (max-width: 1200px) {
+    .search {
+        max-width: none ; } }
 
 .search:active,
 .search:focus-visible { 
@@ -383,13 +389,17 @@ footer .link-to-website:hover {
 
 .search-container {
     position: relative; }
-
-.search-icon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 10px;
-    pointer-events: none; }
+    
+.big-sc-container {
+    display: block; }
+    @media (max-width: 1100px) {
+        .big-sc-container {
+            display: none !important; } }
+.sm-sc-container {
+    display: none; }
+    @media (max-width: 1100px) {
+        .sm-sc-container {
+            display: block !important; } }
 
 .posts-img {
     height: auto;

@@ -9,7 +9,6 @@
 		@csrf
 		<div class="search-container">
 			<input type="search" name="search" value="{{ isset($search) ? $search : '' }}" class="search" placeholder="Search a video game">
-			<i class="icon-search4 search-icon"></i>
 		</div>
 	</form>	
 @endsection

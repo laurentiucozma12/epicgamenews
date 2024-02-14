@@ -11,7 +11,6 @@
             @csrf
             <div class="search-container">
                 <input type="search" name="search" value="{{ isset($search) ? $search : '' }}" class="search" placeholder="Search">
-                <i class="icon-search4 search-icon"></i>
             </div>
         </form>
     @endsection

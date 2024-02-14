@@ -102,7 +102,9 @@
 						<h1 class="title-route"><b>Epic Game News</b></h1>
 					</a>
 					
-					@yield('search')
+					<div class="big-sc-container">
+						@yield('search')
+					</div>
 
 					<div class="nav-layout-btns-container text-right menu-1">
 
@@ -113,6 +115,7 @@
 							<a href="{{ route('platforms.index') }}"><li class="font-changed">Platforms</li></a>
 							<a href="{{ route('about') }}"><li class="font-changed">About</li></a>
 							<a href="{{ route('contact.create') }}"><li class="font-changed no-right-padding">Contact</li></a>
+							<div class="sm-sc-container">@yield('search')</div>
 
 							{{-- @auth
 								<li class="has-dropdown">
