@@ -51,4 +51,43 @@ class CategoryController extends Controller
             'recent_posts' => $recent_posts,
         ]);
     }
+
+    public function searchCategory(Request $request)
+    {
+        $search = $request->search;
+
+        $categories = Category::where(function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->latest()
+        ->where('deleted', 0)
+        ->paginate(20);
+
+        return view('categories.index', compact('categories', 'search'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $posts = Post::where(function($query) use ($search) {
+            $query->where('title', 'like', "%$search%")
+                ->orWhere('excerpt', 'like', "%$search%")
+                ->orWhere('body', 'like', "%$search%");
+        })
+        ->orWhereHas('video_game', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('video_game.categories', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('video_game.platforms', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->latest()
+        ->where('deleted', 0)
+        ->paginate(20);
+
+        return view('home', compact('posts', 'search'));
+    }
 }

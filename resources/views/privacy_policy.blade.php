@@ -6,6 +6,16 @@
 
 <div class="container">
 
+    @section('search')
+        <form action="{{ route('home.search') }}" method="GET">
+            @csrf
+            <div class="search-container">
+                <input type="search" name="search" value="{{ isset($search) ? $search : '' }}" class="search" placeholder="Search">
+                <i class="icon-search4 search-icon"></i>
+            </div>
+        </form>
+    @endsection
+
     <h1>Privacy Policy</h1>
     <p>Last updated: November 20, 2023</p>
     <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>

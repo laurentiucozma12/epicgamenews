@@ -140,7 +140,9 @@ img {
 .font-changed-btn {
     font-size: 12px; }
 .no-right-margin {
-    margin: 0; }
+    margin-right: 0; }
+.no-right-padding {
+    padding-right: 0 !important; }
 .display-large {
     display: block; }
     @media screen and (max-width: 776px) {
@@ -365,6 +367,30 @@ footer .link-to-website:hover {
 
 /****** PAGES ******/
 /* Home Page */
+.search { 
+    font-weight: 400;
+    padding: 0 0 0 15px;
+    border: 3px solid var(--light-gray-1);
+    border-radius: 10px;
+    background-color: var(--dark-gray);
+    max-height: 30px !important; }
+
+.search:active,
+.search:focus-visible { 
+    color: var(--white);
+    border: 3px solid var(--white);
+    border-radius: 10px; }
+
+.search-container {
+    position: relative; }
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    pointer-events: none; }
+
 .posts-img {
     height: auto;
     float: left; }

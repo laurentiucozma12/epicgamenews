@@ -8,7 +8,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="robots" content="index, follow">
-		
+
 	{{-- Title --}}
 	<title>@yield('title')</title>
 
@@ -29,9 +29,9 @@
 	<link rel="canonical" href="{{ url()->current() }}" />
 	
 	{{-- Meta tags for the page --}}
-	<meta property="og:title" content="{{ $seo->title }}">
-	<meta name="description" content="{{ $seo->description }}">
-	<meta name="keywords" content="{{ $seo->keywords }}">
+	<meta property="og:title" content="{{ $seo->title ?? '' }}">
+	<meta name="description" content="{{ $seo->description ?? '' }}">
+	<meta name="keywords" content="{{ $seo->keywords ?? '' }}">
 	<meta name="author" content="Epic Game News" />
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="{{ url()->current() }}">
@@ -97,22 +97,24 @@
 			<div class="container">
 				<div class="nav-layout-container">
 
-						<a href="{{ route('home') }}" class="nav-layout-logo-container logo-route">
-							<img class="logo-new-game-news img-fluid" src="{{ asset('storage/logo/logo-epic-game-news-64x64.png') }}" alt="logo-new-gaming-news" title="logo-ngn" loading="lazy"> 
-							<h1 class="title-route"><b>Epic Game News</b></h1>
-						</a>
+					<a href="{{ route('home') }}" class="nav-layout-logo-container logo-route">
+						<img class="logo-new-game-news img-fluid" src="{{ asset('storage/logo/logo-epic-game-news-64x64.png') }}" alt="logo-new-gaming-news" title="logo-ngn" loading="lazy"> 
+						<h1 class="title-route"><b>Epic Game News</b></h1>
+					</a>
+					
+					@yield('search')
 
 					<div class="nav-layout-btns-container text-right menu-1">
-						
+
 						<ul>
 							<a href="{{ route('home') }}"><li class="font-changed">Home</li></a>
 							<a href="{{ route('video_games.index') }}"><li class="font-changed">Video Games</li></a>
 							<a href="{{ route('categories.index') }}"><li class="font-changed">Categories</li></a>
 							<a href="{{ route('platforms.index') }}"><li class="font-changed">Platforms</li></a>
 							<a href="{{ route('about') }}"><li class="font-changed">About</li></a>
-							<a href="{{ route('contact.create') }}"><li class="font-changed">Contact</li></a>
+							<a href="{{ route('contact.create') }}"><li class="font-changed no-right-padding">Contact</li></a>
 
-							@auth
+							{{-- @auth
 								<li class="has-dropdown">
 									<span class="cursor-pointer font-changed author-btn">{{ auth()->user()->name }}<span class="caret"></span></span>
 									<ul class="dropdown">										
@@ -139,7 +141,7 @@
 										</form>
 									</ul>
 								</li>
-							@endauth								
+							@endauth--}}
 						</ul>
 
 					</div>

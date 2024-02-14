@@ -26,14 +26,14 @@
 <div class="row small-screen-container">
     <p class="posts-excerpt">{{ ucfirst(\Str::limit($post->excerpt, 150)) . $post->excerpt . $post->excerpt . $post->excerpt }}</p>
     <div class="posts-author-date">
-        <div class="posts-author"><span><span class="icon-user2"></span> By {{ $post->author->name }} </span></div>
+        <div class="posts-author"><span><span class="icon-user2"></span>By {{ $post->author->name }}</span></div>
         <div><span><span class="icon-calendar"></span> {{ $post->created_at->diffForHumans() }} </span></div>
     </div>
 </div>
 <hr>
 
 @empty
-    <p class="lead">There are no posts yet.</p>
+    <p class="lead">Ops, we do not have an article related for your search</p>
 @endforelse
 
 {{ $posts->onEachSide(0)->links('pagination::bootstrap-4') }}

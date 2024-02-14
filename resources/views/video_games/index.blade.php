@@ -4,6 +4,16 @@
 
 @section('content')
 
+@section('search')
+	<form action="{{ route('video_games.search') }}" method="GET">
+		@csrf
+		<div class="search-container">
+			<input type="search" name="search" value="{{ isset($search) ? $search : '' }}" class="search" placeholder="Search a video game">
+			<i class="icon-search4 search-icon"></i>
+		</div>
+	</form>	
+@endsection
+
 <div class="colorlib-blog">
 	<div class="container">
 		<div class="row">

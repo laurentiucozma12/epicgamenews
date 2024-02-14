@@ -159,13 +159,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
 
 // Front User Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/search', [HomeController::class, 'search'])->name('home.search');
 
+Route::get('/video-games/search', [VideoGameController::class, 'searchVideoGame'])->name('video_games.search');
+Route::get('/video-games/{video_game:slug}/search', [VideoGameController::class, 'searchRelated'])->name('video_games.related.search');
 Route::get('/video-games', [VideoGameController::class, 'index'])->name('video_games.index');
 Route::get('/video-games/{video_game:slug}', [VideoGameController::class, 'show'])->name('video_games.show');
 
+Route::get('/categories/search', [CategoryController::class, 'searchCategory'])->name('categories.search');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
 
+Route::get('/platforms/search', [PlatformController::class, 'searchPlatform'])->name('platforms.search');
 Route::get('/platforms', [PlatformController::class, 'index'])->name('platforms.index');
 Route::get('/platforms/{platform:slug}', [PlatformController::class, 'show'])->name('platforms.show');
 

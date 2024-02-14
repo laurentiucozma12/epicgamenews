@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Seo;
+use App\Models\Post;
 use App\Models\VideoGame;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\RecentPostsService;
 
@@ -46,5 +48,50 @@ class VideoGameController extends Controller
             'posts' => $posts,
             'recent_posts' => $recent_posts,
         ]);
+    }
+
+    public function searchVideoGame(Request $request)
+    {
+        $search = $request->search;
+
+        $video_games = VideoGame::where(function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('categories', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('platforms', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->latest()
+        ->where('deleted', 0)
+        ->paginate(20);
+
+        return view('video_games.index', compact('video_games', 'search'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $posts = Post::where(function($query) use ($search) {
+            $query->where('title', 'like', "%$search%")
+                ->orWhere('excerpt', 'like', "%$search%")
+                ->orWhere('body', 'like', "%$search%");
+        })
+        ->orWhereHas('video_game', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('video_game.categories', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('video_game.platforms', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->latest()
+        ->where('deleted', 0)
+        ->paginate(20);
+
+        return view('home', compact('posts', 'search'));
     }
 }

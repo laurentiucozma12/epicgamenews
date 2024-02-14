@@ -6,6 +6,7 @@ use App\Models\Seo;
 
 use App\Models\Post;
 use App\Models\Platform;
+use Illuminate\Http\Request;
 use App\Services\RecentPostsService;
 
 class PlatformController extends Controller
@@ -48,5 +49,44 @@ class PlatformController extends Controller
             'posts' => $posts,
             'recent_posts' => $recent_posts,
         ]);
+    }
+
+    public function searchPlatform(Request $request)
+    {
+        $search = $request->search;
+
+        $platforms = Platform::where(function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->latest()
+        ->where('deleted', 0)
+        ->paginate(20);
+
+        return view('platforms.index', compact('platforms', 'search'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $posts = Post::where(function($query) use ($search) {
+            $query->where('title', 'like', "%$search%")
+                ->orWhere('excerpt', 'like', "%$search%")
+                ->orWhere('body', 'like', "%$search%");
+        })
+        ->orWhereHas('video_game', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('video_game.categories', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('video_game.platforms', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->latest()
+        ->where('deleted', 0)
+        ->paginate(20);
+
+        return view('home', compact('posts', 'search'));
     }
 }
