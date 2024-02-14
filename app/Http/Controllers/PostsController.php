@@ -6,11 +6,19 @@ use App\Models\Seo;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Services\PostSearchService;
 use App\Services\RecentPostsService;
 
 
 class PostsController extends Controller
 { 
+    protected $postSearchService;
+
+    public function __construct(PostSearchService $postSearchService)
+    {
+        $this->postSearchService = $postSearchService;
+    }
+    
     public function show(Post $post, RecentPostsService $recentPostsService)
     {
         $seo = Seo::where('page_type', 'Post')->first();
@@ -26,28 +34,11 @@ class PostsController extends Controller
             'tags' => $tags,
         ]);
     }
-
+    
     public function search(Request $request)
     {
         $search = $request->search;
-
-        $posts = Post::where(function($query) use ($search) {
-            $query->where('title', 'like', "%$search%")
-                ->orWhere('excerpt', 'like', "%$search%")
-                ->orWhere('body', 'like', "%$search%");
-        })
-        ->orWhereHas('video_game', function($query) use ($search) {
-            $query->where('name', 'like', "%$search%");
-        })
-        ->orWhereHas('video_game.categories', function($query) use ($search) {
-            $query->where('name', 'like', "%$search%");
-        })
-        ->orWhereHas('video_game.platforms', function($query) use ($search) {
-            $query->where('name', 'like', "%$search%");
-        })
-        ->latest()
-        ->where('deleted', 0)
-        ->paginate(20);
+        $posts = $this->postSearchService->search($search);
 
         return view('home', compact('posts', 'search'));
     }

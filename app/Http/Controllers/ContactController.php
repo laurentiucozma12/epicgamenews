@@ -7,12 +7,19 @@ use App\Models\Post;
 use App\Models\Contact;
 use App\Mail\ContactMail;
 use Illuminate\Http\Request;
+use App\Services\PostSearchService;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
-
 class ContactController extends Controller
 {    
+    protected $postSearchService;
+
+    public function __construct(PostSearchService $postSearchService)
+    {
+        $this->postSearchService = $postSearchService;
+    }
+    
     public function create()
     {
         $seo = Seo::where('page_name', '=', 'Contact')->first();
@@ -63,28 +70,11 @@ class ContactController extends Controller
     
         return response()->json($data);
     }
-
+    
     public function search(Request $request)
     {
         $search = $request->search;
-
-        $posts = Post::where(function($query) use ($search) {
-            $query->where('title', 'like', "%$search%")
-                ->orWhere('excerpt', 'like', "%$search%")
-                ->orWhere('body', 'like', "%$search%");
-        })
-        ->orWhereHas('video_game', function($query) use ($search) {
-            $query->where('name', 'like', "%$search%");
-        })
-        ->orWhereHas('video_game.categories', function($query) use ($search) {
-            $query->where('name', 'like', "%$search%");
-        })
-        ->orWhereHas('video_game.platforms', function($query) use ($search) {
-            $query->where('name', 'like', "%$search%");
-        })
-        ->latest()
-        ->where('deleted', 0)
-        ->paginate(20);
+        $posts = $this->postSearchService->search($search);
 
         return view('home', compact('posts', 'search'));
     }
