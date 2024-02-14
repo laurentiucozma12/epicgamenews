@@ -23,9 +23,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\VideoGameController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\RecentPostsController;
-use App\Http\Controllers\PrivacyPolicyController;
 
+use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\AdminControllers\TinyMCEController;
 use App\Http\Controllers\AdminControllers\AdminSeoController;
 use App\Http\Controllers\AdminControllers\AdminHomeController;

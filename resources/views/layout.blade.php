@@ -35,6 +35,7 @@
 	<meta name="author" content="Epic Game News" />
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="{{ url()->current() }}">
+	<meta name="_token" content="{{ csrf_token() }}" />
 
 	{{-- Meta tags for facebook --}}
 	{{-- <meta property="og:description" content="Stay updated with the latest gaming news, releases, reviews, and industry trends at Epic Game News. Your ultimate source for everything gaming-related."> --}}
@@ -174,7 +175,7 @@
 		<div class="overlay"></div>
 		<div class="first-container">
 
-			<div class="container">
+			{{-- <div class="container">
 				<div >
 					<div class="text-center colorlib-heading animate-box">
 						<h2>Subscribe Newsletter</h2>
@@ -195,7 +196,7 @@
 						</form>
 					</div>
 				</div>
-			</div>
+			</div> --}}
 			
 		</div>
 	</div>
@@ -333,33 +334,6 @@
 <!-- My Scripts -->
 <script src="{{ asset('js/functions.js') }}"></script>
 {{-- END OF SCRIPTS --}}
-
-<script>
-	$(function() {
-		function isEmail(email) {
-			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-			   return regex.test(email);
-		}
-
-		$(document).on("click", "#subscribe-btn", (e) => {
-			e.preventDefault();
-			let _this = $(e.target);
-			
-			let email = _this.parents("form").find("input[name='subscribe-email']").val();
-
-			if (!isEmail(email)) {
-				$("body").append("<div class='global-message error'>This email is not valid</div>");
-			} else {
-				// $("body").append("<div class='global-message info'>You subscribed to Newsletter</div>");
-			}
-
-			setTimeout(() => {
-				$(".global-message.error").remove();
-				$(".global-message.info").remove();
-			}, 5000);
-		})
-	});
-</script>
 <script>
 	$(document).ready(function () {
         
