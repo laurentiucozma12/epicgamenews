@@ -39,14 +39,14 @@ class DatabaseSeeder extends Seeder
 
         foreach ($blog_routes as $route) {
             if (strpos($route->getName(), 'admin') !== false) {
-                $permissionName = $route->getName();
+                $permission_name = $route->getName();
 
                 // Check if the permission already exists
-                $existingPermission = \App\Models\Permission::where('name', $permissionName)->first();
+                $existingPermission = \App\Models\Permission::where('name', $permission_name)->first();
 
                 if (!$existingPermission) {
                     // Permission doesn't exist, create it
-                    $permission = \App\Models\Permission::create(['name' => $permissionName]);
+                    $permission = \App\Models\Permission::create(['name' => $permission_name]);
                     $permissions_ids[] = $permission->id;
                 }
             }
@@ -55,12 +55,12 @@ class DatabaseSeeder extends Seeder
         \App\Models\Role::where('name', 'admin')->first()->permissions()->sync( $permissions_ids );
         
         // Assign the 'admin' role to your account for faster testing
-        $adminUser = \App\Models\User::factory()->create([
+        $admin_user = \App\Models\User::factory()->create([
             'name' => 'Hymerra',
             'email' => 'laurentiucozma12@gmail.com',
         ]);
 
-        $adminUser->roles()->attach($admin_role->id);
+        $admin_user->roles()->attach($admin_role->id);
 
         // Create Users
         $users = \App\Models\User::factory(10)->create();
@@ -104,7 +104,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         
-        $platformsData = [
+        $platforms_data = [
             (object)['name' => 'PC', 'slug' => 'pc'],
             (object)['name' => 'PlayStation', 'slug' => 'playstation'],
             (object)['name' => 'Xbox', 'slug' => 'xbox'],
@@ -112,7 +112,7 @@ class DatabaseSeeder extends Seeder
             (object)['name' => 'Nintendo', 'slug' => 'nintendo'],
         ];
         
-        foreach ($platformsData as $platform) {
+        foreach ($platforms_data as $platform) {
             $platform = \App\Models\Platform::factory()->create([
                 'name' => $platform->name,
                 'slug' => $platform->slug,
@@ -169,10 +169,10 @@ class DatabaseSeeder extends Seeder
             $post->image()->save(\App\Models\Image::factory()->make());
                         
             // Get the tag names associated with the post
-            $tagNames = $post->tags->pluck('name')->toArray();
+            $tag_names = $post->tags->pluck('name')->toArray();
 
             // Convert the array of tag names into a comma-separated string
-            $keywordsString = implode(', ', $tagNames);
+            $keywords_string = implode(', ', $tag_names);
 
             // Attach SEO title, description, and keywords
             $post->seo()->create([
@@ -181,7 +181,7 @@ class DatabaseSeeder extends Seeder
                 'seo_name' => $post->title,
                 'seo_title' => $post->title,
                 'seo_description' => $post->excerpt,
-                'seo_keywords' => $keywordsString,
+                'seo_keywords' => $keywords_string,
             ]);
         }
 
