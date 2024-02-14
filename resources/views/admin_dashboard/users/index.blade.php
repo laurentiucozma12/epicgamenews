@@ -21,7 +21,11 @@
 			<div class="card-body">
 				<div class="d-lg-flex align-items-center mb-4 gap-3">
 					<div class="position-relative">
-						<input type="text" class="form-control ps-5 radius-30" placeholder="Search Order"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+						<form action="{{ route('admin.users.search') }}" method="GET">
+                            @csrf
+                            
+                            <input type="search" name="search" value="{{ isset($search) ? $search : '' }}" class="form-control ps-5 radius-30" placeholder="Search User"><span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                        </form>
 					</div>
 					<div class="ms-auto"><a href="{{ route('admin.users.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New User</a></div>
 				</div>
@@ -66,13 +70,13 @@
 									@endforeach
 								</td>
 								<td>
-									<a class='btn btn-primary btn-sm' href="{{ route('admin.users.showPosts', $user) }}">{{ count($user->posts) }} Posts</a>
+									<a class='btn btn-primary btn-sm' href="{{ route('admin.users.show_posts', $user) }}">{{ count($user->posts) }} Posts</a>
 								</td>
 								<td>
-									<a class='btn btn-primary btn-sm' href="{{ route('admin.users.showVideoGames', $user) }}">{{ count($user->videoGames) }} Video Games</a>
+									<a class='btn btn-primary btn-sm' href="{{ route('admin.users.show_video_games', $user) }}">{{ count($user->videoGames) }} Video Games</a>
 								</td>
 								<td>
-									<a class='btn btn-primary btn-sm' href="{{ route('admin.users.showCategories', $user) }}">{{ count($user->categories) }} Categories</a>
+									<a class='btn btn-primary btn-sm' href="{{ route('admin.users.show_categories', $user) }}">{{ count($user->categories) }} Categories</a>
 								</td>
 								<td>{{ $user->created_at->diffForHumans() }}</td>
 								<td>

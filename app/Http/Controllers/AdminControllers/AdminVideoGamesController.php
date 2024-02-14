@@ -201,6 +201,27 @@ class AdminVideoGamesController extends Controller
         return redirect()->route('admin.video_games.index')->with('danger', 'Video Game has been Dezactivated');
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $video_games = VideoGame::where(function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('categories', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('platforms', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('user', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->paginate(100);
+
+        return view('admin_dashboard.video_games.index', compact('video_games', 'search'));
+    }
+
     public function createApi()
     {
         return view('admin_dashboard.video_games.create_api');

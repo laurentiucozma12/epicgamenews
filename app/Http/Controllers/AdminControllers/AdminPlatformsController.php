@@ -163,4 +163,19 @@ class AdminPlatformsController extends Controller
         
         return redirect()->route('admin.platforms.index')->with('danger', 'Platform has been Dezactivated');
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $platforms = Platform::where(function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('user', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->paginate(100);
+
+        return view('admin_dashboard.platforms.index', compact('platforms', 'search'));
+    }
 }

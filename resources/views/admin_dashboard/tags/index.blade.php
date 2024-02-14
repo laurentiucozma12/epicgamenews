@@ -21,8 +21,12 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="d-lg-flex align-items-center mb-4 gap-3">
-					<div class="position-relative">
-						<input type="text" class="form-control ps-5 radius-30" placeholder="Search Order"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+					<div class="position-relative">					
+                        <form action="{{ route('admin.tags.search') }}" method="GET">
+                            @csrf
+                            
+                            <input type="search" name="search" value="{{ isset($search) ? $search : '' }}" class="form-control ps-5 radius-30" placeholder="Search Tag"><span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                        </form>
 					</div>
 				</div>
 				<div class="table-responsive">

@@ -21,7 +21,11 @@
             <div class="card-body">
                 <div class="d-lg-flex align-items-center mb-4 gap-3">
                     <div class="position-relative">
-                        <input type="text" class="form-control ps-5 radius-30" placeholder="Search Order"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                        <form action="{{ route('admin.posts.search') }}" method="GET">
+                            @csrf
+                            
+                            <input type="search" name="search" value="{{ isset($search) ? $search : '' }}" class="form-control ps-5 radius-30" placeholder="Search Post"><span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                        </form>
                     </div>
                     <div class="ms-auto"><a href="{{ route('admin.posts.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New Post</a></div>
                 </div>
@@ -35,6 +39,8 @@
                                 <th>Post Title</th>
                                 <th>Post Excerpt</th>
                                 <th>Video Game</th>
+                                <th>Category</th>
+                                <th>Platform</th>
                                 <th>Created At</th>
                                 <th>Created By</th>
                                 <th>Views</th>
@@ -66,8 +72,18 @@
                                         @endif
                                     </td>
                                     <td>{{ $post->title }}</td>
-                                    <td>{{ $post->excerpt }}</td>
+                                    <td>{{ Str::limit($post->excerpt, 20) }}</td>
                                     <td>{{ $post->video_game->name }}</td>
+                                    <td>
+                                        @foreach ($post->video_game->categories as $category)
+                                            {{ $category->name }}@if (!$loop->last),@endif
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach ($post->video_game->platforms as $platform)
+                                            {{ $platform->name }}@if (!$loop->last),@endif
+                                        @endforeach
+                                    </td>
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
                                     <td>{{ $post->author->name }}</td>
                                     <td>{{ $post->views }}</td>

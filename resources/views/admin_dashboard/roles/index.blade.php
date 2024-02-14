@@ -24,7 +24,11 @@
             <div class="card-body">
                 <div class="d-lg-flex align-items-center mb-4 gap-3">
                     <div class="position-relative">
-                        <input type="text" class="form-control ps-5 radius-30" placeholder="Search Order"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                        <form action="{{ route('admin.roles.search') }}" method="GET">
+                            @csrf
+                            
+                            <input type="search" name="search" value="{{ isset($search) ? $search : '' }}" class="form-control ps-5 radius-30" placeholder="Search Role"><span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                        </form>
                     </div>
                     <div class="ms-auto"><a href="{{ route('admin.roles.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New Role</a></div>
                 </div>
@@ -69,9 +73,9 @@
                     </table>
                 </div>
 
-                <div>
-                    {{-- {{ $roles->links() }} --}}
-                </div>
+                {{-- <div class='mt-4'>
+                    {{ $posts->onEachSide(0)->links('pagination::bootstrap-4') }}
+                </div> --}}
 
             </div>
         </div>

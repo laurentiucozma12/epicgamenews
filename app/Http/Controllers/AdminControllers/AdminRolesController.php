@@ -44,7 +44,7 @@ class AdminRolesController extends Controller
         $role = Role::create($validated);
         $role->permissions()->sync( $permissions );
 
-        return redirect()->route('admin.roles.create')->with('success', 'Role has been created');
+        return redirect()->route('admin.roles.index')->with('success', 'Role has been created');
     }
 
     public function edit(Role $role)
@@ -82,6 +82,18 @@ class AdminRolesController extends Controller
 
         $role->delete();
         return redirect()->route('admin.roles.index', $role)->with('success', 'Role has been deleted');
+    }
+    
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $roles = Role::where(function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->paginate(100);
+
+        return view('admin_dashboard.roles.index', compact('roles', 'search'));
     }
 
     private function permissions()

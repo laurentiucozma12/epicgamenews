@@ -32,8 +32,10 @@ class AdminPostsController extends Controller
 
     public function index()
     {
+        $posts = Post::orderBy('id', 'DESC')->paginate(100);
+
         return view('admin_dashboard.posts.index', [
-            'posts' => Post::orderBy('id', 'DESC')->paginate(100),
+            'posts' => $posts,
         ]);
     }
 
@@ -190,14 +192,45 @@ class AdminPostsController extends Controller
         return redirect()->route('admin.posts.index')->with('danger', 'Post has been dezactivated');
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $posts = Post::where(function($query) use ($search) {
+            $query->where('title', 'like', "%$search%")
+                ->orWhere('excerpt', 'like', "%$search%")
+                ->orWhere('body', 'like', "%$search%");
+        })
+        ->orWhereHas('video_game', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('video_game.categories', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('video_game.platforms', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('author', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->paginate(100);
+
+        return view('admin_dashboard.posts.index', compact('posts', 'search'));
+    }
+
     public function createApi()
     {
+        // IN DEVELOPMENT, NOT ENOUGH FOUND
+        // 25$/month: zylalabs.com
+        // https://zylalabs.com/api-marketplace/video+games/games+top+news+api/2287
         return view('admin_dashboard.posts.create_api');
     }
 
     public function storeApi(Request $request)
     {
-        //
+        // IN DEVELOPMENT, NOT ENOUGH FOUND
+        // 25$/month: zylalabs.com
+        // https://zylalabs.com/api-marketplace/video+games/games+top+news+api/2287
     }
 
     public function scrapPost()

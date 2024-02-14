@@ -32,4 +32,19 @@ class AdminTagsController extends Controller
 
         return redirect()->route('admin.tags.index')->with('success', 'Tag has been Deleted');
     }
+    
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $tags = Tag::where(function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('user', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->paginate(100);
+
+        return view('admin_dashboard.tags.index', compact('tags', 'search'));
+    }
 }

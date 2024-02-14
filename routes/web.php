@@ -56,6 +56,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     });
 
     Route::prefix('posts')->group(function () {
+        Route::get('/search', [AdminPostsController::class, 'search'])->name('posts.search');
+
         Route::get('/', [AdminPostsController::class, 'index'])->name('posts.index');
         Route::get('/create', [AdminPostsController::class, 'create'])->name('posts.create');
         Route::post('/', [AdminPostsController::class, 'store'])->name('posts.store');
@@ -63,7 +65,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
         Route::put('/{post:slug}', [AdminPostsController::class, 'update'])->name('posts.update');
         Route::patch('/{post:slug}', [AdminPostsController::class, 'update']);
         Route::delete('/{post:slug}', [AdminPostsController::class, 'destroy'])->name('posts.destroy');
-        
+
         Route::get('/games-api', [AdminPostsController::class, 'createApi'])->name('posts.create_api');
         Route::post('/store_api', [AdminPostsController::class, 'storeApi'])->name('posts.store_api');
 
@@ -73,8 +75,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
     Route::post('upload_tinymce_image', [TinyMCEController::class, 'upload_tinymce_image'])->name('upload_tinymce_image');
 
     Route::prefix('video-games')->group(function () {
-        Route::get('/games-api', [AdminVideoGamesController::class, 'createApi'])->name('video_games.create_api');
-        Route::post('/store_api', [AdminVideoGamesController::class, 'storeApi'])->name('video_games.store_api');
+        Route::get('/search', [AdminVideoGamesController::class, 'search'])->name('video_games.search');
 
         Route::get('/', [AdminVideoGamesController::class, 'index'])->name('video_games.index');           
         Route::get('/create', [AdminVideoGamesController::class, 'create'])->name('video_games.create');
@@ -83,10 +84,15 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
         Route::put('/{video_game:slug}', [AdminVideoGamesController::class, 'update'])->name('video_games.update');
         Route::patch('/{video_game:slug}', [AdminVideoGamesController::class, 'update']);
         Route::delete('/{video_game:slug}', [AdminVideoGamesController::class, 'destroy'])->name('video_games.destroy');
-        Route::get('/{video_game:slug}', [AdminVideoGamesController::class, 'show'])->name('video_games.show');
+        Route::get('/{video_game:slug}', [AdminVideoGamesController::class, 'show'])->name('video_games.show');        
+
+        Route::get('/games-api', [AdminVideoGamesController::class, 'createApi'])->name('video_games.create_api');
+        Route::post('/store_api', [AdminVideoGamesController::class, 'storeApi'])->name('video_games.store_api');
     });
 
     Route::prefix('categories')->group(function () {
+        Route::get('/search', [AdminCategoriesController::class, 'search'])->name('categories.search');
+
         Route::get('/', [AdminCategoriesController::class, 'index'])->name('categories.index');
         Route::get('/create', [AdminCategoriesController::class, 'create'])->name('categories.create');
         Route::post('/', [AdminCategoriesController::class, 'store'])->name('categories.store');
@@ -94,10 +100,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
         Route::put('/{category:slug}', [AdminCategoriesController::class, 'update'])->name('categories.update');
         Route::patch('/{category:slug}', [AdminCategoriesController::class, 'update']);
         Route::delete('/{category:slug}', [AdminCategoriesController::class, 'destroy'])->name('categories.destroy');
-        Route::get('/{category:slug}', [AdminCategoriesController::class, 'show'])->name('categories.show');
+        Route::get('/{category:slug}', [AdminCategoriesController::class, 'show'])->name('categories.show');        
     });
 
     Route::prefix('platforms')->group(function () {
+        Route::get('/search', [AdminPlatformsController::class, 'search'])->name('platforms.search');
+
         Route::get('/', [AdminPlatformsController::class, 'index'])->name('platforms.index');
         Route::get('/create', [AdminPlatformsController::class, 'create'])->name('platforms.create');
         Route::post('/', [AdminPlatformsController::class, 'store'])->name('platforms.store');
@@ -107,12 +115,31 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
         Route::delete('/{platform:slug}', [AdminPlatformsController::class, 'destroy'])->name('platforms.destroy');
         Route::get('/{platform:slug}', [AdminPlatformsController::class, 'show'])->name('platforms.show');
     });
-    
-    Route::resource('tags', AdminTagsController::class)->only(['index', 'show', 'destroy']);
 
-    Route::resource('roles', AdminRolesController::class)->except('show');
+    Route::prefix('tags')->group(function () {
+        Route::get('/search', [AdminTagsController::class, 'search'])->name('tags.search');
+
+        Route::get('/', [AdminTagsController::class, 'index'])->name('tags.index');
+        Route::get('/{tag:slug}', [AdminTagsController::class, 'show'])->name('tags.show');
+        Route::delete('/{tag:slug}', [AdminTagsController::class, 'destroy'])->name('tags.destroy');
+    });
+
+    Route::prefix('roles')->group(function () {
+        Route::get('/search', [AdminRolesController::class, 'search'])->name('roles.search');
+
+        Route::get('/', [AdminRolesController::class, 'index'])->name('roles.index');
+        Route::get('/create', [AdminRolesController::class, 'create'])->name('roles.create');
+        Route::post('/', [AdminRolesController::class, 'store'])->name('roles.store');
+        Route::get('/{role}/edit', [AdminRolesController::class, 'edit'])->name('roles.edit');
+        Route::put('/{role}', [AdminRolesController::class, 'update'])->name('roles.update');
+        Route::patch('/{role}', [AdminRolesController::class, 'update']);
+        Route::delete('/{role}', [AdminRolesController::class, 'destroy'])->name('roles.destroy');
+    });
     
     Route::prefix('users')->group(function () {
+        Route::get('/search', [AdminUsersController::class, 'search'])->name('users.search');
+        Route::get('/search-related-post', [AdminUsersController::class, 'search'])->name('users.search_related_post');
+
         Route::get('/', [AdminUsersController::class, 'index'])->name('users.index');
         Route::get('/create', [AdminUsersController::class, 'create'])->name('users.create');
         Route::post('/', [AdminUsersController::class, 'store'])->name('users.store');
@@ -120,10 +147,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
         Route::put('/{user:name}', [AdminUsersController::class, 'update'])->name('users.update');
         Route::patch('/{user:name}', [AdminUsersController::class, 'update']);
         Route::delete('/{user:name}', [AdminUsersController::class, 'destroy'])->name('users.destroy');
-        Route::get('/user:name', [AdminUsersController::class, 'showUsers'])->name('users.showUsers');
-        Route::get('/{user:name}/related-posts', [AdminUsersController::class, 'showPosts'])->name('users.showPosts');
-        Route::get('/{user:name}/related-video-games', [AdminUsersController::class, 'showVideoGames'])->name('users.showVideoGames');
-        Route::get('/{user:name}/related-categories', [AdminUsersController::class, 'showCategories'])->name('users.showCategories');
+        Route::get('/user:name', [AdminUsersController::class, 'showUsers'])->name('users.show_users');
+        Route::get('/{user:name}/related-posts', [AdminUsersController::class, 'showPosts'])->name('users.show_posts');
+        Route::get('/{user:name}/related-video-games', [AdminUsersController::class, 'showVideoGames'])->name('users.show_video_games');
+        Route::get('/{user:name}/related-categories', [AdminUsersController::class, 'showCategories'])->name('users.show_categories');
     });
     
     Route::get('contacts', [AdminContactsController::class, 'index'])->name('contacts');

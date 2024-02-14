@@ -163,4 +163,19 @@ class AdminCategoriesController extends Controller
         
         return redirect()->route('admin.categories.index')->with('danger', 'Category has been Dezactivated');
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $categories = Category::where(function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('user', function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->paginate(100);
+
+        return view('admin_dashboard.categories.index', compact('categories', 'search'));
+    }
 }

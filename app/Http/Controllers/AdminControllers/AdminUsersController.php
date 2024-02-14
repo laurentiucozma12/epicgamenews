@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\AdminControllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
-
+use App\Models\Post;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Http\Request;
+
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\AdminControllers\AdminCropResizeImage;
 
 class AdminUsersController extends Controller
@@ -137,5 +138,17 @@ class AdminUsersController extends Controller
         $user->save();
 
         return redirect()->route('admin.users.index')->with('danger', 'User has been dezactivated.');
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $users = User::where(function($query) use ($search) {
+            $query->where('name', 'like', "%$search%");
+        })
+        ->paginate(100);
+
+        return view('admin_dashboard.users.index', compact('users', 'search'));
     }
 }
