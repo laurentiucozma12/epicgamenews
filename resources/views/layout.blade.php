@@ -174,7 +174,7 @@
 		<div class="overlay"></div>
 		<div class="first-container">
 
-			{{-- <div class="container">
+			<div class="container">
 				<div >
 					<div class="text-center colorlib-heading animate-box">
 						<h2>Subscribe Newsletter</h2>
@@ -184,18 +184,18 @@
 						<form id="subscribe-input" class="form-inline">
 							<div class="">
 								<div class="form-group">
-									<input type="text" class="form-control" id="email" placeholder="Enter your email">
+									<input id="email" name="subscribe-email" type="text" class="form-control newsletter" placeholder="Enter your email">
 								</div>
 							</div>
 							<div class="">
 								<div class="form-group">
-									<button type="submit" class="btn btn-primary">Subscribe Now</button>
+									<button id="subscribe-btn" type="submit" class="btn btn-primary">Subscribe Now</button>
 								</div>
 							</div>
 						</form>
 					</div>
 				</div>
-			</div> --}}
+			</div>
 			
 		</div>
 	</div>
@@ -330,19 +330,27 @@
 <!-- Main -->
 <script src="{{ asset('blog_template/js/main.js') }}"></script>
 
-@yield('custom_js')
-
 <!-- My Scripts -->
 <script src="{{ asset('js/functions.js') }}"></script>
 {{-- END OF SCRIPTS --}}
 
 <script>
-	 $(document).ready(function () {
+	$(function() {
+		$(document).on("click", "#subscribe-btn", (e) => {
+			e.preventDefault();
+			let _this = $(e.target);
+			console.log(_this.text());
+		})
+	});
+</script>
+<script>
+	$(document).ready(function () {
         
 		$('img').lazyload();
-
-	 });
+		
+	});
 </script>
 
+@yield('custom_js')
 </body>
 </html>

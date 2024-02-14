@@ -9,7 +9,6 @@
             @csrf
             <div class="search-container">
                 <input type="search" name="search" value="{{ isset($search) ? $search : '' }}" class="search" placeholder="Search">
-                <i class="icon-search4 search-icon"></i>
             </div>
         </form>
     @endsection
@@ -20,19 +19,19 @@
             <div class="col-12">
                 <h1 class="post-title"><b>{{ ucfirst($post->title) }}<b></h1>
             </div>
-        </div> {{-- End of row --}}
+        </div>
 
         <div class="row">
             <div class="col-12">
                 <p class="post-excerpt">{{ ucfirst($post->excerpt) }}</p>
             </div>
-        </div> {{-- End of row --}}
+        </div>
 
         <div class="row">
             <div class="col-12">
                 <span class="post-author-date">By {{ $post->author->name }}, Published {{ $post->created_at->diffForHumans() }}</span>
             </div>
-        </div> {{-- End of row --}}
+        </div>
 
         <div class="row">
             <div class="col-12">
@@ -47,7 +46,7 @@
                     </picture>      
                 </figure>
             </div>
-        </div> {{-- End of row --}}
+        </div>
         
         <div class="row">
             
@@ -61,9 +60,8 @@
                         </div>
                     </div>
                 </div>
-            </div> {{-- End of row --}}
+            </div>
 
-            <!-- SIDEBAR: start -->
             <div class="col-12 col-lg-4 animate-box">
                 <div class="sidebar">
 
@@ -77,13 +75,13 @@
 					
                 </div>
             </div>
-        </div> {{-- End of row --}}
+        </div>
 
         <div class="row">           
             <div class="col-12">                
                 <x-google-ads.in-vertical-ad/>
             </div>
-        </div> {{-- End of row --}}
+        </div>
 
     </div>
     
