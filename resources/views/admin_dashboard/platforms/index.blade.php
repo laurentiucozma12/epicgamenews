@@ -94,7 +94,7 @@
                 </div>
 
                 <div class='mt-4'>
-                    {{ $posts->onEachSide(0)->links('pagination::bootstrap-4') }}
+                    {{ $platforms->onEachSide(0)->links('pagination::bootstrap-4') }}
                 </div>
 
             </div>
