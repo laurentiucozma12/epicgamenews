@@ -232,7 +232,7 @@ class AdminVideoGamesController extends Controller
     {
         // Find video game by slug, Returns the Instance of the Model OR null
         $game_exists = VideoGame::where('slug', $request->game_slug)->first();
-        
+
         if ($game_exists) {
             return redirect()->back()->with('danger', 'Video Game already exists in Database'); 
         }
@@ -265,22 +265,20 @@ class AdminVideoGamesController extends Controller
 
         // Attach genres to the video game
         $genres_names = explode(',', $request->genres_names);
-        $genres_slugs = explode(',', $request->genres_slugs);
 
         // Remove spaces
         $genres_names = array_map('trim', $genres_names);
-        $genres_slugs = array_map('trim', $genres_slugs);
         
         foreach ($genres_names as $index => $genre_name) {
             // Find category by slug, Returns the Instance of the Model OR null
-            $category = Category::where('slug', $genres_slugs[$index])->first();
-
+            $genre_slug = strtolower(str_replace(' ', '-', $genres_names[$index]));
+            $category = Category::where('slug', $genre_slug)->first();
+            
             // If category is new, save it and attach to the video game
             if ($category === null) {
-
                 $category = Category::create([
                     'name' => $genre_name,
-                    'slug' => $genres_slugs[$index],
+                    'slug' => $genre_slug,
                     'user_id' => auth()->id(),
                 ]);
 
@@ -308,22 +306,21 @@ class AdminVideoGamesController extends Controller
 
         // Attach platforms to the video game
         $platforms_names = explode(',', $request->platforms_names);
-        $platforms_slugs = explode(',', $request->platforms_slugs);
             
         // Remove spaces
         $platforms_names = array_map('trim', $platforms_names);
-        $platforms_slugs = array_map('trim', $platforms_slugs);
 
         foreach ($platforms_names as $index => $platform_name) {
-            // Find platform by slug, Returns the Instance of the Model OR null
-            $platform = Platform::where('slug', $platforms_slugs[$index])->first();
-            
+            // Find platform by slug, Returns the Instance of the Model OR null          
+            $platform_slug = strtolower(str_replace(' ', '-', $platforms_names[$index]));
+            $platform = Platform::where('slug', $platform_slug)->first();
+
             // If platform doesn't exist, create it
             if ($platform === null) {
                 
                 $platform = Platform::create([
                     'name' => $platform_name,
-                    'slug' => $platforms_slugs[$index],
+                    'slug' => $platform_slug,
                     'user_id' => auth()->id(),
                 ]);
 
@@ -348,7 +345,7 @@ class AdminVideoGamesController extends Controller
             $video_game->platforms()->attach($platform->id);
         }
 
-        return redirect()->route('admin.video_games.index')->with('success', 'Video Game has been Created');            
+        return redirect()->route('admin.video_games.create_api')->with('success', 'Video Game has been Created');            
     }
 
     private  function createImage($imageable_id, $imageable_type) {  
