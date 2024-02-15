@@ -453,7 +453,7 @@ footer .link-to-website:hover {
 .posts-text-container .posts-title {
     margin-bottom: 0rem;
     font-weight: 700;
-    font-size: 20pt; }
+    font-size: 15pt; }
     .posts-text-container .posts-title a:hover {
         transition: 0.8s;
         color: var(--light-blue-1); }
@@ -476,7 +476,7 @@ footer .link-to-website:hover {
 .posts-excerpt {
     margin-bottom: 0.25rem;
     font-weight: 100;
-    font-size: 15pt; }
+    font-size: 10pt; }
     @media (max-width: 1200px) {
         .posts-excerpt {
             font-size: 1.5vw; } }
@@ -495,7 +495,7 @@ footer .link-to-website:hover {
 .posts-author-date {
     margin-bottom: 0rem;
     display: flex;
-    font-size: 10pt; }
+    font-size: 8pt; }
     @media (max-width: 1200px) {
         .posts-author-date {
             font-size: 1.15vw; } }
