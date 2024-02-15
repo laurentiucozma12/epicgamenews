@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\AdminControllers;
 
 use App\Models\Seo;
+use App\Models\Image;
 use App\Models\Category;
-use App\Models\Platform;
 
+use App\Models\Platform;
 use App\Models\VideoGame;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -19,7 +20,7 @@ class AdminVideoGamesController extends Controller
         'seo_keywords' => 'required|min:2|max:255',
         'name' => 'required|min:2|max:250',
         'slug' => 'required|unique:video_games,slug|max:150',
-        'thumbnail' => 'image|max:1920',
+        'thumbnail' => 'required|image|max:1920',
     ];
     
     public function index()
@@ -236,10 +237,17 @@ class AdminVideoGamesController extends Controller
             return redirect()->back()->with('danger', 'Video Game already exists in Database'); 
         }
 
-        $validated['name'] = $request->game_name;
-        $validated['slug'] = $request->game_slug;
-        $validated['user_id'] = auth()->id();
-        $video_game = VideoGame::create($validated);
+        // Store the video game data
+        $validatedData = [
+            'name' => $request->game_name,
+            'slug' => $request->game_slug,
+            'user_id' => auth()->id(),
+        ];
+        $video_game = VideoGame::create($validatedData);
+
+        $video_game_id = $video_game->id;
+        $imageable_type = 'App\Models\VideoGame';
+        $this->createImage($video_game_id, $imageable_type);
 
         // Create SEO entry
         if ($video_game) {
@@ -275,6 +283,10 @@ class AdminVideoGamesController extends Controller
                     'slug' => $genres_slugs[$index],
                     'user_id' => auth()->id(),
                 ]);
+
+                $category_id = $category->id;
+                $imageable_type = 'App\Models\Category';
+                $this->createImage($category_id, $imageable_type);
 
                 // Create SEO entry for the category
                 $seoData = [
@@ -315,6 +327,10 @@ class AdminVideoGamesController extends Controller
                     'user_id' => auth()->id(),
                 ]);
 
+                $platform_id = $platform->id;
+                $imageable_type = 'App\Models\Platform';
+                $this->createImage($platform_id, $imageable_type);
+
                 $seoData = [
                     'page_type' => 'platform',
                     'page_name' => 'Related Platform',
@@ -333,5 +349,19 @@ class AdminVideoGamesController extends Controller
         }
 
         return redirect()->route('admin.video_games.index')->with('success', 'Video Game has been Created');            
+    }
+
+    private  function createImage($imageable_id, $imageable_type) {  
+        $name = 'thumbnail_placeholder.jpg';
+        $extension = 'jpg';
+
+        $image = new Image([
+            'name' => $name,
+            'extension' => $extension,
+        ]);
+
+        $image->imageable_id = $imageable_id;
+        $image->imageable_type = $imageable_type;
+        $image->save();
     }
 }

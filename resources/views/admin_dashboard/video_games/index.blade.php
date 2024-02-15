@@ -65,7 +65,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($video_game->image)
+                                        @if ($video_game->image && $video_game->image->name !== "thumbnail_placeholder.jpg") 
                                             <img src="{{ asset('storage/images/300x169/' . $video_game->image->name) }}" width='50' alt="{{ $video_game->image->name }}">
                                         @else
                                             <img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" width='50' alt="Placeholder">
