@@ -24,7 +24,7 @@
     </div>
 </div>
 <div class="row small-screen-container">
-    <p class="posts-excerpt">{{ ucfirst(\Str::limit($post->excerpt, 150)) . $post->excerpt . $post->excerpt . $post->excerpt }}</p>
+    <p class="posts-excerpt">{{ ucfirst(\Str::limit($post->excerpt, 150)) }}</p>
     <div class="posts-author-date">
         <div class="posts-author"><span><span class="icon-user2"></span>By {{ $post->author->name }}</span></div>
         <div><span><span class="icon-calendar"></span> {{ $post->created_at->diffForHumans() }} </span></div>
