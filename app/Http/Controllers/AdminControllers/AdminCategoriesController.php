@@ -13,8 +13,8 @@ class AdminCategoriesController extends Controller
 {
     private $rules = [
         'seo_title' => 'required|min:2|max:250',
-        'seo_description' => 'required|min:5|max:300',
-        'seo_keywords' => 'required|min:5|max:255',
+        'seo_description' => 'required|min:2|max:300',
+        'seo_keywords' => 'required|min:2|max:255',
         'name' => 'required|min:2|max:250',
         'slug' => 'required|unique:categories,slug|max:150',
         'thumbnail' => 'required|image|max:1920',
