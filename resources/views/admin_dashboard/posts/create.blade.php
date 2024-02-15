@@ -50,7 +50,7 @@
 
                                 <div class="mb-3">
                                     <label for="excerpt" class="form-label">Post Excerpt</label>
-                                    <textarea class="form-control" required name='excerpt' id="excerpt" rows="3">{{ old("excerpt") }}</textarea>
+                                    <textarea class="form-control" required name='excerpt' id="excerpt" rows="2" minlength="5" maxlength="300">{{ old("excerpt") }}</textarea>
                                 
                                     @error('excerpt')
                                         <p class='text-danger'>{{ $message }}</p>
