@@ -282,7 +282,7 @@ class AdminVideoGamesController extends Controller
                     'page_name' => 'Related Category',
                     'seo_name' => $category->name,
                     'seo_title' => 'Gaming news related to ' . $category->name . ' category | Epic Game News',                
-                    'seo_description' => 'Find gaming news filtered by the ' . $category->name . 'category, only at Epic Game News',
+                    'seo_description' => 'Find gaming news filtered by the ' . $category->name . ' category, only at Epic Game News',
                     'seo_keywords' => $category->name,
                 ];
 
