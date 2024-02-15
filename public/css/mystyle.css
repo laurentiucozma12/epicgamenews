@@ -254,6 +254,9 @@ footer .link-to-website:hover {
     margin-bottom: 0;
     font-size: 2.5rem;
     font-weight: 700; }
+    @media (max-width: 400px) {
+        .check-youtube-channel {
+            font-size: 1.5rem; } }
 .check-youtube-channel:hover {
     cursor: pointer;
     transition: 0.8s;
@@ -269,16 +272,28 @@ footer .link-to-website:hover {
     display: flex;
     justify-content: center; }
 .ads-container .hymerra-title span {
-    font-size: 2.4rem; }
+    font-size: 2.4rem; }    
+    @media (max-width: 400px) {
+        .ads-container .hymerra-title span {
+            font-size: 1.65rem !important; } }
 .ads-container .hymerra-title {
     font-size: 2.9rem;
     margin-top: 2rem; }
+    @media (max-width: 400px) {
+        .ads-container .hymerra-title {
+            font-size: 2rem !important; } }
 .ads-container .subscribe {
     margin-bottom: 0;
     font-size: 3rem; 
     text-align: center; }
+    @media (max-width: 400px) {
+        .ads-container .subscribe {
+            font-size: 2rem !important; } }
 .ads-container .youtube .icon-youtube {
     font-size: 14.5rem; }
+    @media (max-width: 400px) {
+        .ads-container .icon-youtube {
+            font-size: 10rem !important; } }
 
 .ads-container h4 {
     line-height: normal;
@@ -293,6 +308,9 @@ footer .link-to-website:hover {
     padding: 0 !important; }
 .artstation-link:hover {
     color: var(--light-blue-1); }
+    @media (max-width: 400px) {
+        .artstation-link {
+            font-size: 1rem; } }
 
 /* Recent News: side-recent-posts.blade.php */
 .recent-news-big-title {
@@ -387,6 +405,9 @@ footer .link-to-website:hover {
     @media (max-width: 1200px) {
     .search {
         max-width: none ; } }
+    @media (max-width: 350px) {
+    .search {
+        max-width: 150px ; } }
 
 .search:active,
 .search:focus-visible { 
@@ -432,7 +453,7 @@ footer .link-to-website:hover {
 .posts-text-container .posts-title {
     margin-bottom: 0rem;
     font-weight: 700;
-    font-size: 1.5vw; }
+    font-size: 20pt; }
     .posts-text-container .posts-title a:hover {
         transition: 0.8s;
         color: var(--light-blue-1); }
@@ -455,7 +476,7 @@ footer .link-to-website:hover {
 .posts-excerpt {
     margin-bottom: 0.25rem;
     font-weight: 100;
-    font-size: 1vw; }
+    font-size: 15pt; }
     @media (max-width: 1200px) {
         .posts-excerpt {
             font-size: 1.5vw; } }
@@ -474,7 +495,7 @@ footer .link-to-website:hover {
 .posts-author-date {
     margin-bottom: 0rem;
     display: flex;
-    font-size: 0.75vw; }
+    font-size: 10pt; }
     @media (max-width: 1200px) {
         .posts-author-date {
             font-size: 1.15vw; } }
@@ -596,7 +617,7 @@ padding: 0 0 2.5em 0; }
     
 .post-title {
     margin-bottom: 0;
-    font-size: 2vw; }
+    font-size: 30pt; }
     @media (max-width: 1200px) {
         .post-title {
             font-size: 2.5vw; } }
@@ -615,7 +636,7 @@ padding: 0 0 2.5em 0; }
 
 .post-excerpt {
     margin-bottom: 0;
-    font-size: 1.75vw; }
+    font-size: 20pt; }
     @media (max-width: 1200px) {
         .post-excerpt {
             font-size: 2vw; } }
@@ -628,12 +649,12 @@ padding: 0 0 2.5em 0; }
     @media (max-width: 481px) {
         .post-excerpt {
             font-size: 4.25vw; } }
-    @media (max-width: 300px) {
+    @media (max-width: 400px) {
         .post-excerpt {
             font-size: 4.25vw; } }
 
 .post-author-date {
-    font-size: 1.5vw; }
+    font-size: 15pt; }
     @media (max-width: 1200px) {
         .post-author-date {
             font-size: 1.5vw; } }
@@ -646,7 +667,7 @@ padding: 0 0 2.5em 0; }
     @media (max-width: 481px) {
         .post-author-date {
             font-size: 3.25vw; } }
-    @media (max-width: 300px) {
+    @media (max-width: 400px) {
         .post-author-date {
             font-size: 3.5vw; } }
 
@@ -722,4 +743,10 @@ padding: 0 0 2.5em 0; }
         .classes {
             padding-left: 2rem !important;
             padding-right: 2rem !important; } }
+
+    @media (max-width: 560px) {
+        .desc2 iframe {
+            width: 95vw;
+            max-width: 100%;
+            height: calc(95vw * 9 / 16); } }
 /****** END OF PAGES ******/
