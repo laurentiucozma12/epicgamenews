@@ -617,7 +617,7 @@ padding: 0 0 2.5em 0; }
     
 .post-title {
     margin-bottom: 0;
-    font-size: 30pt; }
+    font-size: 20pt; }
     @media (max-width: 1200px) {
         .post-title {
             font-size: 2.5vw; } }
@@ -636,7 +636,7 @@ padding: 0 0 2.5em 0; }
 
 .post-excerpt {
     margin-bottom: 0;
-    font-size: 20pt; }
+    font-size: 15pt; }
     @media (max-width: 1200px) {
         .post-excerpt {
             font-size: 2vw; } }
@@ -654,7 +654,7 @@ padding: 0 0 2.5em 0; }
             font-size: 4.25vw; } }
 
 .post-author-date {
-    font-size: 15pt; }
+    font-size: 12pt; }
     @media (max-width: 1200px) {
         .post-author-date {
             font-size: 1.5vw; } }
