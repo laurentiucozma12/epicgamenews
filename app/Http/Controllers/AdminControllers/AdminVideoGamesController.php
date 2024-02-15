@@ -19,7 +19,7 @@ class AdminVideoGamesController extends Controller
         'seo_keywords' => 'required|min:2|max:255',
         'name' => 'required|min:2|max:250',
         'slug' => 'required|unique:video_games,slug|max:150',
-        'thumbnail' => 'required|image|max:1920',
+        'thumbnail' => 'image|max:1920',
     ];
     
     public function index()
