@@ -13,8 +13,6 @@
 	</form>
 @endsection
 
-    <div class='global-message info d-none'></div>
-
     <div class="colorlib-contact">
         <div class="container">
             <div class="row">
