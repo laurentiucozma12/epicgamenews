@@ -343,7 +343,17 @@ footer .link-to-website:hover {
 /* Recent News: side-tags.blade.php */
 .tags-big-title {
     margin: 0 0 10px 0 !important; }    
-
+.tag-sm-sc {
+    text-align: center;
+    display: none; }
+    @media (max-width: 1200px) {
+        .tag-sm-sc {
+            display: block; } }
+.tag-big-sc {
+    display: block; }
+    @media (max-width: 1200px) {
+        .tag-big-sc {
+            display: none; } }
 /* Pagination Buttons*/
 .pagination > li > a, .pagination > li > span {
     position: relative;

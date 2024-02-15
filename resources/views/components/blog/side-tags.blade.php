@@ -1,5 +1,6 @@
+<h3 class="tag-sm-sc">Tags</h3>
 <div class="side">
-    <h3 class="sidbar-heading tags-big-title">Tags</h3>
+    <h3 class="sidbar-heading tags-big-title tag-big-sc">Tags</h3>
     <div class="block-26">
         <ul>
             @foreach ($tags as $tag)
