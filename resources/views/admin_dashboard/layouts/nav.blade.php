@@ -70,7 +70,6 @@
                 <li><a href="{{ route('admin.video_games.index') }}"><i class="bx bx-right-arrow-alt"></i>All Video Games</a></li>
                 <li><a href="{{ route('admin.video_games.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Games</a></li>                          
                 <li><a href="{{ route('admin.video_games.create_api') }}"><i class="bx bx-right-arrow-alt"></i>Add API Games</a></li>
-                
             </ul>
         </li>
 
