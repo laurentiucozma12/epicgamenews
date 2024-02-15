@@ -26,22 +26,18 @@
 	var mobileMenuOutsideClick = function() {
 
 		$(document).click(function (e) {
-	    var container = $("#colorlib-offcanvas, .container");
+	    var container = $("#colorlib-offcanvas, .canvas");
 	    if (!container.is(e.target) && container.has(e.target).length === 0) {
 
 	    	if ( $('body').hasClass('offcanvas') ) {
 
     			$('body').removeClass('offcanvas');
     			$('.js-colorlib-nav-toggle').removeClass('active');
-				
 	    	}
-	    
-	    	
 	    }
 		});
 
-	};
-
+	};	
 
 	var offcanvasMenu = function() {
 
