@@ -104,9 +104,9 @@
 
                                 @if ( auth()->user()->roles->contains('name', 'admin') )                                    
                                     <div class="form-check form-switch admin-approve-container">
-                                        <input name='deleted' {{ intval($video_game->deleted) === 0 ? 'checked' : '' }} class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                        <label class="form-check-label {{ intval($video_game->deleted) === 0 ? 'text-success' : 'text-danger' }}" for="flexSwitchCheckChecked">
-                                            <b>{{ intval($video_game->deleted) === 0 ? 'Approved' : 'Not approved' }}</b>
+                                        <input name='deleted' {{ intval($platform->deleted) === 0 ? 'checked' : '' }} class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                        <label class="form-check-label {{ intval($platform->deleted) === 0 ? 'text-success' : 'text-danger' }}" for="flexSwitchCheckChecked">
+                                            <b>{{ intval($platform->deleted) === 0 ? 'Approved' : 'Not approved' }}</b>
                                         </label>
                                     </div>  
                                 @endif
