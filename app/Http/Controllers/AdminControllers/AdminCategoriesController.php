@@ -100,6 +100,7 @@ class AdminCategoriesController extends Controller
         $this->rules['thumbnail'] = 'nullable|image|max:1920';
         $this->rules['slug'] = ['required', Rule::unique('categories')->ignore($category)];
         $validated = $request->validate($this->rules);
+        $validated['deleted'] = $request->has('deleted') ? 0 : 1;
 
         // Update the category details
         $category->update($validated);

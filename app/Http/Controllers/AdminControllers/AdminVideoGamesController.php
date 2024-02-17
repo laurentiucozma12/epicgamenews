@@ -128,6 +128,7 @@ class AdminVideoGamesController extends Controller
         $this->rules['thumbnail'] = 'nullable|image|max:1920';
         $this->rules['slug'] = ['required', Rule::unique('video_games')->ignore($video_game)];
         $validated = $request->validate($this->rules);
+        $validated['deleted'] = $request->has('deleted') ? 0 : 1;
         
         // Update the video game details
         $video_game->update($validated);

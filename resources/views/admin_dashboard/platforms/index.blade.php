@@ -79,12 +79,6 @@
                                     <td>
                                         <div class="d-flex order-actions">
                                             <a href="{{ route('admin.platforms.edit', $platform) }}" ><i class='bx bxs-edit'></i></a>
-                                            <a href="#" onclick="event.preventDefault(); document.getElementById('delete_form_{{ $platform->id }}').submit()" class="ms-3"><i class='bx bxs-trash'></i></a>
-                                        
-                                            <form method="POST" action="{{ route('admin.platforms.destroy', $platform) }}" id="delete_form_{{ $platform->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
                                         </div>
                                     </td>
                                 </tr>
