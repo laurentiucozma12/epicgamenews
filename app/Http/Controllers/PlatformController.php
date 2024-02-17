@@ -9,6 +9,7 @@ use App\Models\Platform;
 use Illuminate\Http\Request;
 use App\Services\PostSearchService;
 use App\Services\RecentPostsService;
+use App\Services\PlatformsService;
 
 class PlatformController extends Controller
 {
@@ -19,20 +20,11 @@ class PlatformController extends Controller
         $this->postSearchService = $postSearchService;
     }
     
-    public function index()
+    public function index(PlatformsService $platformsService)
     {
         $seo = Seo::where('page_name', '=', 'Platform')->first();
         
-        $platforms = Platform::where('deleted', 0)
-            ->whereHas('videoGames', function ($query) {
-                // A platform is attached to a video game. A video game is attached to a post.
-                // Even if a video game has a platform, if the same video game has 0 posts (Not 'deleted' posts),
-                // the platform should not be visible.
-                $query->where('deleted', 0)
-                    ->whereHas('posts');
-            })
-            ->orderBy('name', 'ASC')
-            ->paginate(20);
+        $platforms = $platformsService->getPlatforms()->paginate(20);
 
         return view('platforms.index', [
             'seo' => $seo,

@@ -32,6 +32,7 @@
 								<th>Thumbnail</th>
 								<th>Name</th>
 								<th>Created at</th>
+								<th>Updated at</th>
 								<th>Create by</th>
 								<th>Actions</th>
 							</tr>
@@ -62,6 +63,7 @@
 								</td>
 								<td>{{ $category->name }}</td>
 								<td>{{ $category->created_at->diffForHumans() }}</td>                                        
+								<td>{{ $category->updated_at->diffForHumans() }}</td>                                        
 								<td>{{ $category->user->name }}</td>                                  
 								<td>
 									<div class="d-flex order-actions">

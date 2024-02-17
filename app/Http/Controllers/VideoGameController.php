@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\VideoGame;
 use Illuminate\Http\Request;
 use App\Services\PostSearchService;
+use App\Services\VideoGamesService;
 use App\Http\Controllers\Controller;
 use App\Services\RecentPostsService;
 
@@ -19,19 +20,11 @@ class VideoGameController extends Controller
         $this->postSearchService = $postSearchService;
     }
     
-    public function index()
+    public function index(VideoGamesService $videoGamesService)
     {
         $seo = Seo::where('page_name', 'Video Game')->first();
         
-        $video_games = VideoGame::where('deleted', 0)
-            ->whereHas('posts', function ($query) {
-                // A video game is attached to a post. 
-                // If the video game has 0 posts (Not 'deleted' posts),
-                // the video game should not be visible.
-                $query->where('deleted', 0);
-            })
-            ->orderBy('name', 'ASC')
-            ->paginate(20);
+        $video_games = $videoGamesService->getVideoGames()->paginate(20);
 
         return view('video_games.index', [
             'seo' => $seo,

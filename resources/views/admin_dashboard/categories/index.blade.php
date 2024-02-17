@@ -41,6 +41,7 @@
                                 <th>Slug</th>
                                 <th>Related Games</th>
                                 <th>Created At</th>
+                                <th>Updated At</th>
                                 <th>Created By</th>
                                 <th>Actions</th>
                             </tr>
@@ -75,6 +76,7 @@
                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.categories.show', $category) }}">{{ count($category->videoGames) }} Related Video Games</a>
                                     </td>
                                     <td>{{ $category->created_at->diffForHumans() }}</td>
+                                    <td>{{ $category->updated_at->diffForHumans() }}</td>
                                     <td>{{ $category->user->name }}</td>
                                     <td>
                                         <div class="d-flex order-actions">

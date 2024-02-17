@@ -41,6 +41,7 @@
                                 <th>Slug</th>
                                 <th>Related Video Games</th>
                                 <th>Created at</th>
+                                <th>Updated at</th>
                                 <th>Created By</th>
                                 <th>Actions</th>
                             </tr>
@@ -75,6 +76,7 @@
                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.platforms.show', $platform) }}">{{ count($platform->videoGames) }} Related Video Games</a>
                                     </td>
                                     <td>{{ $platform->created_at->diffForHumans() }}</td>
+                                    <td>{{ $platform->updated_at->diffForHumans() }}</td>
                                     <td>{{ $platform->user->name }}</td>
                                     <td>
                                         <div class="d-flex order-actions">

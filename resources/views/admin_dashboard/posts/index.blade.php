@@ -42,6 +42,7 @@
                                 <th>Category</th>
                                 <th>Platform</th>
                                 <th>Created At</th>
+                                <th>Updated At</th>
                                 <th>Created By</th>
                                 <th>Views</th>
                                 <th>Actions</th>
@@ -85,6 +86,7 @@
                                         @endforeach
                                     </td>
                                     <td>{{ $post->created_at->diffForHumans() }}</td>
+                                    <td>{{ $post->updated_at->diffForHumans() }}</td>
                                     <td>{{ $post->author->name }}</td>
                                     <td>{{ $post->views }}</td>
                                     <td>

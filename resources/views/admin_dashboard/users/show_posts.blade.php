@@ -35,6 +35,7 @@
 								<th>Excerpt</th>
 								<th>Video Game</th>
 								<th>Created at</th>
+								<th>Updated at</th>
 								<th>Views</th>
 								<th>Actions</th>
 							</tr>
@@ -67,6 +68,7 @@
 								<td>{{ $post->excerpt }}</td>
 								<td>{{ $post->video_game->name }}</td>
 								<td>{{ $post->created_at->diffForHumans() }}</td>                                        
+								<td>{{ $post->updated_at->diffForHumans() }}</td>                                        
 								<td>{{ $post->views }}</td>                                        
 								<td>
 									<div class="d-flex order-actions">

@@ -9,6 +9,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Services\PostSearchService;
 use App\Services\RecentPostsService;
+use App\Services\CategoriesService;
 
 class CategoryController extends Controller
 {
@@ -19,20 +20,11 @@ class CategoryController extends Controller
         $this->postSearchService = $postSearchService;
     }
     
-    public function index()
+    public function index(CategoriesService $categoriesService)
     {
         $seo = Seo::where('page_name', '=', 'Category')->first();
         
-        $categories = Category::where('deleted', 0)
-            ->whereHas('videoGames', function ($query) {
-                // A platform is attached to a video game. A video game is attached to a post.
-                // Even if a video game has a platform, if the same video game has 0 posts (Not 'deleted' posts),
-                // the platform should not be visible.
-                $query->where('deleted', 0)
-                    ->whereHas('posts');
-            })
-            ->orderBy('name', 'ASC')
-            ->paginate(20);
+        $categories = $categoriesService->getCategories()->paginate(20);
 
         return view('categories.index', [
             'seo' => $seo,

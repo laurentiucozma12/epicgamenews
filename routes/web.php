@@ -39,6 +39,8 @@ use App\Http\Controllers\AdminControllers\AdminDashboardController;
 use App\Http\Controllers\AdminControllers\AdminPlatformsController;
 use App\Http\Controllers\AdminControllers\AdminCategoriesController;
 use App\Http\Controllers\AdminControllers\AdminVideoGamesController;
+use App\Http\Controllers\SiteMapController;
+use Spatie\Sitemap\Tags\Sitemap;
 
 // Admin Dashboard Routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions'])->group(function(){
@@ -159,6 +161,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
 });
 
 // Front User Routes
+Route::get('/sitemap.xml', [SiteMapController::class, 'index']);
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search', [HomeController::class, 'search'])->name('home.search');
 

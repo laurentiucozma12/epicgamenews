@@ -37,6 +37,7 @@
 								<th>Name</th>
 								<th>Related Posts</th>
 								<th>Created at</th>
+								<th>Updated at</th>
 								<th>Created by</th>
 								<th>Actions</th>
 							</tr>
@@ -56,6 +57,7 @@
 									<a class='btn btn-primary btn-sm' href="{{ route('admin.tags.show', $tag) }}">{{ count($tag->posts) }} Related Posts</a>
 								</td>
 								<td>{{ $tag->created_at->diffForHumans() }}</td>
+								<td>{{ $tag->updated_at->diffForHumans() }}</td>
 								<td>{{ $tag->user->name }} </td>
 								<td>
 									<div class="d-flex order-actions">

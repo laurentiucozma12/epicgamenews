@@ -42,6 +42,7 @@
 								<th>Related Video Games</th>
 								<th>Related Categories</th>
 								<th>Created at</th>
+								<th>Updated at</th>
 								<th>Actions</th>
 							</tr>
 						</thead>
@@ -79,6 +80,7 @@
 									<a class='btn btn-primary btn-sm' href="{{ route('admin.users.show_categories', $user) }}">{{ count($user->categories) }} Categories</a>
 								</td>
 								<td>{{ $user->created_at->diffForHumans() }}</td>
+								<td>{{ $user->updated_at->diffForHumans() }}</td>
 								<td>
 									<div class="d-flex order-actions">
 										<a href="{{ route('admin.users.edit', $user) }}" class=""><i class='bx bxs-edit'></i></a>

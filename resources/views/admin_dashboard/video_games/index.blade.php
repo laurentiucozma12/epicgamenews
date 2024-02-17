@@ -43,6 +43,7 @@
                                 <th>Platforms</th>
                                 <th>Related Posts</th>
                                 <th>Created At</th>
+                                <th>Updated At</th>
                                 <th>Created By</th>
                                 <th>Actions</th>
                             </tr>
@@ -86,6 +87,7 @@
                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.video_games.show', $video_game) }}">{{ count($video_game->posts) }} Related Posts</a>    
                                     </td>
                                     <td>{{ $video_game->created_at->diffForHumans() }}</td>
+                                    <td>{{ $video_game->updated_at->diffForHumans() }}</td>
                                     <td>{{ $video_game->user->name }}</td>
                                     <td>
                                         <div class="d-flex order-actions">

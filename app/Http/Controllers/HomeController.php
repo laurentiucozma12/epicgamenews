@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Seo;
 
-use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Services\PostSearchService;
+use App\Services\PostsService;
 
 class HomeController extends Controller
 {
@@ -17,14 +17,11 @@ class HomeController extends Controller
         $this->postSearchService = $postSearchService;
     }
     
-    public function index()
+    public function index(PostsService $postsService)
     {
-
         $seo = Seo::where('page_name', '=', 'Home')->first();
 
-        $posts = Post::latest()
-            ->where('deleted', 0)
-            ->paginate(20);
+        $posts = $postsService->getPosts()->paginate(20);
 
         return view('home', [
             'seo' => $seo,

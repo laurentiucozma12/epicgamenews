@@ -33,6 +33,7 @@
 								<th>Thumbnail</th>
 								<th>Name</th>
 								<th>Created at</th>
+								<th>Updated at</th>
 								<th>Create by</th>
 								<th>Actions</th>
 							</tr>
@@ -63,6 +64,7 @@
 								</td>
 								<td>{{ $video_game->name }}</td>
 								<td>{{ $video_game->created_at->diffForHumans() }}</td>                                        
+								<td>{{ $video_game->updated_at->diffForHumans() }}</td>                                        
 								<td>{{ $video_game->user->name }}</td>                                  
 								<td>
 									<div class="d-flex order-actions">
