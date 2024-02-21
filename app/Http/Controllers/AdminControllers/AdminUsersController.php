@@ -106,6 +106,15 @@ class AdminUsersController extends Controller
             'categories' => $categories,
         ]);
     }
+
+    public function showPlatforms(User $user)
+    {
+        $platforms = $user->platforms()->latest()->paginate(100);
+        return view('admin_dashboard.users.show_platforms',[
+            'user' => $user,
+            'platforms' => $platforms,
+        ]);
+    }
     
     public function update(Request $request, User $user)
     {

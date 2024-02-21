@@ -9,9 +9,10 @@
 			<div class="ps-3">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb mb-0 p-0">
-						<li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a></li>								
+						<li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
+						</li>								
 						<li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.users.index') }}">All Users</a></li>
-						<li class="breadcrumb-item active text-white" aria-current="page">{{ $user->name }}'s Categories</li>
+						<li class="breadcrumb-item active text-white" aria-current="page">{{ $user->name }}'s Platforms</li>
 					</ol>
 				</nav>
 			</div>
@@ -21,7 +22,7 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="d-lg-flex align-items-center mb-4 gap-3">
-					<div class="ms-auto"><a href="{{ route('admin.categories.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New Category</a></div>
+					<div class="ms-auto"><a href="{{ route('admin.video_games.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New Video Game</a></div>
 				</div>
 				<div class="table-responsive">
 					<table class="table mb-0">
@@ -38,36 +39,36 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($categories as $category)
+							@foreach($platforms as $platform)
 							<tr>
 								<td>
 									<div class="d-flex align-items-center">
 										<div class="ms-2">
-											<h6 class="mb-0 font-14">{{ $category->id }}</h6>
+											<h6 class="mb-0 font-14">{{ $platform->id }}</h6>
 										</div>
 									</div>
 								</td>
 								<td>
-									@if(intval($category->deleted) === 0)
+									@if(intval($platform->deleted) === 0)
 										<div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Approved</div>
 									@else
 										<div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Not Approved</div>
 									@endif
 								</td>
 								<td>
-									@if ($category->image)
-										<img src="{{ asset('storage/images/300x169/' . $category->image->name) }}" width='50' alt="{{ $category->image->name }}">
+									@if ($platform->image)
+										<img src="{{ asset('storage/images/300x169/' . $platform->image->name) }}" width='50' alt="{{ $platform->image->name }}">
 									@else
 										<img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" width='50' alt="Img Placeholder">
 									@endif
 								</td>
-								<td>{{ $category->name }}</td>
-								<td>{{ $category->created_at->diffForHumans() }}</td>                                        
-								<td>{{ $category->updated_at->diffForHumans() }}</td>                                        
-								<td>{{ $category->user->name }}</td>                                  
+								<td>{{ $platform->name }}</td>
+								<td>{{ $platform->created_at->diffForHumans() }}</td>                                        
+								<td>{{ $platform->updated_at->diffForHumans() }}</td>                                        
+								<td>{{ $platform->user->name }}</td>                                  
 								<td>
 									<div class="d-flex order-actions">
-										<a href="{{ route('admin.categories.edit', $category) }}" class=""><i class='bx bxs-edit'></i></a>
+										<a href="{{ route('admin.platforms.edit', $platform) }}" class=""><i class='bx bxs-edit'></i></a>
 									</div>
 								</td>
 							</tr>
@@ -77,7 +78,7 @@
 				</div>
 				
 				<div class='mt-4'>
-					{{ $categories->onEachSide(0)->links('pagination::bootstrap-4') }}
+					{{ $platforms->onEachSide(0)->links('pagination::bootstrap-4') }}
 				</div>
 
 			</div>

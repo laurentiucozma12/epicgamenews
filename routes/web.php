@@ -40,7 +40,6 @@ use App\Http\Controllers\AdminControllers\AdminPlatformsController;
 use App\Http\Controllers\AdminControllers\AdminCategoriesController;
 use App\Http\Controllers\AdminControllers\AdminVideoGamesController;
 use App\Http\Controllers\SiteMapController;
-use Spatie\Sitemap\Tags\Sitemap;
 
 // Admin Dashboard Routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions'])->group(function(){
@@ -153,6 +152,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_permissions']
         Route::get('/{user:name}/related-posts', [AdminUsersController::class, 'showPosts'])->name('users.show_posts');
         Route::get('/{user:name}/related-video-games', [AdminUsersController::class, 'showVideoGames'])->name('users.show_video_games');
         Route::get('/{user:name}/related-categories', [AdminUsersController::class, 'showCategories'])->name('users.show_categories');
+        Route::get('/{user:name}/related-platforms', [AdminUsersController::class, 'showPlatforms'])->name('users.show_platforms');
     });
     
     Route::get('about', [AdminAboutController::class, 'edit'])->name('about.edit');

@@ -69,12 +69,6 @@
 								<td>
 									<div class="d-flex order-actions">
 										<a href="{{ route('admin.video_games.edit', $video_game) }}" class=""><i class='bx bxs-edit'></i></a>
-										<a href="#" onclick="event.preventDefault(); document.getElementById('delete_form_{{ $video_game->id }}').submit();" class="ms-3"><i class='bx bxs-trash'></i></a>
-									
-										<form method='POST' action="{{ route('admin.video_games.destroy', $video_game) }}" id='delete_form_{{ $video_game->id }}'>
-											@csrf 
-											@method('DELETE')
-										</form>
 									</div>
 								</td>
 							</tr>

@@ -41,6 +41,7 @@
 								<th>Related Posts</th>
 								<th>Related Video Games</th>
 								<th>Related Categories</th>
+								<th>Related Platforms</th>
 								<th>Created at</th>
 								<th>Updated at</th>
 								<th>Actions</th>
@@ -79,14 +80,14 @@
 								<td>
 									<a class='btn btn-primary btn-sm' href="{{ route('admin.users.show_categories', $user) }}">{{ count($user->categories) }} Categories</a>
 								</td>
+								<td>
+									<a class='btn btn-primary btn-sm' href="{{ route('admin.users.show_platforms', $user) }}">{{ count($user->platforms) }} Platforms</a>
+								</td>
 								<td>{{ $user->created_at->diffForHumans() }}</td>
 								<td>{{ $user->updated_at->diffForHumans() }}</td>
 								<td>
 									<div class="d-flex order-actions">
 										<a href="{{ route('admin.users.edit', $user) }}" class=""><i class='bx bxs-edit'></i></a>
-										<a href="#" onclick="event.preventDefault(); document.getElementById('delete_form_{{ $user->id }}').submit();" class="ms-3"><i class='bx bxs-trash'></i></a>
-									
-										<form method='post' action="{{ route('admin.users.destroy', $user) }}" id='delete_form_{{ $user->id }}'>@csrf @method('DELETE')</form>
 									</div>
 								</td>
 							</tr>

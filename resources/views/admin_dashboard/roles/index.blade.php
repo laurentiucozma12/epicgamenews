@@ -59,12 +59,6 @@
                                     <td>
                                         <div class="d-flex order-actions">
                                             <a href="{{ route('admin.roles.edit', $role) }}" class=""><i class='bx bxs-edit'></i></a>
-                                            <a href="#" onclick="event.preventDefault(); document.getElementById('delete_form_{{ $role->id }}').submit()" class="ms-3"><i class='bx bxs-trash'></i></a>
-                                        
-                                            <form method="POST" action="{{ route('admin.roles.destroy', $role) }}" id="delete_form_{{ $role->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -72,11 +66,7 @@
                         </tbody>
                     </table>
                 </div>
-
-                {{-- <div class='mt-4'>
-                    {{ $posts->onEachSide(0)->links('pagination::bootstrap-4') }}
-                </div> --}}
-
+                
             </div>
         </div>
 
