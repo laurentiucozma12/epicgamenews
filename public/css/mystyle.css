@@ -752,8 +752,7 @@ padding: 0 0 2.5em 0; }
     @media (max-width: 481px) {
         .desc2 {
             font-size: 4.5vw; } }
-
-
+            
     @media screen and (max-width: 768px) {
         .classes {
             padding-left: 2rem !important;
@@ -764,4 +763,8 @@ padding: 0 0 2.5em 0; }
             width: 95vw;
             max-width: 100%;
             height: calc(95vw * 9 / 16); } }
+.desc2 img {
+    width: 100%;
+    height: auto;
+}
 /****** END OF PAGES ******/
