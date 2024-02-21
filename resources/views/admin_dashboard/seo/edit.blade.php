@@ -48,7 +48,7 @@
                                         <li>Make it compelling and encourage clicks</li>
                                         <li>Avoid keyword stuffing</li>
                                     </ul>
-                                    <input type="text" value='{{ old("title", $seo->title) }}' name="title" required class="form-control" id="seoTitle">
+                                    <input type="text" value='{{ old("seo_title", $seo->seo_title) }}' name="title" required class="form-control" id="seoTitle">
 
                                     @error('title')
                                         <p class="text-danger">{{ $message }}</p>
@@ -65,7 +65,7 @@
                                         <li>Do NOT forget to use comma between keywords!</li>
                                         <li>(ex: world of warcraft, mmorpg, epic mount, guide, limiteed edition)</li>
                                     </ul>
-                                    <input type="text" value='{{ old("keywords", $seo->keywords) }}' name="keywords" required class="form-control" id="seoKeywords">
+                                    <input type="text" value='{{ old("seo_keywords", $seo->seo_keywords) }}' name="keywords" required class="form-control" id="seoKeywords">
 
                                     @error('keywords')
                                         <p class="text-danger">{{ $message }}</p>
@@ -89,7 +89,7 @@
                                             <li>Encourage clicks with a call-to-action</li>
                                         </ul>                                
                                     </div>
-                                    <textarea required class="form-control" name='description' id="seoDescription" rows="2">{{ old("description", $seo->description) }}</textarea>
+                                    <textarea required class="form-control" name='description' id="seoDescription" rows="2">{{ old("seo_description", $seo->seo_description) }}</textarea>
                                     
                                     @error('description')
                                         <p class="text-danger">{{ $message }}</p>

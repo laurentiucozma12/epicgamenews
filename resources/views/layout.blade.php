@@ -29,9 +29,9 @@
 	<link rel="canonical" href="{{ url()->current() }}" />
 	
 	{{-- Meta tags for the page --}}
-	<meta property="og:title" content="{{ $seo->title ?? '' }}">
-	<meta name="description" content="{{ $seo->description ?? '' }}">
-	<meta name="keywords" content="{{ $seo->keywords ?? '' }}">
+	<meta property="og:title" content="{{ $seo->seo_title ?? '' }}">
+	<meta name="description" content="{{ $seo->seo_description ?? '' }}">
+	<meta name="keywords" content="{{ $seo->seo_keywords ?? '' }}">
 	<meta name="author" content="Epic Game News" />
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="{{ url()->current() }}">

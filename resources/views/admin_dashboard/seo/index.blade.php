@@ -38,9 +38,9 @@
                                 <tr>
                                     <td>{{ $seo->id }}</td>
                                     <td>{{ $seo->page_name }}</td>
-                                    <td>{{ Str::limit($seo->title, 35) }}</td>
-                                    <td>{{ Str::limit($seo->description, 30) }}</td>
-                                    <td>{{ Str::limit($seo->keywords, 25) }}</td>
+                                    <td>{{ Str::limit($seo->seo_title, 35) }}</td>
+                                    <td>{{ Str::limit($seo->seo_description, 30) }}</td>
+                                    <td>{{ Str::limit($seo->seo_keywords, 25) }}</td>
                                     <td>{{ $seo->created_at->diffForHumans() }}</td>
                                     <td>{{ $seo->author->name }}</td>
                                     <td>
