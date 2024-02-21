@@ -763,6 +763,12 @@ padding: 0 0 2.5em 0; }
             width: 95vw;
             max-width: 100%;
             height: calc(95vw * 9 / 16); } }
+.desc2 p,
+.desc2 ul li,
+.desc2 ol li {
+    line-height: normal;
+    margin: 1rem;
+    font-size: 1.5rem;}
 .desc2 img {
     height: auto;
 }
