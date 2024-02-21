@@ -18,8 +18,10 @@ class AboutController extends Controller
     
     public function __invoke(Request $request)
     {
-        $seo = Seo::where('page_name', '=', 'About')->first();
-        
+        $seo = Seo::where('page_name', 'About')
+            ->where('page_type', 'main')
+            ->first();
+
         return view('about', [
             'seo' => $seo,
         ]);

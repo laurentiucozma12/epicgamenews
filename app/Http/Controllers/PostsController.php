@@ -21,8 +21,10 @@ class PostsController extends Controller
     
     public function show(Post $post, RecentPostsService $recentPostsService)
     {
-        $seo = Seo::where('page_type', 'Post')->first();
-        
+        $seo = Seo::where('page_type', 'Post')
+           ->where('post_id', $post->id)
+           ->first();
+
         $recent_posts = $recentPostsService->getRecentPosts();
 
         $tags = $post->tags;

@@ -20,9 +20,11 @@ class TagController extends Controller
     }
     
     public function show(Tag $tag, RecentPostsService $recentPostsService)
-    {
-        $seo = Seo::where('seo_name', $tag->name)->first();
-        
+    {        
+        $seo = Seo::where('page_name',  $tag->name)
+           ->where('page_type', 'tag')
+           ->first();
+
         $recent_posts = $recentPostsService->getRecentPosts();
         
         if ($tag->name === 'uncategorized') {

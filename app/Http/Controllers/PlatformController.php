@@ -22,7 +22,9 @@ class PlatformController extends Controller
     
     public function index(PlatformsService $platformsService)
     {
-        $seo = Seo::where('page_name', '=', 'Platform')->first();
+        $seo = Seo::where('page_name', 'Platform')
+           ->where('page_type', 'main')
+           ->first();
         
         $platforms = $platformsService->getPlatforms()->paginate(20);
 
@@ -34,7 +36,11 @@ class PlatformController extends Controller
 
     public function show(Platform $platform, RecentPostsService $recentPostsService)
     {
-        $seo = Seo::where('seo_name', $platform->name)->first();
+        // NOT OK
+        $seo = Seo::where('page_name', 'Related Platform')
+        ->where('page_type', 'platform')
+        ->first();
+
         $recent_posts = $recentPostsService->getRecentPosts();
         $videoGameIds = $platform->videoGames()->pluck('video_game_id');
 

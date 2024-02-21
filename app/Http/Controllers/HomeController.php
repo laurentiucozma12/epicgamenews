@@ -19,7 +19,9 @@ class HomeController extends Controller
     
     public function index(PostsService $postsService)
     {
-        $seo = Seo::where('page_name', '=', 'Home')->first();
+        $seo = Seo::where('page_name', 'Home')
+            ->where('page_type', 'main')
+            ->first();
 
         $posts = $postsService->getPosts()->paginate(20);
 

@@ -21,8 +21,11 @@ class ContactController extends Controller
     }
     
     public function create()
-    {
-        $seo = Seo::where('page_name', '=', 'Contact')->first();
+    {        
+        $seo = Seo::where('page_name', 'Contact')
+            ->where('page_type', 'main')
+            ->first();
+
         return view('contact', [
             'seo' => $seo,
         ]);

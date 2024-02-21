@@ -21,9 +21,11 @@ class CategoryController extends Controller
     }
     
     public function index(CategoriesService $categoriesService)
-    {
-        $seo = Seo::where('page_name', '=', 'Category')->first();
-        
+    {        
+        $seo = Seo::where('page_name', 'Category')
+           ->where('page_type', 'main')
+           ->first();
+
         $categories = $categoriesService->getCategories()->paginate(20);
 
         return view('categories.index', [
@@ -34,7 +36,10 @@ class CategoryController extends Controller
 
     public function show(Category $category, RecentPostsService $recentPostsService)
     {
-        $seo = Seo::where('seo_name', $category->name)->first();
+        $seo = Seo::where('page_name', 'Related Category')
+            ->where('page_type', 'category')
+            ->first();
+
         $recent_posts = $recentPostsService->getRecentPosts();
         
         $videoGameIds = $category->videoGames()->pluck('video_game_id');

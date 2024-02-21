@@ -27,7 +27,7 @@
 	{{------------------------------------ SEO - START ------------------------------------}}
 	{{-- Canonical --}}
 	<link rel="canonical" href="{{ url()->current() }}" />
-	
+
 	{{-- Meta tags for the page --}}
 	<meta property="og:title" content="{{ $seo->seo_title ?? '' }}">
 	<meta name="description" content="{{ $seo->seo_description ?? '' }}">

@@ -22,7 +22,9 @@ class VideoGameController extends Controller
     
     public function index(VideoGamesService $videoGamesService)
     {
-        $seo = Seo::where('page_name', 'Video Game')->first();
+        $seo = Seo::where('page_name', 'Video Game')
+            ->where('page_type', 'main')
+            ->first();
         
         $video_games = $videoGamesService->getVideoGames()->paginate(20);
 
@@ -33,8 +35,10 @@ class VideoGameController extends Controller
     }
 
     public function show(VideoGame $video_game, RecentPostsService $recentPostsService)
-    {
-        $seo = Seo::where('seo_name', $video_game->name)->first();
+    {        
+        $seo = Seo::where('page_name', 'Related Video Game')
+            ->where('page_type', 'video_game')
+            ->first();
 
         $recent_posts = $recentPostsService->getRecentPosts();
 
