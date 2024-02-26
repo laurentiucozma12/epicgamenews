@@ -3,7 +3,7 @@
 @section("wrapper")
 <!--start page wrapper -->
 <div class="page-wrapper">
-    <div class="page-content">
+    <div class="page-content container-page">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
             <div class="ps-3">
@@ -19,7 +19,7 @@
         <!--end breadcrumb-->
         
         <div class="card">
-            <div class="card-body p-4">
+            <div class="card-body container-padding">
                 Edit Post: {!! $post->title ? $post->title : '<span class="text-danger">NO TITLE FOR</span> ' . $post->video_game->name !!}
 
                 <hr/>
@@ -28,16 +28,16 @@
                     @csrf
                     @method('PATCH')
 
-                    <div class="form-body mt-4">
+                    <div class="form-body">
                         <div class="row">
                             <div class="col-lg-12">
 
-                                <div class="mb-3">
+                                <div>
                                     <label class="form-label">Post Video Game</label>                                        
-                                    <div class="card shadow-none border">
+                                    <div class="card shadow-none border mb-4">
                                         <div class="card-body">
                                             <div class="rounded">
-                                                <div class="mb-3">
+                                                <div>
                                                     <select name="video_game_id" class="single-select">
                                                         @foreach ($video_games as $key => $video_game)
                                                             <option {{ intval($post->video_game_id) === $key ? 'selected' : '' }} value="{{ $key }}">{{ $video_game }}</option>
@@ -57,10 +57,10 @@
                                     </div>
                                 </div>
 
-                                <div class="mb-3">
+                                <div>
                                     <div class="row">
                                         <div class="com-md-8">
-                                            <div class="card shadow-none border">
+                                            <div class="card shadow-none border mb-4">
                                                 <div class="card-body">
                                                     <label for="file" class="form-label">Post Thumbnail (Max 1920) <span class="text-danger">REQUIRED</span></label>
                                                     <input id='thumbnail' name='thumbnail' id="file" accept="image/*" type="file" class="mb-3">
@@ -138,7 +138,7 @@
                                     </div>
 
                                     @if ( auth()->user()->roles->contains('name', 'admin') )                                    
-                                        <div class="form-check form-switch admin-approve-container">
+                                        <div class="form-check form-switch admin-approve-container ps-0">
                                             <input name='deleted' {{ intval($post->deleted) === 0 ? 'checked' : '' }} class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
                                             <label class="form-check-label {{ intval($post->deleted) === 0 ? 'text-success' : 'text-danger' }}" for="flexSwitchCheckChecked">
                                                 <b>{{ intval($post->deleted) === 0 ? 'Approved' : 'Not approved' }}</b>
