@@ -284,10 +284,11 @@ class AdminVideoGamesController extends Controller
                     'slug' => $genre_slug,
                     'user_id' => auth()->id(),
                 ]);
-
-                $category_id = $category->id;
+                
+                $imageable_id = $category->id;
                 $imageable_type = 'App\Models\Category';
-                $this->createImage($category_id, $imageable_type);
+                $createImageService = new CreateImageService($imageable_id, $imageable_type);
+                $createImageService->createImage();
 
                 // Create SEO entry for the category
                 $seoData = [
@@ -327,9 +328,10 @@ class AdminVideoGamesController extends Controller
                     'user_id' => auth()->id(),
                 ]);
 
-                $platform_id = $platform->id;
+                $imageable_id = $platform->id;
                 $imageable_type = 'App\Models\Platform';
-                $this->createImage($platform_id, $imageable_type);
+                $createImageService = new CreateImageService($imageable_id, $imageable_type);
+                $createImageService->createImage();
 
                 $seoData = [
                     'page_type' => 'platform',
