@@ -31,39 +31,12 @@
                             <div class="col-lg-12">
 
                                 <div class="mb-3">
-                                    <label for="title" class="form-label">Post Title</label>
-                                    <input type="text" value='{{ old("title") }}' name="title" required class="form-control" id="title">
-
-                                    @error('title')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="slug" class="form-label">Post Slug</label>
-                                    <input type="text" value='{{ old("slug") }}' name="slug" required class="form-control" id="slug">
-
-                                    @error('slug')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="excerpt" class="form-label">Post Excerpt</label>
-                                    <textarea class="form-control" required name='excerpt' id="excerpt" rows="2" minlength="5" maxlength="300">{{ old("excerpt") }}</textarea>
-                                
-                                    @error('excerpt')
-                                        <p class='text-danger'>{{ $message }}</p>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
                                     <label class="form-label">Post Video Game</label>                                        
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="rounded">
                                                 <div class="mb-3">
-                                                    <select name="video_game_id" required class="single-select">
+                                                    <select name="video_game_id" class="single-select">
                                                         @foreach ($video_games as $video_game)
                                                             <option value="{{ intval($video_game->id) }}">{{ $video_game->name }}</option>                                                                
                                                         @endforeach
@@ -80,15 +53,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="tags" class="form-label">Post Tags</label>
-                                    <input type="text" value="{{ old("tags") }}" class="form-control" name="tags" id="tags" data-role="tagsinput">
-
-                                    @error('tags')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
                                 </div>
                             
                                 <div class="mb-3">
@@ -115,6 +79,42 @@
                                     <input type="text" value="{{ old("author_thumbnail") }}" class="form-control" name="author_thumbnail" id="author_thumbnail">
 
                                     @error('author_thumbnail')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Post Title</label>
+                                    <input type="text" value='{{ old("title") }}' name="title" class="form-control" id="title">
+
+                                    @error('title')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="slug" class="form-label">Post Slug <span class="text-danger">REQUIRED</span></label>
+                                    <input type="text" value='{{ old("slug") }}' name="slug" required class="form-control" id="slug">
+
+                                    @error('slug')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="excerpt" class="form-label">Post Excerpt</label>
+                                    <textarea class="form-control" name='excerpt' id="excerpt" rows="2" minlength="5" maxlength="300">{{ old("excerpt") }}</textarea>
+                                
+                                    @error('excerpt')
+                                        <p class='text-danger'>{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="tags" class="form-label">Post Tags</label>
+                                    <input type="text" value="{{ old("tags") }}" class="form-control" name="tags" id="tags" data-role="tagsinput">
+
+                                    @error('tags')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>

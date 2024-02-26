@@ -20,12 +20,15 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-lg-flex align-items-center mb-4 gap-3">
-                    <div class="position-relative">
+                    <div class="position-relative d-flex align-items-center">
                         <form action="{{ route('admin.posts.search') }}" method="GET">
                             @csrf
                             
                             <input type="search" name="search" value="{{ isset($search) ? $search : '' }}" class="form-control ps-5 radius-30" placeholder="Search Post"><span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
                         </form>
+                        <span class="count count-total ms-2">Total: {{ count($posts) }}</span>
+                        <span class="count count-active ms-2">Active: {{ count($posts->where('deleted', 0)) }}</span>
+                        <span class="count count-inactive ms-2">Inactive: {{ count($posts->where('deleted', '!==', 0)) }}</span>    
                     </div>
                     <div class="ms-auto"><a href="{{ route('admin.posts.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New Post</a></div>
                 </div>
@@ -60,9 +63,9 @@
                                     </td>
                                     <td>
                                         @if(intval($post->deleted) === 0)
-                                            <div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Approved</div>
+                                            <div class="text-info bg-light-info badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Active</div>
                                         @else
-                                            <div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Not Approved</div>
+                                            <div class="text-danger bg-light-danger badge rounded-pill p-2 text-uppercase px-3"><i class='bx bxs-circle align-middle me-1'></i>Inactive</div>
                                         @endif
                                     </td>
                                     <td>
@@ -92,12 +95,6 @@
                                     <td>
                                         <div class="d-flex order-actions">
                                             <a href="{{ route('admin.posts.edit', $post) }}" class=""><i class='bx bxs-edit'></i></a>
-                                            <a href="#" onclick="event.preventDefault(); document.getElementById('delete_form_{{ $post->id }}').submit()" class="ms-3"><i class='bx bxs-trash'></i></a>
-
-                                            <form method="POST" action="{{ route('admin.posts.destroy', $post) }}" id="delete_form_{{ $post->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
                                         </div>
                                     </td>
                                 </tr>

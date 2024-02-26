@@ -21,12 +21,15 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-lg-flex align-items-center mb-4 gap-3">
-                    <div class="position-relative">
+                    <div class="position-relative d-flex align-items-center">
                         <form action="{{ route('admin.platforms.search') }}" method="GET">
                             @csrf
 
                             <input type="search" name="search" value="{{ isset($search) ? $search : '' }}" class="form-control ps-5 radius-30" placeholder="Search Platform"><span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
                         </form>
+                        <span class="count count-total ms-2">Total: {{ count($platforms) }}</span>
+                        <span class="count count-active ms-2">Active: {{ count($platforms->where('deleted', 0)) }}</span>
+                        <span class="count count-inactive ms-2">Inactive: {{ count($platforms->where('deleted', '!==', 0)) }}</span> 
                     </div>
                     <div class="ms-auto"><a href="{{ route('admin.platforms.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New Platform</a></div>
                 </div>                    

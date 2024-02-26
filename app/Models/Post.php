@@ -14,7 +14,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title' , 'slug', 'scraped_slug' , 'excerpt', 'body', 'user_id', 'video_game_id', 'author_thumbnail', 'deleted'];
+    protected $fillable = ['title' , 'slug', 'excerpt', 'body', 'user_id', 'video_game_id', 'author_thumbnail', 'deleted'];
 
     public function author()
     {

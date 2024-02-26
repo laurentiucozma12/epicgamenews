@@ -21,13 +21,13 @@ use App\Http\Controllers\AdminControllers\AdminCropResizeImage;
 class AdminPostsController extends Controller
 {
     private $rules = [
-        'title' => 'required|min:2|max:250',
-        'slug' => 'required|unique:posts,slug|max:150',
-        'excerpt' => 'required|min:5|max:300',
-        'video_game_id' => 'required|numeric',
-        'thumbnail' => 'required|image|max:1920',
+        'title' => 'max:250',
+        'slug' => 'required|unique:posts|min:4|max:150',
+        'excerpt' => 'max:300',
+        'video_game_id' => 'numeric',
+        'thumbnail' => 'image|max:1920',
         'author_thumbnail' => 'nullable|max:150',
-        'body' => 'required',
+        'body' => 'max:10000',
     ];
 
     public function index()
@@ -53,6 +53,11 @@ class AdminPostsController extends Controller
     {
         $validated = $request->validate($this->rules);        
         $validated['user_id'] = auth()->id();
+        
+        // Set default values for seo_title and seo_description if not provided
+        $seo_title = $request->input('title') ?? 'NoTitleNoSeoTitleYet';
+        $seo_description = $request->input('excerpt') ?? 'NoExcerptNoSeoDescriptionYet';
+
         $post = Post::create($validated);
         
         // Create SEO entry
@@ -61,8 +66,8 @@ class AdminPostsController extends Controller
                 'page_type' => 'post',
                 'page_name' => 'Post',
                 'seo_name' => $post->video_game->name,
-                'seo_title' => $request->input('title'),
-                'seo_description' => $request->input('excerpt'),
+                'seo_title' => $seo_title,
+                'seo_description' => $seo_description,
                 'seo_keywords' => $request->input('tags'),
             ];
 
@@ -93,8 +98,8 @@ class AdminPostsController extends Controller
         ]);
 
         $this->syncTags($request, $post);
-
-        return redirect()->route('admin.posts.create')->with('success', 'Post has been created.');
+       
+        return redirect()->route('admin.posts.edit', $post)->with('success', 'Post has been created with success');
     }
 
     public function edit(Post $post)
@@ -231,16 +236,6 @@ class AdminPostsController extends Controller
         // IN DEVELOPMENT, NOT ENOUGH FOUND
         // 25$/month: zylalabs.com
         // https://zylalabs.com/api-marketplace/video+games/games+top+news+api/2287
-    }
-
-    public function scrapPost()
-    {        
-        $video_games = VideoGame::all()
-            ->where('deleted', 0);
-
-        return view('admin_dashboard.posts.scrap_post', [
-            'video_games' => $video_games
-        ]);
     }
 
     private function syncTags($request, $post)

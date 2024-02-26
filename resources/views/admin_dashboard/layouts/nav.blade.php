@@ -50,13 +50,7 @@
                         <i class="bx bx-right-arrow-alt"></i>Add API Posts
                         <b class="text-danger">(IN DEVELOPMENT)</b>
                     </a>
-                </li>                          
-                <li> 
-                    <a href="{{ route('admin.posts.scrap_post') }}">
-                        <i class="bx bx-right-arrow-alt"></i>Scrap Posts
-                        <b class="text-danger">&nbsp;(Canceled)</b>
-                    </a>
-                </li>                          
+                </li>                        
             </ul>
         </li>
 
