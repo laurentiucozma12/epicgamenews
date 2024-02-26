@@ -53,7 +53,7 @@ class AdminPostsController extends Controller
         $seo_title = $request->input('title') ?? 'NoTitleNoSeoTitleYet';
         $seo_description = $request->input('excerpt') ?? 'NoExcerptNoSeoDescriptionYet';
 
-        $post = Post::create($validated);        
+        $post = Post::create($validated);
         
         // Create SEO entry
         if ($request->has('title') && $request->has('excerpt')) {
@@ -136,7 +136,19 @@ class AdminPostsController extends Controller
         $seo_title = $request->input('title') ?? 'NoTitleNoSeoTitleYet';
         $seo_description = $request->input('excerpt') ?? 'NoExcerptNoSeoDescriptionYet';
 
-        $post->update($validated);
+        // Check if the post wants to be posted
+        if ($request->input('deleted') === "on") { 
+            // Verify if all required inputs are filled before posting
+            if ($request->hasFile('thumbnail') && $request->filled(['title', 'excerpt', 'body'])) {
+                $post->update($validated);
+            } else {
+                // Update the filled fields and redirect back with a danger message
+                $post->update(array_filter($validated));
+                return redirect()->route('admin.posts.edit', $post)->with('danger', 'Post cannot be published until all required fields are filled');
+            }
+        } else {
+            $post->update($validated);
+        }
 
         // Update SEO entry
         if ($request->has('title') && $request->has('excerpt')) {

@@ -62,7 +62,7 @@
                                         <div class="com-md-8">
                                             <div class="card shadow-none border">
                                                 <div class="card-body">
-                                                    <label for="file" class="form-label">Post Thumbnail (Max 1920)</label>
+                                                    <label for="file" class="form-label">Post Thumbnail (Max 1920) <span class="text-danger">REQUIRED</span></label>
                                                     <input id='thumbnail' name='thumbnail' id="file" accept="image/*" type="file" class="mb-3">
 
                                                     @error('thumbnail')
@@ -91,7 +91,7 @@
                                 </div>
 
                                     <div class="mb-3">
-                                        <label for="title" class="form-label">Post Title / SEO Title</label>
+                                        <label for="title" class="form-label">Post Title / SEO Title <span class="text-danger">REQUIRED</span></label>
                                         <input type="text" value='{{ old("title", $post->title) }}' name="title" class="form-control" id="title">
 
                                         @error('title')
@@ -109,7 +109,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="excerpt" class="form-label">Post Excerpt / SEO Description</label>
+                                        <label for="excerpt" class="form-label">Post Excerpt / SEO Description <span class="text-danger">REQUIRED</span></label>
                                         <textarea class="form-control" name='excerpt' id="excerpt" rows="3">{{ old("excerpt", $post->excerpt) }}</textarea>
                                     
                                         @error('excerpt')
@@ -127,7 +127,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="body" class="form-label">Post Content</label>
+                                        <label for="body" class="form-label">Post Content <span class="text-danger">REQUIRED</span></label>
                                         <textarea name="body" class="form-control" id="body" rows="3">
                                             {{ old("body", str_replace('../../', '../../../', $post->body)) }}
                                         </textarea>   
