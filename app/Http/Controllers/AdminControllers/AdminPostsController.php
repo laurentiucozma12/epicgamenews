@@ -3,20 +3,15 @@
 namespace App\Http\Controllers\AdminControllers;
 
 use App\Models\Seo;
-
 use App\Models\Tag;
-
-use App\Models\Post; 
-use App\Models\Category;
-use App\Models\Platform;
-
+use App\Models\Post;
 use App\Models\VideoGame;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\AdminControllers\AdminCropResizeImage;
+use App\Services\CreateImageService;
 
 class AdminPostsController extends Controller
 {
@@ -58,7 +53,7 @@ class AdminPostsController extends Controller
         $seo_title = $request->input('title') ?? 'NoTitleNoSeoTitleYet';
         $seo_description = $request->input('excerpt') ?? 'NoExcerptNoSeoDescriptionYet';
 
-        $post = Post::create($validated);
+        $post = Post::create($validated);        
         
         // Create SEO entry
         if ($request->has('title') && $request->has('excerpt')) {
@@ -90,6 +85,13 @@ class AdminPostsController extends Controller
             $adminCropResizeImage = new AdminCropResizeImage();
             $image_data = $adminCropResizeImage->optimizeImage($request, $sizes);
             $post->image()->create($image_data);
+        } 
+        else 
+        {
+            $imageable_id = $post->id;
+            $imageable_type = 'App\Models\Post';
+            $createImageService = new CreateImageService($imageable_id, $imageable_type);
+            $createImageService->createImage();
         }
         
         // Set video game IDs to the post

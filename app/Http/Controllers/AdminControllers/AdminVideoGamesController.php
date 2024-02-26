@@ -11,6 +11,7 @@ use App\Models\VideoGame;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\Services\CreateImageService;
 
 class AdminVideoGamesController extends Controller
 {
@@ -246,9 +247,10 @@ class AdminVideoGamesController extends Controller
         ];
         $video_game = VideoGame::create($validatedData);
 
-        $video_game_id = $video_game->id;
+        $imageable_id = $video_game->id;
         $imageable_type = 'App\Models\VideoGame';
-        $this->createImage($video_game_id, $imageable_type);
+        $createImageService = new CreateImageService($imageable_id, $imageable_type);
+        $createImageService->createImage();
 
         // Create SEO entry
         if ($video_game) {
@@ -347,19 +349,5 @@ class AdminVideoGamesController extends Controller
         }
 
         return redirect()->route('admin.video_games.create_api')->with('success', 'Video Game has been Created');            
-    }
-
-    private  function createImage($imageable_id, $imageable_type) {  
-        $name = 'thumbnail_placeholder.jpg';
-        $extension = 'jpg';
-
-        $image = new Image([
-            'name' => $name,
-            'extension' => $extension,
-        ]);
-
-        $image->imageable_id = $imageable_id;
-        $image->imageable_type = $imageable_type;
-        $image->save();
     }
 }
