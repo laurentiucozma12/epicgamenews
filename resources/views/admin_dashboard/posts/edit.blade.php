@@ -20,7 +20,8 @@
         
         <div class="card">
             <div class="card-body p-4">
-                <h5 class="card-title">Edit Post: {{ $post->title }}</h5>
+                Edit Post: {!! $post->title ? $post->title : '<span class="text-danger">NO TITLE FOR</span> ' . $post->video_game->name !!}
+
                 <hr/>
 
                 <form action="{{ route('admin.posts.update', $post) }}" method="POST" enctype="multipart/form-data">
@@ -37,7 +38,7 @@
                                         <div class="card-body">
                                             <div class="rounded">
                                                 <div class="mb-3">
-                                                    <select name="video_game_id" required class="single-select">
+                                                    <select name="video_game_id" class="single-select">
                                                         @foreach ($video_games as $key => $video_game)
                                                             <option {{ intval($post->video_game_id) === $key ? 'selected' : '' }} value="{{ $key }}">{{ $video_game }}</option>
                                                         @endforeach
@@ -91,7 +92,7 @@
 
                                     <div class="mb-3">
                                         <label for="title" class="form-label">Post Title / SEO Title</label>
-                                        <input type="text" value='{{ old("title", $post->title) }}' name="title" required class="form-control" id="title">
+                                        <input type="text" value='{{ old("title", $post->title) }}' name="title" class="form-control" id="title">
 
                                         @error('title')
                                             <p class="text-danger">{{ $message }}</p>
@@ -99,7 +100,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="slug" class="form-label">Post Slug</label>
+                                        <label for="slug" class="form-label">Post Slug <span class="text-danger">REQUIRED</span></label>
                                         <input type="text" value='{{ old("slug", $post->slug) }}' name="slug" required class="form-control" id="slug">
 
                                         @error('slug')
@@ -109,7 +110,7 @@
 
                                     <div class="mb-3">
                                         <label for="excerpt" class="form-label">Post Excerpt / SEO Description</label>
-                                        <textarea required class="form-control" name='excerpt' id="excerpt" rows="3">{{ old("excerpt", $post->excerpt) }}</textarea>
+                                        <textarea class="form-control" name='excerpt' id="excerpt" rows="3">{{ old("excerpt", $post->excerpt) }}</textarea>
                                     
                                         @error('excerpt')
                                             <p class='text-danger'>{{ $message }}</p>
@@ -142,7 +143,7 @@
                                             <label class="form-check-label {{ intval($post->deleted) === 0 ? 'text-success' : 'text-danger' }}" for="flexSwitchCheckChecked">
                                                 <b>{{ intval($post->deleted) === 0 ? 'Approved' : 'Not approved' }}</b>
                                             </label>
-                                        </div>  
+                                        </div>
                                     @endif
                                     
                                     <div class="d-flex justify-content-between">

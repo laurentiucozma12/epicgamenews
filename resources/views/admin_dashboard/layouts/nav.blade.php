@@ -47,8 +47,7 @@
                 <li><a href="{{ route('admin.posts.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Posts</a></li>                          
                 <li>
                     <a href="{{ route('admin.posts.create_api') }}">
-                        <i class="bx bx-right-arrow-alt"></i>Add API Posts
-                        <b class="text-danger">(IN DEVELOPMENT)</b>
+                        <span class="text-danger"><i class="bx bx-right-arrow-alt"></i>Add API Posts</span>
                     </a>
                 </li>                        
             </ul>

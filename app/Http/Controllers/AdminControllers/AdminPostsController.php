@@ -26,7 +26,7 @@ class AdminPostsController extends Controller
         'excerpt' => 'max:300',
         'video_game_id' => 'numeric',
         'thumbnail' => 'image|max:1920',
-        'author_thumbnail' => 'nullable|max:150',
+        'author_thumbnail' => 'max:150',
         'body' => 'max:10000',
     ];
 
@@ -126,17 +126,21 @@ class AdminPostsController extends Controller
 
     public function update(Request $request, Post $post)
     {
-        $this->rules['thumbnail'] = 'nullable|image|max:1920';
         $this->rules['slug'] = ['required', Rule::unique('posts')->ignore($post)];
         $validated = $request->validate($this->rules);
         $validated['deleted'] = $request->has('deleted') ? 0 : 1;
+        
+        // Set default values for seo_title and seo_description if not provided
+        $seo_title = $request->input('title') ?? 'NoTitleNoSeoTitleYet';
+        $seo_description = $request->input('excerpt') ?? 'NoExcerptNoSeoDescriptionYet';
+
         $post->update($validated);
 
         // Update SEO entry
         if ($request->has('title') && $request->has('excerpt')) {
             $seoData = [
-                'seo_title' => $request->input('title'),
-                'seo_description' => $request->input('excerpt'),
+                'seo_title' => $seo_title,
+                'seo_description' => $seo_description,
                 'seo_keywords' => $request->input('tags'),
             ];
 
