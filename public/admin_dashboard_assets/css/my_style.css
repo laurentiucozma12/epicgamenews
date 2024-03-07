@@ -475,6 +475,7 @@ a:hover {
 }
 .cropped-thumbnail-edit {
     width: 100%;
+    max-width: 342px;
     height: auto;
 }
 .admin-approve-container {

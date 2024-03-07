@@ -22,7 +22,7 @@ class AdminPostsController extends Controller
         'video_game_id' => 'numeric',
         'thumbnail' => 'image|max:1920',
         'author_thumbnail' => 'max:150',
-        'body' => 'max:10000',
+        'body' => 'max:30000',
     ];
 
     public function index()
@@ -139,7 +139,7 @@ class AdminPostsController extends Controller
         // Check if the post wants to be posted
         if ($request->input('deleted') === "on") { 
             // Verify if all required inputs are filled before posting
-            if ($request->hasFile('thumbnail') && $request->filled(['title', 'excerpt', 'body'])) {
+            if ($request->hasFile('thumbnail') && $request->filled(['title', 'excerpt', 'body']) && $request->input('image_name') !== 'thumbnail_placeholder.jpg') {
                 $post->update($validated);
             } else {
                 // Update the filled fields and redirect back with a danger message

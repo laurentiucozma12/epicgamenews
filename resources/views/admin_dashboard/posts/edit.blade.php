@@ -30,66 +30,70 @@
 
                     <div class="form-body">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
 
                                 <div>
                                     <label class="form-label">Post Video Game</label>                                        
-                                    <div class="card shadow-none border mb-4">
-                                        <div class="card-body">
-                                            <div class="rounded">
-                                                <div>
-                                                    <select name="video_game_id" class="single-select">
-                                                        @foreach ($video_games as $key => $video_game)
-                                                            <option {{ intval($post->video_game_id) === $key ? 'selected' : '' }} value="{{ $key }}">{{ $video_game }}</option>
-                                                        @endforeach
-                                                    </select>
+                                    <div class="mb-4">
+                                        <div class="rounded">
+                                            <div>
+                                                <select name="video_game_id" class="single-select">
+                                                    @foreach ($video_games as $key => $video_game)
+                                                        <option {{ intval($post->video_game_id) === $key ? 'selected' : '' }} value="{{ $key }}">{{ $video_game }}</option>
+                                                    @endforeach
+                                                </select>
 
-                                                    @error('video_game_id')
-                                                        <p class="text-danger">{{ $message }}</p>
-                                                    @enderror
+                                                @error('video_game_id')
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @enderror
 
-                                                    @if($errors->has('all_fields'))          
-                                                        <p class="text-danger">{{ $errors->first('all_fields') }}</p>
-                                                    @endif
-                                                </div>
+                                                @if($errors->has('all_fields'))          
+                                                    <p class="text-danger">{{ $errors->first('all_fields') }}</p>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div>
-                                    <div class="row">
-                                        <div class="com-md-8">
-                                            <div class="card shadow-none border mb-4">
-                                                <div class="card-body">
-                                                    <label for="file" class="form-label">Post Thumbnail (Max 1920) <span class="text-danger">REQUIRED</span></label>
-                                                    <input id='thumbnail' name='thumbnail' id="file" accept="image/*" type="file" class="mb-3">
-
-                                                    @error('thumbnail')
-                                                        <p class='text-danger'>{{ $message }}</p>
-                                                    @enderror
-
-                                                    {{-- Store the url of the cropped image --}} 
-                                                    <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
-
-                                                    <h5>Cropped Image</h5>
-                                                    <img id="croppedImage" src="{{ asset($post->image ? 'storage/images/764x431/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" class="cropped-thumbnail-edit" alt="Cropped image">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
+                                <div class="mb-4">
                                     <label for="author_thumbnail" class="form-label">Author of the Thumbnail</label>
                                     <input type="text" value='{{ old("author_thumbnail", $post->author_thumbnail) }}' class="form-control" name="author_thumbnail" id="author_thumbnail">
 
                                     @error('author_thumbnail')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                </div>
+                                </div>                                
 
+                                <div class="mb-4">
+                                    <label for="tags" class="form-label">Post Tags / SEO Keywords</label>
+                                    <input type="text" class="form-control" value="{{ $tags }}" name="tags" data-role="tagsinput"  id="tags">
+
+                                    @error('tags')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-4">
+                                    <label for="file" class="form-label">Post Thumbnail (Max 1920) <span class="text-danger">REQUIRED</span></label>
+                                    <input id='thumbnail' name='thumbnail' id="file" accept="image/*" type="file" class="mb-3">
+
+                                    @error('thumbnail')
+                                        <p class='text-danger'>{{ $message }}</p>
+                                    @enderror
+
+                                    {{-- Store the url of the cropped image --}} 
+                                    <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
+
+                                    <h5>Cropped Image</h5>
+                                    <img id="croppedImage" src="{{ asset($post->image ? 'storage/images/342x192/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" widht="342" class="cropped-thumbnail-edit" alt="Cropped image">
+                                    <input id="image_name"  name='image_name' type="hidden" value="{{$post->image->name}}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
                                     <div class="mb-3">
                                         <label for="title" class="form-label">Post Title / SEO Title <span class="text-danger">REQUIRED</span></label>
                                         <input type="text" value='{{ old("title", $post->title) }}' name="title" class="form-control" id="title">
@@ -114,15 +118,6 @@
                                     
                                         @error('excerpt')
                                             <p class='text-danger'>{{ $message }}</p>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="tags" class="form-label">Post Tags / SEO Keywords</label>
-                                        <input type="text" class="form-control" value="{{ $tags }}" name="tags" data-role="tagsinput"  id="tags">
-
-                                        @error('tags')
-                                            <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
 
