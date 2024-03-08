@@ -3,7 +3,7 @@
 @section("wrapper")
 <!--start page wrapper -->
 <div class="page-wrapper">
-    <div class="page-content container-page">
+    <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
             <div class="ps-3">
@@ -19,10 +19,8 @@
         <!--end breadcrumb-->
         
         <div class="card">
-            <div class="card-body container-padding">
-                Edit Post: {!! $post->title ? $post->title : '<span class="text-danger">NO TITLE FOR</span> ' . $post->video_game->name !!}
-
-                <hr/>
+            <div class="card-body">
+                <h5 class="card-title">Edit Post: {!! $post->title ? $post->title : '<span class="text-danger">NO TITLE FOR</span> ' . $post->video_game->name !!}</h5>
 
                 <form action="{{ route('admin.posts.update', $post) }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -30,11 +28,11 @@
 
                     <div class="form-body">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-12 col-lg-6">
 
                                 <div>
                                     <label class="form-label">Post Video Game</label>                                        
-                                    <div class="mb-4">
+                                    <div class="mb-3">
                                         <div class="rounded">
                                             <div>
                                                 <select name="video_game_id" class="single-select">
@@ -55,7 +53,7 @@
                                     </div>
                                 </div>
 
-                                <div class="mb-4">
+                                <div class="mb-3">
                                     <label for="author_thumbnail" class="form-label">Author of the Thumbnail</label>
                                     <input type="text" value='{{ old("author_thumbnail", $post->author_thumbnail) }}' class="form-control" name="author_thumbnail" id="author_thumbnail">
 
@@ -64,7 +62,7 @@
                                     @enderror
                                 </div>                                
 
-                                <div class="mb-4">
+                                <div class="mb-3">
                                     <label for="tags" class="form-label">Post Tags / SEO Keywords</label>
                                     <input type="text" class="form-control" value="{{ $tags }}" name="tags" data-role="tagsinput"  id="tags">
 
@@ -73,8 +71,8 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="mb-4">
+                            <div class="col-12 col-lg-6">
+                                <div class="mb-3">
                                     <label for="file" class="form-label">Post Thumbnail (Max 1920) <span class="text-danger">REQUIRED</span></label>
                                     <input id='thumbnail' name='thumbnail' id="file" accept="image/*" type="file" class="mb-3">
 

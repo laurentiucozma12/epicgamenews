@@ -23,16 +23,13 @@
         <div class="card">
             <div class="card-body p-4">
                 <h5 class="card-title">Edit Platform: {{ $platform->name }}</h5>
-                <hr/>
-
                 <form action="{{ route('admin.platforms.update', $platform) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 
                     <div class="form-body mt-4">
                         <div class="row">
-                            <div class="col-lg-12">
-
+                            <div class="col-12 col-lg-6">
                                 <div class="mb-3">
                                     <label for="seo_title" class="form-label">Platform Seo Title</label>
                                     <input type="text" name="seo_title"  value='{{ old("seo_title", $seo->seo_title) }}' id="seo_title" class="form-control" required>
@@ -41,7 +38,6 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-
                                 <div class="mb-3">
                                     <label for="seo_description" class="form-label">Platform Seo Description</label>
                                     <textarea type="text" name="seo_description" required class="form-control" id="seo_description" rows="2">{{ old("seo_description", $seo->seo_description ) }}</textarea>
@@ -50,7 +46,6 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-
                                 <div class="mb-3">
                                     <label for="seo_keywords" class="form-label">Platform Seo Keywords</label>
                                     <input type="text" value='{{ old("seo_keywords", $seo->seo_keywords) }}' name="seo_keywords" required class="form-control" id="seo_keywords">
@@ -59,7 +54,28 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
+                            </div>                            
+                            <div class="col-12 col-lg-6">
+                                <div class="mb-3">
+                                    <div class="card-body">
+                                        <label for="file" class="form-label">Platform Thumbnail (Max 1920)</label>
+                                        <input id='thumbnail' name='thumbnail' id="file" accept="image/*" type="file" class="mb-3">
 
+                                        @error('thumbnail')
+                                            <p class='text-danger'>{{ $message }}</p>
+                                        @enderror
+
+                                        {{-- Store the url of the cropped image --}} 
+                                        <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
+
+                                        <h5>Cropped Image</h5>
+                                        <img id="croppedImage" src="{{ asset($platform->image ? 'storage/images/400x225/' . $platform->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" class="cropped-thumbnail-edit" alt="Cropped image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
                                 <div class="mb-3">
                                     <label for="inputProductTitle" class="form-label">Platform Name</label>
                                     <input type="text" value='{{ old("name", $platform->name) }}' name="name" required class="form-control" id="inputProductTitle">
@@ -76,30 +92,6 @@
                                     @error('slug')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <div class="row">
-                                        <div class="com-md-8">
-                                            <div class="card shadow-none border">
-                                                <div class="card-body">
-                                                    <label for="file" class="form-label">Platform Thumbnail (Max 1920)</label>
-                                                    <input id='thumbnail' name='thumbnail' id="file" accept="image/*" type="file" class="mb-3">
-
-                                                    @error('thumbnail')
-                                                        <p class='text-danger'>{{ $message }}</p>
-                                                    @enderror
-
-                                                    {{-- Store the url of the cropped image --}} 
-                                                    <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
-
-                                                    <h5>Cropped Image</h5>
-                                                    <img id="croppedImage" src="{{ asset($platform->image ? 'storage/images/400x225/' . $platform->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" class="cropped-thumbnail-edit" alt="Cropped image">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 @if ( auth()->user()->roles->contains('name', 'admin') )                                    

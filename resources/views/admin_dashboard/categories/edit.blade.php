@@ -23,16 +23,13 @@
         <div class="card">
             <div class="card-body p-4">
                 <h5 class="card-title">Edit Category: {{ $category->name }}</h5>
-                <hr/>
-
                 <form action="{{ route('admin.categories.update', $category) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 
                     <div class="form-body mt-4">
                         <div class="row">
-                            <div class="col-lg-12">
-
+                            <div class="col-12 col-lg-6">
                                 <div class="mb-3">
                                     <label for="inputSeoTitle" class="form-label">Category Seo title</label>
                                     <input type="text" name="seo_title"  value='{{ old("seo_title", $seo->seo_title) }}' id="inputSeoTitle" class="form-control" required>
@@ -41,7 +38,6 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-
                                 <div class="mb-3">
                                     <label for="inputSeoDescription" class="form-label">Category Seo Description</label>
                                     <textarea type="text" name="seo_description" required class="form-control" id="inputSeoDescription" rows="2">{{ old("seo_description", $seo->seo_description ) }}</textarea>
@@ -50,7 +46,6 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-
                                 <div class="mb-3">
                                     <label for="inputSeoKeywords" class="form-label">Category Seo Keywords</label>
                                     <input type="text" value='{{ old("seo_keywords", $seo->seo_keywords) }}' name="seo_keywords" required class="form-control" id="inputSeoKeywords">
@@ -59,7 +54,26 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
+                            </div>
+                            <div class="col-12 col-lg-6">                               
+                                <div class="mb-3">
+                                    <label for="file" class="form-label">Category Thumbnail (Max 1920)</label>
+                                    <input id='thumbnail' name='thumbnail' id="file" accept="image/*" type="file" class="mb-3">
 
+                                    @error('thumbnail')
+                                        <p class='text-danger'>{{ $message }}</p>
+                                    @enderror
+
+                                    {{-- Store the url of the cropped image --}} 
+                                    <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
+                                    
+                                    <h5>Cropped Image</h5>
+                                    <img id="croppedImage" src="{{ asset($category->image ? 'storage/images/400x225/' . $category->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" class="cropped-thumbnail-edit" alt="Cropped image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
                                 <div class="mb-3">
                                     <label for="inputProductTitle" class="form-label">Category Name</label>
                                     <input type="text" value='{{ old("name", $category->name) }}' name="name" required class="form-control" id="inputProductTitle">
@@ -68,7 +82,6 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-
                                 <div class="mb-3">
                                     <label for="inputProductTitle" class="form-label">Category Slug</label>
                                     <input type="text" value='{{ old("slug", $category->slug) }}' name="slug" required class="form-control" id="inputProductTitle">
@@ -76,32 +89,7 @@
                                     @error('slug')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <div class="row">
-                                        <div class="com-md-8">
-                                            <div class="card shadow-none border">
-                                                <div class="card-body">
-                                                    <label for="file" class="form-label">Category Thumbnail (Max 1920)</label>
-                                                    <input id='thumbnail' name='thumbnail' id="file" accept="image/*" type="file" class="mb-3">
-
-                                                    @error('thumbnail')
-                                                        <p class='text-danger'>{{ $message }}</p>
-                                                    @enderror
-
-                                                    {{-- Store the url of the cropped image --}} 
-                                                    <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
-                                                    
-                                                    <h5>Cropped Image</h5>
-                                                    <img id="croppedImage" src="{{ asset($category->image ? 'storage/images/400x225/' . $category->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" class="cropped-thumbnail-edit" alt="Cropped image">
-                                                
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                </div> 
                                 @if ( auth()->user()->roles->contains('name', 'admin') )                                    
                                     <div class="form-check form-switch admin-approve-container">
                                         <input name='deleted' {{ intval($category->deleted) === 0 ? 'checked' : '' }} class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
@@ -109,8 +97,7 @@
                                             <b>{{ intval($category->deleted) === 0 ? 'Approved' : 'Not approved' }}</b>
                                         </label>
                                     </div>  
-                                @endif
-                                
+                                @endif                                
                                 <div class="d-flex justify-content-between">
                                     <button class='btn btn-primary' type='submit'>Update Category</button>
 
@@ -121,7 +108,6 @@
                                         Delete Category
                                     </a>
                                 </div>
-
                             </div>
                         </div><!--end row-->
                     </div>                        

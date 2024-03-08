@@ -22,43 +22,54 @@
         <div class="card">
             <div class="card-body p-4">
                 <h5 class="card-title">Edit Video Game: {{ $video_game->name }}</h5>
-                <hr/>
-
                 <form action="{{ route('admin.video_games.update', $video_game) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 
                     <div class="form-body mt-4">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-12 col-lg-6">
+                                <div class="mb-3">
+                                    <label for="seo_title" class="form-label">Video Game Seo title</label>
+                                    <input type="text" name="seo_title"  value='{{ old("seo_title", $seo->seo_title) }}' id="seo_title" class="form-control" required>
 
-                                    <div class="mb-3">
-                                        <label for="seo_title" class="form-label">Video Game Seo title</label>
-                                        <input type="text" name="seo_title"  value='{{ old("seo_title", $seo->seo_title) }}' id="seo_title" class="form-control" required>
+                                    @error('seo_title')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="seo_description" class="form-label">Video Game Seo Description</label>
+                                    <textarea type="text" name="seo_description" required class="form-control" id="seo_description" rows="2">{{ old("seo_description", $seo->seo_description ) }}</textarea>
 
-                                        @error('seo_title')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
+                                    @error('seo_description')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="seo_keywords" class="form-label">Video Game Seo Keywords</label>
+                                    <input type="text" value='{{ old("seo_keywords", $seo->seo_keywords) }}' name="seo_keywords" required class="form-control" id="seo_keywords">
 
-                                    <div class="mb-3">
-                                        <label for="seo_description" class="form-label">Video Game Seo Description</label>
-                                        <textarea type="text" name="seo_description" required class="form-control" id="seo_description" rows="2">{{ old("seo_description", $seo->seo_description ) }}</textarea>
+                                    @error('seo_keywords')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">                                                
+                                <label for="file" class="form-label">Video Game Thumbnail (Max 1920)</label>
+                                <input id='thumbnail' name='thumbnail' id="file" accept="image/*" type="file" class="mb-3">
 
-                                        @error('seo_description')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
+                                @error('thumbnail')
+                                    <p class='text-danger'>{{ $message }}</p>
+                                @enderror
 
-                                    <div class="mb-3">
-                                        <label for="seo_keywords" class="form-label">Video Game Seo Keywords</label>
-                                        <input type="text" value='{{ old("seo_keywords", $seo->seo_keywords) }}' name="seo_keywords" required class="form-control" id="seo_keywords">
+                                {{-- Store the url of the cropped image --}} 
+                                <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
 
-                                        @error('seo_keywords')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-
+                                <h5>Cropped Image</h5>
+                                <img id="croppedImage" src="{{ asset($video_game->image ? 'storage/images/400x225/' . $video_game->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" class="cropped-thumbnail-edit" alt="Cropped image">
+                            </div>
+                        <div class="row">
+                            <div class="col-12">
                                     <div class="mb-3">
                                         <label for="inputProductTitle" class="form-label">Video Game Name</label>
                                         <input type="text" value='{{ old("name", $video_game->name) }}' name="name" required class="form-control" id="inputProductTitle">
@@ -79,8 +90,7 @@
 
                                     <div class="mb-3">
                                         <label class="form-label">Post Category</label>
-                                        <div class="card">
-                                            <div class="card-body">
+                                        
                                                 <div class="rounded">
                                                     <div class="mb-3">
                                                         <select id="categories_ids" name="categories_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose categories" required>
@@ -97,15 +107,13 @@
                                                             <p class="text-danger">{{ $errors->first('all_fields') }}</p>
                                                         @endif
                                                     </div>
-                                                </div>
-                                            </div>
+                                                
                                         </div>
                                     </div>          
 
                                     <div class="mb-3">
                                         <label class="form-label">Post Platform</label>
-                                        <div class="card">
-                                            <div class="card-body">
+                                        
                                                 <div class="rounded">
                                                     <div class="mb-3">
                                                         <select id="platforms_ids" name="platforms_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
@@ -121,30 +129,6 @@
                                                         @if($errors->has('all_fields'))          
                                                             <p class="text-danger">{{ $errors->first('all_fields') }}</p>
                                                         @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <div class="row">
-                                            <div class="com-md-8">
-                                                <div class="card shadow-none border">
-                                                    <div class="card-body">
-                                                        <label for="file" class="form-label">Video Game Thumbnail (Max 1920)</label>
-                                                        <input id='thumbnail' name='thumbnail' id="file" accept="image/*" type="file" class="mb-3">
-
-                                                        @error('thumbnail')
-                                                            <p class='text-danger'>{{ $message }}</p>
-                                                        @enderror
-
-                                                        {{-- Store the url of the cropped image --}} 
-                                                        <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
-
-                                                        <h5>Cropped Image</h5>
-                                                        <img id="croppedImage" src="{{ asset($video_game->image ? 'storage/images/400x225/' . $video_game->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" class="cropped-thumbnail-edit" alt="Cropped image">
-
                                                     </div>
                                                 </div>
                                             </div>

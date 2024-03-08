@@ -22,15 +22,12 @@
         <div class="card">
             <div class="card-body p-4">
                 <h5 class="card-title">Add New Video Game</h5>
-                <hr/>
-
                 <form action="{{ route('admin.video_games.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-body mt-4">
                         <div class="row">
-                            <div class="col-lg-12">
-
+                            <div class="col-12 col-lg-6">
                                 <div class="mb-3">
                                     <label for="seo_title" class="form-label">Video Game Seo Title</label>
                                     <input type="text" value='{{ old("seo_title") }}' name="seo_title" required class="form-control" id="seo_title">
@@ -39,7 +36,6 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-
                                 <div class="mb-3">
                                     <label for="seo_description" class="form-label">Video Game Seo Description</label>
                                     <textarea type="text" name="seo_description" required class="form-control" id="seo_description" rows="2">{{ old("seo_description") }}</textarea>
@@ -48,7 +44,6 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-
                                 <div class="mb-3">
                                     <label for="seo_keywords" class="form-label">Video Game Seo Keywords</label>
                                     <input type="text" value='{{ old("seo_keywords") }}' name="seo_keywords" required class="form-control" id="seo_keywords">
@@ -57,7 +52,28 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
+                            </div>
 
+                            <div class="col-12 col-lg-6">
+                                <div class="mb-3">
+                                    <label for="thumbnail" class="form-label">Post Thumbnail (Max 1920)</label>                                    
+                                    <input id="thumbnail" name="thumbnail" type="file" accept="image/*" class="mb-3">
+
+                                    @error('thumbnail')
+                                        <p class='text-danger'>{{ $message }}</p>
+                                    @enderror
+
+                                    {{-- Store the url of the cropped image --}} 
+                                    <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
+
+                                    <h5>Cropped Image</h5>
+                                    <img id="croppedImage" class="cropped-thumbnail" src="#" alt="Cropped image">                                        
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-12">
                                 <div class="mb-3">
                                     <label for="inputProductTitle" class="form-label">Video Game Name</label>
                                     <input type="text" value='{{ old("name") }}' name="name" required class="form-control" id="inputProductTitle">
@@ -77,74 +93,47 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Video Game Category</label>                                        
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="rounded">
-                                                <div class="mb-3">
-                                                    <select id="categories_ids" name="categories_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose categories" required>
-                                                        @foreach ($categories as $category)
-                                                            <option value="{{ $category->id }}" {{ $category->name === 'uncategorized' ? 'selected' : '' }}>
-                                                                {{ $category->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
+                                    <label class="form-label">Video Game Category</label>
+                                    <div class="rounded">
+                                        <div class="mb-3">
+                                            <select id="categories_ids" name="categories_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose categories" required>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}" {{ $category->name === 'uncategorized' ? 'selected' : '' }}>
+                                                        {{ $category->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
 
-                                                    @error('categories_ids')
-                                                        <p class="text-danger">{{ $message }}</p>
-                                                    @enderror
-
-                                                    @if($errors->has('all_fields'))
-                                                        <p class="text-danger">{{ $errors->first('all_fields') }}</p>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Video Game Platform</label>                                        
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="rounded">
-                                                <div class="mb-3">
-                                                    <select id="platforms_ids" name="platforms_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
-                                                        @foreach ($platforms as $platform)
-                                                            <option value="{{ $platform->id }}" {{ $platform->name === 'uncategorized' ? 'selected' : '' }}>
-                                                                {{ $platform->name }}
-                                                            </option>     
-                                                        @endforeach
-                                                    </select>
-
-                                                    @error('platforms_ids')
-                                                        <p class="text-danger">{{ $message }}</p>
-                                                    @enderror
-
-                                                    @if($errors->has('all_fields'))
-                                                        <p class="text-danger">{{ $errors->first('all_fields') }}</p>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="thumbnail" class="form-label">Post Thumbnail (Max 1920)</label>
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <input id="thumbnail" name="thumbnail" type="file" accept="image/*" class="mb-3">
-
-                                            @error('thumbnail')
-                                                <p class='text-danger'>{{ $message }}</p>
+                                            @error('categories_ids')
+                                                <p class="text-danger">{{ $message }}</p>
                                             @enderror
 
-                                            {{-- Store the url of the cropped image --}} 
-                                            <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
+                                            @if($errors->has('all_fields'))
+                                                <p class="text-danger">{{ $errors->first('all_fields') }}</p>
+                                            @endif
+                                        </div>                                            
+                                    </div>
+                                </div>
 
-                                            <h5>Cropped Image</h5>
-                                            <img id="croppedImage" class="cropped-thumbnail" src="#" alt="Cropped image">
+                                <div class="mb-3">
+                                    <label class="form-label">Video Game Platform</label> 
+                                    <div class="rounded">
+                                        <div class="mb-3">
+                                            <select id="platforms_ids" name="platforms_ids[]" multiple="multiple" class="multiple-select" data-placeholder="Choose platforms" required>
+                                                @foreach ($platforms as $platform)
+                                                    <option value="{{ $platform->id }}" {{ $platform->name === 'uncategorized' ? 'selected' : '' }}>
+                                                        {{ $platform->name }}
+                                                    </option>     
+                                                @endforeach
+                                            </select>
+
+                                            @error('platforms_ids')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+
+                                            @if($errors->has('all_fields'))
+                                                <p class="text-danger">{{ $errors->first('all_fields') }}</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

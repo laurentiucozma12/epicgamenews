@@ -19,21 +19,20 @@
         <!--end breadcrumb-->
         
         <div class="card">
-            <div class="card-body p-4">
+            <div class="card-body">
                 <h5 class="card-title">Add New Post</h5>
-                <hr/>
 
                 <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    <div class="form-body mt-4">
+                    <div class="form-body">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-12 col-lg-6">
 
                                 <div class="mb-3">
                                     <label class="form-label">Post Video Game</label>                                        
-                                    <div class="card">
-                                        <div class="card-body">
+                                    <div>
+                                        <div>
                                             <div class="rounded">
                                                 <div class="mb-3">
                                                     <select name="video_game_id" class="single-select">
@@ -54,26 +53,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            
-                                <div class="mb-3">
-                                    <label for="thumbnail" class="form-label">Post Thumbnail (Max 1920)</label>
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <input id="thumbnail" name="thumbnail" type="file" accept="image/*" class="mb-3">
-
-                                            @error('thumbnail')
-                                                <p class='text-danger'>{{ $message }}</p>
-                                            @enderror
-
-                                            {{-- Store the url of the cropped image --}} 
-                                            <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
-
-                                            <h5>Cropped Image</h5>
-                                            <img id="croppedImage" src="#" alt="Cropped image" class="cropped-thumbnail">
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="mb-3">
                                     <label for="author_thumbnail" class="form-label">Author of the Thumbnail</label>
                                     <input type="text" value="{{ old("author_thumbnail") }}" class="form-control" name="author_thumbnail" id="author_thumbnail">
@@ -82,6 +61,40 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="tags" class="form-label">Post Tags / SEO Keywords</label>
+                                    <input type="text" value="{{ old("tags") }}" class="form-control" name="tags" id="tags" data-role="tagsinput">
+
+                                    @error('tags')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>                                
+                            </div>
+
+                            <div class="col-12 col-lg-6">
+                                <div class="mb-3">
+                                    <label for="thumbnail" class="form-label">Post Thumbnail (Max 1920)</label>                                    
+                                    <input id="thumbnail" name="thumbnail" type="file" accept="image/*" class="mb-3">
+
+                                    @error('thumbnail')
+                                        <p class='text-danger'>{{ $message }}</p>
+                                    @enderror
+
+                                    {{-- Store the url of the cropped image --}} 
+                                    <input type="hidden" id="croppedImageData" name="croppedImageData" value="">
+
+                                    <h5>Cropped Image</h5>
+                                    <img id="croppedImage" src="#" alt="Cropped image" class="cropped-thumbnail" widht="342">                                       
+                                </div>    
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">                            
+                                
+                                
 
                                 <div class="mb-3">
                                     <label for="title" class="form-label">Post Title</label>
@@ -107,15 +120,6 @@
                                 
                                     @error('excerpt')
                                         <p class='text-danger'>{{ $message }}</p>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="tags" class="form-label">Post Tags</label>
-                                    <input type="text" value="{{ old("tags") }}" class="form-control" name="tags" id="tags" data-role="tagsinput">
-
-                                    @error('tags')
-                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
 
