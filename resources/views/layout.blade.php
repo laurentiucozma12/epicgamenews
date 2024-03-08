@@ -102,7 +102,7 @@
 </script>
 
 {{-- PAGE --}}
-<main id="page">
+<main>
 	{{-- NAVBAR --}}
 	<nav class="colorlib-nav" role="navigation">
 		<div class="top-menu">
@@ -172,11 +172,11 @@
 	{{-- END OF CONTENT OF THE PAGE --}}
 
 	{{-- SUBSCRIBE NEWSLETTER --}}
-	<div id="colorlib-subscribe" class="subs-img" style="background-image: url({{ asset('blog_template/images/img_bg_2.jpg') }});" loading="lazy">
+	{{-- <div id="colorlib-subscribe" class="subs-img" style="background-image: url({{ asset('blog_template/images/img_bg_2.jpg') }});" loading="lazy">
 		<div class="overlay"></div>
 		<div class="first-container">
 
-			{{-- <div class="container">
+			<div class="container">
 				<div >
 					<div class="text-center colorlib-heading animate-box">
 						<h2>Subscribe Newsletter</h2>
@@ -197,91 +197,17 @@
 						</form>
 					</div>
 				</div>
-			</div> --}}
+			</div>
 			
 		</div>
-	</div>
+	</div> --}}
 	{{-- END OF SUBSCRIBE NEWSLETTER --}}
 	
 </main>
 {{-- END OF PAGE --}}
 
 {{-- FOOTER AND COPYRIGHT --}}
-<footer>
-	{{-- <div class="container">
-		<div class="row row-pb-md">
-			<div class="col-md-3 colorlib-widget">
-				<h4>Contact Info</h4>
-				<ul class="colorlib-footer-links">
-					<li>291 South 21th Street, <br> Suite 721 New York NY 10016</li>
-					<li><a href="tel://1234567920"><i class="icon-phone"></i> + 1235 2355 98</a></li>
-					<li><a href="mailto:info@yoursite.com"><i class="icon-envelope"></i> info@yoursite.com</a></li>
-					<li><a href="http://luxehotel.com"><i class="icon-location4"></i> yourwebsite.com</a></li>
-				</ul>
-			</div>
-			<div class="col-md-2 colorlib-widget">
-				<h4>Programs</h4>
-				<p>
-					<ul class="colorlib-footer-links">
-						<li><a href="#"><i class="icon-check"></i> Diploma Degree</a></li>
-						<li><a href="#"><i class="icon-check"></i> BS Degree</a></li>
-						<li><a href="#"><i class="icon-check"></i> Beginner</a></li>
-						<li><a href="#"><i class="icon-check"></i> Intermediate</a></li>
-						<li><a href="#"><i class="icon-check"></i> Advance</a></li>
-						<li><a href="#"><i class="icon-check"></i> Difficulty</a></li>
-					</ul>
-				</p>
-			</div>
-			<div class="col-md-2 colorlib-widget">
-				<h4>Useful Links</h4>
-				<p>
-					<ul class="colorlib-footer-links">
-						<li><a href="#"><i class="icon-check"></i> About Us</a></li>
-						<li><a href="#"><i class="icon-check"></i> Testimonials</a></li>
-						<li><a href="#"><i class="icon-check"></i> Courses</a></li>
-						<li><a href="#"><i class="icon-check"></i> Event</a></li>
-						<li><a href="#"><i class="icon-check"></i> News</a></li>
-						<li><a href="#"><i class="icon-check"></i> Contact</a></li>
-					</ul>
-				</p>
-			</div>
-
-			<div class="col-md-2 colorlib-widget">
-				<h4>Support</h4>
-				<p>
-					<ul class="colorlib-footer-links">
-						<li><a href="#"><i class="icon-check"></i> Documentation</a></li>
-						<li><a href="#"><i class="icon-check"></i> Forums</a></li>
-						<li><a href="#"><i class="icon-check"></i> Help &amp; Support</a></li>
-						<li><a href="#"><i class="icon-check"></i> Scholarship</a></li>
-						<li><a href="#"><i class="icon-check"></i> Student Transport</a></li>
-						<li><a href="#"><i class="icon-check"></i> Release Status</a></li>
-					</ul>
-				</p>
-			</div>
-
-			<div class="col-md-3 colorlib-widget">
-				<h4>Recent Post</h4>
-				<div class="f-blog">
-					<a href="blog.html" class="blog-img" style="background-image: url({{ asset('blog_template/images/blog-1.jpg') }});">
-					</a>
-					<div class="desc">
-						<h2><a href="blog.html">Creating Mobile Apps</a></h2>
-						<p class="admin"><span>18 April 2018</span></p>
-					</div>
-				</div>
-				<div class="f-blog">
-					<a href="blog.html" class="blog-img" style="background-image: url({{ asset('blog_template/images/blog-2.jpg') }});">
-					</a>
-					<div class="desc">
-						<h2><a href="blog.html">Creating Mobile Apps</a></h2>
-						<p class="admin"><span>18 April 2018</span></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> --}}
-	
+<footer>	
 	<div class="copy">
 		<div class="container">
 			<div class="row">
@@ -297,7 +223,6 @@
 			</div>
 		</div>
 	</div>
-
 </footer>
 {{-- END OF FOOTER AND COPYRIGHT --}}
 
