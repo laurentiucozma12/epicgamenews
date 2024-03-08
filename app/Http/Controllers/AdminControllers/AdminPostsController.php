@@ -139,7 +139,7 @@ class AdminPostsController extends Controller
         // Check if the post wants to be posted
         if ($request->input('deleted') === "on") { 
             // Verify if all required inputs are filled before posting
-            if ($request->hasFile('thumbnail') && $request->filled(['title', 'excerpt', 'body']) && $request->input('image_name') !== 'thumbnail_placeholder.jpg') {
+            if ($request->filled(['title', 'excerpt', 'body']) && $request->input('image_name') !== 'thumbnail_placeholder.jpg') {
                 $post->update($validated);
             } else {
                 // Update the filled fields and redirect back with a danger message

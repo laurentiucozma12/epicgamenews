@@ -383,18 +383,6 @@ body {
     font-family: "Roboto", sans-serif;
     color: var(--white);
 }
-/* Hide scrollbar but still usable */
-* {
-    scroll-behavior: smooth;
-    -ms-overflow-style: none !important; /* IE and Edge */
-    scrollbar-width: none !important; /* Firefox */
-}
-
-/* Hide scrollbar but still usable */
-*::-webkit-scrollbar {
-    width: 0 !important;
-    height: 0 !important;
-}
 a {
     color: var(--white);
 }
