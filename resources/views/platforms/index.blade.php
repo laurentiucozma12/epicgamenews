@@ -12,7 +12,7 @@
 		</div>
 	</form>	
 @endsection
-<div class="colorlib-blog">{{dd($platforms)}}
+<div class="colorlib-blog">
 	<div class="container">
         <div class="row">
             @forelse ($platforms as $platform)
