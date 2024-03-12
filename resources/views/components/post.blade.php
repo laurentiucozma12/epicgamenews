@@ -71,8 +71,10 @@
 
 					<x-blog.side-recent-posts :recent_posts="$recent_posts"/>
 
-					<x-blog.side-tags :tags="$tags"/>
-					
+                    @if (count($tags) > 0)
+                        <x-blog.side-tags :tags="$tags"/>
+                    @endif
+                   					
                 </div>
             </div>
         </div>
