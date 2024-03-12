@@ -73,7 +73,7 @@
                             </div>
                             <div class="col-12 col-lg-6">
                                 <div class="mb-3">
-                                    <label for="file" class="form-label">Post Thumbnail (Max 1920) <span class="text-danger">REQUIRED</span></label>
+                                    <label for="file" class="form-label">Post Thumbnail<span class="text-danger">REQUIRED</span></label>
                                     <input id='thumbnail' name='thumbnail' id="file" accept="image/*" type="file" class="mb-3">
 
                                     @error('thumbnail')

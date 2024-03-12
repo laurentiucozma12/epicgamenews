@@ -29,7 +29,7 @@
                         </form>
                         <span class="count count-total ms-2">Total: {{ count($categories) }}</span>
                         <span class="count count-active ms-2">Active: {{ count($categories->where('deleted', 0)) }}</span>
-                        <span class="count count-inactive ms-2">Inactive: {{ count($categories->where('deleted', '!==', 0)) }}</span> 
+                        <span class="count count-inactive ms-2">Inactive: {{ count($categories->where('deleted', '!=', 0)) }}</span> 
                     </div>
                     <div class="ms-auto"><a href="{{ route('admin.categories.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New Category</a></div>
                 </div>
