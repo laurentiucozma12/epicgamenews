@@ -20,7 +20,7 @@ class PreprodAccess
             
             $allowedIPs = [
                 '83.103.225.235', // home ip
-                '86.124.118.32', // mobile hotspot
+                '86.124.113.212', '101.188.67.134', '86.124.118.32', // mobile hotspot
                 '127.0.0.1', // localhost
             ];
             
