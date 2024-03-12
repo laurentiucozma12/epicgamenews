@@ -327,6 +327,9 @@ footer .link-to-website:hover {
         justify-content: center !important;
     }
 }
+.sidebar-container {
+    padding: 0 0 0 1rem;
+}
 .sidebar {
     padding-left: 0px;
 }
@@ -466,6 +469,7 @@ footer .link-to-website:hover {
 .tag-sm-sc {
     text-align: center;
     display: none;
+    margin-bottom: 1rem;
 }
 @media (max-width: 1200px) {
     .tag-sm-sc {
@@ -740,7 +744,7 @@ footer .link-to-website:hover {
     right: 5rem;
     border: none;
     background-color: transparent !important;
-    height: 60px;
+    height: 40px;
 }
 @media (max-width: 768px) {
     .menu-btn-epic {

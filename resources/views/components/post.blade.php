@@ -62,7 +62,7 @@
                 </div>
             </div>
 
-            <div class="col-12 col-lg-4 animate-box">
+            <div class="col-12 col-lg-4 animate-box sidebar-container">
                 <div class="sidebar">
 
                     <div class="d-none d-lg-block">

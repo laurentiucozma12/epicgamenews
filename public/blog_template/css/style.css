@@ -202,7 +202,7 @@ figure {
 }
 @media screen and (max-width: 1100px) {
     .colorlib-nav .top-menu {
-        padding: 0.5em 1em;
+        padding: 0 1em;
     }
 }
 .colorlib-nav #colorlib-logo {
@@ -2054,7 +2054,7 @@ input[type="text"] {
 .colorlib-nav-toggle i::before,
 .colorlib-nav-toggle i::after {
     content: "";
-    width: 25px;
+    width: 20px;
     height: 2px;
     background: var(--dark-gray);
     position: absolute;
