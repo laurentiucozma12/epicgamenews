@@ -92,10 +92,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-12">                            
-                                
-                                
-
+                            <div class="col-lg-12">
                                 <div class="mb-3">
                                     <label for="title" class="form-label">Post Title</label>
                                     <input type="text" value='{{ old("title") }}' name="title" class="form-control" id="title">
