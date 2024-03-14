@@ -20,7 +20,7 @@ class AdminPostsController extends Controller
         'slug' => 'required|unique:posts|min:4|max:150',
         'excerpt' => 'max:300',
         'video_game_id' => 'numeric',
-        'thumbnail' => 'image|max:50000',
+        'thumbnail' => 'mimes:jpeg,png,webp,avif|max:50000',
         'author_thumbnail' => 'max:150',
         'body' => 'max:30000',
     ];

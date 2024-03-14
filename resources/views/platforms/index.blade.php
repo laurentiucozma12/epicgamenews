@@ -19,17 +19,11 @@
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="{{ route('platforms.show', $platform) }}">
                         <figure class="overlay-container">
-                            <picture>
-                                <source class="image-category" media="(min-width: 1024px)" sizes="342px" srcset="{{ asset($platform->image ? 'storage/images/342x192/' . $platform->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}">
-                                <source class="image-category" media="(min-width: 400px)" sizes="764px" srcset="{{ asset($platform->image ? 'storage/images/764x431/' . $platform->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 2) ? 'lazy' : '' }}">
-                                <source class="image-category" media="(min-width: 300px)" sizes="400px" srcset="{{ asset($platform->image ? 'storage/images/400x225/' . $platform->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 3) ? 'lazy' : '' }}">
-                                <source class="image-category" media="(min-width: 0px)" sizes="300px" srcset="{{ asset($platform->image ? 'storage/images/300x169/' . $platform->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 4) ? 'lazy' : '' }}">
-                                @if ($platform->image)
-                                    <img class="image-category" src="{{ asset('storage/images/342x192/' . $platform->image->name) }}" alt="{{ $platform->image->name }}">
-                                @else
-                                    <img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="Thumbnail Placeholder">
-                                @endif
-                            </picture>
+                            @if ($platform->image)
+                                <img class="image-category" src="{{ asset('storage/images/300x169/' . $platform->image->name) }}" alt="{{ $platform->image->name }}">
+                            @else
+                                <img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="Thumbnail Placeholder">
+                            @endif
                             <figcaption class="text-container">
                                 <h3 class="heading">{{ $platform->name }}</h3>
                             </figcaption>
