@@ -24,6 +24,7 @@
                         @else
                             <img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="Thumbnail Placeholder">
                         @endif
+                        <div class="overlay"></div>
                     </div>
                     <figcaption class="text-container">
                         <h3 class="heading">{{ $video_game->name }}</h3>
