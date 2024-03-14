@@ -18,16 +18,17 @@
             @forelse ($platforms as $platform)
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a href="{{ route('platforms.show', $platform) }}">
-                        <figure class="overlay-container">
+                        <div class="image-container">
                             @if ($platform->image)
                                 <img class="image-category" src="{{ asset('storage/images/300x169/' . $platform->image->name) }}" width="300" height="169" alt="{{ $platform->image->name }}">
                             @else
                                 <img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="Thumbnail Placeholder">
                             @endif
-                            <figcaption class="text-container">
-                                <h3 class="heading">{{ $platform->name }}</h3>
-                            </figcaption>
-                        </figure>
+                            <div class="overlay"></div>
+                        </div>
+                        <figcaption class="text-container">
+                            <h3 class="heading">{{ $platform->name }}</h3>
+                        </figcaption>
                     </a>
                 </div>
             @empty

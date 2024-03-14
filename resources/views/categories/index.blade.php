@@ -15,21 +15,22 @@
 <div class="colorlib-blog">
 	<div class="container">
         <div class="row">
-            @forelse ($categories as $category)
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="{{ route('categories.show', $category) }}">
-                        <figure class="overlay-container">
-                            @if ($category->image)
-                                <img class="image-category" src="{{ asset('storage/images/300x169/' . $category->image->name) }}" width="300" height="169" alt="{{ $category->image->name }}">
-                            @else
-                                <img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="Thumbnail Placeholder">
-                            @endif
-                        <figcaption class="text-container">
-                            <h3 class="heading">{{ $category->name }}</h3>
-                        </figcaption>
-                        </figure>
-                    </a>
-                </div>
+            @forelse ($categories as $category)                
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="{{ route('categories.show', $category) }}">
+                    <div class="image-container">
+                        @if ($category->image)
+                            <img class="image-category" src="{{ asset('storage/images/300x169/' . $category->image->name) }}" width="300" height="169" alt="{{ $category->image->name }}">
+                        @else
+                            <img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="Thumbnail Placeholder">
+                        @endif
+                        <div class="overlay"></div>
+                    </div>
+                    <figcaption class="text-container">
+                        <h3 class="heading">{{ $category->name }}</h3>
+                    </figcaption>
+                </a>
+            </div>
             @empty
                 <p class="lead">There are no Video Games to show.</p>
             @endforelse   

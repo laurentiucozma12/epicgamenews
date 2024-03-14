@@ -30,7 +30,7 @@
                         <h3 class="heading">{{ $video_game->name }}</h3>
                     </figcaption>
                 </a>
-            </div>            
+            </div>
             @empty
                 <p class="lead">There are no Video Games to show.</p>
             @endforelse   
