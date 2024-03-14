@@ -10,8 +10,8 @@
                 <source media="(min-width: 768px)" sizes="400px" srcset="{{ asset($post->image ? 'storage/images/400x225/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 4) ? 'lazy' : '' }}">
                 <source media="(min-width: 481px)" sizes="300px" srcset="{{ asset($post->image ? 'storage/images/300x169/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 5) ? 'lazy' : '' }}">
                 <source media="(min-width: 0px)" sizes="146px" srcset="{{ asset($post->image ? 'storage/images/146x82/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" loading="{{ ($loop->index > 5) ? 'lazy' : '' }}">
-                <img src="{{ asset($post->image ? 'storage/images/342x192/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" class="posts-img" alt="{{ $post->image->name }}">
-            </picture>            
+                <img src="{{ asset($post->image ? 'storage/images/342x192/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" width="342" height="192" class="posts-img" alt="{{ $post->image->name }}">
+            </picture>
         </a>
     </div>
     <div class="col-sm-8 posts-text-container">
