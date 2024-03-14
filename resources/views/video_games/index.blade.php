@@ -20,7 +20,7 @@
                     <a href="{{ route('video_games.show', $video_game) }}">
                         <figure class="overlay-container">
                             @if ($video_game->image)
-                                <img class="image-category" src="{{ asset('storage/images/300x169/' . $video_game->image->name) }}" alt="{{ $video_game->image->name }}">
+                                <img class="image-category" src="{{ asset('storage/images/300x169/' . $video_game->image->name) }}" width="300" height="169" alt="{{ $video_game->image->name }}">
                             @else
                                 <img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="Thumbnail Placeholder">
                             @endif

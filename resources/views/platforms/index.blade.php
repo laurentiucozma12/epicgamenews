@@ -20,7 +20,7 @@
                     <a href="{{ route('platforms.show', $platform) }}">
                         <figure class="overlay-container">
                             @if ($platform->image)
-                                <img class="image-category" src="{{ asset('storage/images/300x169/' . $platform->image->name) }}" alt="{{ $platform->image->name }}">
+                                <img class="image-category" src="{{ asset('storage/images/300x169/' . $platform->image->name) }}" width="300" height="169" alt="{{ $platform->image->name }}">
                             @else
                                 <img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="Thumbnail Placeholder">
                             @endif
