@@ -814,7 +814,7 @@ footer .link-to-website:hover {
 
 /* Index.blade.php for Video Games/Categories/Platforms/Others */
 
-.overlay-container {
+/* .overlay-container {
     position: relative;
     margin-bottom: 30px;
 }
@@ -836,6 +836,16 @@ footer .link-to-website:hover {
     object-fit: cover;
     width: 100%;
     height: 100%;
+} */
+.image-container {
+    height: 169px; /* Adjust the height as needed */
+    overflow: hidden; /* Ensure that any overflow is hidden */
+}
+
+.image-category {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio and cover entire container */
 }
 
 .text-container {

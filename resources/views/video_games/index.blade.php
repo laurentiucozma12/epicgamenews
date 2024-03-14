@@ -16,20 +16,20 @@
 	<div class="container">
         <div class="row">
             @forelse ($video_games as $video_game)
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <a href="{{ route('video_games.show', $video_game) }}">
-                        <figure class="overlay-container">
-                            @if ($video_game->image)
-                                <img class="image-category" src="{{ asset('storage/images/300x169/' . $video_game->image->name) }}" width="300" height="169" alt="{{ $video_game->image->name }}">
-                            @else
-                                <img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="Thumbnail Placeholder">
-                            @endif
-                            <figcaption class="text-container">
-                                <h3 class="heading">{{ $video_game->name }}</h3>
-                            </figcaption>
-                        </figure>
-                    </a>
-                </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="{{ route('video_games.show', $video_game) }}">
+                    <div class="image-container">
+                        @if ($video_game->image)
+                            <img class="image-category" src="{{ asset('storage/images/300x169/' . $video_game->image->name) }}" width="300" height="169" alt="{{ $video_game->image->name }}">
+                        @else
+                            <img src="{{ asset('storage/placeholders/thumbnail_placeholder.jpg') }}" alt="Thumbnail Placeholder">
+                        @endif
+                    </div>
+                    <figcaption class="text-container">
+                        <h3 class="heading">{{ $video_game->name }}</h3>
+                    </figcaption>
+                </a>
+            </div>            
             @empty
                 <p class="lead">There are no Video Games to show.</p>
             @endforelse   
