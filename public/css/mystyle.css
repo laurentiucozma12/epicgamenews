@@ -872,6 +872,11 @@ footer .link-to-website:hover {
     }
 }
 
+.page-number-container {
+    display: flex;
+    justify-content: center;
+}
+
 /* Post Page */
 .single-post-container {
     max-width: 1140px;

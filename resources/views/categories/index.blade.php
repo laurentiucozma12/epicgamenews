@@ -41,8 +41,10 @@
                 <p class="lead">There are no Video Games to show.</p>
             @endforelse   
         </div>
+        <div class="page-number-container">
+            {{ $categories->onEachSide(1)->links('pagination::bootstrap-4') }}
+        </div>
     </div>
-    {{ $categories->onEachSide(1)->links('pagination::bootstrap-4') }}
     <div class="row">
         <div class="col-12">  
             <div class="d-none d-md-block">
