@@ -41,7 +41,7 @@
                         <source media="(min-width: 768px)" sizes="943px" srcset="{{ asset($post->image ? 'storage/images/943x530/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}">
                         <source media="(min-width: 481px)" sizes="767px" srcset="{{ asset($post->image ? 'storage/images/764x431/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}">
                         <source media="(min-width: 0px)" sizes="480px" srcset="{{ asset($post->image ? 'storage/images/480x270/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}">
-                        <img src="{{ asset($post->image ? 'storage/images/1140x641/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" width="1800" height="900" alt="{{ $post->image->name }}">
+                        <img src="{{ asset($post->image ? 'storage/images/1140x641/' . $post->image->name : 'storage/placeholders/thumbnail_placeholder.jpg') }}" width="1800" height="900" alt="{{ $post->image->name }}" class="post-img">
                         @if ($post->author_thumbnail) <figcaption class="author-credit">{{ $post->author_thumbnail }}</figcaption> @endif
                     </picture>      
                 </figure>

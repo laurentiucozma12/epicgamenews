@@ -462,6 +462,10 @@ footer .link-to-website:hover {
     margin: 0 !important;
 }
 
+.recent-news-img img {
+    border-radius: 0.25rem !important;
+}
+
 /* Recent News: side-tags.blade.php */
 .tags-big-title {
     margin: 0 0 10px 0 !important;
@@ -599,6 +603,7 @@ footer .link-to-website:hover {
 }
 
 .posts-img {
+    border-radius: 0.5rem;
     height: auto;
     float: left;
 }
@@ -614,6 +619,9 @@ footer .link-to-website:hover {
         width: 30%;
         float: right;
     }
+}
+.post-img {
+    border-radius: 0.5rem;
 }
 
 .posts-text-container {
