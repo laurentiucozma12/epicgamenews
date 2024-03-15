@@ -63,8 +63,14 @@ class AdminPostsController extends Controller
                 'seo_name' => $post->video_game->name,
                 'seo_title' => $seo_title,
                 'seo_description' => $seo_description,
-                'seo_keywords' => $request->input('tags'),
             ];
+            
+            $tagsInput = $request->input('tags');
+            if ($tagsInput !== null) {
+                $seoData = [
+                    'seo_keywords' => $tagsInput
+                ];
+            }
 
             $post->seo()->create($seoData);
         }
@@ -136,20 +142,6 @@ class AdminPostsController extends Controller
         $seo_title = $request->input('title') ?? 'NoTitleNoSeoTitleYet';
         $seo_description = $request->input('excerpt') ?? 'NoExcerptNoSeoDescriptionYet';
 
-        // Check if the post wants to be posted
-        if ($request->input('deleted') === "on") { 
-            // Verify if all required inputs are filled before posting
-            if ($request->filled(['title', 'excerpt', 'body']) && $request->input('image_name') !== 'thumbnail_placeholder.jpg') {
-                $post->update($validated);
-            } else {
-                // Update the filled fields and redirect back with a danger message
-                $post->update(array_filter($validated));
-                return redirect()->route('admin.posts.edit', $post)->with('danger', 'Post cannot be published until all required fields are filled');
-            }
-        } else {
-            $post->update($validated);
-        }
-
         // Update SEO entry
         if ($request->has('title') && $request->has('excerpt')) {
             $seoData = [
@@ -198,11 +190,26 @@ class AdminPostsController extends Controller
             $adminCropResizeImage->deleteOldImages($post, $folders);
         }
 
+        // Sync tags
         $this->syncTags($request, $post);
 
         // Save the changes to the post
         $post->video_game_id = $request->input('video_game_id');
         $post->save();
+
+        // Check if the admin wants to publish the article
+        if ($request->input('deleted') === "on") { 
+            // Verify if all required inputs are filled before posting
+            if ($request->filled(['title', 'slug', 'excerpt', 'body']) && $request->input('image_name') !== 'thumbnail_placeholder.jpg') {
+                $post->update($validated);
+            } else {
+                // Update the filled fields and redirect back with a danger message
+                $post->update(array_filter($validated));
+                return redirect()->route('admin.posts.edit', $post)->with('danger', 'Post cannot be published until all required fields are filled');
+            }
+        } else {
+            $post->update($validated);
+        }
 
         return redirect()->route('admin.posts.edit', $post)->with('success', 'Post has been updated with success');
     }
@@ -258,34 +265,38 @@ class AdminPostsController extends Controller
 
     private function syncTags($request, $post)
     { 
-        $tags = explode(',', $request->input('tags'));
+        $tagsInput = $request->input('tags');
+        $tags = explode(',', $tagsInput);
         $tags_ids = [];
-        foreach ($tags as $tag) {
-            $tag = strtolower(trim($tag)); // Convert to lowercase
-            $existingTag = Tag::firstOrNew(['name' => $tag]);
-            
-            if (!$existingTag->exists) {
-                $existingTag->name = $tag;
-                $existingTag->slug = Str::slug($tag, '-');
-                $existingTag->user_id = auth()->id();
-                $existingTag->save();
+
+        if ($tagsInput !== null) {
+            foreach ($tags as $tag) {
+                $tag = strtolower(trim($tag)); // Convert to lowercase
+                $existingTag = Tag::firstOrNew(['name' => $tag]);
+                
+                if (!$existingTag->exists) {
+                    $existingTag->name = $tag;
+                    $existingTag->slug = Str::slug($tag, '-');
+                    $existingTag->user_id = auth()->id();
+                    $existingTag->save();
+                }
+
+                // Create SEO entry for the tag
+                $seoData = [
+                    'page_type' => 'tag',
+                    'page_name' => 'Related Tag',
+                    'seo_name' => $existingTag->name,
+                    'seo_title' => 'Gaming news related to  ' . $existingTag->name . ' tag | Epic Game News',
+                    'seo_description' => 'Find gaming news filtered by the ' . $existingTag->name . ' tag, only at Epic Game News',
+                    'seo_keywords' => $existingTag->name,
+                ];
+
+                $existingTag->seo()->updateOrCreate([], $seoData);
+
+                $tags_ids[] = $existingTag->id;
             }
-
-            // Create SEO entry for the tag
-            $seoData = [
-                'page_type' => 'tag',
-                'page_name' => 'Related Tag',
-                'seo_name' => $existingTag->name,
-                'seo_title' => 'Gaming news related to  ' . $existingTag->name . ' tag | Epic Game News',
-                'seo_description' => 'Find gaming news filtered by the ' . $existingTag->name . ' tag, only at Epic Game News',
-                'seo_keywords' => $existingTag->name,
-            ];
-
-            $existingTag->seo()->updateOrCreate([], $seoData);
-
-            $tags_ids[] = $existingTag->id;
         }
-        
+            
         $post->tags()->sync($tags_ids);
     }
 }
