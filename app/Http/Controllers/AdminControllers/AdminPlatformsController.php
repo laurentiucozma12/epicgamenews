@@ -97,7 +97,7 @@ class AdminPlatformsController extends Controller
 
     public function update(Request $request, Platform $platform)
     {
-        $this->rules['thumbnail'] = 'nullable|image|max:1920';
+        $this->rules['thumbnail'] = 'nullable|mimes:jpeg,png,webp,avif|max:50000';
         $this->rules['slug'] = ['required', Rule::unique('platforms')->ignore($platform)];
         $validated = $request->validate($this->rules);
         $validated['deleted'] = $request->has('deleted') ? 0 : 1;
