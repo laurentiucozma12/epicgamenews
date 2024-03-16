@@ -428,11 +428,14 @@ footer .link-to-website:hover {
 
 /* Recent News: side-recent-posts.blade.php */
 .recent-news-big-title {
-    font-weight: 700;
+    font-size: 3.25rem;
+    font-weight: 500;
     margin: 0 0 10px 0 !important;
 }
-.recent-news-title {
-    font-weight: 500;
+@media (max-width: 1200px) {
+    .recent-news-big-title {
+        font-size: 2.25rem;
+    }
 }
 .recent-news-title:hover {
     transition: 0.8s;
@@ -449,15 +452,18 @@ footer .link-to-website:hover {
     height: 50px !important;
 }
 .recent-news-container .img-and-title-container-recent-news h3 {
-    font-size: 14pt;
+    font-size: 1.75rem;
     height: fit-content !important;
     margin: 0 !important;
+}
+.recent-news-container .desc span {
+    font-size: 1.1rem !important;
 }
 .recent-news-container .desc .admin {
     color: var(--gray-2);
 }
 .recent-news-container .desc p {
-    font-size: 10pt;
+    font-size: 1.25rem;
     font-weight: normal !important;
     margin: 0 !important;
 }
@@ -892,93 +898,27 @@ footer .link-to-website:hover {
 
 .post-title {
     margin-bottom: 0;
-    font-size: 20pt;
+    font-size: 3.25rem;
 }
 @media (max-width: 1200px) {
     .post-title {
-        font-size: 2.5vw;
-    }
-}
-@media (max-width: 992px) {
-    .post-title {
-        font-size: 3vw;
-    }
-}
-@media (max-width: 768px) {
-    .post-title {
-        font-size: 4vw;
-    }
-}
-@media (max-width: 481px) {
-    .post-title {
-        font-size: 5.5vw;
-    }
-}
-@media (max-width: 300px) {
-    .post-title {
-        font-size: 6vw;
+        font-size: 2.25rem;
     }
 }
 
 .post-excerpt {
     margin-bottom: 0;
-    font-size: 15pt;
+    font-size: 1.25rem;
 }
 @media (max-width: 1200px) {
-    .post-excerpt {
-        font-size: 2vw;
+    .post-excerpt,
+    .post-author-date {
+        font-size: 1rem;
     }
 }
-@media (max-width: 992px) {
-    .post-excerpt {
-        font-size: 2vw;
-    }
-}
-@media (max-width: 768px) {
-    .post-excerpt {
-        font-size: 3vw;
-    }
-}
-@media (max-width: 481px) {
-    .post-excerpt {
-        font-size: 4.25vw;
-    }
-}
-@media (max-width: 400px) {
-    .post-excerpt {
-        font-size: 4.25vw;
-    }
-}
-
 .post-author-date {
-    font-size: 12pt;
+    font-size: 1.1rem;
 }
-@media (max-width: 1200px) {
-    .post-author-date {
-        font-size: 1.5vw;
-    }
-}
-@media (max-width: 992px) {
-    .post-author-date {
-        font-size: 1.75vw;
-    }
-}
-@media (max-width: 768px) {
-    .post-author-date {
-        font-size: 3vw;
-    }
-}
-@media (max-width: 481px) {
-    .post-author-date {
-        font-size: 3.25vw;
-    }
-}
-@media (max-width: 400px) {
-    .post-author-date {
-        font-size: 3.5vw;
-    }
-}
-
 @media (max-width: 768px) {
     .post-title,
     .post-excerpt,
@@ -1044,28 +984,15 @@ footer .link-to-website:hover {
     }
 }
 .desc2 {
-    font-size: 1.5vw;
     font-weight: normal !important;
     padding-top: 0;
 }
+.desc2 p {
+    font-size: 1.8rem !important;
+}
 @media (max-width: 1200px) {
-    .desc2 {
-        font-size: 2vw;
-    }
-}
-@media (max-width: 992px) {
-    .desc2 {
-        font-size: 2.5vw;
-    }
-}
-@media (max-width: 768px) {
-    .desc2 {
-        font-size: 3.5vw;
-    }
-}
-@media (max-width: 481px) {
-    .desc2 {
-        font-size: 4.5vw;
+    .desc2 p {
+        font-size: 1.9rem;
     }
 }
 
