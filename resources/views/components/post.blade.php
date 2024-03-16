@@ -51,7 +51,7 @@
         <div class="row">
             
             <div class="col-12 col-lg-8">
-                <div class="row row-pb-lg">
+                <div class="row">
                     <div class="col-12 animate-box">
                         <div class="classes class-single">
                             <div class="desc desc2">
