@@ -899,6 +899,7 @@ footer .link-to-website:hover {
 .post-title {
     margin-bottom: 0;
     font-size: 4.25rem;
+    line-height: 1.1 !important;
 }
 @media (max-width: 1200px) {
     .post-title {
@@ -912,7 +913,7 @@ footer .link-to-website:hover {
 }
 @media (max-width: 1200px) {
     .post-excerpt {
-        font-size: 1.25rem;
+        font-size: 1.35rem;
     }
 }
 .post-author-date {
@@ -920,7 +921,7 @@ footer .link-to-website:hover {
 }
 @media (max-width: 1200px) {
     .post-author-date {
-        font-size: 1rem;
+        font-size: 1.25rem;
     }
 }
 @media (max-width: 768px) {
