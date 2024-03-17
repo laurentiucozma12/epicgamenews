@@ -233,7 +233,8 @@ class AdminVideoGamesController extends Controller
     public function storeApi(Request $request)
     {
         // Find video game by slug, Returns the Instance of the Model OR null
-        $game_exists = VideoGame::where('slug', $request->game_slug)->first();
+        $game_exists = VideoGame::where('slug', $request->game_slug)->first();        
+        $game_exists = str_replace('/', '', $game_exists);
 
         if ($game_exists) {
             return redirect()->back()->with('danger', 'Video Game already exists in Database'); 
@@ -275,6 +276,7 @@ class AdminVideoGamesController extends Controller
         foreach ($genres_names as $index => $genre_name) {
             // Find category by slug, Returns the Instance of the Model OR null
             $genre_slug = strtolower(str_replace(' ', '-', $genres_names[$index]));
+            $genre_slug = str_replace('/', '', $genre_slug);
             $category = Category::where('slug', $genre_slug)->first();
             
             // If category is new, save it and attach to the video game
@@ -317,6 +319,7 @@ class AdminVideoGamesController extends Controller
         foreach ($platforms_names as $index => $platform_name) {
             // Find platform by slug, Returns the Instance of the Model OR null          
             $platform_slug = strtolower(str_replace(' ', '-', $platforms_names[$index]));
+            $platform_slug = str_replace('/', '', $platform_slug);
             $platform = Platform::where('slug', $platform_slug)->first();
 
             // If platform doesn't exist, create it
