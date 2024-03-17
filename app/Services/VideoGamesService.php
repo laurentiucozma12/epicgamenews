@@ -15,6 +15,7 @@ class VideoGamesService
                 // the video game should not be visible.
                 $query->where('deleted', 0);
             })
-            ->orderBy('name', 'ASC');
+            ->withCount('posts') // Count the number of posts for each video game
+            ->orderBy('posts_count', 'DESC'); // Order by the number of posts in descending order
     }
 }
