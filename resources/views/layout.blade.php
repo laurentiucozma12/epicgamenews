@@ -23,7 +23,8 @@
 	
 	{{-- Google Ads --}}
 	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7545576639006325" crossorigin="anonymous"></script>
-	
+	<meta name="google-adsense-account" content="ca-pub-7545576639006325">
+
 	{{------------------------------------ SEO - START ------------------------------------}}
 	{{-- Canonical --}}
 	<link rel="canonical" href="{{ url()->current() }}" />
